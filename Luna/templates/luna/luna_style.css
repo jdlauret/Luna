@@ -1,0 +1,77 @@
+body {
+    font-family: "Lato", sans-serif;
+    background-color: #656569;
+}
+
+/* The sidebar menu */
+.sidenav {
+    height: 100%; /* Full-height: remove this if you want "auto" height */
+    width: 160px; /* Set the width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 160px; /* Stay below Luna logo */
+    left: 0;
+    background-color: #dbd9d9; /* Black */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 20px;
+    box-shadow: 0px 20px 20px #111;
+}
+
+/* The navigation menu links */
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #656569;
+    display: block;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+/* Style page content */
+.main {
+    margin-left: 160px; /* Same as the width of the sidebar */
+    margin-top: 160px;
+    padding: 10px 10px;
+    color: #DBD9D9;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+/*Header*/
+.header {
+    height: 160px; /*Set height of header to match height of logo*/
+    width: 100%; /*full width of screen*/
+    position: fixed; /*will stay on scroll*/
+    z-index: 1; /*stay on top layer*/
+    top: 0; /*stay at top of page*/
+    left: 0; /*stay at left of page*/
+    background-color: #dbd9d9;
+    box-shadow: 0px 5px 20px #111;
+}
+
+.header img {
+    float: left;
+    width: 160px;
+    height: 160px;
+    background-color: transparent;
+    z-index: 1;
+}
+
+.header a {
+    z-index: 1;
+}
+
+.header h1 {
+    top: 18px;
+    left: 10px;
+    font-size: 36px;
+    color: #656569;
+}
