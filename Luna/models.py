@@ -1,5 +1,18 @@
 from django.db import models
 
+"""
+Setup class with all column definitions
+
+import class in Luna/admin.py
+admin.site.register(<ClassName>) to Luna/admin.py
+
+Then type in the following Command Prompt lines setup New Table
+
+python manage.py makemigrations Luna
+python manage.py sqlmigration Luna 0001
+python manage.py migrate
+"""
+
 
 class CareerPath(models.Model):
     # Department Codes
@@ -170,4 +183,14 @@ class CareerPath(models.Model):
     job_description = models.TextField()
 
 
+class AutomatorTask(models.Model):
+    # TODO create AutomatorTask model once requirments are scoped out
+    day = models.DateField(
+        blank=True,
+        null=True
+    )
+    hour = models.IntegerField(
+        blank=True,
+        null=True
+    )
 

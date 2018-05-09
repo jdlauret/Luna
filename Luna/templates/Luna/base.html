@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Luna Landing</title>
+    <link rel="stylesheet"
+          type="text/css"
+          href="{% static 'luna_style.css' %}"/>
+</head>
+<body>
+<div class="header">
+    <a href="/Luna/">
+        <img src="{% static 'resources/Orange.png' %}" alt="Home"/>
+    </a>
+    <h1>Welcome to Luna</h1>
+</div>
+<div class="sidenav">
+    <a href="/Luna/system_performance_calc'">Calculator</a>
+    <a href="/Luna/career_path">Career Path</a>
+</div>
+
+{% block content %}
+{% endblock %}
+
+</body>
+</html>
