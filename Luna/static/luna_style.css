@@ -75,3 +75,7 @@ body {
     font-size: 36px;
     color: #656569;
 }
+
+.right_header p {
+    float:right;
+}

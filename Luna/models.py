@@ -1,4 +1,6 @@
+import datetime as dt
 from django.db import models
+from django.utils import timezone
 
 """
 Setup class with all column definitions
@@ -194,3 +196,15 @@ class AutomatorTask(models.Model):
         null=True
     )
 
+class Idea(models.Model):
+
+    concept = models.TextField()
+    up_votes = models.IntegerField(
+        default=0
+    )
+    down_votes = models.IntegerField(
+        default=0
+    )
+    submit_date = models.DateField(
+        default=timezone.now()
+    )
