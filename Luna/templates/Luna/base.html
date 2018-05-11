@@ -25,9 +25,7 @@
         <a class="lead" href="{% url 'social:begin' 'google-oauth2' %}">Login</a>
     {% endif %}
 </div>
-<div class="main">
-    {% block content %}
-    {% endblock %}
-</div>
+{% block content %}
+{% endblock %}
 </body>
 </html>

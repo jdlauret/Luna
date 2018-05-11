@@ -1,5 +1,592 @@
 {% extends 'Luna/base.html' %}
 {% block content %}
-    <h2>Career Path</h2>
-    <p></p>
+    <div class="main">
+        <h2>PIO Career Path</h2>
+        <div class="container">
+            <div class="left-half">
+                <article>
+                    <h4 class="sticky">
+                        <div class="far-left">
+                        </div>
+                        <div class="center-left">
+                            <p>Tier 1</p>
+                        </div>
+                        <div class="center-right">
+                            <p>Tier 2</p>
+                        </div>
+                        <div class="far-right">
+                            <p>Tier 3</p>
+                        </div>
+                    </h4>
+                    <p></p>
+                    <section>
+                        <h4 class="sticky">Central Scheduling</h4>
+                        <hr/>
+                        <div class="inner-container">
+                            <div class="far-left">
+                                <p>Inbound</p>
+                            </div>
+                            <div class="center-left">
+                                <button class="button button1" onclick="toggle('one')">Representative 1</button>
+                            </div>
+                            <div class="center-right">
+                                <button class="button button2" onclick="toggle('two')">Representative 2</button>
+                            </div>
+                            <div class="far-right">
+                                <button class="button button3" onclick="toggle('three')">Team Lead</button>
+                            </div>
+                        </div>
+                        <div class="inner-container">
+                            <div class="far-left">
+                                <p></p>
+                            </div>
+                            <div class="center-left">
+                                <p></p>
+                            </div>
+                            <div class="center-right">
+                                <button class="button button2" onclick="toggle('four')">Representative 3</button>
+                            </div>
+                            <div class="far-right">
+                                <p></p>
+                            </div>
+                        </div>
+                        <div class="inner-container">
+                            <div class="far-left">
+                                <p></p>
+                            </div>
+                            <div class="center-left">
+                                <p></p>
+                            </div>
+                            <div class="center-right">
+                                <p></p>
+                            </div>
+                            <div class="far-right">
+                                <p></p>
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="inner-container">
+                            <div class="far-left">
+                                <p>Auxiliary</p>
+                            </div>
+                            <div class="center-left">
+                                <p></p>
+                            </div>
+                            <div class="center-right">
+                                <button class="button button2">Representative 2</button>
+                            </div>
+                            <div class="far-right">
+                                <button class="button button3">Team Lead</button>
+                            </div>
+                        </div>
+                        <div class="inner-container">
+                            <div class="far-left">
+                                <p></p>
+                            </div>
+                            <div class="center-left">
+                                <p></p>
+                            </div>
+                            <div class="center-right">
+                                <button class="button button2">Representative 3</button>
+                            </div>
+                            <div class="far-right">
+                                <p></p>
+                            </div>
+                        </div>
+                        <div class="inner-container">
+                            <div class="far-left">
+                                <p></p>
+                            </div>
+                            <div class="center-left">
+                                <p></p>
+                            </div>
+                            <div class="center-right">
+                                <button class="button button2">Specialist 1</button>
+                            </div>
+                            <div class="far-right">
+                                <p></p>
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="inner-container">
+                            <div class="far-left">
+                                <p>Super Agent</p>
+                            </div>
+                            <div class="center-left">
+                                <p></p>
+                            </div>
+                            <div class="center-right">
+                                <button class="button button2">Representative 2</button>
+                            </div>
+                            <div class="far-right">
+                                <button class="button button3">Specialist 2</button>
+                            </div>
+                        </div>
+                        <div class="inner-container">
+                            <div class="far-left">
+                                <p></p>
+                            </div>
+                            <div class="center-left">
+                                <p></p>
+                            </div>
+                            <div class="center-right">
+                                <button class="button button2">Representative 3</button>
+                            </div>
+                            <div class="far-right">
+                                <button class="button button3">Team Lead</button>
+                            </div>
+                        </div>
+                        <div class="inner-container">
+                            <div class="far-left">
+                                <p></p>
+                            </div>
+                            <div class="center-left">
+                                <p></p>
+                            </div>
+                            <div class="center-right">
+                                <button class="button button2">Specialist 1</button>
+                            </div>
+                            <div class="far-right">
+                                <p></p>
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="inner-container">
+                            <div class="far-left">
+                                <p>Service</p>
+                            </div>
+                            <div class="center-left">
+                                <p></p>
+                            </div>
+                            <div class="center-right">
+                                <button class="button button2">Representative 2</button>
+                            </div>
+                            <div class="far-right">
+                                <button class="button button3">Specialist 2</button>
+                            </div>
+                        </div>
+                        <div class="inner-container">
+                            <div class="far-left">
+                                <p></p>
+                            </div>
+                            <div class="center-left">
+                                <p></p>
+                            </div>
+                            <div class="center-right">
+                                <button class="button button2">Representative 3</button>
+                            </div>
+                            <div class="far-right">
+                                <button class="button button3">Team Lead</button>
+                            </div>
+                        </div>
+                        <div class="inner-container">
+                            <div class="far-left">
+                                <p></p>
+                            </div>
+                            <div class="center-left">
+                                <p></p>
+                            </div>
+                            <div class="center-right">
+                                <button class="button button2">Specialist 1</button>
+                            </div>
+                            <div class="far-right">
+                                <p></p>
+                            </div>
+                        </div>
+                    </section>
+                    <p></p>
+                    <section>
+                        <h4 class="sticky">Customer Relations</h4>
+                        <hr/>
+                        <div class="inner-container">
+                            <div class="far-left">
+                                <p>Inbound & Outbound</p>
+                            </div>
+                            <div class="center-left">
+                                <button class="button button1">Representative 1</button>
+                            </div>
+                            <div class="center-right">
+                                <button class="button button2">Representative 2</button>
+                            </div>
+                            <div class="far-right">
+                                <button class="button button3">Specialist 2</button>
+                            </div>
+                        </div>
+                        <div class="inner-container">
+                            <div class="far-left">
+                                <p></p>
+                            </div>
+                            <div class="center-left">
+
+                            </div>
+                            <div class="center-right">
+                                <button class="button button2">Representative 3</button>
+                            </div>
+                            <div class="far-right">
+                                <button class="button button3">Specialist 3</button>
+                            </div>
+                        </div>
+                        <div class="inner-container">
+                            <div class="far-left">
+
+                            </div>
+                            <div class="center-left">
+
+                            </div>
+                            <div class="center-right">
+                                <button class="button button2">Specialist 1</button>
+                            </div>
+                            <div class="far-right">
+                                <button class="button button3">Team Lead</button>
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="inner-container">
+                            <div class="far-left">
+                                <p>Email Admin</p>
+                            </div>
+                            <div class="center-left">
+                                <button class="button button1">Representative 1</button>
+                            </div>
+                            <div class="center-right">
+                                <button class="button button2">Representative 2</button>
+                            </div>
+                            <div class="far-right">
+                                <button class="button button3">Specialist 2</button>
+                            </div>
+                        </div>
+                        <div class="inner-container">
+                            <div class="far-left">
+                                <p></p>
+                            </div>
+                            <div class="center-left">
+
+                            </div>
+                            <div class="center-right">
+                                <button class="button button2">Representative 3</button>
+                            </div>
+                            <div class="far-right">
+                                <button class="button button3">Specialist 3</button>
+                            </div>
+                        </div>
+                        <div class="inner-container">
+                            <div class="far-left">
+
+                            </div>
+                            <div class="center-left">
+
+                            </div>
+                            <div class="center-right">
+                                <button class="button button2">Specialist 1</button>
+                            </div>
+                            <div class="far-right">
+                                <button class="button button3">Team Lead</button>
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="inner-container">
+                            <div class="far-left">
+                                <p>Documents</p>
+                            </div>
+                            <div class="center-left">
+                                <button class="button button1">Representative 1</button>
+                            </div>
+                            <div class="center-right">
+                                <button class="button button2">Representative 2</button>
+                            </div>
+                            <div class="far-right">
+                                <button class="button button3">Specialist 2</button>
+                            </div>
+                        </div>
+                        <div class="inner-container">
+                            <div class="far-left">
+                                <p></p>
+                            </div>
+                            <div class="center-left">
+
+                            </div>
+                            <div class="center-right">
+                                <button class="button button2">Representative 3</button>
+                            </div>
+                            <div class="far-right">
+                                <button class="button button3">Specialist 3</button>
+                            </div>
+                        </div>
+                        <div class="inner-container">
+                            <div class="far-left">
+
+                            </div>
+                            <div class="center-left">
+
+                            </div>
+                            <div class="center-right">
+                                <button class="button button2">Specialist 1</button>
+                            </div>
+                            <div class="far-right">
+                                <button class="button button3">Team Lead</button>
+                            </div>
+                        </div>
+                    </section>
+                    <p></p>
+                    <section>
+                        <h4 class="sticky">Customer Service</h4>
+                        <hr/>
+                        <div class="inner-container">
+                            <div class="far-left">
+                                <p>Customer Service</p>
+                            </div>
+                            <div class="center-left">
+                                <button class="button button1">Representative 1</button>
+                            </div>
+                            <div class="center-right">
+                                <button class="button button2">Representative 2</button>
+                            </div>
+                            <div class="far-right">
+                                <button class="button button3">Specialist 2</button>
+                            </div>
+                        </div>
+                        <div class="inner-container">
+                            <div class="far-left">
+                                <p></p>
+                            </div>
+                            <div class="center-left">
+                                <p></p>
+                            </div>
+                            <div class="center-right">
+                                <button class="button button2">Representative 3</button>
+                            </div>
+                            <div class="far-right">
+                                <button class="button button3">Specialist 3</button>
+                            </div>
+                        </div>
+                        <div class="inner-container">
+                            <div class="far-left">
+
+                            </div>
+                            <div class="center-left">
+
+                            </div>
+                            <div class="center-right">
+                                <button class="button button2">Specialist 1</button>
+                            </div>
+                            <div class="far-right">
+                                <button class="button button3">Team Lead</button>
+                            </div>
+                        </div>
+                    </section>
+                    <p></p>
+                    <section>
+                        <h4 class="sticky">Customer Solutions</h4>
+                        <hr/>
+                        <div class="inner-container">
+                            <div class="far-left">
+                                <p>CSO Specialist I</p>
+                            </div>
+                            <div class="center-left">
+                                <button class="button button1">Representative 1</button>
+                            </div>
+                            <div class="center-right">
+                                <button class="button button2">Representative 2</button>
+                            </div>
+                            <div class="far-right">
+                                <p></p>
+                            </div>
+                        </div>
+                        <div class="inner-container">
+                            <div class="far-left">
+                                <p></p>
+                            </div>
+                            <div class="center-left">
+
+                            </div>
+                            <div class="center-right">
+                                <button class="button button2">Representative 3</button>
+                            </div>
+                            <div class="far-right">
+                                <p></p>
+                            </div>
+                        </div>
+                        <div class="inner-container">
+                            <div class="far-left">
+
+                            </div>
+                            <div class="center-left">
+
+                            </div>
+                            <div class="center-right">
+                                <p></p>
+                            </div>
+                            <div class="far-right">
+                                <p></p>
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="inner-container">
+                            <div class="far-left">
+                                <p>CSO Specialist II</p>
+                            </div>
+                            <div class="center-left">
+                                <p></p>
+                            </div>
+                            <div class="center-right">
+                                <button class="button button2">Representative 2</button>
+                            </div>
+                            <div class="far-right">
+                                <button class="button button3">Specialist 2</button>
+                            </div>
+                        </div>
+                        <div class="inner-container">
+                            <div class="far-left">
+                                <p></p>
+                            </div>
+                            <div class="center-left">
+                                <p></p>
+                            </div>
+                            <div class="center-right">
+                                <button class="button button2">Representative 3</button>
+                            </div>
+                            <div class="far-right">
+                                <button class="button button3">Specialist 3</button>
+                            </div>
+                        </div>
+                        <div class="inner-container">
+                            <div class="far-left">
+                                <p></p>
+                            </div>
+                            <div class="center-left">
+                                <p></p>
+                            </div>
+                            <div class="center-right">
+                                <button class="button button2">Specialist 1</button>
+                            </div>
+                            <div class="far-right">
+                                <button class="button button3">Team Lead</button>
+                            </div>
+                        </div>
+                    </section>
+                    <p></p>
+                    <section>
+                        <h4 class="sticky">RECs and Rebates</h4>
+                        <hr/>
+                        <div class="inner-container">
+                            <div class="far-left">
+                                <p>RECs and Rebates</p>
+                            </div>
+                            <div class="center-left">
+                                <button class="button button1">Representative 1</button>
+                            </div>
+                            <div class="center-right">
+                                <button class="button button2">Representative 2</button>
+                            </div>
+                            <div class="far-right">
+                                <button class="button button3">Specialist 1</button>
+                            </div>
+                        </div>
+                        <div class="inner-container">
+                            <div class="far-left">
+                                <p></p>
+                            </div>
+                            <div class="center-left">
+                                <p></p>
+                            </div>
+                            <div class="center-right">
+                                <button class="button button2">Representative 3</button>
+                            </div>
+                            <div class="far-right">
+                                <button class="button button3">Specialist 2</button>
+                            </div>
+                        </div>
+                        <div class="inner-container">
+                            <div class="far-left">
+                                <p></p>
+                            </div>
+                            <div class="center-left">
+                                <p></p>
+                            </div>
+                            <div class="center-right">
+                                <p></p>
+                            </div>
+                            <div class="far-right">
+                                <button class="button button3">Team Lead</button>
+                            </div>
+                        </div>
+                    </section>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                </article>
+            </div>
+            <div class="right-half">
+                <article>
+                    <h2>Job Requirements</h2>
+                    <div class="click" id="one">
+                        testy tester
+                    </div>
+                    <div class="click" id="two">
+                        no
+                    </div>
+                    <div class="click" id="three">
+                        YES
+                    </div>
+                    <div class="click" id="four">
+                        Maybe
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
 {% endblock %}
+<script>
+    function toggle(num) {
+        var click = document.getElementsByClassName("click");
+        var show = document.getElementsByClassName("show");
+        var i;
+        for (i = 0; i < click.length; i++) {
+            if (click[i].id == num) {
+                click[i].className = "show";
+            }
+        }
+        var j;
+        for (j = 0; j < show.length; j++) {
+            if (show[j].id != num) {
+                show[j].className = "click";
+            }
+        }
+    }
+</script>
+

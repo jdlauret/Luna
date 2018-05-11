@@ -1,6 +1,100 @@
 body {
     font-family: "Lato", sans-serif;
     background-color: #656569;
+    padding: 0;
+}
+
+section {
+    background-color: #dbd9d9;
+    color: #656569;
+    border-radius: 5px;
+    padding: 0rem .5rem .5rem .5rem;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), #656569, rgba(0, 0, 0, 0));
+}
+
+h4.sticky {
+  background: #dbd9d9;
+  color: #656569;
+  margin: 0;
+  padding: 0;
+  position: -webkit-sticky;
+  position: sticky;
+  top: -16px;
+  border-bottom: 5px #656569;
+  display: flex;
+  border-radius: 5px;
+}
+
+h5.sticky {
+  background: #dbd9d9;
+  color: #656569;
+  margin: 0;
+  padding: 0;
+  position: -webkit-sticky;
+  position: sticky;
+  top: -16px;
+}
+
+
+/* pattern styles */
+.container {
+    display: flex;
+    overflow: hidden;
+    height: 89vh;
+    margin-top: -100px;
+    padding-top: 100px;
+    position: relative;
+    width: 100%;
+    backface-visibility: hidden;
+    will-change: overflow;
+}
+
+.inner-container {
+    display: flex;
+}
+
+.left-half, .right-half {
+    background-color: transparent;
+    flex: 1;
+    padding: 1rem;
+    overflow: auto;
+    height: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+}
+
+.left-half::-webkit-scrollbar,
+.right-half::-webkit-scrollbar {
+    display: none;
+}
+
+.far-left{
+    background-color: transparent;
+    flex: 1;
+    padding: .25rem;
+}
+
+.center-left {
+    background-color: transparent;
+    flex: 1;
+    padding: .25rem;
+}
+
+.far-right{
+    background-color: transparent;
+    flex: 1;
+    padding: .25rem;
+}
+
+.center-right {
+    background-color: transparent;
+    flex: 1;
+    padding: .25rem;
 }
 
 /* The sidebar menu */
@@ -9,16 +103,16 @@ body {
     width: 160px; /* Set the width of the sidebar */
     position: fixed; /* Fixed Sidebar (stay in place on scroll) */
     z-index: 1; /* Stay on top */
-    top: 160px; /* Stay below Luna logo */
+    top: 0px; /* Stay below Luna logo */
     left: 0;
     background-color: #dbd9d9; /* Black */
     overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 20px;
+    padding-top: 5px;
     box-shadow: 0px 20px 20px #111;
 }
 
 /* The navigation menu links */
-.sidenav a {
+.sidenav a.link {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
     font-size: 25px;
@@ -31,10 +125,19 @@ body {
     color: #f1f1f1;
 }
 
+.sidenav img {
+    float: left;
+    width: 160px;
+    height: 160px;
+    background-color: transparent;
+    z-index: 1;
+    padding-bottom: 10px;
+}
+
 /* Style page content */
 .main {
     margin-left: 160px; /* Same as the width of the sidebar */
-    margin-top: 160px;
+    margin-top: 0px;
     padding: 10px 10px;
     color: #DBD9D9;
 }
@@ -76,6 +179,90 @@ body {
     color: #656569;
 }
 
-.right_header p {
-    float:right;
+/* Buttons */
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.button1 {
+    background-color: transparent;
+    color: #656569;
+    border: 2px solid #3fbfad;
+    border-radius: 5px;
+}
+
+.button1:hover {
+    background-color: #3fbfad;
+    color: #656569;
+}
+
+.button2 {
+    background-color: transparent;
+    color: #656569;
+    border: 2px solid #57c1e8;
+    border-radius: 5px;
+}
+
+.button2:hover {
+    background-color: #57c1e8;
+    color: #656569;
+}
+
+.button3 {
+    background-color: transparent;
+    color: #656569;
+    border: 2px solid #f8eb60;
+    border-radius: 5px;
+}
+
+.button3:hover {
+    background-color: #f8eb60;
+    color: #656569;
+}
+
+.button4 {
+    background-color: #ff8200;
+    color: white;
+    border: 2px solid #ff8200;
+}
+
+.button4:hover {background-color: #e7e7e7;}
+
+.button5 {
+    background-color: white;
+    color: black;
+    border: 2px solid #555555;
+}
+
+.button5:hover {
+    background-color: #555555;
+    color: white;
+}
+
+div.job_req {
+    width: 100%;
+    padding: 50px 0;
+    text-align: center;
+    background-color: lightblue;
+    margin-top: 20px;
+    display: none;
+}
+
+.click {
+    display: none;
+}
+
+.show {
+    display: block;
 }
