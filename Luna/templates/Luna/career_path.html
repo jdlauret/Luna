@@ -1,5 +1,23 @@
 {% extends 'Luna/base.html' %}
 {% block content %}
+    <script>
+        function toggle(num) {
+            var click = document.getElementsByClassName("click");
+            var show = document.getElementsByClassName("show");
+            var i;
+            for (i = 0; i < click.length; i++) {
+                if (click[i].id == num) {
+                    click[i].className = "show";
+                }
+            }
+            var j;
+            for (j = 0; j < show.length; j++) {
+                if (show[j].id != num) {
+                    show[j].className = "click";
+                }
+            }
+        }
+    </script>
     <div class="main">
         <h2>PIO Career Path</h2>
         <div class="container">
@@ -571,22 +589,5 @@
         </div>
     </div>
 {% endblock %}
-<script>
-    function toggle(num) {
-        var click = document.getElementsByClassName("click");
-        var show = document.getElementsByClassName("show");
-        var i;
-        for (i = 0; i < click.length; i++) {
-            if (click[i].id == num) {
-                click[i].className = "show";
-            }
-        }
-        var j;
-        for (j = 0; j < show.length; j++) {
-            if (show[j].id != num) {
-                show[j].className = "click";
-            }
-        }
-    }
-</script>
+
 

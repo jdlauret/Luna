@@ -17,6 +17,12 @@ hr {
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), #656569, rgba(0, 0, 0, 0));
 }
 
+hr.thick {
+    border: 0;
+    height: 2px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), #656569, rgba(0, 0, 0, 0));
+}
+
 h4.sticky {
   background: #dbd9d9;
   color: #656569;
@@ -120,12 +126,32 @@ h5.sticky {
     display: block;
 }
 
+.sidenav-bottom a.link {
+    padding: 6px 8px 16px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #656569;
+    display: block;
+    position: absolute;
+    bottom: 0px;
+}
+
 /* When you mouse over the navigation links, change their color */
 .sidenav a:hover {
     color: #f1f1f1;
 }
 
-.sidenav img {
+.sidenav a.logo {
+    padding: 6px 8px 6px 0px;
+    text-decoration: none;
+    width: 160px;
+    height: 160px;
+    font-size: 25px;
+    color: #656569;
+    display: inline-block;
+}
+
+.sidenav img.logo {
     float: left;
     width: 160px;
     height: 160px;

@@ -16,7 +16,6 @@ def index(request):
     context = {'user': request.user}
     return HttpResponse(template.render(context))
 
-
 def career_path(request):
     if request.user.is_authenticated:
         template = loader.get_template('Luna/career_path.html')

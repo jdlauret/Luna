@@ -4,25 +4,24 @@
 <link rel="icon" href="{% static 'resources/textless_orange.png' %}">
 <head>
     <meta charset="UTF-8">
-    <title>Luna Landing</title>
-    <link rel="stylesheet"
-          type="text/css"
-          href="{% static 'luna_style.css' %}"/>
+    <title>Luna</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'luna_style.css' %}"/>
 </head>
 <body>
-<div class="header">
-    <a href="/Luna/">
-        <img src="{% static 'resources/orange.png' %}" alt="Home"/>
-    </a>
-    <h1>Welcome to Luna</h1>
-</div>
 <div class="sidenav">
+    <a class="logo" href="/Luna/">
+        <img class="logo" src="{% static 'resources/orange.png' %}" alt="Home"/>
+    </a>
+    <hr class="thick">
     {% if user.is_authenticated %}
-        <a href="/Luna/system_performance_calculator">Calculator</a>
-        <a href="/Luna/career_path">Career Path</a>
-        <a href="/Luna/logout">Logout</a>
+        <a class="link" href="/Luna/system_performance_calculator">Calculator</a>
+        <a class="link" href="/Luna/career_path">Career Path</a>
+        <div class="sidenav-bottom">
+        <hr class="thick">
+        <a class="link" href="/Luna/logout">Logout</a>
+        </div>
     {% else %}
-        <a class="lead" href="{% url 'social:begin' 'google-oauth2' %}">Login</a>
+        <a class="link" href="{% url 'social:begin' 'google-oauth2' %}">Login</a>
     {% endif %}
 </div>
 {% block content %}
