@@ -106,27 +106,27 @@ h5.sticky {
 /* The sidebar menu */
 .sidenav {
     height: 100%; /* Full-height: remove this if you want "auto" height */
-    width: 160px; /* Set the width of the sidebar */
+    width: 190px; /* Set the width of the sidebar */
     position: fixed; /* Fixed Sidebar (stay in place on scroll) */
     z-index: 1; /* Stay on top */
     top: 0px; /* Stay below Luna logo */
     left: 0;
-    background-color: #dbd9d9; /* Black */
+    background-color: #303033; /* Black */
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 5px;
     box-shadow: 0px 20px 20px #111;
 }
 
 /* The navigation menu links */
-.sidenav a.link {
+.sidenav a {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
-    font-size: 25px;
-    color: #656569;
+    font-size: 18px;
+    color: #e3edfe;
     display: block;
 }
 
-.sidenav-bottom a.link {
+.sidenav-bottom a {
     padding: 6px 8px 16px 16px;
     text-decoration: none;
     font-size: 25px;
@@ -138,7 +138,7 @@ h5.sticky {
 
 /* When you mouse over the navigation links, change their color */
 .sidenav a:hover {
-    color: #f1f1f1;
+    background-color: #616166;
 }
 
 .sidenav a.logo {
@@ -162,7 +162,7 @@ h5.sticky {
 
 /* Style page content */
 .main {
-    margin-left: 160px; /* Same as the width of the sidebar */
+    margin-left: 190px; /* Same as the width of the sidebar */
     margin-top: 0px;
     padding: 10px 10px;
     color: #DBD9D9;
