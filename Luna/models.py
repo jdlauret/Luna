@@ -1,6 +1,5 @@
-import datetime as dt
+import django
 from django.db import models
-from django.utils import timezone
 
 """
 Setup class with all column definitions
@@ -184,6 +183,21 @@ class CareerPath(models.Model):
     )
     job_description = models.TextField()
 
+    def position_display(self):
+        return dict(CareerPath.POSITIONS)[self.position]
+
+    def department_display(self):
+        return dict(CareerPath.DEPARTMENTS)[self.department]
+
+    def function_display(self):
+        return dict(CareerPath.FUNCTIONS)[self.function]
+
+    def pay_rate_display(self):
+        return dict(CareerPath.PAY_RATES)[self.pay_rate]
+
+    def tier_display(self):
+        return dict(CareerPath.TIER_LEVELS)[self.tier_level]
+
 
 class AutomatorTask(models.Model):
     # TODO create AutomatorTask model once requirments are scoped out
@@ -196,15 +210,9 @@ class AutomatorTask(models.Model):
         null=True
     )
 
-class Idea(models.Model):
 
+class Idea(models.Model):
     concept = models.TextField()
-    up_votes = models.IntegerField(
-        default=0
-    )
-    down_votes = models.IntegerField(
-        default=0
-    )
-    submit_date = models.DateField(
-        default=timezone.now()
-    )
+    up_votes = models.IntegerField(default=0)
+    down_votes = models.IntegerField(default=0)
+    submit_date = models.DateField(default=django.utils.timezone.now)

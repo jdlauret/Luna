@@ -109,17 +109,17 @@ h5.sticky {
     width: 190px; /* Set the width of the sidebar */
     position: fixed; /* Fixed Sidebar (stay in place on scroll) */
     z-index: 1; /* Stay on top */
-    top: 0px; /* Stay below Luna logo */
+    top: 0; /* Stay below Luna logo */
     left: 0;
     background-color: #303033; /* Black */
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 5px;
-    box-shadow: 0px 20px 20px #111;
+    box-shadow: 0 20px 20px #111;
 }
 
 /* The navigation menu links */
 .sidenav a {
-    padding: 6px 8px 6px 16px;
+    padding: 6px 16px 6px 16px;
     text-decoration: none;
     font-size: 18px;
     color: #e3edfe;
@@ -129,11 +129,10 @@ h5.sticky {
 .sidenav-bottom a {
     padding: 6px 8px 16px 16px;
     text-decoration: none;
-    font-size: 25px;
-    color: #656569;
-    display: block;
+    font-size: 18px;
+    color: #e3edfe;
     position: absolute;
-    bottom: 0px;
+    bottom: 0;
 }
 
 /* When you mouse over the navigation links, change their color */
@@ -142,13 +141,25 @@ h5.sticky {
 }
 
 .sidenav a.logo {
-    padding: 6px 8px 6px 0px;
+    padding: 6px 8px 6px 0;
     text-decoration: none;
     width: 160px;
     height: 160px;
     font-size: 25px;
     color: #656569;
     display: inline-block;
+    background-image: url("/static/resources/orange.png");
+    background-size: 160px auto;
+    background-repeat: no-repeat;
+    margin-left: 12px;
+    margin-top: 6px;
+}
+
+.sidenav a.logo:hover {
+    background-image: url("/static/resources/white.png");
+    background-size: 160px auto;
+    background-repeat: no-repeat;
+    background-color: #303033;
 }
 
 .sidenav img.logo {
