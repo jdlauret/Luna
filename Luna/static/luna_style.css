@@ -27,7 +27,7 @@ h4.sticky {
   background: #dbd9d9;
   color: #656569;
   margin: 0;
-  padding: 0;
+  padding: 4px 0 0 0;
   position: -webkit-sticky;
   position: sticky;
   top: -16px;
@@ -75,7 +75,11 @@ h5.sticky {
 }
 
 .left-half::-webkit-scrollbar,
-.right-half::-webkit-scrollbar {
+.right-half::-webkit-scrollbar,
+.far-left::-webkit-scrollbar,
+.center-left::-webkit-scrollbar,
+.far-right::-webkit-scrollbar,
+.center-right::-webkit-scrollbar {
     display: none;
 }
 
@@ -85,22 +89,15 @@ h5.sticky {
     padding: .25rem;
 }
 
-.center-left {
-    background-color: transparent;
-    flex: 1;
-    padding: .25rem;
-}
-
-.far-right{
-    background-color: transparent;
-    flex: 1;
-    padding: .25rem;
-}
-
+.center-left,
+.far-right,
 .center-right {
     background-color: transparent;
     flex: 1;
     padding: .25rem;
+    overflow: auto;
+    height: auto;
+    text-align: center;
 }
 
 /* The sidebar menu */
@@ -221,12 +218,12 @@ h5.sticky {
     background-color: #4CAF50; /* Green */
     border: none;
     color: white;
-    padding: 16px 32px;
+    padding: 16px 24px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
+    margin: 3px 3px;
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
     cursor: pointer;
@@ -237,11 +234,13 @@ h5.sticky {
     color: #656569;
     border: 2px solid #3fbfad;
     border-radius: 5px;
+    max-width: 100%;
 }
 
-.button1:hover {
+.button1:hover, .button1:focus {
     background-color: #3fbfad;
     color: #656569;
+    outline: none;
 }
 
 .button2 {
@@ -249,11 +248,13 @@ h5.sticky {
     color: #656569;
     border: 2px solid #57c1e8;
     border-radius: 5px;
+    max-width: 100%;
 }
 
-.button2:hover {
+.button2:hover, .button2:focus {
     background-color: #57c1e8;
     color: #656569;
+    outline: none;
 }
 
 .button3 {
@@ -261,11 +262,13 @@ h5.sticky {
     color: #656569;
     border: 2px solid #f8eb60;
     border-radius: 5px;
+    max-width: 100%;
 }
 
-.button3:hover {
+.button3:hover, .button3:focus {
     background-color: #f8eb60;
     color: #656569;
+    outline: none;
 }
 
 .button4 {
