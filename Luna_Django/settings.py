@@ -30,8 +30,8 @@ ALLOWED_HOSTS = [
     'luna.vivintsolar.com',
 ]
 
-LOGIN_URL = '/Luna/login'
-LOGIN_REDIRECT_URL = '/Luna'
+LOGIN_URL = '/'
+LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get('GOOGLE_OAUTH2_KEY')

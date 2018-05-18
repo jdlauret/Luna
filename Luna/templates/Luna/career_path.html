@@ -1,25 +1,49 @@
 {% extends 'Luna/base.html' %}
 {% block content %}
-    <script>
-        function toggle(num) {
-            var click = document.getElementsByClassName("click");
-            var show = document.getElementsByClassName("show");
-            var i;
-            for (i = 0; i < click.length; i++) {
-                if (click[i].id == num) {
-                    click[i].className = "show";
+    <script type="text/javascript">
+        function toggle(button) {
+            var num = button[1];
+            var div = button[0];
+
+            var buttons = document.getElementsByTagName('button')
+            var click = Array.from(document.getElementsByClassName("click"));
+            var show = Array.from(document.getElementsByClassName("show"));
+            if (show.length > 0 && click.length > 0) {
+
+                click = click.concat(show);
+            }
+
+            var j;
+            for (j = 0; j < click.length; j++) {
+                if (click[j].id == num && click[j].className != 'show') {
+                    click[j].className = "show";
+                }
+                else if (click[j].id == num && click[j].className == 'show') {
+                    click[j].className = 'click';
+                }
+                else if (click[j].id != num) {
+                    click[j].className = "click";
                 }
             }
-            var j;
-            for (j = 0; j < show.length; j++) {
-                if (show[j].id != num) {
-                    show[j].className = "click";
+            for (j = 0; j < buttons.length; j++){
+                if (buttons[j].id != num){
+                    buttons[j].className = buttons[j].className.replace('clicked', '')
                 }
             }
         }
+
+        $(() => {
+                'use strict';
+                $('button').click(function() {
+                    $(this).toggleClass('clicked')
+                })
+            }
+        )
     </script>
     <div class="main">
-        <h2>PIO Career Path</h2>
+        <span style="padding-left: 1rem; display: inline-block">
+        <h2 class="h2">PIO Career Path</h2>
+    </span>
         <div class="container">
             <div class="left-half">
                 <article>
@@ -42,9 +66,11 @@
                         <section>
                             <h4 class="sticky">{{ key1 }}</h4>
                             {% for key2, value2 in value1.items %}
+                                <hr>
                                 {% for key3, value3 in value2.items %}
+
                                     {% if value3.0.position != '' or value3.1.position != '' or value3.2.position != '' or value3.3.position != '' %}
-                                        <hr>
+
                                         <div class="inner-container">
                                             {% if value3.0 != '' %}
                                                 <div class="far-left">
@@ -57,21 +83,27 @@
                                             {% endif %}
                                             <div class="center-left">
                                                 {% if value3.1.position != '' %}
-                                                    <button class="button button1" onclick="toggle({{ value3.1.id }})">
+                                                    <button class="button1"
+                                                            id = "{{ value3.1.id }}"
+                                                            onclick="toggle([this, {{ value3.1.id }}])">
                                                         {{ value3.1.position }}
                                                     </button>
                                                 {% endif %}
                                             </div>
                                             <div class="center-right">
                                                 {% if value3.2.position != '' %}
-                                                    <button class="button button2" onclick="toggle({{ value3.2.id }})">
+                                                    <button class="button2"
+                                                            id = "{{ value3.2.id }}"
+                                                            onclick="toggle([this, {{ value3.2.id }}])">
                                                         {{ value3.2.position }}
                                                     </button>
                                                 {% endif %}
                                             </div>
                                             <div class="far-right">
                                                 {% if value3.3.position != '' %}
-                                                    <button class="button button3" onclick="toggle({{ value3.3.id }})">
+                                                    <button class="button3"
+                                                            id = "{{ value3.3.id }}"
+                                                            onclick="toggle([this, {{ value3.3.id }}])">
                                                         {{ value3.3.position }}
                                                     </button>
                                                 {% endif %}
@@ -88,24 +120,75 @@
             </div>
             <div class="right-half">
                 <article>
-                    <h2>Job Requirements</h2>
-                    {% for item in job_description %}
-                        <div class="click" id="{{ item.id }}">
-                            Department: {{ item.department_display }}
-                            <br>
-                            Function: {{ item.function_display }}
-                            <br>
-                            Position: {{ item.position_display }}
-                            <br>
-                            Tier: {{ item.tier_level }}
-                            <br>
-                            Pay: {{ item.pay_rate_display }}
-                            <br>
-                            Job Description:
-                            <br>
-                            {{ item.job_description|linebreaksbr }}
+
+                    <h4 class="sticky">
+                        <div class="far-left">
+                            <p>Job Requirements</p>
                         </div>
-                    {% endfor %}
+                    </h4>
+                    <p></p>
+                    <section>
+                        {% for item in job_description %}
+                            <div class="click" id="{{ item.id }}">
+                                <br>
+                                <h4>{{ item.department_display }} - {{ item.function_display }}
+                                    - {{ item.position_display }}</h4>
+                                <div class="inner-container">
+                                    <div class="far-left">
+                                        <b>Position Expectations</b>
+                                        <br>
+                                        <b>Duration: </b> {{ item.duration }} Days
+                                        {% if item.qa != None %}
+                                            <br>
+                                            <b>QA > </b>{{ item.qa_display }}
+                                        {% endif %}
+                                        {% if item.aht != None %}
+                                            <br>
+                                            <b>Average Handle Time < </b>{{ item.aht }} Minutes
+                                        {% endif %}
+                                        {% if item.aph != None %}
+                                            <br>
+                                            <b>Activities Per Hour > </b>{{ item.aph }} Per Hour
+                                        {% endif %}
+                                        {% if item.adh != None %}
+                                            <br>
+                                            <b>Adherence > </b>{{ item.adh_display }}
+                                        {% endif %}
+                                        {% if item.availability != None %}
+                                            <br>
+                                            <b>Availability ></b>{{ item.availability_display }}
+                                        {% endif %}
+                                        {% if item.efficiency != None %}
+                                            <br>
+                                            <b>Efficiency > </b>{{ item.efficiency_display }}
+                                        {% endif %}
+                                        {% if item.error_rate != None %}
+                                            <br>
+                                            <b>Error Rate < </b>{{ item.error_rate_display }}
+                                        {% endif %}
+                                        {% if item.productivity != None %}
+                                            <br>
+                                            <b>Productivity > </b>{{ item.productivity_display }}
+                                        {% endif %}
+                                        {% if item.nps != None %}
+                                            <br>
+                                            <b>NPS > </b>{{ item.nps }}
+                                        {% endif %}
+                                        {% if item.field_qa_nps_score != None %}
+                                            <br>
+                                            <b>QA NPS of </b>{{ item.field_qa_nps_score }}
+                                        {% endif %}
+                                        <b></b>
+                                    </div>
+                                    <div class="far-right"><b>Pay: </b>{{ item.pay_rate_display }}</div>
+                                </div>
+                                <br>
+                                <b>Trained and Successful Execution in the following areas:</b>
+                                <br>
+                                <blockquote>{{ item.job_description|linebreaksbr }}</blockquote>
+                            </div>
+                        {% endfor %}
+                    </section>
                 </article>
             </div>
         </div>

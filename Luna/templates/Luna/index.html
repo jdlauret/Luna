@@ -1,1 +1,14 @@
 {% extends 'Luna/base.html' %}
+{% block content %}
+    <div class="main">
+        <div class="container">
+            {% if user.is_authenticated %}
+                <h2>Welcome, {{ user.first_name }}!</h2>
+            {% else %}
+                <h2>Welcome!
+                <br>To access Luna, Please <a href="{% url 'social:begin' 'google-oauth2' %}">Login</a>
+                </h2>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

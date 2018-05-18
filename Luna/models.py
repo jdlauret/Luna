@@ -103,6 +103,7 @@ class CareerPath(models.Model):
 
     PERCENTAGES = (
         (0, '0%'),
+        (5, '5%'),
         (10, '10%'),
         (20, '20%'),
         (30, '30%'),
@@ -112,6 +113,7 @@ class CareerPath(models.Model):
         (70, '70%'),
         (75, '75%'),
         (80, '80%'),
+        (85, '85%'),
         (90, '90%'),
         (100, '100%'),
     )
@@ -156,7 +158,8 @@ class CareerPath(models.Model):
     )
     adh = models.IntegerField(
         null=True,
-        blank=True
+        blank=True,
+        choices=PERCENTAGES,
     )
     availability = models.IntegerField(
         null=True,
@@ -197,6 +200,24 @@ class CareerPath(models.Model):
 
     def tier_display(self):
         return dict(CareerPath.TIER_LEVELS)[self.tier_level]
+
+    def qa_display(self):
+        return dict(CareerPath.PERCENTAGES)[self.qa]
+
+    def adh_display(self):
+        return dict(CareerPath.PERCENTAGES)[self.adh]
+
+    def availability_display(self):
+        return dict(CareerPath.PERCENTAGES)[self.availability]
+
+    def efficiency_display(self):
+        return dict(CareerPath.PERCENTAGES)[self.efficiency]
+
+    def error_rate_display(self):
+        return dict(CareerPath.PERCENTAGES)[self.error_rate]
+
+    def productivity_display(self):
+        return dict(CareerPath.PERCENTAGES)[self.productivity]
 
 
 class AutomatorTask(models.Model):
