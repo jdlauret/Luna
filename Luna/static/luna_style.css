@@ -13,13 +13,12 @@ section {
 
 hr {
     display: block;
-    height: 1px;
+    height: 2px;
     border: 0;
-    border-top: 1px solid;
     margin: 1em 0;
     padding: 0;
     color: #b6b6bd;
-    background-color: #b6b6bd;
+    background-image: linear-gradient(#18181a, #18181a, #e3edfe);
 }
 
 h2 {
@@ -71,14 +70,14 @@ h5.sticky {
     background-color: transparent;
     flex: 1;
     padding: 1rem;
-    overflow: auto;
+    overflow-y: scroll;
     height: auto;
     min-width: 600px;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: none;
 }
 
-.left-half::-webkit-scrollbar,
+/*.left-half::-webkit-scrollbar,*/
 .right-half::-webkit-scrollbar,
 .far-left::-webkit-scrollbar,
 .center-left::-webkit-scrollbar,
@@ -90,7 +89,12 @@ h5.sticky {
 .far-left{
     background-color: transparent;
     flex: 1;
+    float: top;
     padding: .25rem;
+}
+
+.far-left p {
+    margin-top: 0;
 }
 
 .center-left,
@@ -149,7 +153,7 @@ h5.sticky {
     font-size: 25px;
     color: #656569;
     display: inline-block;
-    background-image: url("/static/resources/orange.png");
+    background-image: url("/static/resources/white_starless.png");
     background-size: 160px auto;
     background-repeat: no-repeat;
     margin-left: 12px;
@@ -174,20 +178,18 @@ h5.sticky {
 
 .sidenav hr {
     display: block;
-    height: 1px;
+    height: 2px;
     border: 0;
-    border-top: 1px solid;
     margin: 1em 0;
     padding: 0;
     color: #b6b6bd ;
-    background-color: #b6b6bd;
+    background-image: linear-gradient(#18181a, #18181a, #e3edfe);
 }
 /* Style page content */
 .main {
     margin-left: 190px; /* Same as the width of the sidebar */
     margin-top: 0px;
     padding: 10px 10px;
-    color: transparent;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
