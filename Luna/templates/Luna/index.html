@@ -1,7 +1,7 @@
 {% extends 'Luna/base.html' %}
 {% load static %}
 {% block content %}
-    <script type="text/javascript" src="{% static 'js/scripts.js' %}"></script>
+
     <div class="main">
         {% if user.is_authenticated %}
             <h2>Welcome, {{ user.first_name }}!</h2>
@@ -12,8 +12,9 @@
             <br>
             <p>To access Luna, Please <a href="{% url 'social:begin' 'google-oauth2' %}">Login</a></p>
         {% endif %}
-        <p style="float: bottom" id="browser_detect" onclick="browser_detect()">Click here to check if you are using a
+        <p id="browser_detect" onclick="browser_detect()">Click here to check if you are using a
             compatible browser</p>
     </div>
+    <script type="text/javascript" src="{% static 'js/scripts.js' %}"></script>
 
 {% endblock %}

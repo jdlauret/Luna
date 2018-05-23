@@ -32,7 +32,6 @@ def career_path(request):
     else:
         return HttpResponse('/Luna')
 
-
 @login_required
 def system_performance_calculator(request):
     if request.user.is_authenticated:

@@ -26,28 +26,27 @@ h2 {
 }
 
 h4.sticky {
-  background: #dbd9d9;
-  color: #656569;
-  margin: 0;
-  padding: 6px 0 0 0;
-  position: -webkit-sticky;
-  position: sticky;
-  top: -16px;
-  border-bottom: 5px #656569;
-  display: flex;
-  border-radius: 5px;
+    background: #dbd9d9;
+    color: #656569;
+    margin: 0;
+    padding: 6px 0 0 0;
+    position: -webkit-sticky;
+    position: sticky;
+    top: -16px;
+    border-bottom: 5px #656569;
+    display: flex;
+    border-radius: 5px;
 }
 
 h5.sticky {
-  background: #dbd9d9;
-  color: #656569;
-  margin: 0;
-  padding: 0;
-  position: -webkit-sticky;
-  position: sticky;
-  top: -16px;
+    background: #dbd9d9;
+    color: #656569;
+    margin: 0;
+    padding: 0;
+    position: -webkit-sticky;
+    position: sticky;
+    top: -16px;
 }
-
 
 /* pattern styles */
 .container {
@@ -86,7 +85,7 @@ h5.sticky {
     display: none;
 }
 
-.far-left{
+.far-left {
     background-color: transparent;
     flex: 1;
     float: top;
@@ -122,6 +121,13 @@ h5.sticky {
     box-shadow: 0 0 20px #111;
 }
 
+.sidenav div {
+    text-decoration: none;
+    font-size: 18px;
+    color: #e3edfe;
+    display: block;
+}
+
 /* The navigation menu links */
 .sidenav a {
     padding: 6px 16px 6px 16px;
@@ -141,7 +147,7 @@ h5.sticky {
 }
 
 /* When you mouse over the navigation links, change their color */
-.sidenav a:hover {
+.sidenav a:hover, a:active {
     background-color: #616166;
 }
 
@@ -153,7 +159,7 @@ h5.sticky {
     font-size: 25px;
     color: #656569;
     display: inline-block;
-    background-image: url("/static/resources/white_starless.png");
+    background-image: url("../static/resources/white_starless.png");
     background-size: 160px auto;
     background-repeat: no-repeat;
     margin-left: 12px;
@@ -161,7 +167,7 @@ h5.sticky {
 }
 
 .sidenav a.logo:hover {
-    background-image: url("/static/resources/white.png");
+    background-image: url("../static/resources/white.png");
     background-size: 160px auto;
     background-repeat: no-repeat;
     background-color: #303033;
@@ -182,32 +188,80 @@ h5.sticky {
     border: 0;
     margin: 1em 0;
     padding: 0;
-    color: #b6b6bd ;
+    color: #b6b6bd;
     background-image: linear-gradient(#18181a, #18181a, #e3edfe);
 }
+
+.menu-content {
+    max-height: 0;
+    overflow: hidden;
+    padding-left: 6px;
+    display: block;
+}
+
+.menu-content a {
+    font-size: 15px;
+}
+
+.collapsible-menu a {
+    list-style-type: none;
+}
+
+.collapsible-menu label {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.collapsible-menu img {
+    height: 15px;
+    width: 15px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+input#menu {
+    display: none;
+}
+
+input:checked ~ .menu-content {
+    max-height: 100%;
+}
+
+input:checked ~ label > img {
+    -webkit-transform: rotate(90deg);
+}
+
 /* Style page content */
 .main {
     margin-left: 190px; /* Same as the width of the sidebar */
-    margin-top: 0px;
+    margin-top: 0;
     padding: 10px 10px;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
 }
 
 /*Header*/
 .header {
-    height: 160px; /*Set height of header to match height of logo*/
-    width: 100%; /*full width of screen*/
+    height: 91px; /*Set height of header to match height of logo*/
+    width: 91px; /*full width of screen*/
     position: fixed; /*will stay on scroll*/
     z-index: 1; /*stay on top layer*/
     top: 0; /*stay at top of page*/
     left: 0; /*stay at left of page*/
     background-color: #dbd9d9;
-    box-shadow: 0px 5px 20px #111;
+    box-shadow: 0 5px 20px #111;
+    display: block;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .header img {
@@ -230,8 +284,7 @@ h5.sticky {
 }
 
 /* Buttons */
-button, :focus {
-    background-color: #4CAF50; /* Green */
+button {
     border: none;
     color: white;
     text-align: center;
@@ -240,7 +293,6 @@ button, :focus {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    -webkit-transition-duration: 0.4s; /* Safari */
     cursor: pointer;
     outline: none;
 }
@@ -293,7 +345,9 @@ button, :focus {
     border: 2px solid #ff8200;
 }
 
-.button4:hover {background-color: #e7e7e7;}
+.button4:hover {
+    background-color: #e7e7e7;
+}
 
 .button5 {
     background-color: white;
