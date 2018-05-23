@@ -61,3 +61,5 @@ desktop\.ini
 .idea/
 
 Luna_Django/credentials/
+
+Luna/credentials/
