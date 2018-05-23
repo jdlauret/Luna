@@ -10,7 +10,7 @@ calculator_patterns = [
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^career_path/$', views.career_path, name='career_path'),
+    url(r'^career_path/$', views.career_path),
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout, name='logout'),
     path('calculators/', include(calculator_patterns))

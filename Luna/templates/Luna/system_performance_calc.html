@@ -1,9 +1,62 @@
 {% extends 'Luna/base.html' %}
 {% block content %}
+
     <div class="main">
         <h2>System Performance Calculator</h2>
-        <p>This is a paragraph.</p>
-        <p>Yada, yada.</p>
-        <p>This is where the calculator will go.</p>
+        <form action="/Luna/calculators/system_performance_calculator/" method="post">
+            {{ form.non_field_errors }}
+            {% for field in form %}
+                <div class="fieldWrapper">
+                {{ field.errors }}
+                <label for="{{ field.id_for_label }}">{{ field.label }} </label>
+                {{ field }}
+                </div>
+            {% endfor %}
+            <input type="submit" value="Submit">
+        </form>
+        {% if form_response_complete %}
+            <div id="account" name="account_info">
+                <table>
+                    <th>Account</th>
+                    {% for row in form_response.account %}
+                        <tr>
+                            {{ row }}
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div id="summary" name="summary_info">
+                <table>
+                    <th>Summary</th>
+                    {% for row in form_response.summary %}
+                        <tr>
+                            {% for col in row %}
+                                {{ col }}
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div id="production" name="production_info">
+                <table>
+                    <th>Production by Month</th>
+                    {% for row in form_response.production %}
+                        {% if row.0 == 'Total' %}
+                            <tr>
+                                {% for col in row %}
+                                    <td>{{ col }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% else %}
+                            <tr class="table_footer">
+                                {% for col in row %}
+                                    <tr>{{ col }}</tr>
+                                {% endfor %}
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </table>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}

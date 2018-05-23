@@ -1,1 +1,1714 @@
-{"Customer Service": {"Customer Service": {"1": [{"position": "Customer Service"}, {"position": "Representative 1", "id": 23, "position_data": {"id": 23, "tier_level": 1.1, "pay_rate": 12.0, "department": "customer_service", "function": "customer_service", "position": "representative_1", "qa": 60, "productivity": null, "aht": 12, "aph": 5, "adh": 80, "availability": null, "error_rate": null, "efficiency": 80, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Basic System Troubleshooting & Dispatching\r\n\u2022 In Good Standing (No Written Warnings)"}}, {"position": "Representative 2", "id": 24, "position_data": {"id": 24, "tier_level": 2.1, "pay_rate": 13.0, "department": "customer_service", "function": "customer_service", "position": "representative_2", "qa": null, "productivity": null, "aht": null, "aph": 5, "adh": null, "availability": null, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Intermediate System Troubleshooting & Dispatching (Inbound Only)\r\n\u2022 Service Billing & General Maintenance (Inbound Only)\r\n\u2022 In Good Standing (No Written Warnings)"}}, {"position": "Specialist 2", "id": 27, "position_data": {"id": 27, "tier_level": 3.1, "pay_rate": 14.0, "department": "customer_service", "function": "customer_service", "position": "specialist_2", "qa": null, "productivity": null, "aht": 15, "aph": null, "adh": null, "availability": null, "error_rate": null, "efficiency": 85, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Compensation Requests (Outbound)\r\n\u2022 Sales Promise Claims (Outbound)\r\n\u2022 System Performance Analysis (Outbound)\r\n\u2022 Force Majeure / Casualty Events (Outbound)\r\n\u2022 In Good Standing (No Written Warnings)"}}], "2": [{"position": ""}, {"position": ""}, {"position": "Representative 3", "id": 25, "position_data": {"id": 25, "tier_level": 2.2, "pay_rate": 13.25, "department": "customer_service", "function": "customer_service", "position": "representative_3", "qa": null, "productivity": null, "aht": null, "aph": null, "adh": null, "availability": null, "error_rate": null, "efficiency": 80, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Compensation Requests (Inbound Only)\r\n\u2022 System Performance Analysis (Inbound Only)\r\n\u2022 Sales Promise Claims (Inbound Only)\r\n\u2022 Force Majeure / Casualty Events (Inbound Only)"}}, {"position": "Specialist 3", "id": 28, "position_data": {"id": 28, "tier_level": 3.2, "pay_rate": 14.25, "department": "customer_service", "function": "customer_service", "position": "specialist_3", "qa": 80, "productivity": null, "aht": 15, "aph": 4, "adh": 90, "availability": null, "error_rate": null, "efficiency": 85, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 All Follow-up Cases\r\n\u2022 Advanced System Troubleshooting & Dispatching\r\n\u2022 General Service Disputes/Sales Promise\r\n\u2022 Compensation/System Performance Analysis\r\n\u2022 In Good Standing (No Written Warnings)"}}], "3": [{"position": ""}, {"position": ""}, {"position": "Specialist 1", "id": 26, "position_data": {"id": 26, "tier_level": 2.3, "pay_rate": 13.5, "department": "customer_service", "function": "customer_service", "position": "specialist_1", "qa": null, "productivity": null, "aht": null, "aph": null, "adh": null, "availability": null, "error_rate": null, "efficiency": 85, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 System Troubleshooting (Outbound)\r\n\u2022 General Service Requests (Outbound)\r\n\u2022 In Good Standing (No Written Warnings)"}}, {"position": "Team Lead", "id": 29, "position_data": {"id": 29, "tier_level": 3.3, "pay_rate": 14.5, "department": "customer_service", "function": "customer_service", "position": "team_lead", "qa": null, "productivity": null, "aht": null, "aph": 15, "adh": 90, "availability": null, "error_rate": null, "efficiency": 85, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 All Follow-up Cases\r\n\u2022 Advanced System Troubleshooting & Dispatching\r\n\u2022 General Service Disputes/Sales Promise\r\n\u2022 Compensation/System Performance Analysis\r\n\u2022 In Good Standing (No Written Warnings)"}}]}}, "Customer Solutions": {"Specialist 1": {"1": [{"position": "Specialist 1"}, {"position": "Representative 1", "id": 30, "position_data": {"id": 30, "tier_level": 1.1, "pay_rate": 12.0, "department": "customer_solutions", "function": "specialist_1", "position": "representative_1", "qa": null, "productivity": null, "aht": null, "aph": 4, "adh": null, "availability": 80, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Manage Inbox\r\n\u2022 Navigate Salesforce\r\n\u2022 Document accounts using CSO Activity Codes"}}, {"position": "Representative 2", "id": 31, "position_data": {"id": 31, "tier_level": 2.1, "pay_rate": 13.0, "department": "customer_solutions", "function": "specialist_1", "position": "representative_2", "qa": null, "productivity": null, "aht": null, "aph": 6, "adh": null, "availability": 80, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Prep and Send Default/DRA Letters\r\n\u2022 Document & Update Default Cases"}}, {"position": ""}], "2": [{"position": ""}, {"position": ""}, {"position": "Representative 3", "id": 32, "position_data": {"id": 32, "tier_level": 2.2, "pay_rate": 13.25, "department": "customer_solutions", "function": "specialist_1", "position": "representative_3", "qa": null, "productivity": null, "aht": null, "aph": 7, "adh": null, "availability": 85, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Upload, review, and document county filings\r\n\u2022 Maintain relationship with Lease Dimensions filing team\r\n\u2022 Request filings for all new Vivint Solar installs\r\n\u2022 Research missing filings & resubmit with new information\r\n\u2022 Manage requested terminations for escalated refinance and transfer customers"}}, {"position": ""}], "3": [{"position": ""}, {"position": ""}, {"position": ""}, {"position": ""}]}, "Super Agent": {"1": [{"position": "Super Agent"}, {"position": ""}, {"position": "Representative 2", "id": 33, "position_data": {"id": 33, "tier_level": 2.1, "pay_rate": 13.0, "department": "customer_solutions", "function": "super_agent", "position": "representative_2", "qa": 70, "productivity": null, "aht": null, "aph": 4, "adh": null, "availability": 85, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Navigate Salesforce\r\n\u2022 Document account using CSO activity codes\r\n\u2022 Document and update default cases\r\n\u2022 Complete an escalated customer transfer\r\n\u2022 Researching an account"}}, {"position": "Specialist 2", "id": 36, "position_data": {"id": 36, "tier_level": 3.1, "pay_rate": 14.0, "department": "customer_solutions", "function": "super_agent", "position": "specialist_2", "qa": 80, "productivity": null, "aht": null, "aph": 5, "adh": null, "availability": 90, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Relocation Accounts\r\n\u2022 Customer Communication Project (Creating templates)\r\n\u2022 Skip Trace Process\r\n\u2022 Priority Escalations in All Areas"}}], "2": [{"position": ""}, {"position": ""}, {"position": "Representative 3", "id": 34, "position_data": {"id": 34, "tier_level": 2.2, "pay_rate": 13.25, "department": "customer_solutions", "function": "super_agent", "position": "representative_3", "qa": 70, "productivity": null, "aht": null, "aph": 4, "adh": null, "availability": 85, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Own and maintain a project role\r\n\u2022 Escalated CARE account management\r\n\u2022 Admin/CORP Account <181 Management"}}, {"position": "Specialist 3", "id": 37, "position_data": {"id": 37, "tier_level": 3.2, "pay_rate": 14.25, "department": "customer_solutions", "function": "super_agent", "position": "specialist_3", "qa": 80, "productivity": null, "aht": null, "aph": 5, "adh": null, "availability": 90, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Ownership of all Exception Review Customer Communication (ECL)\r\n\u2022 Ownership of Legal Communication (Amendments, settlement agreement, etc.)"}}], "3": [{"position": ""}, {"position": ""}, {"position": "Specialist 1", "id": 35, "position_data": {"id": 35, "tier_level": 2.3, "pay_rate": 13.5, "department": "customer_solutions", "function": "super_agent", "position": "specialist_1", "qa": 70, "productivity": null, "aht": null, "aph": 4, "adh": null, "availability": 85, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Salesforce Reporting \r\n\u2022 Negotiation of Foreclosure Transfers\r\n\u2022 Team Mentor - Y-jacking  & Side by Sides"}}, {"position": "Team Lead", "id": 38, "position_data": {"id": 38, "tier_level": 3.3, "pay_rate": 14.5, "department": "customer_solutions", "function": "super_agent", "position": "team_lead", "qa": 80, "productivity": null, "aht": null, "aph": 5, "adh": null, "availability": 90, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Update/Maintain Vault Procedures\r\n\u2022 Provide Daily Reporting to Leadership\r\n\u2022 Complete Bi-weekly Side by Sides \r\n\u2022 Complete 2 QA's per Team Member Weekly\r\n\u2022 All New Hire Training"}}]}}, "Recs And Rebates": {"Recs And Rebates": {"1": [{"position": "Recs And Rebates"}, {"position": "Representative 1", "id": 39, "position_data": {"id": 39, "tier_level": 1.1, "pay_rate": 12.0, "department": "recs_and_rebates", "function": "recs_and_rebates", "position": "representative_1", "qa": null, "productivity": 75, "aht": null, "aph": null, "adh": null, "availability": null, "error_rate": 20, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Maintain good standing at all time with Vivint Solar\r\n\u2022 Will be able to accomplish teams workflow processes\r\n\u2022 New Hire considered in \"training\" first 90 days\r\n\u2022 Comprehend All Training Provided"}}, {"position": "Representative 2", "id": 40, "position_data": {"id": 40, "tier_level": 2.1, "pay_rate": 13.0, "department": "recs_and_rebates", "function": "recs_and_rebates", "position": "representative_2", "qa": null, "productivity": 80, "aht": null, "aph": null, "adh": null, "availability": null, "error_rate": null, "efficiency": 20, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Maintain Good Standing with Vivint Solar\r\n\u2022 Eligible to QA Workflow Processes completed by Teammates\r\n\u2022 Begin Training on Inbox Processes & Communications"}}, {"position": "Specialist 2", "id": 42, "position_data": {"id": 42, "tier_level": 3.1, "pay_rate": 14.0, "department": "recs_and_rebates", "function": "recs_and_rebates", "position": "specialist_2", "qa": null, "productivity": 90, "aht": null, "aph": null, "adh": null, "availability": null, "error_rate": 5, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Maintain Good Standing with Vivint Solar\r\n\u2022 Able to complete one or more processes from another team\r\n\u2022 Able to complete one or more special projects (such as Requested Items)\r\n\u2022 Training on Customer Communication & Phone Calls"}}], "2": [{"position": ""}, {"position": ""}, {"position": "Representative 3", "id": 41, "position_data": {"id": 41, "tier_level": 2.2, "pay_rate": 13.25, "department": "recs_and_rebates", "function": "recs_and_rebates", "position": "representative_3", "qa": null, "productivity": 80, "aht": null, "aph": null, "adh": null, "availability": null, "error_rate": 20, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Maintain Good Standing with Vivint Solar\r\n\u2022 Able to Complete all Inbox Processes\r\n\u2022 Begin training on one or more special projects (such as Requested Items)\r\n\u2022 Begin training on one or more processes from another team"}}, {"position": "Specialist 3", "id": 43, "position_data": {"id": 43, "tier_level": 3.2, "pay_rate": 14.25, "department": "recs_and_rebates", "function": "recs_and_rebates", "position": "specialist_3", "qa": null, "productivity": 90, "aht": null, "aph": null, "adh": null, "availability": null, "error_rate": 5, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Maintain Good Standing with Vivint Solar\r\n\u2022 Begin Training on Escalated Accounts & Moving them Forward\r\n\u2022 Able to complete two or more special projects (such as Requested Items)\r\n\u2022 Begin Training on Customer & Program Communication\r\n\u2022 Able to Complete two or more processes form another team\r\n\u2022 Training on Salesforce Reporting\r\n\u2022 Able to Complete Customer Communication & Phone Calls\r\n\u2022 Processing Specialist II is considered \"Acting Team Lead\""}}], "3": [{"position": ""}, {"position": ""}, {"position": ""}, {"position": "Team Lead", "id": 44, "position_data": {"id": 44, "tier_level": 3.3, "pay_rate": 14.5, "department": "recs_and_rebates", "function": "recs_and_rebates", "position": "team_lead", "qa": null, "productivity": 90, "aht": null, "aph": null, "adh": null, "availability": null, "error_rate": 5, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Maintain Good Standing with Vivint Solar\r\n\u2022 Handles Escalated Accounts\r\n\u2022 Maintain Workflow & Volume for the Team\r\n\u2022 Conduct ALL New Hire & UP Training for the Team\r\n\u2022 Handles Special Projects (Such as Requested Items)\r\n\u2022 Able to build and run Salesforce Reports for Team\r\n\u2022 Build Relationships with Counter Departments\r\n\u2022 Conduct Weekly Coaching for Team Members\r\n\u2022 Monthly Leadership Training"}}]}}, "Real Time Scheduling": {"Inbound": {"1": [{"position": "Inbound"}, {"position": "Representative 1", "id": 2, "position_data": {"id": 2, "tier_level": 1.1, "pay_rate": 12.0, "department": "real_time_scheduling", "function": "inbound", "position": "representative_1", "qa": 60, "productivity": null, "aht": 10, "aph": 3, "adh": 80, "availability": null, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Scheduling Installations for reps, techs, and customers\r\n\u2022 Rescheduling Site Surveys\r\n\u2022 Ability to respond and complete installation email requests\r\n\u2022 Proficient with Click software\r\n\u2022 Knowledgeable of case and hold procedures\r\n\u2022 Knowledgeable of the installation process including how to read and use headers"}}, {"position": "Representative 2", "id": 3, "position_data": {"id": 3, "tier_level": 2.1, "pay_rate": 13.0, "department": "real_time_scheduling", "function": "inbound", "position": "representative_2", "qa": 70, "productivity": null, "aht": 8, "aph": 4, "adh": 85, "availability": null, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Competent in completing all various types of emails received through the general RTS inbox\r\n\u2022 Competent in AB2FIN Scheduling and able to assist with AB2FIN Scheduling calls\r\n\u2022 Assists with training by y-jacking with new employees and is able to competently walk an new hire through the installation schedule process"}}, {"position": ""}], "2": [{"position": ""}, {"position": ""}, {"position": "Representative 3", "id": 4, "position_data": {"id": 4, "tier_level": 2.2, "pay_rate": 13.25, "department": "real_time_scheduling", "function": "inbound", "position": "representative_3", "qa": 70, "productivity": null, "aht": 8, "aph": 4, "adh": 85, "availability": null, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Proficient with the Arrival Window Procedure and perfect adherence to zero arrival window breaks\r\n\u2022 Competent in SREC Scheduling and able to assist with SREC Scheduling calls\r\n\u2022 Competent in Removal and Reinstall Scheduling and able to assist with Removal and Reinstall Scheduling calls"}}, {"position": ""}], "3": [{"position": ""}, {"position": ""}, {"position": ""}, {"position": "Team Lead", "id": 5, "position_data": {"id": 5, "tier_level": 3.3, "pay_rate": 14.5, "department": "real_time_scheduling", "function": "inbound", "position": "team_lead", "qa": 80, "productivity": null, "aht": 7, "aph": 3, "adh": 90, "availability": null, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 50% of time is dedicated to handling inbound calls and emails\r\n\u2022 50%  of time is dedicated to floor support and monitoring phone queues\r\n\u2022 Monitors and assigns work within the RTS Inbox\r\n\u2022 Owns and manages a report/project\r\n\u2022 Owns new hire training\r\n\u2022 Assists in uptraining\r\n\u2022 Responsible for handling 2nd level escalations\r\n\u2022 Knowledgeable of all RT'S processes and practices\r\n\u2022 Ability to provide feedback to agents and performs side by sides\r\n\u2022 Advanced Knowledge of Central scheduling and maximizing processes and efficiency"}}]}, "Auxiliary": {"1": [{"position": "Auxiliary"}, {"position": ""}, {"position": "Representative 2", "id": 6, "position_data": {"id": 6, "tier_level": 2.1, "pay_rate": 13.0, "department": "real_time_scheduling", "function": "auxiliary", "position": "representative_2", "qa": 70, "productivity": null, "aht": 5, "aph": 6, "adh": 85, "availability": null, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Manage two QA techs by ensuring their calendar is filled with QA appts every week\r\n\u2022 Competent in AB2FIN Scheduling and procedures\r\n\u2022 Proficient with the Arrival Window Procedure and perfect adherance to zero arrival window breaks\r\n\u2022 Proficient at creating scheduling cases for pre-PTO service work"}}, {"position": ""}], "2": [{"position": ""}, {"position": ""}, {"position": "Representative 3", "id": 7, "position_data": {"id": 7, "tier_level": 2.2, "pay_rate": 13.25, "department": "real_time_scheduling", "function": "auxiliary", "position": "representative_3", "qa": 70, "productivity": null, "aht": 5, "aph": 6, "adh": 85, "availability": null, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": 100, "job_description": "\u2022  Competent in Notary scheduling procedures"}}, {"position": ""}], "3": [{"position": ""}, {"position": ""}, {"position": "Specialist 1", "id": 8, "position_data": {"id": 8, "tier_level": 2.3, "pay_rate": 13.5, "department": "real_time_scheduling", "function": "auxiliary", "position": "specialist_1", "qa": 70, "productivity": null, "aht": 5, "aph": 6, "adh": 85, "availability": null, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Proficient with derate scheduling procedures for pre-PTO accounts\r\n\u2022 Establishes strong professional relationships with utility companies\r\n\u2022 50% of time is dedicated to inbound call assistance\r\n\u2022 AB2FIN, Pre-PTO Scheduling, QA, Notary"}}, {"position": "Team Lead", "id": 9, "position_data": {"id": 9, "tier_level": 3.3, "pay_rate": 14.5, "department": "real_time_scheduling", "function": "auxiliary", "position": "team_lead", "qa": 80, "productivity": null, "aht": 4, "aph": 4, "adh": 90, "availability": null, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 40% of time is dedicated to floor support and monitoring phone queues\r\n\u2022 40% of time is dedicated to Auxiliary agent duties (manage two QA Offices)\r\n\u2022 20% of time is dedicated to Wiki Support and Communications\r\n\u2022 Edit and publish department processes within the Vault\r\n\u2022 Sustain 100% NP Score with QA Techs\r\n\u2022 Monitor AB2FIN RTS bucket\r\n\u2022 Establish strong relationships with QA field managers and techs\r\n\u2022 Drive property survey requests to completion\r\n\u2022 Responsible for handling 2nd level escalations\r\n\u2022 Advanced Knowledge of Central scheduling and maximizing processes and efficiency\r\n\u2022 Ability to provide feedback to agents and performs side by sides\r\n\u2022 Responsible for ensuring all of RTS is communicated new polices, procedures, shout-outs and other necessary department communications"}}]}, "Super Agent": {"1": [{"position": "Super Agent"}, {"position": ""}, {"position": "Representative 2", "id": 10, "position_data": {"id": 10, "tier_level": 2.1, "pay_rate": 13.0, "department": "real_time_scheduling", "function": "super_agent", "position": "representative_2", "qa": 70, "productivity": null, "aht": 5, "aph": 6, "adh": 85, "availability": null, "error_rate": null, "efficiency": null, "duration": 90, "nps": 7, "field_qa_nps_score": null, "job_description": "\u2022 Performing Defcons/Backfilling/Office optimization\r\n\u2022 Communicates daily with their assigned OM to ensure calendar optimization and good field relations\r\n\u2022 Auditing 100% of accounts within assigned Region"}}, {"position": "Specialist 2", "id": 13, "position_data": {"id": 13, "tier_level": 3.1, "pay_rate": 14.0, "department": "real_time_scheduling", "function": "super_agent", "position": "specialist_2", "qa": 80, "productivity": null, "aht": 5, "aph": 6, "adh": 90, "availability": null, "error_rate": null, "efficiency": null, "duration": 90, "nps": 9, "field_qa_nps_score": null, "job_description": "\u2022 Region Lead - A Super Agent who ensures all offices have audits completed and installs filled within a specific region with two other agents\r\n\u2022 Maintain Good Standing with Vivint Solar\r\n\u2022 Proficient in scheduling preferences for all offices in the region\r\n\u2022 Gives back-up assistance as needed to other regional agents\r\n\u2022 Reports and coordinates necessary up training needs of individual agents with Supervisor and TL for their region"}}], "2": [{"position": ""}, {"position": ""}, {"position": "Representative 3", "id": 11, "position_data": {"id": 11, "tier_level": 2.2, "pay_rate": 13.25, "department": "real_time_scheduling", "function": "super_agent", "position": "representative_3", "qa": 70, "productivity": null, "aht": 5, "aph": 6, "adh": 85, "availability": null, "error_rate": null, "efficiency": null, "duration": 90, "nps": 7, "field_qa_nps_score": null, "job_description": "\u2022 Proficient in scheduling Installations for Reps,Techs and Customers\r\n\u2022 Completing Daily Regional Install Confirmation Dialer Tasks\r\n\u2022 Assist in completing daily Permit approved list- Dialer Tasks\r\n\u2022 Provides overflow support for inbound calls\r\n\u2022 Maintains communication throughout each day with OM"}}, {"position": ""}], "3": [{"position": ""}, {"position": ""}, {"position": "Specialist 1", "id": 12, "position_data": {"id": 12, "tier_level": 2.3, "pay_rate": 13.5, "department": "real_time_scheduling", "function": "super_agent", "position": "specialist_1", "qa": 70, "productivity": null, "aht": 5, "aph": 6, "adh": 85, "availability": null, "error_rate": null, "efficiency": null, "duration": 90, "nps": 7, "field_qa_nps_score": null, "job_description": "\u2022 75% of assigned offices Install Calendar Filled\r\n\u2022 Competent to schedule service appointments per OM request\r\n\u2022 Coordinates with DM over their region to help fill the install calendar"}}, {"position": ""}]}, "Service": {"1": [{"position": "Service"}, {"position": ""}, {"position": "Representative 3", "id": 14, "position_data": {"id": 14, "tier_level": 2.1, "pay_rate": 13.0, "department": "real_time_scheduling", "function": "service", "position": "representative_3", "qa": 70, "productivity": null, "aht": 9, "aph": 4, "adh": 85, "availability": null, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Competent in scheduling removals and re-installs with customers\r\n\u2022 Audit existing removals or re-installs on the calendar\r\n\u2022 Knowledgeable of the removal and reinstall process including how to read headers\r\n\u2022 Competent in responding and completing service now requests"}}, {"position": "Specialist 2", "id": 21, "position_data": {"id": 21, "tier_level": 3.1, "pay_rate": 14.0, "department": "real_time_scheduling", "function": "service", "position": "specialist_2", "qa": 80, "productivity": null, "aht": 8, "aph": 5, "adh": 90, "availability": null, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Proficient with the Arrival Window Procedure and perfect adherence to zero arrival window breaks\r\n\u2022 Manages 40 cases per day"}}], "2": [{"position": ""}, {"position": ""}, {"position": "Representative 3", "id": 15, "position_data": {"id": 15, "tier_level": 2.2, "pay_rate": 13.25, "department": "real_time_scheduling", "function": "service", "position": "representative_3", "qa": 70, "productivity": null, "aht": 9, "aph": 4, "adh": 85, "availability": null, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Proficient understanding of the Removal and Reinstall scheduling procedures\r\n\u2022 Able to read and understand SREC cases and schedule correctly\r\n\u2022 Competent to assign priority tickets\r\n\u2022 Manages 30 cases per day"}}, {"position": ""}], "3": [{"position": ""}, {"position": ""}, {"position": "Specialist 1", "id": 16, "position_data": {"id": 16, "tier_level": 2.3, "pay_rate": 13.5, "department": "real_time_scheduling", "function": "service", "position": "specialist_1", "qa": 70, "productivity": null, "aht": 9, "aph": 4, "adh": 85, "availability": null, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 24hr priority ticket closure time\r\n\u2022 Establishes strong professional relationships with SPMs\r\n\u2022 Knowledgeable of the end to end Removal and Reinstall Process"}}, {"position": "Team Lead", "id": 22, "position_data": {"id": 22, "tier_level": 3.3, "pay_rate": 14.5, "department": "real_time_scheduling", "function": "service", "position": "team_lead", "qa": 80, "productivity": null, "aht": 8, "aph": 5, "adh": 90, "availability": null, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 50% of time is dedicated to super agent responsibilities\r\n\u2022 50%  of time is dedicated to floor support and monitoring phone queues\r\n\u2022 Assists with department on trainings on changes within the Services process\r\n\u2022 Responsible for handling 2nd level escalations\r\n\u2022 Point of contact for SPM's - maintains good relationhips with all SPMs\r\n\u2022 Ability to provide feedback to agents and performs side by sides\r\n\u2022 Advanced Knowledge of Central scheduling and maximizing processes and efficiency\r\n\u2022 Meter Swap cases\r\n\u2022 Builds relationships with other departments to eliminate silos and promote trust."}}]}}, "Relations": {"Inbound Outbound": {"1": [{"position": "Inbound Outbound"}, {"position": "Representative 1", "id": 45, "position_data": {"id": 45, "tier_level": 1.1, "pay_rate": 12.0, "department": "relations", "function": "inbound_outbound", "position": "representative_1", "qa": 60, "productivity": null, "aht": null, "aph": null, "adh": 80, "availability": null, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Assist with Post-PTO Troubleshooting and general questions.\r\n\u2022 Able to navigate SalesForce to answer customer questions.\r\n\u2022 Basic knowledge of ServiceNow and Email Procedures.\r\n\u2022 Knowledgeable about the Corporate Review process.\r\n\u2022 Answer incoming calls from customers\r\n\u2022 Basic knowledge of VSLR Products, Contracts, and Utility/Rebate documents.\r\n\u2022 Basic understanding of the Install to PTO process, know which department owns each step, and accurately respond to customer inquiries about their system."}}, {"position": "Representative 2", "id": 46, "position_data": {"id": 46, "tier_level": 2.1, "pay_rate": 13.0, "department": "relations", "function": "inbound_outbound", "position": "representative_2", "qa": 70, "productivity": null, "aht": null, "aph": null, "adh": 85, "availability": null, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Intermediate understanding of the Install to PTO process, know which department owns each step, and accurately respond to customer inquiries about their system.\r\n\u2022 Audit accounts for errors that will affect progress.\r\n\u2022 Intermediate knowledge of VSLR Products, Contracts, and Utility/Rebate documents.\r\n\u2022 Able to efficiently navigate SalesForce to research an account and answer customer questions.\r\n\u2022 Make outbound calls to customers"}}, {"position": "Specialist 2", "id": 49, "position_data": {"id": 49, "tier_level": 3.1, "pay_rate": 14.0, "department": "relations", "function": "inbound_outbound", "position": "specialist_2", "qa": 80, "productivity": null, "aht": null, "aph": null, "adh": 90, "availability": null, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Work with the training team to develop up training for all agents.\r\n\u2022 Advanced communication skills, both written and verbal.\r\n\u2022 Take live calls from escalated customers when another agents is unable to de-escalate.\r\n\u2022 Create general Salesforce Reports/Dashboards to provide beneficial information to leadership or the floor.\r\n\u2022 Expert at researching/diagnosing accounts.\r\n\u2022 Handles pre-default process for region."}}], "2": [{"position": ""}, {"position": ""}, {"position": "Representative 3", "id": 47, "position_data": {"id": 47, "tier_level": 2.2, "pay_rate": 13.25, "department": "relations", "function": "inbound_outbound", "position": "representative_3", "qa": 70, "productivity": null, "aht": null, "aph": null, "adh": 85, "availability": null, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Effectively deescalate customers\r\n\u2022 Able to uncover account issues and work with the appropriate department to correct.\r\n\u2022 Allow new hires to sit with you while you work, and explain how to research an account."}}, {"position": "Specialist 3", "id": 50, "position_data": {"id": 50, "tier_level": 3.2, "pay_rate": 14.25, "department": "relations", "function": "inbound_outbound", "position": "specialist_3", "qa": 80, "productivity": null, "aht": null, "aph": null, "adh": 90, "availability": null, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Create detailed Salesforce Reports/Dashboards to provide beneficial information to leadership or the floor.\r\n\u2022 Works with the training team to provide group training on new processes, products, and contracts.\r\n\u2022 Assists Team Lead in managing workflow. Steps in as the Team Lead when one is not available."}}], "3": [{"position": ""}, {"position": ""}, {"position": "Specialist 1", "id": 48, "position_data": {"id": 48, "tier_level": 2.3, "pay_rate": 13.5, "department": "relations", "function": "inbound_outbound", "position": "specialist_1", "qa": 70, "productivity": null, "aht": null, "aph": null, "adh": 85, "availability": null, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Able to accurately modify available Salesforce reporting\r\n\u2022 Able to read Salesforce filtering to understand what a report is showing.\r\n\u2022 Start building relationships with other departments to eliminate silos and promote trust.\r\n\u2022 Intermediate knowledge of Vivint Solar Products, Contracts, and Utility/Rebate documents.\r\n\u2022 Able to efficiently navigate Salesforce to uncover process issues within other departments."}}, {"position": "Team Lead", "id": 51, "position_data": {"id": 51, "tier_level": 3.3, "pay_rate": 14.5, "department": "relations", "function": "inbound_outbound", "position": "team_lead", "qa": 80, "productivity": null, "aht": null, "aph": null, "adh": 90, "availability": null, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Completes call-backs to escalated customers when another agents are unable to de-escalate.\r\n\u2022 Provides coaching for employees\r\n\u2022 Assists Supervisors by managing workflow and auditing adherence.\r\n\u2022 Audits and submits ECL for region. Meets with Management to discuss submissions before they are sent to the committee. Follows through on providing ECL decisions to effected customers/departments.\r\n\u2022 Meet with other departments and leadership to improve processes\r\n\u2022 Mentors Specialist 3 to prepare them for a Team Lead role.\r\n\u2022 Holds 1 on 1's with individual agents every other week\r\n\u2022 Able to identify complex account issues, work with the appropriate departments, and follow through on resolutions."}}]}, "Email Admin": {"1": [{"position": "Email Admin"}, {"position": ""}, {"position": "Representative 2", "id": 52, "position_data": {"id": 52, "tier_level": 2.1, "pay_rate": 13.0, "department": "relations", "function": "email_admin", "position": "representative_2", "qa": 70, "productivity": null, "aht": null, "aph": null, "adh": 85, "availability": null, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Intermediate understanding of the Install to PTO process, know which department owns each step, and accurately respond to customer inquiries about their system.\r\n\u2022 Audit accounts for errors that will affect progress.\r\n\u2022 Intermediate knowledge of Vivint Solar products, contracts, and utility / rebate documents.\r\n\u2022 Able to efficiently navigate SalesForce to research an account and answer customer questions.\r\n\u2022 Intermediate knowledge of all ServiceNow and email procedures."}}, {"position": "Specialist 2", "id": 55, "position_data": {"id": 55, "tier_level": 3.1, "pay_rate": 14.0, "department": "relations", "function": "email_admin", "position": "specialist_2", "qa": 80, "productivity": null, "aht": null, "aph": null, "adh": 90, "availability": null, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Work with the training team to develop up training for all agents.\r\n\u2022 Call escalated customers when they escalate through email.\r\n\u2022 Assists Documents Specialist 2 with pre-default process for documents.\r\n\u2022 Create general Salesforce reports / dashboards to provide beneficial information to leadership or the floor.\r\n\u2022 Expert at researching/diagnosing accounts.\r\n\u2022 Advanced communication skills, both written and verbal."}}], "2": [{"position": ""}, {"position": ""}, {"position": "Representative 3", "id": 53, "position_data": {"id": 53, "tier_level": 2.2, "pay_rate": 13.25, "department": "relations", "function": "email_admin", "position": "representative_3", "qa": 70, "productivity": null, "aht": null, "aph": null, "adh": 85, "availability": null, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Effectively deescalate customers\r\n\u2022 Able to uncover account issues and work with the appropriate department to correct.\r\n\u2022 Allow new hires to sit with you while you work, and explain how to research an account.\r\n\u2022 Advanced knowledge of all ServiceNow / InContact / Salesforce platforms\r\n\u2022 Advanced understanding of post-install to PTO process (AB2FIN, Cases, phase)\r\n\u2022 Intermediate troubleshooting (Enphase, Solar Edge, Mercury, Fronius)"}}, {"position": "Specialist 3", "id": 56, "position_data": {"id": 56, "tier_level": 3.2, "pay_rate": 14.25, "department": "relations", "function": "email_admin", "position": "specialist_3", "qa": 80, "productivity": null, "aht": null, "aph": null, "adh": 90, "availability": null, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Create detailed Salesforce Reports/Dashboards to provide beneficial information to leadership or the floor.\r\n\u2022 Works with the training team to provide group training on new processes, products, and contracts.\r\n\u2022 Assists Team Lead in managing workflow. Steps in as the Team Lead when one is not available."}}], "3": [{"position": ""}, {"position": ""}, {"position": "Specialist 1", "id": 54, "position_data": {"id": 54, "tier_level": 2.3, "pay_rate": 13.5, "department": "relations", "function": "email_admin", "position": "specialist_1", "qa": 70, "productivity": null, "aht": null, "aph": null, "adh": 85, "availability": null, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Able to accurately modify available Salesforce reporting\r\n\u2022 Able to read Salesforce filtering to understand what a report is showing.\r\n\u2022 Start building relationships with other departments to eliminate silos and promote trust.\r\n\u2022 Intermediate knowledge of Vivint Solar products, contracts, and utility / rebate documents.\r\n\u2022 Able to efficiently navigate Salesforce to uncover process issues within other departments.\r\n\u2022 Advanced knowledge of all ServiceNow and email procedures, including how to utilize the ServiceNow stats."}}, {"position": "Team Lead", "id": 57, "position_data": {"id": 57, "tier_level": 3.3, "pay_rate": 14.5, "department": "relations", "function": "email_admin", "position": "team_lead", "qa": 80, "productivity": null, "aht": null, "aph": null, "adh": 90, "availability": null, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Provides coaching for employees\r\n\u2022 Completes call-backs to escalated customers when another agents are unable to deescalate.\r\n\u2022 Holds 1 on 1's with individual agents every other week\r\n\u2022 Able to identify complex account issues, work with the appropriate departments, and follow through on resolutions.\r\n\u2022 Audits and submits ECL for region. Meets with Management to discuss submissions before they are sent to the committee. Follows through on providing ECL decisions to effected customers/departments.\r\n\u2022 Meet with other departments and leadership to improve processes\r\n\u2022 Mentors Specialist 3 to prepare them for a Team Lead role.\r\n\u2022 Assists Supervisors by managing workflow and auditing adherence."}}]}, "Documents": {"1": [{"position": "Documents"}, {"position": ""}, {"position": "Representative 2", "id": 58, "position_data": {"id": 58, "tier_level": 2.1, "pay_rate": 13.0, "department": "relations", "function": "documents", "position": "representative_2", "qa": 70, "productivity": null, "aht": null, "aph": null, "adh": 85, "availability": null, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Intermediate understanding of the Install to PTO process, know which department owns each step, and accurately respond to customer inquiries about their system.\r\n\u2022 Audit accounts for errors that will affect progress.\r\n\u2022 Intermediate knowledge of Vivint Solar products, contracts, and utility / rebate documents.\r\n\u2022 Able to efficiently navigate SalesForce to research an account and answer customer questions.\r\n\u2022 Intermediate knowledge of all ServiceNow and Email Procedures.\r\n\u2022 Make outbound calls to customers to collect documents"}}, {"position": "Specialist 2", "id": 61, "position_data": {"id": 61, "tier_level": 3.1, "pay_rate": 14.0, "department": "relations", "function": "documents", "position": "specialist_2", "qa": 80, "productivity": null, "aht": null, "aph": null, "adh": 90, "availability": null, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Work with the training team to develop up training for all agents.\r\n\u2022 Advanced communication skills, both written and verbal.\r\n\u2022 Take live calls from escalated customers when another agents is unable to deescalate.\r\n\u2022 Create general Salesforce reports / dashboards to provide beneficial information to leadership or the floor.\r\n\u2022 Expert at researching/diagnosing accounts.\r\n\u2022 Handles pre-default process for documents."}}], "2": [{"position": ""}, {"position": ""}, {"position": "Representative 3", "id": 59, "position_data": {"id": 59, "tier_level": 2.2, "pay_rate": 13.25, "department": "relations", "function": "documents", "position": "representative_3", "qa": 70, "productivity": null, "aht": null, "aph": null, "adh": 85, "availability": null, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Effectively deescalate customers\r\n\u2022 Able to uncover account issues and work with the appropriate department to correct.\r\n\u2022 Allow new hires to sit with you while you work, and explain how to research an account.\r\n\u2022 Create and send required documents to customers for signature."}}, {"position": "Specialist 3", "id": 62, "position_data": {"id": 62, "tier_level": 3.2, "pay_rate": 14.25, "department": "relations", "function": "documents", "position": "specialist_3", "qa": 80, "productivity": null, "aht": null, "aph": null, "adh": 90, "availability": null, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Create detailed Salesforce reports / dashboards to provide beneficial information to leadership or the floor.\r\n\u2022 Works with the training team to provide group training on new processes, products, and contracts.\r\n\u2022 Assists Team Lead in managing workflow. Steps in as the Team Lead when one is not available."}}], "3": [{"position": ""}, {"position": ""}, {"position": "Specialist 1", "id": 60, "position_data": {"id": 60, "tier_level": 2.3, "pay_rate": 13.5, "department": "relations", "function": "documents", "position": "specialist_1", "qa": 70, "productivity": null, "aht": null, "aph": null, "adh": 85, "availability": null, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Able to accurately modify available Salesforce reporting\r\n\u2022 Able to read Salesforce filtering to understand what a report is showing.\r\n\u2022 Start building relationships with other departments to eliminate silos and promote trust.\r\n\u2022 Intermediate knowledge of Vivint Solar products, contracts, and utility / rebate documents.\r\n\u2022 Able to efficiently navigate Salesforce to uncover process issues within other departments."}}, {"position": "Team Lead", "id": 63, "position_data": {"id": 63, "tier_level": 3.3, "pay_rate": 14.5, "department": "relations", "function": "documents", "position": "team_lead", "qa": 80, "productivity": null, "aht": null, "aph": null, "adh": 90, "availability": null, "error_rate": null, "efficiency": null, "duration": 90, "nps": null, "field_qa_nps_score": null, "job_description": "\u2022 Provides coaching for employees\r\n\u2022 Completes call-backs to escalated customers when another agents are unable to deescalate.\r\n\u2022 Meet with other departments and leadership to improve processes\r\n\u2022 Assists Supervisors by managing workflow and auditing adherence.\r\n\u2022 Audits and submits ECL for region. Meets with Management to discuss submissions before they are sent to the committee. Follows through on providing ECL decisions to effected customers/departments.\r\n\u2022 Holds 1 on 1's with individual agents every other week\r\n\u2022 Able to identify complex account issues, work with the appropriate departments, and follow through on resolutions.\r\n\u2022 Mentors Specialist 3 to prepare them for a Team Lead role."}}]}}}
+{
+  "Customer Service": {
+    "Customer Service": {
+      "1": [
+        {
+          "position": "Customer Service"
+        },
+        {
+          "position": "Representative 1",
+          "id": 23,
+          "position_data": {
+            "id": 23,
+            "tier_level": 1.1,
+            "pay_rate": 12.0,
+            "department": "customer_service",
+            "function": "customer_service",
+            "position": "representative_1",
+            "qa": 60,
+            "productivity": null,
+            "aht": 12,
+            "aph": 5,
+            "adh": 80,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": 80,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Basic System Troubleshooting & Dispatching\r\n\u2022 In Good Standing (No Written Warnings)"
+          }
+        },
+        {
+          "position": "Representative 2",
+          "id": 24,
+          "position_data": {
+            "id": 24,
+            "tier_level": 2.1,
+            "pay_rate": 13.0,
+            "department": "customer_service",
+            "function": "customer_service",
+            "position": "representative_2",
+            "qa": null,
+            "productivity": null,
+            "aht": null,
+            "aph": 5,
+            "adh": null,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Intermediate System Troubleshooting & Dispatching (Inbound Only)\r\n\u2022 Service Billing & General Maintenance (Inbound Only)\r\n\u2022 In Good Standing (No Written Warnings)"
+          }
+        },
+        {
+          "position": "Specialist 2",
+          "id": 27,
+          "position_data": {
+            "id": 27,
+            "tier_level": 3.1,
+            "pay_rate": 14.0,
+            "department": "customer_service",
+            "function": "customer_service",
+            "position": "specialist_2",
+            "qa": null,
+            "productivity": null,
+            "aht": 15,
+            "aph": null,
+            "adh": null,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": 85,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Compensation Requests (Outbound)\r\n\u2022 Sales Promise Claims (Outbound)\r\n\u2022 System Performance Analysis (Outbound)\r\n\u2022 Force Majeure / Casualty Events (Outbound)\r\n\u2022 In Good Standing (No Written Warnings)"
+          }
+        }
+      ],
+      "2": [
+        {
+          "position": ""
+        },
+        {
+          "position": ""
+        },
+        {
+          "position": "Representative 3",
+          "id": 25,
+          "position_data": {
+            "id": 25,
+            "tier_level": 2.2,
+            "pay_rate": 13.25,
+            "department": "customer_service",
+            "function": "customer_service",
+            "position": "representative_3",
+            "qa": null,
+            "productivity": null,
+            "aht": null,
+            "aph": null,
+            "adh": null,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": 80,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Compensation Requests (Inbound Only)\r\n\u2022 System Performance Analysis (Inbound Only)\r\n\u2022 Sales Promise Claims (Inbound Only)\r\n\u2022 Force Majeure / Casualty Events (Inbound Only)"
+          }
+        },
+        {
+          "position": "Specialist 3",
+          "id": 28,
+          "position_data": {
+            "id": 28,
+            "tier_level": 3.2,
+            "pay_rate": 14.25,
+            "department": "customer_service",
+            "function": "customer_service",
+            "position": "specialist_3",
+            "qa": 80,
+            "productivity": null,
+            "aht": 15,
+            "aph": 4,
+            "adh": 90,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": 85,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 All Follow-up Cases\r\n\u2022 Advanced System Troubleshooting & Dispatching\r\n\u2022 General Service Disputes/Sales Promise\r\n\u2022 Compensation/System Performance Analysis\r\n\u2022 In Good Standing (No Written Warnings)"
+          }
+        }
+      ],
+      "3": [
+        {
+          "position": ""
+        },
+        {
+          "position": ""
+        },
+        {
+          "position": "Specialist 1",
+          "id": 26,
+          "position_data": {
+            "id": 26,
+            "tier_level": 2.3,
+            "pay_rate": 13.5,
+            "department": "customer_service",
+            "function": "customer_service",
+            "position": "specialist_1",
+            "qa": null,
+            "productivity": null,
+            "aht": null,
+            "aph": null,
+            "adh": null,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": 85,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 System Troubleshooting (Outbound)\r\n\u2022 General Service Requests (Outbound)\r\n\u2022 In Good Standing (No Written Warnings)"
+          }
+        },
+        {
+          "position": "Team Lead",
+          "id": 29,
+          "position_data": {
+            "id": 29,
+            "tier_level": 3.3,
+            "pay_rate": 14.5,
+            "department": "customer_service",
+            "function": "customer_service",
+            "position": "team_lead",
+            "qa": null,
+            "productivity": null,
+            "aht": null,
+            "aph": 15,
+            "adh": 90,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": 85,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 All Follow-up Cases\r\n\u2022 Advanced System Troubleshooting & Dispatching\r\n\u2022 General Service Disputes/Sales Promise\r\n\u2022 Compensation/System Performance Analysis\r\n\u2022 In Good Standing (No Written Warnings)"
+          }
+        }
+      ]
+    }
+  },
+  "Customer Solutions": {
+    "Specialist 1": {
+      "1": [
+        {
+          "position": "Specialist 1"
+        },
+        {
+          "position": "Representative 1",
+          "id": 30,
+          "position_data": {
+            "id": 30,
+            "tier_level": 1.1,
+            "pay_rate": 12.0,
+            "department": "customer_solutions",
+            "function": "specialist_1",
+            "position": "representative_1",
+            "qa": null,
+            "productivity": null,
+            "aht": null,
+            "aph": 4,
+            "adh": null,
+            "availability": 80,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Manage Inbox\r\n\u2022 Navigate Salesforce\r\n\u2022 Document accounts using CSO Activity Codes"
+          }
+        },
+        {
+          "position": "Representative 2",
+          "id": 31,
+          "position_data": {
+            "id": 31,
+            "tier_level": 2.1,
+            "pay_rate": 13.0,
+            "department": "customer_solutions",
+            "function": "specialist_1",
+            "position": "representative_2",
+            "qa": null,
+            "productivity": null,
+            "aht": null,
+            "aph": 6,
+            "adh": null,
+            "availability": 80,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Prep and Send Default/DRA Letters\r\n\u2022 Document & Update Default Cases"
+          }
+        },
+        {
+          "position": ""
+        }
+      ],
+      "2": [
+        {
+          "position": ""
+        },
+        {
+          "position": ""
+        },
+        {
+          "position": "Representative 3",
+          "id": 32,
+          "position_data": {
+            "id": 32,
+            "tier_level": 2.2,
+            "pay_rate": 13.25,
+            "department": "customer_solutions",
+            "function": "specialist_1",
+            "position": "representative_3",
+            "qa": null,
+            "productivity": null,
+            "aht": null,
+            "aph": 7,
+            "adh": null,
+            "availability": 85,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Upload, review, and document county filings\r\n\u2022 Maintain relationship with Lease Dimensions filing team\r\n\u2022 Request filings for all new Vivint Solar installs\r\n\u2022 Research missing filings & resubmit with new information\r\n\u2022 Manage requested terminations for escalated refinance and transfer customers"
+          }
+        },
+        {
+          "position": ""
+        }
+      ],
+      "3": [
+        {
+          "position": ""
+        },
+        {
+          "position": ""
+        },
+        {
+          "position": ""
+        },
+        {
+          "position": ""
+        }
+      ]
+    },
+    "Super Agent": {
+      "1": [
+        {
+          "position": "Super Agent"
+        },
+        {
+          "position": ""
+        },
+        {
+          "position": "Representative 2",
+          "id": 33,
+          "position_data": {
+            "id": 33,
+            "tier_level": 2.1,
+            "pay_rate": 13.0,
+            "department": "customer_solutions",
+            "function": "super_agent",
+            "position": "representative_2",
+            "qa": 70,
+            "productivity": null,
+            "aht": null,
+            "aph": 4,
+            "adh": null,
+            "availability": 85,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Navigate Salesforce\r\n\u2022 Document account using CSO activity codes\r\n\u2022 Document and update default cases\r\n\u2022 Complete an escalated customer transfer\r\n\u2022 Researching an account"
+          }
+        },
+        {
+          "position": "Specialist 2",
+          "id": 36,
+          "position_data": {
+            "id": 36,
+            "tier_level": 3.1,
+            "pay_rate": 14.0,
+            "department": "customer_solutions",
+            "function": "super_agent",
+            "position": "specialist_2",
+            "qa": 80,
+            "productivity": null,
+            "aht": null,
+            "aph": 5,
+            "adh": null,
+            "availability": 90,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Relocation Accounts\r\n\u2022 Customer Communication Project (Creating templates)\r\n\u2022 Skip Trace Process\r\n\u2022 Priority Escalations in All Areas"
+          }
+        }
+      ],
+      "2": [
+        {
+          "position": ""
+        },
+        {
+          "position": ""
+        },
+        {
+          "position": "Representative 3",
+          "id": 34,
+          "position_data": {
+            "id": 34,
+            "tier_level": 2.2,
+            "pay_rate": 13.25,
+            "department": "customer_solutions",
+            "function": "super_agent",
+            "position": "representative_3",
+            "qa": 70,
+            "productivity": null,
+            "aht": null,
+            "aph": 4,
+            "adh": null,
+            "availability": 85,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Own and maintain a project role\r\n\u2022 Escalated CARE account management\r\n\u2022 Admin/CORP Account <181 Management"
+          }
+        },
+        {
+          "position": "Specialist 3",
+          "id": 37,
+          "position_data": {
+            "id": 37,
+            "tier_level": 3.2,
+            "pay_rate": 14.25,
+            "department": "customer_solutions",
+            "function": "super_agent",
+            "position": "specialist_3",
+            "qa": 80,
+            "productivity": null,
+            "aht": null,
+            "aph": 5,
+            "adh": null,
+            "availability": 90,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Ownership of all Exception Review Customer Communication (ECL)\r\n\u2022 Ownership of Legal Communication (Amendments, settlement agreement, etc.)"
+          }
+        }
+      ],
+      "3": [
+        {
+          "position": ""
+        },
+        {
+          "position": ""
+        },
+        {
+          "position": "Specialist 1",
+          "id": 35,
+          "position_data": {
+            "id": 35,
+            "tier_level": 2.3,
+            "pay_rate": 13.5,
+            "department": "customer_solutions",
+            "function": "super_agent",
+            "position": "specialist_1",
+            "qa": 70,
+            "productivity": null,
+            "aht": null,
+            "aph": 4,
+            "adh": null,
+            "availability": 85,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Salesforce Reporting \r\n\u2022 Negotiation of Foreclosure Transfers\r\n\u2022 Team Mentor - Y-jacking  & Side by Sides"
+          }
+        },
+        {
+          "position": "Team Lead",
+          "id": 38,
+          "position_data": {
+            "id": 38,
+            "tier_level": 3.3,
+            "pay_rate": 14.5,
+            "department": "customer_solutions",
+            "function": "super_agent",
+            "position": "team_lead",
+            "qa": 80,
+            "productivity": null,
+            "aht": null,
+            "aph": 5,
+            "adh": null,
+            "availability": 90,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Update/Maintain Vault Procedures\r\n\u2022 Provide Daily Reporting to Leadership\r\n\u2022 Complete Bi-weekly Side by Sides \r\n\u2022 Complete 2 QA's per Team Member Weekly\r\n\u2022 All New Hire Training"
+          }
+        }
+      ]
+    }
+  },
+  "Recs And Rebates": {
+    "Recs And Rebates": {
+      "1": [
+        {
+          "position": "Recs And Rebates"
+        },
+        {
+          "position": "Representative 1",
+          "id": 39,
+          "position_data": {
+            "id": 39,
+            "tier_level": 1.1,
+            "pay_rate": 12.0,
+            "department": "recs_and_rebates",
+            "function": "recs_and_rebates",
+            "position": "representative_1",
+            "qa": null,
+            "productivity": 75,
+            "aht": null,
+            "aph": null,
+            "adh": null,
+            "availability": null,
+            "error_rate": 20,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Maintain good standing at all time with Vivint Solar\r\n\u2022 Will be able to accomplish teams workflow processes\r\n\u2022 New Hire considered in \"training\" first 90 days\r\n\u2022 Comprehend All Training Provided"
+          }
+        },
+        {
+          "position": "Representative 2",
+          "id": 40,
+          "position_data": {
+            "id": 40,
+            "tier_level": 2.1,
+            "pay_rate": 13.0,
+            "department": "recs_and_rebates",
+            "function": "recs_and_rebates",
+            "position": "representative_2",
+            "qa": null,
+            "productivity": 80,
+            "aht": null,
+            "aph": null,
+            "adh": null,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": 20,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Maintain Good Standing with Vivint Solar\r\n\u2022 Eligible to QA Workflow Processes completed by Teammates\r\n\u2022 Begin Training on Inbox Processes & Communications"
+          }
+        },
+        {
+          "position": "Specialist 2",
+          "id": 42,
+          "position_data": {
+            "id": 42,
+            "tier_level": 3.1,
+            "pay_rate": 14.0,
+            "department": "recs_and_rebates",
+            "function": "recs_and_rebates",
+            "position": "specialist_2",
+            "qa": null,
+            "productivity": 90,
+            "aht": null,
+            "aph": null,
+            "adh": null,
+            "availability": null,
+            "error_rate": 5,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Maintain Good Standing with Vivint Solar\r\n\u2022 Able to complete one or more processes from another team\r\n\u2022 Able to complete one or more special projects (such as Requested Items)\r\n\u2022 Training on Customer Communication & Phone Calls"
+          }
+        }
+      ],
+      "2": [
+        {
+          "position": ""
+        },
+        {
+          "position": ""
+        },
+        {
+          "position": "Representative 3",
+          "id": 41,
+          "position_data": {
+            "id": 41,
+            "tier_level": 2.2,
+            "pay_rate": 13.25,
+            "department": "recs_and_rebates",
+            "function": "recs_and_rebates",
+            "position": "representative_3",
+            "qa": null,
+            "productivity": 80,
+            "aht": null,
+            "aph": null,
+            "adh": null,
+            "availability": null,
+            "error_rate": 20,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Maintain Good Standing with Vivint Solar\r\n\u2022 Able to Complete all Inbox Processes\r\n\u2022 Begin training on one or more special projects (such as Requested Items)\r\n\u2022 Begin training on one or more processes from another team"
+          }
+        },
+        {
+          "position": "Specialist 3",
+          "id": 43,
+          "position_data": {
+            "id": 43,
+            "tier_level": 3.2,
+            "pay_rate": 14.25,
+            "department": "recs_and_rebates",
+            "function": "recs_and_rebates",
+            "position": "specialist_3",
+            "qa": null,
+            "productivity": 90,
+            "aht": null,
+            "aph": null,
+            "adh": null,
+            "availability": null,
+            "error_rate": 5,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Maintain Good Standing with Vivint Solar\r\n\u2022 Begin Training on Escalated Accounts & Moving them Forward\r\n\u2022 Able to complete two or more special projects (such as Requested Items)\r\n\u2022 Begin Training on Customer & Program Communication\r\n\u2022 Able to Complete two or more processes form another team\r\n\u2022 Training on Salesforce Reporting\r\n\u2022 Able to Complete Customer Communication & Phone Calls\r\n\u2022 Processing Specialist II is considered \"Acting Team Lead\""
+          }
+        }
+      ],
+      "3": [
+        {
+          "position": ""
+        },
+        {
+          "position": ""
+        },
+        {
+          "position": ""
+        },
+        {
+          "position": "Team Lead",
+          "id": 44,
+          "position_data": {
+            "id": 44,
+            "tier_level": 3.3,
+            "pay_rate": 14.5,
+            "department": "recs_and_rebates",
+            "function": "recs_and_rebates",
+            "position": "team_lead",
+            "qa": null,
+            "productivity": 90,
+            "aht": null,
+            "aph": null,
+            "adh": null,
+            "availability": null,
+            "error_rate": 5,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Maintain Good Standing with Vivint Solar\r\n\u2022 Handles Escalated Accounts\r\n\u2022 Maintain Workflow & Volume for the Team\r\n\u2022 Conduct ALL New Hire & UP Training for the Team\r\n\u2022 Handles Special Projects (Such as Requested Items)\r\n\u2022 Able to build and run Salesforce Reports for Team\r\n\u2022 Build Relationships with Counter Departments\r\n\u2022 Conduct Weekly Coaching for Team Members\r\n\u2022 Monthly Leadership Training"
+          }
+        }
+      ]
+    }
+  },
+  "Real Time Scheduling": {
+    "Inbound": {
+      "1": [
+        {
+          "position": "Inbound"
+        },
+        {
+          "position": "Representative 1",
+          "id": 2,
+          "position_data": {
+            "id": 2,
+            "tier_level": 1.1,
+            "pay_rate": 12.0,
+            "department": "real_time_scheduling",
+            "function": "inbound",
+            "position": "representative_1",
+            "qa": 60,
+            "productivity": null,
+            "aht": 10,
+            "aph": 3,
+            "adh": 80,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Scheduling Installations for reps, techs, and customers\r\n\u2022 Rescheduling Site Surveys\r\n\u2022 Ability to respond and complete installation email requests\r\n\u2022 Proficient with Click software\r\n\u2022 Knowledgeable of case and hold procedures\r\n\u2022 Knowledgeable of the installation process including how to read and use headers"
+          }
+        },
+        {
+          "position": "Representative 2",
+          "id": 3,
+          "position_data": {
+            "id": 3,
+            "tier_level": 2.1,
+            "pay_rate": 13.0,
+            "department": "real_time_scheduling",
+            "function": "inbound",
+            "position": "representative_2",
+            "qa": 70,
+            "productivity": null,
+            "aht": 8,
+            "aph": 4,
+            "adh": 85,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Competent in completing all various types of emails received through the general RTS inbox\r\n\u2022 Competent in AB2FIN Scheduling and able to assist with AB2FIN Scheduling calls\r\n\u2022 Assists with training by y-jacking with new employees and is able to competently walk an new hire through the installation schedule process"
+          }
+        },
+        {
+          "position": ""
+        }
+      ],
+      "2": [
+        {
+          "position": ""
+        },
+        {
+          "position": ""
+        },
+        {
+          "position": "Representative 3",
+          "id": 4,
+          "position_data": {
+            "id": 4,
+            "tier_level": 2.2,
+            "pay_rate": 13.25,
+            "department": "real_time_scheduling",
+            "function": "inbound",
+            "position": "representative_3",
+            "qa": 70,
+            "productivity": null,
+            "aht": 8,
+            "aph": 4,
+            "adh": 85,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Proficient with the Arrival Window Procedure and perfect adherence to zero arrival window breaks\r\n\u2022 Competent in SREC Scheduling and able to assist with SREC Scheduling calls\r\n\u2022 Competent in Removal and Reinstall Scheduling and able to assist with Removal and Reinstall Scheduling calls"
+          }
+        },
+        {
+          "position": ""
+        }
+      ],
+      "3": [
+        {
+          "position": ""
+        },
+        {
+          "position": ""
+        },
+        {
+          "position": ""
+        },
+        {
+          "position": "Team Lead",
+          "id": 5,
+          "position_data": {
+            "id": 5,
+            "tier_level": 3.3,
+            "pay_rate": 14.5,
+            "department": "real_time_scheduling",
+            "function": "inbound",
+            "position": "team_lead",
+            "qa": 80,
+            "productivity": null,
+            "aht": 7,
+            "aph": 3,
+            "adh": 90,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 50% of time is dedicated to handling inbound calls and emails\r\n\u2022 50%  of time is dedicated to floor support and monitoring phone queues\r\n\u2022 Monitors and assigns work within the RTS Inbox\r\n\u2022 Owns and manages a report/project\r\n\u2022 Owns new hire training\r\n\u2022 Assists in uptraining\r\n\u2022 Responsible for handling 2nd level escalations\r\n\u2022 Knowledgeable of all RT'S processes and practices\r\n\u2022 Ability to provide feedback to agents and performs side by sides\r\n\u2022 Advanced Knowledge of Central scheduling and maximizing processes and efficiency"
+          }
+        }
+      ]
+    },
+    "Auxiliary": {
+      "1": [
+        {
+          "position": "Auxiliary"
+        },
+        {
+          "position": ""
+        },
+        {
+          "position": "Representative 2",
+          "id": 6,
+          "position_data": {
+            "id": 6,
+            "tier_level": 2.1,
+            "pay_rate": 13.0,
+            "department": "real_time_scheduling",
+            "function": "auxiliary",
+            "position": "representative_2",
+            "qa": 70,
+            "productivity": null,
+            "aht": 5,
+            "aph": 6,
+            "adh": 85,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Manage two QA techs by ensuring their calendar is filled with QA appts every week\r\n\u2022 Competent in AB2FIN Scheduling and procedures\r\n\u2022 Proficient with the Arrival Window Procedure and perfect adherance to zero arrival window breaks\r\n\u2022 Proficient at creating scheduling cases for pre-PTO service work"
+          }
+        },
+        {
+          "position": ""
+        }
+      ],
+      "2": [
+        {
+          "position": ""
+        },
+        {
+          "position": ""
+        },
+        {
+          "position": "Representative 3",
+          "id": 7,
+          "position_data": {
+            "id": 7,
+            "tier_level": 2.2,
+            "pay_rate": 13.25,
+            "department": "real_time_scheduling",
+            "function": "auxiliary",
+            "position": "representative_3",
+            "qa": 70,
+            "productivity": null,
+            "aht": 5,
+            "aph": 6,
+            "adh": 85,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": 100,
+            "job_description": "\u2022  Competent in Notary scheduling procedures"
+          }
+        },
+        {
+          "position": ""
+        }
+      ],
+      "3": [
+        {
+          "position": ""
+        },
+        {
+          "position": ""
+        },
+        {
+          "position": "Specialist 1",
+          "id": 8,
+          "position_data": {
+            "id": 8,
+            "tier_level": 2.3,
+            "pay_rate": 13.5,
+            "department": "real_time_scheduling",
+            "function": "auxiliary",
+            "position": "specialist_1",
+            "qa": 70,
+            "productivity": null,
+            "aht": 5,
+            "aph": 6,
+            "adh": 85,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Proficient with derate scheduling procedures for pre-PTO accounts\r\n\u2022 Establishes strong professional relationships with utility companies\r\n\u2022 50% of time is dedicated to inbound call assistance\r\n\u2022 AB2FIN, Pre-PTO Scheduling, QA, Notary"
+          }
+        },
+        {
+          "position": "Team Lead",
+          "id": 9,
+          "position_data": {
+            "id": 9,
+            "tier_level": 3.3,
+            "pay_rate": 14.5,
+            "department": "real_time_scheduling",
+            "function": "auxiliary",
+            "position": "team_lead",
+            "qa": 80,
+            "productivity": null,
+            "aht": 4,
+            "aph": 4,
+            "adh": 90,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 40% of time is dedicated to floor support and monitoring phone queues\r\n\u2022 40% of time is dedicated to Auxiliary agent duties (manage two QA Offices)\r\n\u2022 20% of time is dedicated to Wiki Support and Communications\r\n\u2022 Edit and publish department processes within the Vault\r\n\u2022 Sustain 100% NP Score with QA Techs\r\n\u2022 Monitor AB2FIN RTS bucket\r\n\u2022 Establish strong relationships with QA field managers and techs\r\n\u2022 Drive property survey requests to completion\r\n\u2022 Responsible for handling 2nd level escalations\r\n\u2022 Advanced Knowledge of Central scheduling and maximizing processes and efficiency\r\n\u2022 Ability to provide feedback to agents and performs side by sides\r\n\u2022 Responsible for ensuring all of RTS is communicated new polices, procedures, shout-outs and other necessary department communications"
+          }
+        }
+      ]
+    },
+    "Super Agent": {
+      "1": [
+        {
+          "position": "Super Agent"
+        },
+        {
+          "position": ""
+        },
+        {
+          "position": "Representative 2",
+          "id": 10,
+          "position_data": {
+            "id": 10,
+            "tier_level": 2.1,
+            "pay_rate": 13.0,
+            "department": "real_time_scheduling",
+            "function": "super_agent",
+            "position": "representative_2",
+            "qa": 70,
+            "productivity": null,
+            "aht": 5,
+            "aph": 6,
+            "adh": 85,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": 7,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Performing Defcons/Backfilling/Office optimization\r\n\u2022 Communicates daily with their assigned OM to ensure calendar optimization and good field relations\r\n\u2022 Auditing 100% of accounts within assigned Region"
+          }
+        },
+        {
+          "position": "Specialist 2",
+          "id": 13,
+          "position_data": {
+            "id": 13,
+            "tier_level": 3.1,
+            "pay_rate": 14.0,
+            "department": "real_time_scheduling",
+            "function": "super_agent",
+            "position": "specialist_2",
+            "qa": 80,
+            "productivity": null,
+            "aht": 5,
+            "aph": 6,
+            "adh": 90,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": 9,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Region Lead - A Super Agent who ensures all offices have audits completed and installs filled within a specific region with two other agents\r\n\u2022 Maintain Good Standing with Vivint Solar\r\n\u2022 Proficient in scheduling preferences for all offices in the region\r\n\u2022 Gives back-up assistance as needed to other regional agents\r\n\u2022 Reports and coordinates necessary up training needs of individual agents with Supervisor and TL for their region"
+          }
+        }
+      ],
+      "2": [
+        {
+          "position": ""
+        },
+        {
+          "position": ""
+        },
+        {
+          "position": "Representative 3",
+          "id": 11,
+          "position_data": {
+            "id": 11,
+            "tier_level": 2.2,
+            "pay_rate": 13.25,
+            "department": "real_time_scheduling",
+            "function": "super_agent",
+            "position": "representative_3",
+            "qa": 70,
+            "productivity": null,
+            "aht": 5,
+            "aph": 6,
+            "adh": 85,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": 7,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Proficient in scheduling Installations for Reps,Techs and Customers\r\n\u2022 Completing Daily Regional Install Confirmation Dialer Tasks\r\n\u2022 Assist in completing daily Permit approved list- Dialer Tasks\r\n\u2022 Provides overflow support for inbound calls\r\n\u2022 Maintains communication throughout each day with OM"
+          }
+        },
+        {
+          "position": ""
+        }
+      ],
+      "3": [
+        {
+          "position": ""
+        },
+        {
+          "position": ""
+        },
+        {
+          "position": "Specialist 1",
+          "id": 12,
+          "position_data": {
+            "id": 12,
+            "tier_level": 2.3,
+            "pay_rate": 13.5,
+            "department": "real_time_scheduling",
+            "function": "super_agent",
+            "position": "specialist_1",
+            "qa": 70,
+            "productivity": null,
+            "aht": 5,
+            "aph": 6,
+            "adh": 85,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": 7,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 75% of assigned offices Install Calendar Filled\r\n\u2022 Competent to schedule service appointments per OM request\r\n\u2022 Coordinates with DM over their region to help fill the install calendar"
+          }
+        },
+        {
+          "position": ""
+        }
+      ]
+    },
+    "Service": {
+      "1": [
+        {
+          "position": "Service"
+        },
+        {
+          "position": ""
+        },
+        {
+          "position": "Representative 3",
+          "id": 14,
+          "position_data": {
+            "id": 14,
+            "tier_level": 2.1,
+            "pay_rate": 13.0,
+            "department": "real_time_scheduling",
+            "function": "service",
+            "position": "representative_3",
+            "qa": 70,
+            "productivity": null,
+            "aht": 9,
+            "aph": 4,
+            "adh": 85,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Competent in scheduling removals and re-installs with customers\r\n\u2022 Audit existing removals or re-installs on the calendar\r\n\u2022 Knowledgeable of the removal and reinstall process including how to read headers\r\n\u2022 Competent in responding and completing service now requests"
+          }
+        },
+        {
+          "position": "Specialist 2",
+          "id": 21,
+          "position_data": {
+            "id": 21,
+            "tier_level": 3.1,
+            "pay_rate": 14.0,
+            "department": "real_time_scheduling",
+            "function": "service",
+            "position": "specialist_2",
+            "qa": 80,
+            "productivity": null,
+            "aht": 8,
+            "aph": 5,
+            "adh": 90,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Proficient with the Arrival Window Procedure and perfect adherence to zero arrival window breaks\r\n\u2022 Manages 40 cases per day"
+          }
+        }
+      ],
+      "2": [
+        {
+          "position": ""
+        },
+        {
+          "position": ""
+        },
+        {
+          "position": "Representative 3",
+          "id": 15,
+          "position_data": {
+            "id": 15,
+            "tier_level": 2.2,
+            "pay_rate": 13.25,
+            "department": "real_time_scheduling",
+            "function": "service",
+            "position": "representative_3",
+            "qa": 70,
+            "productivity": null,
+            "aht": 9,
+            "aph": 4,
+            "adh": 85,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Proficient understanding of the Removal and Reinstall scheduling procedures\r\n\u2022 Able to read and understand SREC cases and schedule correctly\r\n\u2022 Competent to assign priority tickets\r\n\u2022 Manages 30 cases per day"
+          }
+        },
+        {
+          "position": ""
+        }
+      ],
+      "3": [
+        {
+          "position": ""
+        },
+        {
+          "position": ""
+        },
+        {
+          "position": "Specialist 1",
+          "id": 16,
+          "position_data": {
+            "id": 16,
+            "tier_level": 2.3,
+            "pay_rate": 13.5,
+            "department": "real_time_scheduling",
+            "function": "service",
+            "position": "specialist_1",
+            "qa": 70,
+            "productivity": null,
+            "aht": 9,
+            "aph": 4,
+            "adh": 85,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 24hr priority ticket closure time\r\n\u2022 Establishes strong professional relationships with SPMs\r\n\u2022 Knowledgeable of the end to end Removal and Reinstall Process"
+          }
+        },
+        {
+          "position": "Team Lead",
+          "id": 22,
+          "position_data": {
+            "id": 22,
+            "tier_level": 3.3,
+            "pay_rate": 14.5,
+            "department": "real_time_scheduling",
+            "function": "service",
+            "position": "team_lead",
+            "qa": 80,
+            "productivity": null,
+            "aht": 8,
+            "aph": 5,
+            "adh": 90,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 50% of time is dedicated to super agent responsibilities\r\n\u2022 50%  of time is dedicated to floor support and monitoring phone queues\r\n\u2022 Assists with department on trainings on changes within the Services process\r\n\u2022 Responsible for handling 2nd level escalations\r\n\u2022 Point of contact for SPM's - maintains good relationhips with all SPMs\r\n\u2022 Ability to provide feedback to agents and performs side by sides\r\n\u2022 Advanced Knowledge of Central scheduling and maximizing processes and efficiency\r\n\u2022 Meter Swap cases\r\n\u2022 Builds relationships with other departments to eliminate silos and promote trust."
+          }
+        }
+      ]
+    }
+  },
+  "Relations": {
+    "Inbound Outbound": {
+      "1": [
+        {
+          "position": "Inbound Outbound"
+        },
+        {
+          "position": "Representative 1",
+          "id": 45,
+          "position_data": {
+            "id": 45,
+            "tier_level": 1.1,
+            "pay_rate": 12.0,
+            "department": "relations",
+            "function": "inbound_outbound",
+            "position": "representative_1",
+            "qa": 60,
+            "productivity": null,
+            "aht": null,
+            "aph": null,
+            "adh": 80,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Assist with Post-PTO Troubleshooting and general questions.\r\n\u2022 Able to navigate SalesForce to answer customer questions.\r\n\u2022 Basic knowledge of ServiceNow and Email Procedures.\r\n\u2022 Knowledgeable about the Corporate Review process.\r\n\u2022 Answer incoming calls from customers\r\n\u2022 Basic knowledge of VSLR Products, Contracts, and Utility/Rebate documents.\r\n\u2022 Basic understanding of the Install to PTO process, know which department owns each step, and accurately respond to customer inquiries about their system."
+          }
+        },
+        {
+          "position": "Representative 2",
+          "id": 46,
+          "position_data": {
+            "id": 46,
+            "tier_level": 2.1,
+            "pay_rate": 13.0,
+            "department": "relations",
+            "function": "inbound_outbound",
+            "position": "representative_2",
+            "qa": 70,
+            "productivity": null,
+            "aht": null,
+            "aph": null,
+            "adh": 85,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Intermediate understanding of the Install to PTO process, know which department owns each step, and accurately respond to customer inquiries about their system.\r\n\u2022 Audit accounts for errors that will affect progress.\r\n\u2022 Intermediate knowledge of VSLR Products, Contracts, and Utility/Rebate documents.\r\n\u2022 Able to efficiently navigate SalesForce to research an account and answer customer questions.\r\n\u2022 Make outbound calls to customers"
+          }
+        },
+        {
+          "position": "Specialist 2",
+          "id": 49,
+          "position_data": {
+            "id": 49,
+            "tier_level": 3.1,
+            "pay_rate": 14.0,
+            "department": "relations",
+            "function": "inbound_outbound",
+            "position": "specialist_2",
+            "qa": 80,
+            "productivity": null,
+            "aht": null,
+            "aph": null,
+            "adh": 90,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Work with the training team to develop up training for all agents.\r\n\u2022 Advanced communication skills, both written and verbal.\r\n\u2022 Take live calls from escalated customers when another agents is unable to de-escalate.\r\n\u2022 Create general Salesforce Reports/Dashboards to provide beneficial information to leadership or the floor.\r\n\u2022 Expert at researching/diagnosing accounts.\r\n\u2022 Handles pre-default process for region."
+          }
+        }
+      ],
+      "2": [
+        {
+          "position": ""
+        },
+        {
+          "position": ""
+        },
+        {
+          "position": "Representative 3",
+          "id": 47,
+          "position_data": {
+            "id": 47,
+            "tier_level": 2.2,
+            "pay_rate": 13.25,
+            "department": "relations",
+            "function": "inbound_outbound",
+            "position": "representative_3",
+            "qa": 70,
+            "productivity": null,
+            "aht": null,
+            "aph": null,
+            "adh": 85,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Effectively deescalate customers\r\n\u2022 Able to uncover account issues and work with the appropriate department to correct.\r\n\u2022 Allow new hires to sit with you while you work, and explain how to research an account."
+          }
+        },
+        {
+          "position": "Specialist 3",
+          "id": 50,
+          "position_data": {
+            "id": 50,
+            "tier_level": 3.2,
+            "pay_rate": 14.25,
+            "department": "relations",
+            "function": "inbound_outbound",
+            "position": "specialist_3",
+            "qa": 80,
+            "productivity": null,
+            "aht": null,
+            "aph": null,
+            "adh": 90,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Create detailed Salesforce Reports/Dashboards to provide beneficial information to leadership or the floor.\r\n\u2022 Works with the training team to provide group training on new processes, products, and contracts.\r\n\u2022 Assists Team Lead in managing workflow. Steps in as the Team Lead when one is not available."
+          }
+        }
+      ],
+      "3": [
+        {
+          "position": ""
+        },
+        {
+          "position": ""
+        },
+        {
+          "position": "Specialist 1",
+          "id": 48,
+          "position_data": {
+            "id": 48,
+            "tier_level": 2.3,
+            "pay_rate": 13.5,
+            "department": "relations",
+            "function": "inbound_outbound",
+            "position": "specialist_1",
+            "qa": 70,
+            "productivity": null,
+            "aht": null,
+            "aph": null,
+            "adh": 85,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Able to accurately modify available Salesforce reporting\r\n\u2022 Able to read Salesforce filtering to understand what a report is showing.\r\n\u2022 Start building relationships with other departments to eliminate silos and promote trust.\r\n\u2022 Intermediate knowledge of Vivint Solar Products, Contracts, and Utility/Rebate documents.\r\n\u2022 Able to efficiently navigate Salesforce to uncover process issues within other departments."
+          }
+        },
+        {
+          "position": "Team Lead",
+          "id": 51,
+          "position_data": {
+            "id": 51,
+            "tier_level": 3.3,
+            "pay_rate": 14.5,
+            "department": "relations",
+            "function": "inbound_outbound",
+            "position": "team_lead",
+            "qa": 80,
+            "productivity": null,
+            "aht": null,
+            "aph": null,
+            "adh": 90,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Completes call-backs to escalated customers when another agents are unable to de-escalate.\r\n\u2022 Provides coaching for employees\r\n\u2022 Assists Supervisors by managing workflow and auditing adherence.\r\n\u2022 Audits and submits ECL for region. Meets with Management to discuss submissions before they are sent to the committee. Follows through on providing ECL decisions to effected customers/departments.\r\n\u2022 Meet with other departments and leadership to improve processes\r\n\u2022 Mentors Specialist 3 to prepare them for a Team Lead role.\r\n\u2022 Holds 1 on 1's with individual agents every other week\r\n\u2022 Able to identify complex account issues, work with the appropriate departments, and follow through on resolutions."
+          }
+        }
+      ]
+    },
+    "Email Admin": {
+      "1": [
+        {
+          "position": "Email Admin"
+        },
+        {
+          "position": ""
+        },
+        {
+          "position": "Representative 2",
+          "id": 52,
+          "position_data": {
+            "id": 52,
+            "tier_level": 2.1,
+            "pay_rate": 13.0,
+            "department": "relations",
+            "function": "email_admin",
+            "position": "representative_2",
+            "qa": 70,
+            "productivity": null,
+            "aht": null,
+            "aph": null,
+            "adh": 85,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Intermediate understanding of the Install to PTO process, know which department owns each step, and accurately respond to customer inquiries about their system.\r\n\u2022 Audit accounts for errors that will affect progress.\r\n\u2022 Intermediate knowledge of Vivint Solar products, contracts, and utility / rebate documents.\r\n\u2022 Able to efficiently navigate SalesForce to research an account and answer customer questions.\r\n\u2022 Intermediate knowledge of all ServiceNow and email procedures."
+          }
+        },
+        {
+          "position": "Specialist 2",
+          "id": 55,
+          "position_data": {
+            "id": 55,
+            "tier_level": 3.1,
+            "pay_rate": 14.0,
+            "department": "relations",
+            "function": "email_admin",
+            "position": "specialist_2",
+            "qa": 80,
+            "productivity": null,
+            "aht": null,
+            "aph": null,
+            "adh": 90,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Work with the training team to develop up training for all agents.\r\n\u2022 Call escalated customers when they escalate through email.\r\n\u2022 Assists Documents Specialist 2 with pre-default process for documents.\r\n\u2022 Create general Salesforce reports / dashboards to provide beneficial information to leadership or the floor.\r\n\u2022 Expert at researching/diagnosing accounts.\r\n\u2022 Advanced communication skills, both written and verbal."
+          }
+        }
+      ],
+      "2": [
+        {
+          "position": ""
+        },
+        {
+          "position": ""
+        },
+        {
+          "position": "Representative 3",
+          "id": 53,
+          "position_data": {
+            "id": 53,
+            "tier_level": 2.2,
+            "pay_rate": 13.25,
+            "department": "relations",
+            "function": "email_admin",
+            "position": "representative_3",
+            "qa": 70,
+            "productivity": null,
+            "aht": null,
+            "aph": null,
+            "adh": 85,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Effectively deescalate customers\r\n\u2022 Able to uncover account issues and work with the appropriate department to correct.\r\n\u2022 Allow new hires to sit with you while you work, and explain how to research an account.\r\n\u2022 Advanced knowledge of all ServiceNow / InContact / Salesforce platforms\r\n\u2022 Advanced understanding of post-install to PTO process (AB2FIN, Cases, phase)\r\n\u2022 Intermediate troubleshooting (Enphase, Solar Edge, Mercury, Fronius)"
+          }
+        },
+        {
+          "position": "Specialist 3",
+          "id": 56,
+          "position_data": {
+            "id": 56,
+            "tier_level": 3.2,
+            "pay_rate": 14.25,
+            "department": "relations",
+            "function": "email_admin",
+            "position": "specialist_3",
+            "qa": 80,
+            "productivity": null,
+            "aht": null,
+            "aph": null,
+            "adh": 90,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Create detailed Salesforce Reports/Dashboards to provide beneficial information to leadership or the floor.\r\n\u2022 Works with the training team to provide group training on new processes, products, and contracts.\r\n\u2022 Assists Team Lead in managing workflow. Steps in as the Team Lead when one is not available."
+          }
+        }
+      ],
+      "3": [
+        {
+          "position": ""
+        },
+        {
+          "position": ""
+        },
+        {
+          "position": "Specialist 1",
+          "id": 54,
+          "position_data": {
+            "id": 54,
+            "tier_level": 2.3,
+            "pay_rate": 13.5,
+            "department": "relations",
+            "function": "email_admin",
+            "position": "specialist_1",
+            "qa": 70,
+            "productivity": null,
+            "aht": null,
+            "aph": null,
+            "adh": 85,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Able to accurately modify available Salesforce reporting\r\n\u2022 Able to read Salesforce filtering to understand what a report is showing.\r\n\u2022 Start building relationships with other departments to eliminate silos and promote trust.\r\n\u2022 Intermediate knowledge of Vivint Solar products, contracts, and utility / rebate documents.\r\n\u2022 Able to efficiently navigate Salesforce to uncover process issues within other departments.\r\n\u2022 Advanced knowledge of all ServiceNow and email procedures, including how to utilize the ServiceNow stats."
+          }
+        },
+        {
+          "position": "Team Lead",
+          "id": 57,
+          "position_data": {
+            "id": 57,
+            "tier_level": 3.3,
+            "pay_rate": 14.5,
+            "department": "relations",
+            "function": "email_admin",
+            "position": "team_lead",
+            "qa": 80,
+            "productivity": null,
+            "aht": null,
+            "aph": null,
+            "adh": 90,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Provides coaching for employees\r\n\u2022 Completes call-backs to escalated customers when another agents are unable to deescalate.\r\n\u2022 Holds 1 on 1's with individual agents every other week\r\n\u2022 Able to identify complex account issues, work with the appropriate departments, and follow through on resolutions.\r\n\u2022 Audits and submits ECL for region. Meets with Management to discuss submissions before they are sent to the committee. Follows through on providing ECL decisions to effected customers/departments.\r\n\u2022 Meet with other departments and leadership to improve processes\r\n\u2022 Mentors Specialist 3 to prepare them for a Team Lead role.\r\n\u2022 Assists Supervisors by managing workflow and auditing adherence."
+          }
+        }
+      ]
+    },
+    "Documents": {
+      "1": [
+        {
+          "position": "Documents"
+        },
+        {
+          "position": ""
+        },
+        {
+          "position": "Representative 2",
+          "id": 58,
+          "position_data": {
+            "id": 58,
+            "tier_level": 2.1,
+            "pay_rate": 13.0,
+            "department": "relations",
+            "function": "documents",
+            "position": "representative_2",
+            "qa": 70,
+            "productivity": null,
+            "aht": null,
+            "aph": null,
+            "adh": 85,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Intermediate understanding of the Install to PTO process, know which department owns each step, and accurately respond to customer inquiries about their system.\r\n\u2022 Audit accounts for errors that will affect progress.\r\n\u2022 Intermediate knowledge of Vivint Solar products, contracts, and utility / rebate documents.\r\n\u2022 Able to efficiently navigate SalesForce to research an account and answer customer questions.\r\n\u2022 Intermediate knowledge of all ServiceNow and Email Procedures.\r\n\u2022 Make outbound calls to customers to collect documents"
+          }
+        },
+        {
+          "position": "Specialist 2",
+          "id": 61,
+          "position_data": {
+            "id": 61,
+            "tier_level": 3.1,
+            "pay_rate": 14.0,
+            "department": "relations",
+            "function": "documents",
+            "position": "specialist_2",
+            "qa": 80,
+            "productivity": null,
+            "aht": null,
+            "aph": null,
+            "adh": 90,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Work with the training team to develop up training for all agents.\r\n\u2022 Advanced communication skills, both written and verbal.\r\n\u2022 Take live calls from escalated customers when another agents is unable to deescalate.\r\n\u2022 Create general Salesforce reports / dashboards to provide beneficial information to leadership or the floor.\r\n\u2022 Expert at researching/diagnosing accounts.\r\n\u2022 Handles pre-default process for documents."
+          }
+        }
+      ],
+      "2": [
+        {
+          "position": ""
+        },
+        {
+          "position": ""
+        },
+        {
+          "position": "Representative 3",
+          "id": 59,
+          "position_data": {
+            "id": 59,
+            "tier_level": 2.2,
+            "pay_rate": 13.25,
+            "department": "relations",
+            "function": "documents",
+            "position": "representative_3",
+            "qa": 70,
+            "productivity": null,
+            "aht": null,
+            "aph": null,
+            "adh": 85,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Effectively deescalate customers\r\n\u2022 Able to uncover account issues and work with the appropriate department to correct.\r\n\u2022 Allow new hires to sit with you while you work, and explain how to research an account.\r\n\u2022 Create and send required documents to customers for signature."
+          }
+        },
+        {
+          "position": "Specialist 3",
+          "id": 62,
+          "position_data": {
+            "id": 62,
+            "tier_level": 3.2,
+            "pay_rate": 14.25,
+            "department": "relations",
+            "function": "documents",
+            "position": "specialist_3",
+            "qa": 80,
+            "productivity": null,
+            "aht": null,
+            "aph": null,
+            "adh": 90,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Create detailed Salesforce reports / dashboards to provide beneficial information to leadership or the floor.\r\n\u2022 Works with the training team to provide group training on new processes, products, and contracts.\r\n\u2022 Assists Team Lead in managing workflow. Steps in as the Team Lead when one is not available."
+          }
+        }
+      ],
+      "3": [
+        {
+          "position": ""
+        },
+        {
+          "position": ""
+        },
+        {
+          "position": "Specialist 1",
+          "id": 60,
+          "position_data": {
+            "id": 60,
+            "tier_level": 2.3,
+            "pay_rate": 13.5,
+            "department": "relations",
+            "function": "documents",
+            "position": "specialist_1",
+            "qa": 70,
+            "productivity": null,
+            "aht": null,
+            "aph": null,
+            "adh": 85,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Able to accurately modify available Salesforce reporting\r\n\u2022 Able to read Salesforce filtering to understand what a report is showing.\r\n\u2022 Start building relationships with other departments to eliminate silos and promote trust.\r\n\u2022 Intermediate knowledge of Vivint Solar products, contracts, and utility / rebate documents.\r\n\u2022 Able to efficiently navigate Salesforce to uncover process issues within other departments."
+          }
+        },
+        {
+          "position": "Team Lead",
+          "id": 63,
+          "position_data": {
+            "id": 63,
+            "tier_level": 3.3,
+            "pay_rate": 14.5,
+            "department": "relations",
+            "function": "documents",
+            "position": "team_lead",
+            "qa": 80,
+            "productivity": null,
+            "aht": null,
+            "aph": null,
+            "adh": 90,
+            "availability": null,
+            "error_rate": null,
+            "efficiency": null,
+            "duration": 90,
+            "nps": null,
+            "field_qa_nps_score": null,
+            "job_description": "\u2022 Provides coaching for employees\r\n\u2022 Completes call-backs to escalated customers when another agents are unable to deescalate.\r\n\u2022 Meet with other departments and leadership to improve processes\r\n\u2022 Assists Supervisors by managing workflow and auditing adherence.\r\n\u2022 Audits and submits ECL for region. Meets with Management to discuss submissions before they are sent to the committee. Follows through on providing ECL decisions to effected customers/departments.\r\n\u2022 Holds 1 on 1's with individual agents every other week\r\n\u2022 Able to identify complex account issues, work with the appropriate departments, and follow through on resolutions.\r\n\u2022 Mentors Specialist 3 to prepare them for a Team Lead role."
+          }
+        }
+      ]
+    }
+  }
+}
