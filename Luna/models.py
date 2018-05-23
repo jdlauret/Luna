@@ -284,8 +284,7 @@ class DataWarehouse:
         """
         Open credentials file and create a new connection to the Database
         """
-        with open(os.path.join(credentials_dir, 'dw_creds.json'), 'r') as infile:
-            connection_info = json.load(infile)
+        connection_info = json.loads(os.environ.get('DATA_WAREHOUSE'))
 
         # Values retrieved from credentials file
         user = connection_info['credentials'][self.user]
