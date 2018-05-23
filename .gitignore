@@ -59,3 +59,5 @@ target/
 
 desktop\.ini
 .idea/
+
+Luna_Django/credentials/
