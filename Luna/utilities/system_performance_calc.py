@@ -25,7 +25,10 @@ def system_performance(servicenum, startdate, enddate):
 
     results = {'account': dw.results}
 
-    if startdate < results['account'][0][7]:
+    if len(results['account']) == 0:
+        results['error'] =
+        return '{} is not a valid service number!'.format(servicenum)
+    elif startdate < results['account'][0][7]:
         startdatestring = results['account'][0][7].strftime('%m/%d/%Y')
         results['startdate'] = results['account'][0][7]
     else:
