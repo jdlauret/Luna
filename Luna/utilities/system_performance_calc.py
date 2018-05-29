@@ -6,6 +6,7 @@ main_dir = os.getcwd()
 luna_dir = os.path.join(main_dir, 'Luna')
 utilities_dir = os.path.join(luna_dir, 'utilities')
 
+
 def system_performance(servicenum, startdate, enddate):
 
     dw = DataWarehouse('admin')
@@ -25,7 +26,7 @@ def system_performance(servicenum, startdate, enddate):
 
     results = {'account': dw.results}
 
-    if startdate < results['account'][0][7]:
+    if startdate < results['account'][0][7].date():
         startdatestring = results['account'][0][7].strftime('%m/%d/%Y')
         results['startdate'] = results['account'][0][7]
     else:

@@ -1,45 +1,94 @@
 {% extends 'Luna/base.html' %}
 {% block content %}
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <div class="main">
         <h2>System Performance Calculator</h2>
-        <form action="/Luna/calculators/system_performance_calculator/" method="post">
-            {{ form.non_field_errors }}
-            {% for field in form %}
-                <div class="fieldWrapper">
-                {{ field.errors }}
-                <label for="{{ field.id_for_label }}">{{ field.label }} </label>
-                {{ field }}
-                </div>
-            {% endfor %}
-            <input type="submit" value="Submit">
-        </form>
-        {% if form_response_complete %}
-            <div id="account" name="account_info">
-                <table>
-                    <th>Account</th>
-                    {% for row in form_response.account %}
+        <div style="width: 100%; overflow: hidden">
+            <div style="float: left; width: 30%">
+                <form action="/Luna/calculators/system_performance_calculator/" method="post">
+                    <table class="table table-borderless">
+                        <thead class="thead-dark">
                         <tr>
-                            {{ row }}
+                            <th colspan="2">Account Lookup</th>
                         </tr>
-                    {% endfor %}
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{ form.non_field_errors }}</td>
+                        </tr>
+                        {% for field in form %}
+                            <tr>
+                                {% if field.errors %}
+                                    <td>{{ field.errors }}</td>
+                                {% endif %}
+                                <td><label for="{{ field.id_for_label }}">{{ field.label }} </label></td>
+                                <td>{{ field }}</td>
+                            </tr>
+                        {% endfor %}
+                        <tr>
+                            <td></td>
+                            <td style="float: right"><input type="submit" value="Submit"/></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+            <div id="account_info" style="margin-left: 32%">
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th colspan="{{ form_response.account.0|length }}">Account Information</th>
+                    </tr>
+                    </thead>
+                    {% if form_response_complete == True %}
+                        <thead>
+                        <tr>
+                            <th>Service Number</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Street Address</th>
+                            <th>City</th>
+                            <th>State</th>
+                            <th>Zip Code</th>
+                            <th>PTO</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+
+                        {% for row in form_response.account %}
+                            <tr>
+                                {% for item in row %}
+                                    <td>{{ item }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    {% endif %}
                 </table>
             </div>
-            <div id="summary" name="summary_info">
-                <table>
-                    <th>Summary</th>
-                    {% for row in form_response.summary %}
-                        <tr>
-                            {% for col in row %}
-                                {{ col }}
-                            {% endfor %}
-                        </tr>
-                    {% endfor %}
-                </table>
-            </div>
-            <div id="production" name="production_info">
-                <table>
-                    <th>Production by Month</th>
+        </div>
+        <div id="production_div">
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th colspan="{{ form_response.production.0|length }}">Production by Month</th>
+                </tr>
+                </thead>
+            </table>
+            <table id="production" class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Month</th>
+                    <th scope="col">Estimate (kWh)</th>
+                    <th scope="col">Actual (kWh)</th>
+                    <th scope="col">Performance Ratio</th>
+                </tr>
+                </thead>
+                {% if form_response_complete == True %}
+                    <tbody>
+
                     {% for row in form_response.production %}
                         {% if row.0 == 'Total' %}
                             <tr>
@@ -48,15 +97,22 @@
                                 {% endfor %}
                             </tr>
                         {% else %}
-                            <tr class="table_footer">
+                            <tr>
                                 {% for col in row %}
-                                    <tr>{{ col }}</tr>
+                                    <td>{{ col }}</td>
                                 {% endfor %}
                             </tr>
                         {% endif %}
                     {% endfor %}
-                </table>
-            </div>
-        {% endif %}
+                    </tbody>
+                {% endif %}
+            </table>
+        </div>
+
     </div>
+    <script>
+        $(document).ready(function () {
+            $('#production').DataTable();
+        });
+    </script>
 {% endblock %}
