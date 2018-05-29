@@ -20,8 +20,6 @@ python manage.py sqlmigration Luna 0001
 python manage.py migrate
 """
 
-credentials_dir = os.path.join(os.getcwd(), 'credentials')
-
 
 class CareerPath(models.Model):
     # Department Codes

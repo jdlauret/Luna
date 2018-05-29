@@ -6,6 +6,7 @@ main_dir = os.getcwd()
 luna_dir = os.path.join(main_dir, 'Luna')
 utilities_dir = os.path.join(luna_dir, 'utilities')
 
+
 def system_performance(servicenum, startdate, enddate):
 
     if enddate < startdate:
@@ -32,7 +33,7 @@ def system_performance(servicenum, startdate, enddate):
     if len(results['account']) == 0:
         results['accounterror'] = '{} is not a valid service number.'.format(servicenum)
         return results
-    elif startdate < results['account'][0][7]:
+    if startdate < results['account'][0][7].date():
         results['startdate'] = results['account'][0][7]
         startdatestring = results['startdate'].strftime('%m/%d/%Y')
     else:

@@ -3,12 +3,14 @@ from django.shortcuts import render
 # Create your views here.
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import get_object_or_404, redirect, render, render_to_response
 from django.contrib.auth.models import Permission, User
-from django.template import loader, Context, Template, Library
+from django.template.context_processors import csrf
+from django.template import loader, Context, Template, Library, RequestContext
 from .models import CareerPath, AutomatorTask
 from .templates.template_updates import JsonHandler
 from .forms import SystemPerformanceForm
+from .utilities.system_performance_calc import system_performance
 
 register = Library()
 
@@ -16,7 +18,7 @@ register = Library()
 def index(request):
     template = loader.get_template('Luna/index.html')
     context = {'user': request.user}
-    return HttpResponse(template.render(context))
+    return render(request, 'Luna/index.html', context)
 
 
 @login_required
@@ -39,20 +41,23 @@ def career_path(request):
 @login_required
 def system_performance_calculator(request):
     if request.user.is_authenticated:
-        if request == 'POST':
+        if request.method == 'POST':
             form = SystemPerformanceForm(request.POST)
             if form.is_valid():
-
                 service_number = form.cleaned_data['service_number']
                 start_date = form.cleaned_data['start_date']
                 end_date = form.cleaned_data['end_date']
                 # TODO pass parameters to Mack's function
                 context = {
+                    'form': form,
                     'user': request.user,
                     'form_response_complete': True,
-                    'form_response': {}
+                    'form_response': system_performance(service_number, start_date, end_date)
                 }
-                return HttpResponse('/Luna/calculators/system_performance_calculator/', context=context)
+
+                return render_to_response('Luna/system_performance_calc.html',
+                                          context,
+                                          RequestContext(request))
             else:
                 form = SystemPerformanceForm()
                 context = {
