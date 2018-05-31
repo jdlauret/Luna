@@ -33,15 +33,14 @@ def system_performance(servicenum, startdate, enddate):
     if len(results['account']) == 0:
         results['accounterror'] = '{} is not a valid service number.'.format(servicenum)
         return results
-    if startdate < results['account'][0][7].date():
+    elif startdate < results['account'][0][7].date():
         results['startdate'] = results['account'][0][7]
         startdatestring = results['startdate'].strftime('%m/%d/%Y')
     else:
         results['startdate'] = startdate
         startdatestring = results['startdate'].replace(day=1).strftime('%m/%d/%Y')
 
-
-    if enddate.date() >= date.today() and enddate < results['startdate'] + timedelta(14) and results['startdate'] == results['account'][0][7]:
+    if enddate >= date.today() and enddate < results['startdate'].date() + timedelta(14) and results['startdate'] == results['account'][0][7]:
         # enddatestring = (date.today().replace(day=1) - timedelta(1)).strftime('%m/%d/%Y')
         # results['enddate'] = date.today().replace(day=1) - timedelta(1)
         results['error'] = "The system has not been PTO'd for at least two weeks."

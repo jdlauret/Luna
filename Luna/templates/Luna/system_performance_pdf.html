@@ -1,0 +1,77 @@
+{% extends "Luna/print_base.html" %}
+{% block content %}
+    <div>
+        <div id="account_info">
+            <table class="table">
+                <thead id="thead-1" class="thead-dark thead-1">
+                <tr>
+                    <th colspan="{{ form_response.account.0|length }}">Account Information</th>
+                </tr>
+                </thead>
+                {% if form_response_complete == True %}
+                    <thead id="thead-2" class="thead-2">
+                    <tr>
+                        <th>Service Number</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Street Address</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Zip Code</th>
+                        <th>PTO</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for row in form_response.account %}
+                        <tr>
+                            {% for item in row %}
+                                <td style="text-align: left">{{ item }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                {% endif %}
+            </table>
+        </div>
+    </div>
+    <div id="production_div">
+        <table class="table">
+            <thead id="thead-1" class="thead-dark thead-1">
+            <tr>
+                <th colspan="{{ form_response.production.0|length }}">Production by Month</th>
+            </tr>
+            </thead>
+        </table>
+        <table id="production" class="table table-striped">
+            <thead id="thead-2" class="thead-2">
+            <tr>
+                <th>Month</th>
+                <th>Estimate (kWh)</th>
+                <th>Actual (kWh)</th>
+                <th>Performance Ratio</th>
+            </tr>
+            </thead>
+            {% if form_response_complete == True %}
+                <tbody>
+
+                {% for row in form_response.production %}
+
+                    {% if row.0 == 'Total' %}
+                        <tr>
+                            {% for col in row %}
+                                <td style="text-align: center">{{ col }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% else %}
+                        <tr>
+                            {% for col in row %}
+                                <td style="text-align: center">{{ col }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            {% endif %}
+        </table>
+    </div>
+{% endblock %}
