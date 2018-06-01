@@ -40,7 +40,6 @@ def system_performance(servicenum, startdate, enddate):
         results['startdate'] = startdate
         startdatestring = results['startdate'].replace(day=1).strftime('%m/%d/%Y')
 
-
     if enddate >= date.today() and enddate < results['startdate'].date() + timedelta(14) and results['startdate'] == results['account'][0][7]:
         # enddatestring = (date.today().replace(day=1) - timedelta(1)).strftime('%m/%d/%Y')
         # results['enddate'] = date.today().replace(day=1) - timedelta(1)

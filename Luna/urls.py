@@ -5,13 +5,19 @@ from django.contrib.auth import views as auth_views
 from . import views
 
 calculator_patterns = [
-    url(r'^system_performance_calculator/$', views.system_performance_calculator)
+    url(r'^system_performance_calculator/$', views.system_performance_calculator),
+    url(r'^system_performance_calculator/pdf$', views.performance_calculator_print, name='System Performance'),
+]
+
+automation_patterns =[
+    url(r'^$', views.automation_page)
 ]
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^career_path/$', views.career_path),
+    url(r'^career_path/$', views.career_path, name='career_path'),
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout, name='logout'),
-    path('calculators/', include(calculator_patterns))
+    path('calculators/', include(calculator_patterns)),
+    path('automation/', include(automation_patterns)),
 ]

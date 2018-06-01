@@ -6,7 +6,9 @@ function browser_detect() {
     var isFirefox = typeof InstallTrigger !== 'undefined';
 
     // Safari 3.0+ "[object HTMLElementConstructor]"
-    var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification);
+    var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) {
+        return p.toString() === "[object SafariRemoteNotification]";
+    })(!window['safari'] || safari.pushNotification);
 
     // Internet Explorer 6-11
     var isIE = /*@cc_on!@*/false || !!document.documentMode;
@@ -29,13 +31,18 @@ function browser_detect() {
     output += 'isEdge: ' + isEdge + '<br>';
     output += 'isBlink: ' + isBlink + '<br>';
     var working_response = document.getElementById('browser_detect').innerHTML = 'Your browser is compatible!'
-    if (isChrome){
+    if (isChrome) {
         return working_response
     }
-    else if (isFirefox){
+    else if (isFirefox) {
         return working_response
     }
     else {
         document.getElementById('browser_detect').innerHTML = 'Luna is not yet designed for your browser type, which may result in odd behavior.'
     }
+}
+
+function printPage() {
+    //Get the print button and put it into a variable
+    window.print()
 }

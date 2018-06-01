@@ -25,8 +25,8 @@
                     click[j].className = "click";
                 }
             }
-            for (j = 0; j < buttons.length; j++){
-                if (buttons[j].id != num){
+            for (j = 0; j < buttons.length; j++) {
+                if (buttons[j].id != num) {
                     buttons[j].className = buttons[j].className.replace('clicked', '')
                 }
             }
@@ -34,7 +34,7 @@
 
         $(() => {
                 'use strict';
-                $('button').click(function() {
+                $('button').click(function () {
                     $(this).toggleClass('clicked')
                 })
             }
@@ -44,10 +44,10 @@
         <span style="padding-left: 1rem; display: inline-block">
         <h2 class="h2">Post Install Operations Career Path</h2>
     </span>
-        <div class="container">
+        <div class="careerpath_container">
             <div class="left-half">
                 <article>
-                    <h4 class="sticky">
+                    <h4 class="sticky" style="z-index: 1">
                         <div class="far-left">
                         </div>
                         <div class="center-left">
@@ -84,7 +84,7 @@
                                             <div class="center-left">
                                                 {% if value3.1.position != '' %}
                                                     <button class="button1"
-                                                            id = "{{ value3.1.id }}"
+                                                            id="{{ value3.1.id }}"
                                                             onclick="toggle([this, {{ value3.1.id }}])">
                                                         {{ value3.1.position }}
                                                     </button>
@@ -93,7 +93,7 @@
                                             <div class="center-right">
                                                 {% if value3.2.position != '' %}
                                                     <button class="button2"
-                                                            id = "{{ value3.2.id }}"
+                                                            id="{{ value3.2.id }}"
                                                             onclick="toggle([this, {{ value3.2.id }}])">
                                                         {{ value3.2.position }}
                                                     </button>
@@ -102,7 +102,7 @@
                                             <div class="far-right">
                                                 {% if value3.3.position != '' %}
                                                     <button class="button3"
-                                                            id = "{{ value3.3.id }}"
+                                                            id="{{ value3.3.id }}"
                                                             onclick="toggle([this, {{ value3.3.id }}])">
                                                         {{ value3.3.position }}
                                                     </button>

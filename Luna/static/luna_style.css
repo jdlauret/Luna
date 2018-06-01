@@ -1,3 +1,70 @@
+* {
+    font-family: "Lato", sans-serif;
+}
+
+@media print {
+    body {
+        background-color: #FFFFFF;
+        background-image: none;
+        color: #000000;
+    }
+
+    #printPageButton {
+        visibility: hidden;
+    }
+
+    #printPage {
+        padding: 0;
+        margin-top: -70px;
+
+    }
+
+    #thead-1 {
+        color: black;
+        background-color: #b6b6bd;
+    }
+}
+
+.thead-1 th {
+    text-align: left;
+}
+
+.thead-2 th {
+    text-align: center;
+}
+
+.printPageButton {
+    font-size: 30px;
+    background-color: #cc3300;
+}
+
+.printPage {
+    margin: 10px 50px 10px;
+    padding: 10px 50px 10px;
+}
+
+.printPageFooter {
+    float: bottom;
+    font-size: 8px;
+}
+
+table {
+    page-break-inside: auto
+}
+
+tr {
+    page-break-inside: avoid;
+    page-break-after: auto
+}
+
+thead {
+    display: table-header-group
+}
+
+tfoot {
+    display: table-footer-group
+}
+
 body {
     font-family: "Lato", sans-serif;
     background-color: #fdfdff;
@@ -5,7 +72,7 @@ body {
 }
 
 section {
-    background-color: #dbd9d9;
+    /*background-color: #dbd9d9;*/
     color: #656569;
     border-radius: 5px;
     padding: 0 .5rem .5rem .5rem;
@@ -29,7 +96,7 @@ h4.sticky {
     background: #dbd9d9;
     color: #656569;
     margin: 0;
-    padding: 6px 0 0 0;
+    padding: 6px 0 6px 0;
     position: -webkit-sticky;
     position: sticky;
     top: -16px;
@@ -49,10 +116,10 @@ h5.sticky {
 }
 
 /* pattern styles */
-.container {
+.careerpath_container {
     display: flex;
     overflow: hidden;
-    height: 89vh;
+    height: 100vh;
     margin-top: -100px;
     padding-top: 100px;
     position: relative;
@@ -149,6 +216,7 @@ h5.sticky {
 /* When you mouse over the navigation links, change their color */
 .sidenav a:hover, a:active {
     background-color: #616166;
+    color: #e3edfe;
 }
 
 .sidenav a.logo {

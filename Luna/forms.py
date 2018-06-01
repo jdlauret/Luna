@@ -7,9 +7,13 @@ class DateInput(forms.DateInput):
     input_type = 'date'
 
 
-def previous_month():
+def previous_month_end():
     today = date.today()
     return date(today.year, today.month, 1) - relativedelta(days=1)
+
+
+def previous_month_start():
+    pass
 
 
 class SystemPerformanceForm(forms.Form):
@@ -20,8 +24,9 @@ class SystemPerformanceForm(forms.Form):
                                      'type': 'date'
                                  }))
     end_date = forms.DateField(label='End Date:',
-                               initial=previous_month(),
+                               initial=previous_month_end(),
                                required=True,
                                widget=forms.TextInput(attrs={
-                                   'type': 'date'
+                                   'type': 'date',
+                                   'width': '100%',
                                }))
