@@ -31,9 +31,9 @@ def system_performance(servicenum, startdate, enddate):
     results = {'account': dw.results}
 
     if len(results['account']) == 0:
-        results['accounterror'] = '{} is not a valid service number.'.format(servicenum)
+        results['error'] = '{} is not a valid service number.'.format(servicenum)
         return results
-    if startdate < results['account'][0][7].date():
+    elif startdate < results['account'][0][7].date():
         results['startdate'] = results['account'][0][7]
         startdatestring = results['startdate'].strftime('%m/%d/%Y')
     else:
@@ -41,7 +41,7 @@ def system_performance(servicenum, startdate, enddate):
         startdatestring = results['startdate'].replace(day=1).strftime('%m/%d/%Y')
 
 
-    if enddate.date() >= date.today() and enddate < results['startdate'] + timedelta(14) and results['startdate'] == results['account'][0][7]:
+    if enddate >= date.today() and enddate < results['startdate'].date() + timedelta(14) and results['startdate'] == results['account'][0][7]:
         # enddatestring = (date.today().replace(day=1) - timedelta(1)).strftime('%m/%d/%Y')
         # results['enddate'] = date.today().replace(day=1) - timedelta(1)
         results['error'] = "The system has not been PTO'd for at least two weeks."
@@ -62,9 +62,9 @@ def system_performance(servicenum, startdate, enddate):
     results['production'] = dw.results
 
     if len(results['production']) == 0:
-        results['productionerror'] = 'There were no CAD estimates or Actual production ' \
-                                     'found for service number {} in the date range {} ' \
-                                     'to {}.'.format(servicenum, startdatestring, enddatestring)
+        results['error'] = 'There were no CAD estimates or Actual production ' \
+                             'found for service number {} in the date range {} ' \
+                             'to {}.'.format(servicenum, startdatestring, enddatestring)
         return results
 
     totals = [sum(j) for j in [i for i in zip(*results['production'])][1:3]]
