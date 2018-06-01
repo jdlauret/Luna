@@ -22,6 +22,9 @@
     <hr>
     {% if user.is_authenticated %}
         <div class="collapsible-menu">
+            {% if perms.automator_task.can_add_automator_tasks %}
+                <a href="/automation">Automation</a>
+            {% endif %}
             <input type="checkbox" id="menu">
             <label for="menu"><img src="{% static "resources/arrow-right-white.png" %}">Calculators</label>
             <div class="menu-content">
@@ -33,6 +36,7 @@
         <div class="sidenav-bottom">
             <a style="width: 166px" href="/logout">Logout</a>
         </div>
+
     {% else %}
         <a href="{% url 'social:begin' 'google-oauth2' %}">Login</a>
     {% endif %}
