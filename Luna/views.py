@@ -3,9 +3,9 @@ from django.shortcuts import render
 # Create your views here.
 from io import BytesIO
 from django.http import HttpResponse, HttpResponseRedirect
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import get_object_or_404, redirect, render, render_to_response
-from django.contrib.auth.models import Permission, User
+from django.contrib.auth.models import Permission, User, Group
 from django.template.context_processors import csrf
 from django.template import loader, Context, Template, Library, RequestContext
 from django.views.generic import View
@@ -20,6 +20,14 @@ from .utilities.page_notes import *
 register = Library()
 
 
+def email_check(user):
+    return user.email.endswith('@vivintsolar.com')
+
+
+def automation_access(user):
+    return user.groups.filter(name='Automation Access').exists()
+
+
 def index(request):
     template = loader.get_template('Luna/index.html')
     context = {'user': request.user}
@@ -27,6 +35,7 @@ def index(request):
 
 
 @login_required
+@user_passes_test(email_check)
 def career_path(request):
     if request.user.is_authenticated:
         template = loader.get_template('Luna/career_path.html')
@@ -44,6 +53,7 @@ def career_path(request):
 
 
 @login_required
+@user_passes_test(email_check)
 def system_performance_calculator(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -96,6 +106,7 @@ def system_performance_calculator(request):
 
 
 @login_required
+@user_passes_test(email_check)
 def performance_calculator_print(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -145,3 +156,14 @@ def performance_calculator_print(request):
             return HttpResponse(template.render(context))
     else:
         return HttpResponseRedirect('/Luna')
+
+
+@register.filter(name='has_group')
+def has_group(user, group_name):
+    group = Group.objects.get(name=group_name)
+    return True if group in user.groups.all() else False
+
+
+@user_passes_test(automation_access)
+def automation_page(request):
+    return HttpResponse('Woot')
