@@ -1,33 +1,43 @@
 <!DOCTYPE html>
 {% load staticfiles %}
 <html lang="en">
-<link rel="icon" href="{% static 'resources/Textless - Orange.png' %}">
+<link rel="icon" href="{% static 'resources/textless_black_starless.png' %}">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+<script src="{% static "js/scripts.js" %}"></script>
+
 <head>
     <meta charset="UTF-8">
-    <title>Luna Landing</title>
-    <link rel="stylesheet"
-          type="text/css"
-          href="{% static 'luna_style.css' %}"/>
+    <title>Luna</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'luna_style.css' %}"/>
 </head>
 <body>
-<div class="header">
-    <a href="/Luna/">
-        <img src="{% static 'resources/Orange.png' %}" alt="Home"/>
-    </a>
-    <h1>Welcome to Luna</h1>
-</div>
 <div class="sidenav">
+    <a class="logo" href="{% url 'index' %}">
+        <span class="logo"></span>
+    </a>
+    <hr>
     {% if user.is_authenticated %}
-        <a href="/Luna/system_performance_calculator">Calculator</a>
-        <a href="/Luna/career_path">Career Path</a>
-        <a href="/Luna/logout">Logout</a>
+        <div class="collapsible-menu">
+            <input type="checkbox" id="menu">
+            <label for="menu"><img src="{% static "resources/arrow-right-white.png" %}">Calculators</label>
+            <div class="menu-content">
+                <a href="/calculators/system_performance_calculator">System Performance</a>
+            </div>
+        </div>
+        <a href="/career_path">Career Path</a>
+        <hr>
+        <div class="sidenav-bottom">
+            <a style="width: 166px" href="/logout">Logout</a>
+        </div>
     {% else %}
-        <a class="lead" href="{% url 'social:begin' 'google-oauth2' %}">Login</a>
+        <a href="{% url 'social:begin' 'google-oauth2' %}">Login</a>
     {% endif %}
 </div>
-<div class="main">
-    {% block content %}
-    {% endblock %}
-</div>
+{% block content %}
+{% endblock %}
 </body>
 </html>

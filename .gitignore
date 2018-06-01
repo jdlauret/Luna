@@ -59,4 +59,7 @@ target/
 
 desktop\.ini
 .idea/
-Luna/migrations/
+
+Luna_Django/credentials/
+
+Luna/credentials/
