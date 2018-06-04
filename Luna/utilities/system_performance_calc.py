@@ -31,7 +31,7 @@ def system_performance(servicenum, startdate, enddate):
     results = {'account': dw.results}
 
     if len(results['account']) == 0:
-        results['accounterror'] = '{} is not a valid service number.'.format(servicenum)
+        results['error'] = '{} is not a valid service number.'.format(servicenum)
         return results
     elif startdate < results['account'][0][7].date():
         results['startdate'] = results['account'][0][7]
@@ -61,9 +61,9 @@ def system_performance(servicenum, startdate, enddate):
     results['production'] = dw.results
 
     if len(results['production']) == 0:
-        results['productionerror'] = 'There were no CAD estimates or Actual production ' \
-                                     'found for service number {} in the date range {} ' \
-                                     'to {}.'.format(servicenum, startdatestring, enddatestring)
+        results['error'] = 'There were no CAD estimates or Actual production ' \
+                             'found for service number {} in the date range {} ' \
+                             'to {}.'.format(servicenum, startdatestring, enddatestring)
         return results
 
     totals = [sum(j) for j in [i for i in zip(*results['production'])][1:3]]
