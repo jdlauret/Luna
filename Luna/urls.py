@@ -10,7 +10,8 @@ calculator_patterns = [
 ]
 
 automation_patterns =[
-    url(r'^$', views.automation_page)
+    url(r'^$', views.automation_page),
+    url(r'^create_new_task/$', views.create_new_task)
 ]
 
 urlpatterns = [

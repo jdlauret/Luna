@@ -66,7 +66,7 @@ def build_career_path():
                                                key=lambda j: relations_order.index(j[0])))
 
     with open(os.path.join(JSON_STORAGE_DIR, 'career_path.json'), 'w') as outfile:
-        json.dump(new_dict, outfile)
+        json.dump(new_dict, outfile, indent=4)
 
 
 class JsonHandler:

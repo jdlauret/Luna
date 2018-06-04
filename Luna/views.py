@@ -13,7 +13,7 @@ from xhtml2pdf import pisa
 
 from .models import CareerPath, AutomatorTask
 from .templates.template_updates import JsonHandler
-from .forms import SystemPerformanceForm
+from .forms import *
 from .utilities.system_performance_calc import system_performance
 from .utilities.page_notes import *
 
@@ -29,7 +29,6 @@ def automation_access(user):
 
 
 def index(request):
-    template = loader.get_template('Luna/index.html')
     context = {'user': request.user}
     return render(request, 'Luna/index.html', context)
 
@@ -46,10 +45,10 @@ def career_path(request):
             'job_description': CareerPath.objects.all()
 
         }
-        return HttpResponse(template.render(context))
+        return render(request, 'Luna/career_path.html', context=context)
 
     else:
-        return HttpResponse('/Luna')
+        return render(request, 'Luna/index.html')
 
 
 @login_required
@@ -92,7 +91,6 @@ def system_performance_calculator(request):
                 return render(request, 'Luna/system_performance_calc.html', context=context)
         else:
             form = SystemPerformanceForm()
-            template = loader.get_template('Luna/system_performance_calc.html')
             context = {
                 'user': request.user,
                 'form': form,
@@ -100,7 +98,7 @@ def system_performance_calculator(request):
                 'form_response': {},
                 'legal_footer': print_page_legal_footer,
             }
-            return HttpResponse(template.render(context))
+            return render(request, 'Luna/system_performance_calc.html', context)
     else:
         return HttpResponseRedirect('/Luna')
 
@@ -142,10 +140,9 @@ def performance_calculator_print(request):
                     'form_response': {},
                     'legal_footer': print_page_legal_footer,
                 }
-                return render(request, 'Luna/system_performance_pdf.html', context=context)
+                return render(request, 'Luna/system_performance_pdf.html', context)
         else:
             form = SystemPerformanceForm()
-            template = loader.get_template('Luna/system_performance_pdf.html')
             context = {
                 'user': request.user,
                 'form': form,
@@ -153,17 +150,47 @@ def performance_calculator_print(request):
                 'form_response': {},
                 'legal_footer': print_page_legal_footer,
             }
-            return HttpResponse(template.render(context))
+            return render(request, 'Luna/system_performance_pdf.html', context)
     else:
         return HttpResponseRedirect('/Luna')
 
 
-@register.filter(name='has_group')
-def has_group(user, group_name):
-    group = Group.objects.get(name=group_name)
-    return True if group in user.groups.all() else False
-
-
+@login_required
 @user_passes_test(automation_access)
 def automation_page(request):
-    return HttpResponse('Woot')
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            automation_form = AutomatorForm(request.POST)
+            data_source_type = automation_form.cleaned_data['data_source_type']
+            data_source_location = automation_form.cleaned_data['data_source_location']
+            data_source_id = automation_form.cleaned_data['data_source_id']
+            data_format_type = automation_form.cleaned_data['data_format_type']
+            context = {
+                'user': request.user,
+                'start_form': automation_form,
+                'start_form_completed': True,
+                'google_sheet_form': GoogleSheetsFormat(request.POST),
+                'csv_form': CsvForm(request.POST),
+                'excel_form': ExcelForm(request.POST),
+            }
+            render_to_response('Luna/system_performance_pdf.html',
+                               context,
+                               RequestContext(request))
+        else:
+            context = {
+                'user': request.user,
+                'start_form': AutomatorForm(),
+                'google_sheet_form': GoogleSheetsFormat(),
+                'csv_form': CsvForm(),
+                'excel_form': ExcelForm(),
+            }
+            return render(request, 'Luna/automation.html', context)
+    else:
+        return HttpResponseRedirect('/Luna')
+
+
+@login_required
+@user_passes_test(automation_access)
+def create_new_task(request):
+    context = {'user': request.user}
+    return render(request, 'Luna/automation_create_new_task.html', context)
