@@ -30,13 +30,13 @@ def soft_savings_analysis(servicenum, startdate, enddate):
     results = {'account': dw.results}
 
     if len(results['account']) == 0:
-        results['accounterror'] = '{} is not a valid service number.'.format(servicenum)
+        results['error'] = '{} is not a valid service number.'.format(servicenum)
         return results
     elif results['account'][0][7].date() > date.today()-timedelta(30):
-        results['timeerror'] = 'The system hasn\'t been PTO\'d for more than 30 days.'
+        results['error'] = 'The system hasn\'t been PTO\'d for more than 30 days.'
         return results
     elif results['account'][0][8] == None:
-        results['utilityerror'] = 'There was no utility information found for service ' \
+        results['error'] = 'There was no utility information found for service ' \
                                     '{}.'.format(servicenum)
         return results
     elif startdate < results['account'][0][7].date():
@@ -68,7 +68,7 @@ def soft_savings_analysis(servicenum, startdate, enddate):
     results['savings'] = dw.results
 
     if len(results['savings']) == 0:
-        results['savingserror'] = 'There was no Actual production ' \
+        results['error'] = 'There was no Actual production ' \
                                      'found for service number {} in the date range {} ' \
                                      'to {}.'.format(servicenum, startdatestring, enddatestring)
         return results
