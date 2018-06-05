@@ -7,11 +7,11 @@ luna_dir = os.path.join(main_dir, 'Luna')
 utilities_dir = os.path.join(luna_dir, 'utilities')
 
 
-def soft_savings_analysis(servicenum, consumption, buyback, utilitybill):
+def full_benefit_analysis(servicenum, consumption, backfeed, utilitybill):
 
     dw = DataWarehouse('admin')
 
-    with open(os.path.join(utilities_dir, 'soft_savings_analysis.sql'),'r') as file:
+    with open(os.path.join(utilities_dir, 'full_benefit_analysis.sql'),'r') as file:
         sql = file.read()
 
     sql = sql.split(';')
@@ -23,7 +23,7 @@ def soft_savings_analysis(servicenum, consumption, buyback, utilitybill):
 
     dw.query_results(sql[0], bindvars=bindvars[0])
 
-    results = {'account': dw.results}
+    results = {'account': dw.results, 'error': None}
 
     if len(results['account']) == 0:
         results['error'] = '{} is not a valid service number.'.format(servicenum)
@@ -56,13 +56,60 @@ def soft_savings_analysis(servicenum, consumption, buyback, utilitybill):
                              'to {}.'.format(servicenum, startdatestring, enddatestring)
         return results
 
-    totals = [sum(j) for j in [i for i in zip(*results['production'])][1:5]]
-    results['production'].append(['Total',
-                                  round(totals[0], 2),
-                                  round(totals[1], 2),
-                                  round(totals[2], 2),
-                                  round(totals[3], 2)
-                                  ])
+    i = 0
+    while i < len(consumption):
+        results['production'][i].append(consumption[i])
+        results['production'][i].append(backfeed[i])
+        results['production'][i].append(utilitybill[i])
+        i += 1
+
+    del i
+
+    for month in results['production']:
+        month.append(month[1] + month[3] - month[4]) #consumption
+        month.append(round(month[6] * results['account'][0][9], 2)) #bill w/out solar
+        month.append(round(month[2] + month[5], 2)) #bill w/solar
+        month.append(round(month[7] - month[8], 2)) #savings
+
+    results['header'] = [
+        'Month',
+        'Actual (kWh)',
+        'Vivint Solar Bill',
+        'Utility Consumption',
+        'Excess Production Sent to Grid (kWh)',
+        'Utility Bill',
+        'Total Consumption',
+        'Bill w/out Solar',
+        'Bill w/Solar',
+        'Savings'
+    ]
+
+    # results['production'] = [
+    #     x + [results['production'][x][1] + results['production'][x][3] - results['production'][x][4]] for x in
+    #     results['production']]
+    # results['production'] = [x + [results['production'][x][6] * production['account'][9]] for x in
+    #                          results['production']]
+    # results['production'] = [x + [results['production'][x][2] + production['production'][5]] for x in
+    #                          results['production']]
+
+    totals = [sum(j) for j in [i for i in zip(*results['production'])][1:10]]
+    results['production'].append([
+            'Total',
+            round(totals[0], 2),
+            round(totals[1], 2),
+            round(totals[2], 2),
+            round(totals[3], 2),
+            round(totals[4], 2),
+            round(totals[5], 2),
+            round(totals[6], 2),
+            round(totals[7], 2),
+            round(totals[8], 2)
+        ]
+    )
+
+
+
+
 
     # results['summary'] ='Your system has produced {} kilowatt hours (kWh) since {}. '\
     #         'For that energy, you paid Vivint Solar ${}. '\

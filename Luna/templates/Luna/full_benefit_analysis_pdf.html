@@ -1,0 +1,85 @@
+{% extends "Luna/print_base.html" %}
+{% block content %}
+    <div>
+        <div id="account_info">
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th colspan="{{ form_response.account.0|length }}">Account Information</th>
+                </tr>
+                </thead>
+                {% if form_response_complete == True %}
+                    <thead>
+                    <tr>
+                        <th>Service Number</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Street Address</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Zip Code</th>
+                        <th>PTO</th>
+                        <th>Utility Company</th>
+                        <th>Average Utility Rate</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for row in form_response.account %}
+                        <tr>
+                            {% for item in row %}
+                                <td style="text-align: left">{{ item }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                {% endif %}
+            </table>
+        </div>
+    </div>
+    <div id="production_div">
+        <table class="table">
+            <thead>
+            <tr>
+                <th colspan="{{ form_response.production.0|length }}">Production by Month</th>
+            </tr>
+            </thead>
+        </table>
+        <table id="production" class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Month</th>
+                <th scope="col">Actual (kWh)</th>
+                <th scope="col">Vivint Solar Bill</th>
+                <th scope="col">Utility Consumption</th>
+                <th scope="col">Excess Production Sent to Grid (kWh)</th>
+                <th scope="col">Utility Bill</th>
+                <th scope="col">Total Consumption</th>
+                <th scope="col">Bill w/out Solar</th>
+                <th scope="col">Bill w/Solar</th>
+                <th scope="col">Savings</th>
+            </tr>
+            </thead>
+            {% if form_response_complete == True %}
+                <tbody>
+
+                {% for row in form_response.production %}
+
+                    {% if row.0 == 'Total' %}
+                        <tr>
+                            {% for col in row %}
+                                <td style="text-align: center">{{ col }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% else %}
+                        <tr>
+                            {% for col in row %}
+                                <td style="text-align: center">{{ col }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            {% endif %}
+        </table>
+    </div>
+{% endblock %}
