@@ -18,7 +18,7 @@ admin.site.register(<ClassName>) to Luna/admin.py
 Then type in the following Command Prompt lines setup New Table
 
 python manage.py makemigrations Luna
-python manage.py sqlmigration Luna 0001
+python manage.py sqlmigrate Luna 0001
 python manage.py migrate
 """
 
@@ -160,7 +160,7 @@ class CareerPath(models.Model):
         null=True,
         blank=True
     )
-    aph = models.IntegerField(
+    aph = models.FloatField(
         null=True,
         blank=True
     )

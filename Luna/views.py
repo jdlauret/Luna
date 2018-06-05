@@ -1,18 +1,11 @@
-from django.shortcuts import render
-
 # Create your views here.
-from io import BytesIO
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.shortcuts import get_object_or_404, redirect, render, render_to_response
-from django.contrib.auth.models import Permission, User, Group
-from django.template.context_processors import csrf
-from django.template import loader, Context, Template, Library, RequestContext
-from django.views.generic import View
-from xhtml2pdf import pisa
+from django.shortcuts import render, render_to_response
+from django.template import loader, Library, RequestContext
 
-from .models import CareerPath, AutomatorTask
-from .templates.template_updates import JsonHandler
+from .models import CareerPath
+from Luna.utilities.template_updates import JsonHandler
 from .forms import *
 from .utilities.system_performance_calc import system_performance
 from .utilities.page_notes import *
