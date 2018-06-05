@@ -136,8 +136,10 @@
                                 <div class="inner-container">
                                     <div class="far-left">
                                         <b>Position Expectations</b>
-                                        <br>
-                                        <b>Duration: </b> {{ item.duration }} Days
+                                        {% if item.duration != None %}
+                                            <br>
+                                            <b>Duration: </b> {{ item.duration }} Days
+                                        {% endif %}
                                         {% if item.qa != None %}
                                             <br>
                                             <b>QA > </b>{{ item.qa_display }}
