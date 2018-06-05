@@ -182,7 +182,9 @@ class CareerPath(models.Model):
         blank=True
     )
     duration = models.IntegerField(
-        default=90
+        default=90,
+        blank=True,
+        null=True,
     )
     nps = models.IntegerField(
         null=True,
