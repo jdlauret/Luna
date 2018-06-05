@@ -7,6 +7,10 @@ from . import views
 calculator_patterns = [
     url(r'^system_performance_calculator/$', views.system_performance_calculator),
     url(r'^system_performance_calculator/pdf$', views.performance_calculator_print, name='System Performance'),
+    url(r'^soft_savings_analysis/$', views.soft_savings_analysis),
+    url(r'^soft_savings_analysis/pdf$', views.soft_savings_print, name='Soft Savings Analysis'),
+    url(r'^full_benefit_analysis/$', views.full_benefit_analysis),
+    url(r'^full_benefit_analysis/pdf$', views.full_benefit_print, name='Full Benefit Analysis')
 ]
 
 automation_patterns =[
