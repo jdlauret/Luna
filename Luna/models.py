@@ -126,8 +126,11 @@ class CareerPath(models.Model):
         (100, '100%'),
     )
 
+    TIER_LEVEL_HELP = ''
+
     tier_level = models.FloatField(
-        choices=TIER_LEVELS
+        choices=TIER_LEVELS,
+        help_text=TIER_LEVEL_HELP
     )
     pay_rate = models.FloatField(
         choices=PAY_RATES
@@ -175,7 +178,7 @@ class CareerPath(models.Model):
     )
     error_rate = models.IntegerField(
         null=True,
-        blank=True
+        blank=True,
     )
     efficiency = models.IntegerField(
         null=True,
@@ -230,6 +233,7 @@ class CareerPath(models.Model):
         return dict(CareerPath.PERCENTAGES)[self.productivity]
 
 
+
 class AutomatorTask(models.Model):
     # TODO create AutomatorTask model once requirments are scoped out
     day = models.DateField(
@@ -239,6 +243,84 @@ class AutomatorTask(models.Model):
     hour = models.IntegerField(
         blank=True,
         null=True
+    )
+
+
+class VcaasLogin(models.Model):
+    DEPARTMENTS = (
+        ('cad', 'CAD'),
+        ('click_support', 'Click Support'),
+        ('collections', 'Collections'),
+        ('customer_relations', 'Customer Relations'),
+        ('customer_service', 'Customer Service'),
+        ('customer_solutions', 'Customer Solution'),
+        ('damage_resolutions', 'Damage Resolutions'),
+        ('executive_resolutions', 'Executive Resolutions'),
+        ('field_support', 'Field Support'),
+        ('inspection_specialists', 'Inspection Specialist'),
+        ('quality_assurance', 'Quality Assurance'),
+        ('real_time_scheduling', 'Real Time Scheduling'),
+        ('recs_and_rebates', 'RECs & Rebates'),
+        ('sales_concierge', 'Sales Concierge'),
+        ('solar_collections', 'Solar Collections'),
+        ('workforce_management', 'Workforce Management')
+    )
+
+    first_name = models.CharField(
+        blank=True,
+        null=True,
+        max_length=100,
+    )
+    last_name = models.CharField(
+        blank=True,
+        null=True,
+        max_length=100,
+    )
+    badge = models.IntegerField(
+        blank=True,
+        null=True,
+    )
+    incontact_id = models.IntegerField(
+        blank=True,
+        null=True,
+    )
+    email = models.CharField(
+        blank=True,
+        null=True,
+        max_length=200,
+    )
+    department = models.CharField(
+        choices=DEPARTMENTS,
+        blank=True,
+        null=True,
+        max_length=200
+    )
+    psuedo_number = models.IntegerField()
+    phone_number = models.IntegerField()
+    user_id = models.CharField(
+        max_length=100,
+    )
+    id = models.CharField(
+        max_length=6,
+        unique=True,
+        primary_key=True
+    )
+    vcaas_password = models.CharField(
+        max_length=10,
+    )
+    voice_mail_passcode = models.IntegerField(
+        blank=True,
+        null=True,
+    )
+    extension = models.IntegerField(
+        blank=True,
+        null=True,
+    )
+    voice_mail = models.BooleanField(
+        blank=True,
+    )
+    dnis_enabled = models.BooleanField(
+        blank=True,
     )
 
 
