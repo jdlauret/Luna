@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CareerPath, AutomatorTask
+from .models import *
 
 # Register your models here.
 admin.site.register(CareerPath)

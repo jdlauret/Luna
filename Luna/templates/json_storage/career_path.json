@@ -18,7 +18,7 @@
                         "qa": 60,
                         "productivity": null,
                         "aht": 12,
-                        "aph": 5,
+                        "aph": 4,
                         "adh": 80,
                         "availability": null,
                         "error_rate": null,
@@ -39,18 +39,18 @@
                         "department": "customer_service",
                         "function": "customer_service",
                         "position": "representative_2",
-                        "qa": null,
+                        "qa": 70,
                         "productivity": null,
-                        "aht": null,
+                        "aht": 10,
                         "aph": 5,
-                        "adh": null,
+                        "adh": 85,
                         "availability": null,
                         "error_rate": null,
-                        "efficiency": null,
+                        "efficiency": 80,
                         "duration": 90,
                         "nps": null,
                         "field_qa_nps_score": null,
-                        "job_description": "\u2022 Intermediate System Troubleshooting & Dispatching (Inbound Only)\r\n\u2022 Service Billing & General Maintenance (Inbound Only)\r\n\u2022 In Good Standing (No Written Warnings)"
+                        "job_description": "\u2022 System Troubleshooting & Dispatching (Inbound Only)\r\n\u2022 Service Billing & Compensation (Inbound Only)\r\n\u2022 In Good Standing (No Written Warnings)"
                     }
                 },
                 {
@@ -63,18 +63,18 @@
                         "department": "customer_service",
                         "function": "customer_service",
                         "position": "specialist_2",
-                        "qa": null,
+                        "qa": 75,
                         "productivity": null,
                         "aht": 15,
-                        "aph": null,
-                        "adh": null,
+                        "aph": 4,
+                        "adh": 85,
                         "availability": null,
                         "error_rate": null,
                         "efficiency": 85,
                         "duration": 90,
                         "nps": null,
                         "field_qa_nps_score": null,
-                        "job_description": "\u2022 Compensation Requests (Outbound)\r\n\u2022 Sales Promise Claims (Outbound)\r\n\u2022 System Performance Analysis (Outbound)\r\n\u2022 Force Majeure / Casualty Events (Outbound)\r\n\u2022 In Good Standing (No Written Warnings)"
+                        "job_description": "\u2022 Service Billing Disputes (Outbound)\r\n\u2022 Sales Promise Claims (Outbound)\r\n\u2022 In Good Standing (No Written Warnings)"
                     }
                 }
             ],
@@ -95,18 +95,18 @@
                         "department": "customer_service",
                         "function": "customer_service",
                         "position": "representative_3",
-                        "qa": null,
+                        "qa": 70,
                         "productivity": null,
-                        "aht": null,
-                        "aph": null,
-                        "adh": null,
+                        "aht": 12,
+                        "aph": 5,
+                        "adh": 85,
                         "availability": null,
                         "error_rate": null,
                         "efficiency": 80,
                         "duration": 90,
                         "nps": null,
                         "field_qa_nps_score": null,
-                        "job_description": "\u2022 Compensation Requests (Inbound Only)\r\n\u2022 System Performance Analysis (Inbound Only)\r\n\u2022 Sales Promise Claims (Inbound Only)\r\n\u2022 Force Majeure / Casualty Events (Inbound Only)"
+                        "job_description": "\u2022 General Follow-ups (Inbound Only)\r\n\u2022 System Issue Follow-up (Inbound Only)\r\n\u2022 In Good Standing (No Written Warnings)"
                     }
                 },
                 {
@@ -123,14 +123,14 @@
                         "productivity": null,
                         "aht": 15,
                         "aph": 4,
-                        "adh": 90,
+                        "adh": 85,
                         "availability": null,
                         "error_rate": null,
                         "efficiency": 85,
                         "duration": 90,
                         "nps": null,
                         "field_qa_nps_score": null,
-                        "job_description": "\u2022 All Follow-up Cases\r\n\u2022 Advanced System Troubleshooting & Dispatching\r\n\u2022 General Service Disputes/Sales Promise\r\n\u2022 Compensation/System Performance Analysis\r\n\u2022 In Good Standing (No Written Warnings)"
+                        "job_description": "\u2022 System Performance Analysis\r\n\u2022 Savings Analysis\r\n\u2022 In Good Standing (No Written Warnings)"
                     }
                 }
             ],
@@ -151,18 +151,18 @@
                         "department": "customer_service",
                         "function": "customer_service",
                         "position": "specialist_1",
-                        "qa": null,
+                        "qa": 75,
                         "productivity": null,
-                        "aht": null,
-                        "aph": null,
-                        "adh": null,
+                        "aht": 15,
+                        "aph": 5,
+                        "adh": 85,
                         "availability": null,
                         "error_rate": null,
                         "efficiency": 85,
                         "duration": 90,
                         "nps": null,
                         "field_qa_nps_score": null,
-                        "job_description": "\u2022 System Troubleshooting (Outbound)\r\n\u2022 General Service Requests (Outbound)\r\n\u2022 In Good Standing (No Written Warnings)"
+                        "job_description": "\u2022 Compensation (Outbound)\r\n\u2022 System Damage (Outbound)\r\n\u2022 In Good Standing (No Written Warnings)"
                     }
                 },
                 {
@@ -175,10 +175,10 @@
                         "department": "customer_service",
                         "function": "customer_service",
                         "position": "team_lead",
-                        "qa": null,
+                        "qa": 80,
                         "productivity": null,
-                        "aht": null,
-                        "aph": 15,
+                        "aht": 15,
+                        "aph": 3,
                         "adh": 90,
                         "availability": null,
                         "error_rate": null,
@@ -186,7 +186,7 @@
                         "duration": 90,
                         "nps": null,
                         "field_qa_nps_score": null,
-                        "job_description": "\u2022 All Follow-up Cases\r\n\u2022 Advanced System Troubleshooting & Dispatching\r\n\u2022 General Service Disputes/Sales Promise\r\n\u2022 Compensation/System Performance Analysis\r\n\u2022 In Good Standing (No Written Warnings)"
+                        "job_description": "\u2022 1st Level Escalation\r\n\u2022 Queue Management\r\n\u2022 Floor Support/Side-by-Sides\r\n\u2022 Manual True-up & Compensation Approval\r\n\u2022 In Good Standing (No Written Warnings)\r\n\r\nPromotion to Team Lead based on position availability in Workday"
                     }
                 }
             ]
@@ -465,7 +465,7 @@
                         "duration": 90,
                         "nps": null,
                         "field_qa_nps_score": null,
-                        "job_description": "\u2022 Update/Maintain Vault Procedures\r\n\u2022 Provide Daily Reporting to Leadership\r\n\u2022 Complete Bi-weekly Side by Sides \r\n\u2022 Complete 2 QA's per Team Member Weekly\r\n\u2022 All New Hire Training"
+                        "job_description": "\u2022 Update/Maintain Vault Procedures\r\n\u2022 Provide Daily Reporting to Leadership\r\n\u2022 Complete Bi-weekly Side by Sides \r\n\u2022 Complete 2 QA's per Team Member Weekly\r\n\u2022 All New Hire Training\r\n\r\nPromotion to Team Lead based on position availability in Workday"
                     }
                 }
             ]
@@ -637,7 +637,7 @@
                         "duration": 90,
                         "nps": null,
                         "field_qa_nps_score": null,
-                        "job_description": "\u2022 Maintain Good Standing with Vivint Solar\r\n\u2022 Handles Escalated Accounts\r\n\u2022 Maintain Workflow & Volume for the Team\r\n\u2022 Conduct ALL New Hire & UP Training for the Team\r\n\u2022 Handles Special Projects (Such as Requested Items)\r\n\u2022 Able to build and run Salesforce Reports for Team\r\n\u2022 Build Relationships with Counter Departments\r\n\u2022 Conduct Weekly Coaching for Team Members\r\n\u2022 Monthly Leadership Training"
+                        "job_description": "\u2022 Maintain Good Standing with Vivint Solar\r\n\u2022 Handles Escalated Accounts\r\n\u2022 Maintain Workflow & Volume for the Team\r\n\u2022 Conduct ALL New Hire & UP Training for the Team\r\n\u2022 Handles Special Projects (Such as Requested Items)\r\n\u2022 Able to build and run Salesforce Reports for Team\r\n\u2022 Build Relationships with Counter Departments\r\n\u2022 Conduct Weekly Coaching for Team Members\r\n\u2022 Monthly Leadership Training\r\n\r\nPromotion to Team Lead based on position availability in Workday"
                     }
                 }
             ]
@@ -767,7 +767,7 @@
                         "duration": 90,
                         "nps": null,
                         "field_qa_nps_score": null,
-                        "job_description": "\u2022 50% of time is dedicated to handling inbound calls and emails\r\n\u2022 50%  of time is dedicated to floor support and monitoring phone queues\r\n\u2022 Monitors and assigns work within the RTS Inbox\r\n\u2022 Owns and manages a report/project\r\n\u2022 Owns new hire training\r\n\u2022 Assists in uptraining\r\n\u2022 Responsible for handling 2nd level escalations\r\n\u2022 Knowledgeable of all RT'S processes and practices\r\n\u2022 Ability to provide feedback to agents and performs side by sides\r\n\u2022 Advanced Knowledge of Central scheduling and maximizing processes and efficiency"
+                        "job_description": "\u2022 50% of time is dedicated to handling inbound calls and emails\r\n\u2022 50%  of time is dedicated to floor support and monitoring phone queues\r\n\u2022 Monitors and assigns work within the RTS Inbox\r\n\u2022 Owns and manages a report/project\r\n\u2022 Owns new hire training\r\n\u2022 Assists in uptraining\r\n\u2022 Responsible for handling 2nd level escalations\r\n\u2022 Knowledgeable of all RT'S processes and practices\r\n\u2022 Ability to provide feedback to agents and performs side by sides\r\n\u2022 Advanced Knowledge of Central scheduling and maximizing processes and efficiency\r\n\r\nPromotion to Team Lead based on position availability in Workday"
                     }
                 }
             ]
@@ -895,7 +895,7 @@
                         "duration": 90,
                         "nps": null,
                         "field_qa_nps_score": null,
-                        "job_description": "\u2022 40% of time is dedicated to floor support and monitoring phone queues\r\n\u2022 40% of time is dedicated to Auxiliary agent duties (manage two QA Offices)\r\n\u2022 20% of time is dedicated to Wiki Support and Communications\r\n\u2022 Edit and publish department processes within the Vault\r\n\u2022 Sustain 100% NP Score with QA Techs\r\n\u2022 Monitor AB2FIN RTS bucket\r\n\u2022 Establish strong relationships with QA field managers and techs\r\n\u2022 Drive property survey requests to completion\r\n\u2022 Responsible for handling 2nd level escalations\r\n\u2022 Advanced Knowledge of Central scheduling and maximizing processes and efficiency\r\n\u2022 Ability to provide feedback to agents and performs side by sides\r\n\u2022 Responsible for ensuring all of RTS is communicated new polices, procedures, shout-outs and other necessary department communications"
+                        "job_description": "\u2022 40% of time is dedicated to floor support and monitoring phone queues\r\n\u2022 40% of time is dedicated to Auxiliary agent duties (manage two QA Offices)\r\n\u2022 20% of time is dedicated to Wiki Support and Communications\r\n\u2022 Edit and publish department processes within the Vault\r\n\u2022 Sustain 100% NP Score with QA Techs\r\n\u2022 Monitor AB2FIN RTS bucket\r\n\u2022 Establish strong relationships with QA field managers and techs\r\n\u2022 Drive property survey requests to completion\r\n\u2022 Responsible for handling 2nd level escalations\r\n\u2022 Advanced Knowledge of Central scheduling and maximizing processes and efficiency\r\n\u2022 Ability to provide feedback to agents and performs side by sides\r\n\u2022 Responsible for ensuring all of RTS is communicated new polices, procedures, shout-outs and other necessary department communications\r\n\r\nPromotion to Team Lead based on position availability in Workday"
                     }
                 }
             ]
@@ -1024,7 +1024,28 @@
                     }
                 },
                 {
-                    "position": ""
+                    "position": "Team Lead",
+                    "id": 81,
+                    "position_data": {
+                        "id": 81,
+                        "tier_level": 3.3,
+                        "pay_rate": 14.5,
+                        "department": "real_time_scheduling",
+                        "function": "super_agent",
+                        "position": "team_lead",
+                        "qa": 80,
+                        "productivity": null,
+                        "aht": 5,
+                        "aph": 6,
+                        "adh": 90,
+                        "availability": null,
+                        "error_rate": null,
+                        "efficiency": null,
+                        "duration": 90,
+                        "nps": 9,
+                        "field_qa_nps_score": null,
+                        "job_description": "\u2022 50% of time is dedicated to floor support and monitoring phone queues\r\n\u2022 50% of time is dedicated to super agent responsibilities\r\n\u2022 Manage Multiple Offices\r\n\u2022 Leadership Skills\r\n\u2022 Maintain Good Standing with Vivint Solar\r\n\u2022 Ability to provide feedback to agents and performs side by sides\r\n\u2022 Advanced Knowledge of Central scheduling and maximizing processes and efficiency\r\n\u2022 Knowledge of other departments processes\r\n\u2022 Responsible for handling 2nd level escalations\r\n\u2022 Manage/ monitor team's workflow\r\n\u2022 Master at Salesforce Navigation\r\n\r\nPromotion to Team Lead based on position availability in Workday"
+                    }
                 }
             ]
         },
@@ -1037,7 +1058,7 @@
                     "position": ""
                 },
                 {
-                    "position": "Representative 3",
+                    "position": "Representative 2",
                     "id": 14,
                     "position_data": {
                         "id": 14,
@@ -1045,7 +1066,7 @@
                         "pay_rate": 13.0,
                         "department": "real_time_scheduling",
                         "function": "service",
-                        "position": "representative_3",
+                        "position": "representative_2",
                         "qa": 70,
                         "productivity": null,
                         "aht": 9,
@@ -1172,7 +1193,7 @@
                         "duration": 90,
                         "nps": null,
                         "field_qa_nps_score": null,
-                        "job_description": "\u2022 50% of time is dedicated to super agent responsibilities\r\n\u2022 50%  of time is dedicated to floor support and monitoring phone queues\r\n\u2022 Assists with department on trainings on changes within the Services process\r\n\u2022 Responsible for handling 2nd level escalations\r\n\u2022 Point of contact for SPM's - maintains good relationhips with all SPMs\r\n\u2022 Ability to provide feedback to agents and performs side by sides\r\n\u2022 Advanced Knowledge of Central scheduling and maximizing processes and efficiency\r\n\u2022 Meter Swap cases\r\n\u2022 Builds relationships with other departments to eliminate silos and promote trust."
+                        "job_description": "\u2022 50% of time is dedicated to super agent responsibilities\r\n\u2022 50%  of time is dedicated to floor support and monitoring phone queues\r\n\u2022 Assists with department on trainings on changes within the Services process\r\n\u2022 Responsible for handling 2nd level escalations\r\n\u2022 Point of contact for SPM's - maintains good relationships with all SPMs\r\n\u2022 Ability to provide feedback to agents and performs side by sides\r\n\u2022 Advanced Knowledge of Central scheduling and maximizing processes and efficiency\r\n\u2022 Meter Swap cases\r\n\u2022 Builds relationships with other departments to eliminate silos and promote trust.\r\n\r\nPromotion to Team Lead based on position availability in Workday"
                     }
                 }
             ]
@@ -1365,7 +1386,7 @@
                         "duration": 90,
                         "nps": null,
                         "field_qa_nps_score": null,
-                        "job_description": "\u2022 Completes call-backs to escalated customers when another agents are unable to de-escalate.\r\n\u2022 Provides coaching for employees\r\n\u2022 Assists Supervisors by managing workflow and auditing adherence.\r\n\u2022 Audits and submits ECL for region. Meets with Management to discuss submissions before they are sent to the committee. Follows through on providing ECL decisions to effected customers/departments.\r\n\u2022 Meet with other departments and leadership to improve processes\r\n\u2022 Mentors Specialist 3 to prepare them for a Team Lead role.\r\n\u2022 Holds 1 on 1's with individual agents every other week\r\n\u2022 Able to identify complex account issues, work with the appropriate departments, and follow through on resolutions."
+                        "job_description": "\u2022 Completes call-backs to escalated customers when another agents are unable to de-escalate.\r\n\u2022 Provides coaching for employees\r\n\u2022 Assists Supervisors by managing workflow and auditing adherence.\r\n\u2022 Audits and submits ECL for region. Meets with Management to discuss submissions before they are sent to the committee. Follows through on providing ECL decisions to effected customers/departments.\r\n\u2022 Meet with other departments and leadership to improve processes\r\n\u2022 Mentors Specialist 3 to prepare them for a Team Lead role.\r\n\u2022 Holds 1 on 1's with individual agents every other week\r\n\u2022 Able to identify complex account issues, work with the appropriate departments, and follow through on resolutions.\r\n\r\nPromotion to Team Lead based on position availability in Workday"
                     }
                 }
             ]
@@ -1535,7 +1556,7 @@
                         "duration": 90,
                         "nps": null,
                         "field_qa_nps_score": null,
-                        "job_description": "\u2022 Provides coaching for employees\r\n\u2022 Completes call-backs to escalated customers when another agents are unable to deescalate.\r\n\u2022 Holds 1 on 1's with individual agents every other week\r\n\u2022 Able to identify complex account issues, work with the appropriate departments, and follow through on resolutions.\r\n\u2022 Audits and submits ECL for region. Meets with Management to discuss submissions before they are sent to the committee. Follows through on providing ECL decisions to effected customers/departments.\r\n\u2022 Meet with other departments and leadership to improve processes\r\n\u2022 Mentors Specialist 3 to prepare them for a Team Lead role.\r\n\u2022 Assists Supervisors by managing workflow and auditing adherence."
+                        "job_description": "\u2022 Provides coaching for employees\r\n\u2022 Completes call-backs to escalated customers when another agents are unable to deescalate.\r\n\u2022 Holds 1 on 1's with individual agents every other week\r\n\u2022 Able to identify complex account issues, work with the appropriate departments, and follow through on resolutions.\r\n\u2022 Audits and submits ECL for region. Meets with Management to discuss submissions before they are sent to the committee. Follows through on providing ECL decisions to effected customers/departments.\r\n\u2022 Meet with other departments and leadership to improve processes\r\n\u2022 Mentors Specialist 3 to prepare them for a Team Lead role.\r\n\u2022 Assists Supervisors by managing workflow and auditing adherence.\r\n\r\nPromotion to Team Lead based on position availability in Workday"
                     }
                 }
             ]
@@ -1705,7 +1726,7 @@
                         "duration": 90,
                         "nps": null,
                         "field_qa_nps_score": null,
-                        "job_description": "\u2022 Provides coaching for employees\r\n\u2022 Completes call-backs to escalated customers when another agents are unable to deescalate.\r\n\u2022 Meet with other departments and leadership to improve processes\r\n\u2022 Assists Supervisors by managing workflow and auditing adherence.\r\n\u2022 Audits and submits ECL for region. Meets with Management to discuss submissions before they are sent to the committee. Follows through on providing ECL decisions to effected customers/departments.\r\n\u2022 Holds 1 on 1's with individual agents every other week\r\n\u2022 Able to identify complex account issues, work with the appropriate departments, and follow through on resolutions.\r\n\u2022 Mentors Specialist 3 to prepare them for a Team Lead role."
+                        "job_description": "\u2022 Provides coaching for employees\r\n\u2022 Completes call-backs to escalated customers when another agents are unable to deescalate.\r\n\u2022 Meet with other departments and leadership to improve processes\r\n\u2022 Assists Supervisors by managing workflow and auditing adherence.\r\n\u2022 Audits and submits ECL for region. Meets with Management to discuss submissions before they are sent to the committee. Follows through on providing ECL decisions to effected customers/departments.\r\n\u2022 Holds 1 on 1's with individual agents every other week\r\n\u2022 Able to identify complex account issues, work with the appropriate departments, and follow through on resolutions.\r\n\u2022 Mentors Specialist 3 to prepare them for a Team Lead role.\r\n\r\nPromotion to Team Lead based on position availability in Workday"
                     }
                 }
             ]
