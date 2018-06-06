@@ -7,7 +7,6 @@ import datetime as dt
 from dateutil.parser import parse
 from django.db import models
 from django.conf import settings
-from easy_pdf.views import PDFTemplateView
 
 """
 Setup class with all column definitions
@@ -581,17 +580,3 @@ class DataWarehouse:
                 raise
 
             self.close_connection()
-
-
-class SystemPerformancePDF(PDFTemplateView):
-    template_name = 'Luna/system_performance_pdf.html'
-
-    base_url = 'file://' + settings.STATIC_URL
-    download_filename = 'System Performance.pdf'
-
-    def get_context_data(self, **kwargs):
-        return super(SystemPerformancePDF, self).get_context_data(
-            pagesize='A4',
-            title='System Performance',
-            **kwargs
-        )
