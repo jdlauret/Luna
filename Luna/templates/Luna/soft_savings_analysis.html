@@ -78,6 +78,9 @@
                         {% endfor %}
                         </tbody>
                     {% endif %}
+{#                    {% if form_response_complete == False %}#}
+{#                        <p>False</p>#}
+{#                    {% endif %}#}
                 </table>
             </div>
         </div>
@@ -85,7 +88,7 @@
             <table class="table">
                 <thead class="thead-dark">
                 <tr>
-                    <th colspan="{{ form_response.production.0|length }}">Analysis by Month</th>
+                    <th colspan="{{ form_response.savings.0|length }}">Analysis by Month</th>
                 </tr>
                 </thead>
             </table>
@@ -102,7 +105,7 @@
                 {% if form_response_complete == True %}
                     <tbody>
 
-                    {% for row in form_response.production %}
+                    {% for row in form_response.savings %}
                         {% if row.0 == 'Total' %}
                             <tr>
                                 {% for col in row %}

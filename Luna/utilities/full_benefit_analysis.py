@@ -66,7 +66,7 @@ def full_benefit_analysis(servicenum, consumption, backfeed, utilitybill):
     del i
 
     for month in results['production']:
-        month.append(month[1] + month[3] - month[4]) #consumption
+        month.append(round(month[1] + month[3] - month[4], 3)) #total consumption
         month.append(round(month[6] * results['account'][0][9], 2)) #bill w/out solar
         month.append(round(month[2] + month[5], 2)) #bill w/solar
         month.append(round(month[7] - month[8], 2)) #savings

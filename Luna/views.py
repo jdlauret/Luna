@@ -24,7 +24,9 @@ def automation_access(user):
 
 
 def index(request):
-    context = {'user': request.user}
+    context = {
+        # 'user': request.user
+    }
     return render(request, 'Luna/index.html', context)
 
 
@@ -70,9 +72,8 @@ def system_performance_calculator(request):
                 except Exception as e:
                     context['form_response_complete'] = False
 
-                response = render_to_response('Luna/system_performance_calc.html',
-                                              context,
-                                              RequestContext(request))
+                response = render(request, 'Luna/system_performance_calc.html', context=context)
+
                 return response
             else:
                 form = SystemPerformanceForm()
@@ -193,7 +194,7 @@ def create_new_task(request):
 
 @login_required
 @user_passes_test(email_check)
-def full_benefit_analysis(request):
+def full_benefit_calculator(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
             form = FullBenefitForm(request.POST)
@@ -255,9 +256,8 @@ def full_benefit_analysis(request):
                 except Exception as e:
                     context['form_response_complete'] = False
 
-                response = render_to_response('Luna/full_benefit_analysis.html',
-                                              context,
-                                              RequestContext(request))
+                response = render(request, 'Luna/full_benefit_analysis.html', context=context)
+
                 return response
             else:
                 form = FullBenefitForm()
@@ -377,7 +377,7 @@ def full_benefit_print(request):
 
 @login_required
 @user_passes_test(email_check)
-def soft_savings_analysis(request):
+def soft_savings_calculator(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
             form = SoftSavingsForm(request.POST)
@@ -399,9 +399,8 @@ def soft_savings_analysis(request):
                 except Exception as e:
                     context['form_response_complete'] = False
 
-                response = render_to_response('Luna/soft_savings_analysis.html',
-                                              context,
-                                              RequestContext(request))
+                response = render(request, 'Luna/soft_savings_analysis.html', context=context)
+
                 return response
             else:
                 form = SoftSavingsForm()

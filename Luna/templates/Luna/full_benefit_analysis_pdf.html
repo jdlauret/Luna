@@ -51,7 +51,7 @@
                 <th scope="col">Actual (kWh)</th>
                 <th scope="col">Vivint Solar Bill</th>
                 <th scope="col">Utility Consumption</th>
-                <th scope="col">Excess Production Sent to Grid (kWh)</th>
+                <th scope="col">Excess Production </br>Sent to Grid (kWh)</th>
                 <th scope="col">Utility Bill</th>
                 <th scope="col">Total Consumption</th>
                 <th scope="col">Bill w/out Solar</th>
@@ -67,13 +67,13 @@
                     {% if row.0 == 'Total' %}
                         <tr>
                             {% for col in row %}
-                                <td style="text-align: center">{{ col }}</td>
+                                <td>{{ col }}</td>
                             {% endfor %}
                         </tr>
                     {% else %}
                         <tr>
                             {% for col in row %}
-                                <td style="text-align: center">{{ col }}</td>
+                                <td>{{ col }}</td>
                             {% endfor %}
                         </tr>
                     {% endif %}

@@ -57,18 +57,18 @@
             {% if form_response_complete == True %}
                 <tbody>
 
-                {% for row in form_response.production %}
+                {% for row in form_response.savings %}
 
                     {% if row.0 == 'Total' %}
                         <tr>
                             {% for col in row %}
-                                <td style="text-align: center">{{ col }}</td>
+                                <td>{{ col }}</td>
                             {% endfor %}
                         </tr>
                     {% else %}
                         <tr>
                             {% for col in row %}
-                                <td style="text-align: center">{{ col }}</td>
+                                <td>{{ col }}</td>
                             {% endfor %}
                         </tr>
                     {% endif %}

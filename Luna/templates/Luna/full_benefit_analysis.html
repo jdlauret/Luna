@@ -9,24 +9,34 @@
                     <table class="table table-borderless">
                         <thead class="thead-dark">
                         <tr>
-                            <th colspan="3">Account Lookup</th>
+                            <th colspan="4">Customer Info</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
                             <td>{{ form.non_field_errors }}</td>
                         </tr>
+{#                        <tr>#}
+{#                            <td><label for="{{ form.service_number.id_for_label }}">{{ form.service_number.label }}</label></td>#}
+{#                            <td colspan="2">{{ form.service_number }}</td>#}
+{#                        </tr>#}
+{#                        <tr>#}
+{#                            <td></td>#}
+{#                            <td>Consumption</td>#}
+{#                            <td>Backfeed</td>#}
+{#                            <td>Utility Bill</td>#}
+{#                        </tr>#}
                         {% for field in form %}
                             <tr>
                                 {% if field.errors %}
                                     <td>{{ field.errors }}</td>
                                 {% endif %}
                                 <td><label for="{{ field.id_for_label }}">{{ field.label }} </label></td>
-                                <td colspan="2">{{ field }}</td>
+                                <td colspan="1">{{ field }}</td>
                             </tr>
                         {% endfor %}
                         <tr>
-                            <td colspan="2">
+                            <td colspan="3">
                                 {% if form_response_complete == True %}
                                     <input type="submit"
                                            formaction="/calculators/full_benefit_analysis/pdf"
@@ -96,7 +106,7 @@
                     <th scope="col">Actual (kWh)</th>
                     <th scope="col">Vivint Solar Bill</th>
                     <th scope="col">Utility Consumption</th>
-                    <th scope="col">Excess Production Sent to Grid (kWh)</th>
+                    <th scope="col">Excess Production </br>Sent to Grid (kWh)</th>
                     <th scope="col">Utility Bill</th>
                     <th scope="col">Total Consumption</th>
                     <th scope="col">Bill w/out Solar</th>
