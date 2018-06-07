@@ -1,5 +1,7 @@
 from django import forms
+from django.forms import ModelForm
 from django.utils.safestring import mark_safe
+from .models import *
 from datetime import date
 from dateutil.relativedelta import relativedelta
 
@@ -153,3 +155,25 @@ class CsvForm(forms.Form):
         required=True,
         label='Where in Google Drive do you want the file Stored?: '
     )
+
+
+class VcaasForm(ModelForm):
+    class Meta:
+        model = VcaasLogin
+        fields = [
+            'first_name',
+            'last_name',
+            'badge',
+            'incontact_id',
+            'email',
+            'department',
+            'psuedo_number',
+            'phone_number',
+            'user_id',
+            'id',
+            'vcaas_password',
+            'voice_mail_passcode',
+            'extension',
+            'voice_mail',
+            'dnis_enabled'
+        ]

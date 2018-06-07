@@ -1,0 +1,39 @@
+{% extends 'Luna/base.html' %}
+{% load luna_extras %}
+{% block content %}
+    <div class="main">
+        <table class="table table-striped">
+            <thead class="thead-dark" style="white-space: nowrap">
+            <tr>
+                {% for key, value in model_data.items %}
+                    {% if key == 'header' %}
+                        {% for item in value %}
+                            <th id="{{ item }}" style="text-align: center">{{ item }}</th>
+                        {% endfor %}
+                        <th>Update</th>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+            </thead>
+            <tbody>
+            {% for key, value in model_data.items %}
+                {% if key == 'table' %}
+                    {% for row in value %}
+                        <tr id="row_{{ forloop.counter }}">
+                            {% for value in row %}
+                                <td id="{{ model_data.fields|index:forloop.counter0 }}" style="text-align: center">{{ value }}</td>
+                            {% endfor %}
+                            <td>
+                                <a href="/wfm/vcaas/update/{{ forloop.counter0 }}">Change</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script>
+
+    </script>
+{% endblock %}

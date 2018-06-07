@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Luna.apps.LunaConfig',
+    'Luna.templatetags',
     'social_django',
 ]
 

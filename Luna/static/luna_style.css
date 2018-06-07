@@ -227,7 +227,7 @@ h5.sticky {
     font-size: 25px;
     color: #656569;
     display: inline-block;
-    background-image: url("../static/resources/white_starless.png");
+    background-image: url("images/white_starless.png");
     background-size: 160px auto;
     background-repeat: no-repeat;
     margin-left: 12px;
@@ -235,7 +235,7 @@ h5.sticky {
 }
 
 .sidenav a.logo:hover {
-    background-image: url("../static/resources/white.png");
+    background-image: url("images/white.png");
     background-size: 160px auto;
     background-repeat: no-repeat;
     background-color: #303033;

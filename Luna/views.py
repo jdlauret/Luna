@@ -1,10 +1,10 @@
 # Create your views here.
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render, render_to_response, HttpResponse, get_object_or_404, redirect
 from django.template import loader, Library, RequestContext
+from django.core import serializers
 
-from .models import CareerPath
 from Luna.utilities.template_updates import JsonHandler
 from .forms import *
 from .utilities.system_performance_calc import system_performance
@@ -187,3 +187,52 @@ def automation_page(request):
 def create_new_task(request):
     context = {'user': request.user}
     return render(request, 'Luna/automation_create_new_task.html', context)
+
+
+@login_required
+@user_passes_test(email_check)
+def vcaas_data_set(request):
+    model_data = create_table_from_model(VcaasLogin)
+    context = {
+        'form': VcaasForm(),
+        'model_data': model_data,
+        'update_model': ''
+    }
+    return render(request, 'Luna/vcaas_data.html', context)
+
+
+def vcaas_update(request, num):
+    model_data = create_table_from_model(VcaasLogin)
+    header = model_data['fields']
+    model_id = model_data['table'][num][header.index('id')]
+    instance = get_object_or_404(VcaasLogin, id=model_id)
+    form = VcaasForm(request.POST or None, instance=instance)
+    context = {'form': form}
+    if form.is_valid():
+        form.save()
+        return redirect('/wfm/vcaas/')
+    update_object = context['model'][num]
+    context['update_model'] = update_object
+    return render(request, 'Luna/vcaas_update_form.html', context)
+
+
+def create_table_from_model(model):
+    model_fields = [x.name for x in model._meta.get_fields()]
+    model_header = [x.replace('_', ' ').title() for x in model_fields]
+    model_list = []
+
+    for item in model.objects.all():
+        new_row = []
+        for field in model_fields:
+            new_row.append(item.__dict__[field])
+        model_list.append(new_row)
+
+    data = {
+        'fields': model_fields,
+        'header': model_header,
+        'table': model_list
+    }
+
+    return data
+
+

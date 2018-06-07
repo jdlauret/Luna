@@ -14,6 +14,12 @@ automation_patterns =[
     url(r'^create_new_task/$', views.create_new_task)
 ]
 
+wfm_patterns = [
+    url(r'^$', views.index),
+    url(r'^vcaas/$', views.vcaas_data_set),
+    path('vcaas/update/<int:num>/', views.vcaas_update)
+]
+
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^career_path/$', views.career_path, name='career_path'),
@@ -21,4 +27,5 @@ urlpatterns = [
     url(r'^logout/$', auth_views.logout, name='logout'),
     path('calculators/', include(calculator_patterns)),
     path('automation/', include(automation_patterns)),
+    path('wfm/', include(wfm_patterns)),
 ]
