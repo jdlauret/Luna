@@ -46,6 +46,7 @@ def soft_savings_analysis(servicenum, startdate, enddate):
         results['startdate'] = startdate
         startdatestring = results['startdate'].replace(day=1).strftime('%m/%d/%Y')
 
+    results['account'][0][9] = '${}'.format(round(results['account'][0][9], 5))
 
     if enddate >= date.today() and enddate < results['startdate'].date() + timedelta(30) and results['startdate'] == results['account'][0][7]:
         # enddatestring = (date.today().replace(day=1) - timedelta(1)).strftime('%m/%d/%Y')
@@ -81,17 +82,36 @@ def soft_savings_analysis(servicenum, startdate, enddate):
                                   round(totals[3], 2)
                                   ])
 
-    results['summary'] ='Your system has produced {} kilowatt hours (kWh) since {}. '\
-            'For that energy, you paid Vivint Solar ${}. '\
-            'If you had paid your utility company, {}, for that same amount of energy, ' \
-            'you would have paid ${}. Your total savings since {} is ${}.'.format(
-                results['savings'][-1][1],
-                results['startdate'].strftime('%m/%d/%Y'),
-                '%.2f' % results['savings'][-1][2],
-                results['account'][0][8],
-                '%.2f' % results['savings'][-1][3],
-                results['startdate'].strftime('%m/%d/%Y'),
-                '%.2f' % results['savings'][-1][4]
-            )
+    for month in results['savings']:
+        month[1] = '{} kWh'.format(month[1])
+        if month[2] < 0:
+            month[2] = '$({})'.format('%.2f' % abs(month[2]))
+        else:
+            month[2] = '${}'.format('%.2f' % month[2])
+        if month[3] < 0:
+            month[3] = '$({})'.format('%.2f' % abs(month[3]))
+        else:
+            month[3] = '${}'.format('%.2f' % month[3])
+        if month[4] < 0:
+            month[4] = '$({})'.format('%.2f' % abs(month[4]))
+        else:
+            month[4] = '${}'.format('%.2f' % month[4])
+
+    results['summary'] = [
+        'Your system has produced {} kilowatt hours (kWh) since {}.'.format(
+            results['savings'][-1][1].split()[0],
+            results['startdate'].strftime('%m/%d/%Y')
+        ),
+        'For that energy, you paid Vivint Solar {}.'.format(results['savings'][-1][2]),
+        'If you had paid your utility company, {}, for that same amount of energy, ' \
+        'you would have paid {}.'.format(
+            results['account'][0][8],
+            results['savings'][-1][3]
+        ),
+        'Your total savings since {} is {}.'.format(
+            results['startdate'].strftime('%m/%d/%Y'),
+            results['savings'][-1][4]
+        )
+    ]
 
     return results

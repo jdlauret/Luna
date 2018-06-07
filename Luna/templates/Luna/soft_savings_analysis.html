@@ -96,7 +96,7 @@
                 <thead>
                 <tr>
                     <th scope="col">Month</th>
-                    <th scope="col">Actual (kWh)</th>
+                    <th scope="col">Actual</th>
                     <th scope="col">Vivint Solar Bill</th>
                     <th scope="col">Utility Bill</th>
                     <th scope="col">Savings</th>
@@ -123,6 +123,13 @@
                     </tbody>
                 {% endif %}
             </table>
+            {% if form_response_complete == True %}
+                <ul>
+                    {% for item in form_response.summary %}
+                        <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
         </div>
 
     </div>
