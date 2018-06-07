@@ -1,0 +1,1 @@
+cd C:\Luna_Dev\venv\Scripts & activate & cd C:\Luna_Dev & python manage.py runserver 0:8000
