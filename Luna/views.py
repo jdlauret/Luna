@@ -201,32 +201,32 @@ def full_benefit_calculator(request):
             if form.is_valid():
                 service_number = form.cleaned_data['service_number']
                 consumption = [
-                    form.cleaned_data['twelve_months_consumption'],
-                    form.cleaned_data['eleven_months_consumption'],
-                    form.cleaned_data['ten_months_consumption'],
-                    form.cleaned_data['nine_months_consumption'],
-                    form.cleaned_data['eight_months_consumption'],
-                    form.cleaned_data['seven_months_consumption'],
-                    form.cleaned_data['six_months_consumption'],
-                    form.cleaned_data['five_months_consumption'],
-                    form.cleaned_data['four_months_consumption'],
-                    form.cleaned_data['three_months_consumption'],
-                    form.cleaned_data['two_months_consumption'],
-                    form.cleaned_data['one_months_consumption']
+                    abs(form.cleaned_data['twelve_months_consumption']),
+                    abs(form.cleaned_data['eleven_months_consumption']),
+                    abs(form.cleaned_data['ten_months_consumption']),
+                    abs(form.cleaned_data['nine_months_consumption']),
+                    abs(form.cleaned_data['eight_months_consumption']),
+                    abs(form.cleaned_data['seven_months_consumption']),
+                    abs(form.cleaned_data['six_months_consumption']),
+                    abs(form.cleaned_data['five_months_consumption']),
+                    abs(form.cleaned_data['four_months_consumption']),
+                    abs(form.cleaned_data['three_months_consumption']),
+                    abs(form.cleaned_data['two_months_consumption']),
+                    abs(form.cleaned_data['one_months_consumption'])
                 ]
                 backfeed = [
-                    form.cleaned_data['twelve_months_backfeed'],
-                    form.cleaned_data['eleven_months_backfeed'],
-                    form.cleaned_data['ten_months_backfeed'],
-                    form.cleaned_data['nine_months_backfeed'],
-                    form.cleaned_data['eight_months_backfeed'],
-                    form.cleaned_data['seven_months_backfeed'],
-                    form.cleaned_data['six_months_backfeed'],
-                    form.cleaned_data['five_months_backfeed'],
-                    form.cleaned_data['four_months_backfeed'],
-                    form.cleaned_data['three_months_backfeed'],
-                    form.cleaned_data['two_months_backfeed'],
-                    form.cleaned_data['one_months_backfeed']
+                    abs(form.cleaned_data['twelve_months_backfeed']),
+                    abs(form.cleaned_data['eleven_months_backfeed']),
+                    abs(form.cleaned_data['ten_months_backfeed']),
+                    abs(form.cleaned_data['nine_months_backfeed']),
+                    abs(form.cleaned_data['eight_months_backfeed']),
+                    abs(form.cleaned_data['seven_months_backfeed']),
+                    abs(form.cleaned_data['six_months_backfeed']),
+                    abs(form.cleaned_data['five_months_backfeed']),
+                    abs(form.cleaned_data['four_months_backfeed']),
+                    abs(form.cleaned_data['three_months_backfeed']),
+                    abs(form.cleaned_data['two_months_backfeed']),
+                    abs(form.cleaned_data['one_months_backfeed'])
                 ]
                 utility_bill = [
                     form.cleaned_data['twelve_months_utility_bill'],

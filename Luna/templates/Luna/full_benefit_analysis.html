@@ -16,27 +16,110 @@
                         <tr>
                             <td>{{ form.non_field_errors }}</td>
                         </tr>
-{#                        <tr>#}
-{#                            <td><label for="{{ form.service_number.id_for_label }}">{{ form.service_number.label }}</label></td>#}
-{#                            <td colspan="2">{{ form.service_number }}</td>#}
-{#                        </tr>#}
-{#                        <tr>#}
-{#                            <td></td>#}
-{#                            <td>Consumption</td>#}
-{#                            <td>Backfeed</td>#}
-{#                            <td>Utility Bill</td>#}
-{#                        </tr>#}
-                        {% for field in form %}
-                            <tr>
-                                {% if field.errors %}
-                                    <td>{{ field.errors }}</td>
-                                {% endif %}
-                                <td><label for="{{ field.id_for_label }}">{{ field.label }} </label></td>
-                                <td colspan="1">{{ field }}</td>
-                            </tr>
-                        {% endfor %}
                         <tr>
-                            <td colspan="3">
+                            <td><label for="{{ form.service_number.id_for_label }}">{{ form.service_number.label }}</label></td>
+                            <td colspan="2">{{ form.service_number }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td colspan="1">Consumption</td>
+                            <td colspan="1">Backfeed</td>
+                            <td colspan="1">Utility Bill</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">{{ form.labels.twelve }}</td>
+                            <td colspan="1">{{ form.twelve_months_consumption }}</td>
+                            <td colspan="1">{{ form.twelve_months_backfeed }}</td>
+                            <td colspan="1">{{ form.twelve_months_utility_bill }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">{{ form.labels.eleven }}</td>
+                            <td colspan="1">{{ form.eleven_months_consumption }}</td>
+                            <td colspan="1">{{ form.eleven_months_backfeed }}</td>
+                            <td colspan="1">{{ form.eleven_months_utility_bill }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">{{ form.labels.ten }}</td>
+                            <td colspan="1">{{ form.ten_months_consumption }}</td>
+                            <td colspan="1">{{ form.ten_months_backfeed }}</td>
+                            <td colspan="1">{{ form.ten_months_utility_bill }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">{{ form.labels.nine }}</td>
+                            <td colspan="1">{{ form.nine_months_consumption }}</td>
+                            <td colspan="1">{{ form.nine_months_backfeed }}</td>
+                            <td colspan="1">{{ form.nine_months_utility_bill }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">{{ form.labels.eight }}</td>
+                            <td colspan="1">{{ form.eight_months_consumption }}</td>
+                            <td colspan="1">{{ form.eight_months_backfeed }}</td>
+                            <td colspan="1">{{ form.eight_months_utility_bill }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">{{ form.labels.seven }}</td>
+                            <td colspan="1">{{ form.seven_months_consumption }}</td>
+                            <td colspan="1">{{ form.seven_months_backfeed }}</td>
+                            <td colspan="1">{{ form.seven_months_utility_bill }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">{{ form.labels.six }}</td>
+                            <td colspan="1">{{ form.six_months_consumption }}</td>
+                            <td colspan="1">{{ form.six_months_backfeed }}</td>
+                            <td colspan="1">{{ form.six_months_utility_bill }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">{{ form.labels.five }}</td>
+                            <td colspan="1">{{ form.five_months_consumption }}</td>
+                            <td colspan="1">{{ form.five_months_backfeed }}</td>
+                            <td colspan="1">{{ form.five_months_utility_bill }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">{{ form.labels.four }}</td>
+                            <td colspan="1">{{ form.four_months_consumption }}</td>
+                            <td colspan="1">{{ form.four_months_backfeed }}</td>
+                            <td colspan="1">{{ form.four_months_utility_bill }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">{{ form.labels.three }}</td>
+                            <td colspan="1">{{ form.three_months_consumption }}</td>
+                            <td colspan="1">{{ form.three_months_backfeed }}</td>
+                            <td colspan="1">{{ form.three_months_utility_bill }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">{{ form.labels.two }}</td>
+                            <td colspan="1">{{ form.two_months_consumption }}</td>
+                            <td colspan="1">{{ form.two_months_backfeed }}</td>
+                            <td colspan="1">{{ form.two_months_utility_bill }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">{{ form.labels.one }}</td>
+                            <td colspan="1">{{ form.one_months_consumption }}</td>
+                            <td colspan="1">{{ form.one_months_backfeed }}</td>
+                            <td colspan="1">{{ form.one_months_utility_bill }}</td>
+                        </tr>
+{#                        {% for row in form.grid %}#}
+{#                            <tr>#}
+{#                                <td>{{ row }}</td>#}
+{#                                {% for item in row %}#}
+{#                                    {% if item.errors %}#}
+{#                                        <td>{{ item.errors }}</td>#}
+{#                                    {% endif %}#}
+{#                                    <td colspan="1">{{ item }}</td>#}
+{#                                {% endfor %}#}
+{#                            </tr>#}
+{#                        {% endfor %}#}
+{#                        {% for field in form %}#}
+{#                            <tr>#}
+{#                                {% if field.errors %}#}
+{#                                    <td>{{ field.errors }}</td>#}
+{#                                {% endif %}#}
+{#                                <td><label for="{{ field.id_for_label }}">{{ field.label }} </label></td>#}
+{#                                <td colspan="1">{{ field }}</td>#}
+{#                            </tr>#}
+{#                        {% endfor %}#}
+                        <tr>
+                            <td colspan="4">
                                 {% if form_response_complete == True %}
                                     <input type="submit"
                                            formaction="/calculators/full_benefit_analysis/pdf"
