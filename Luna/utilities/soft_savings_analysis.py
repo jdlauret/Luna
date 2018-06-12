@@ -9,6 +9,8 @@ utilities_dir = os.path.join(luna_dir, 'utilities')
 
 def soft_savings_analysis(servicenum, startdate, enddate):
 
+    results = {}
+
     if enddate < startdate:
         results = {'error': 'The start date you entered ({}) must come before the end date you entered ({}).'.format(startdate.strftime('%m/%d/%Y'), enddate.strftime('%m/%d/%Y'))}
         return results
@@ -25,9 +27,13 @@ def soft_savings_analysis(servicenum, startdate, enddate):
 
     bindvars = [{'serviceNum': servicenum}]
 
-    dw.query_results(sql[0], bindvars=bindvars[0])
+    try:
+        dw.query_results(sql[0], bindvars=bindvars[0])
+    except Exception as e:
+        results['error'] = e
+        return results
 
-    results = {'account': dw.results}
+    results['account'] = dw.results
 
     if len(results['account']) == 0:
         results['error'] = '{} is not a valid service number.'.format(servicenum)
@@ -64,7 +70,11 @@ def soft_savings_analysis(servicenum, startdate, enddate):
                  'startDate': startdatestring,
                  'endDate': enddatestring})
 
-    dw.query_results(sql[1], bindvars=bindvars[1])
+    try:
+        dw.query_results(sql[1], bindvars=bindvars[1])
+    except Exception as e:
+        results['error'] = e
+        return results
 
     results['savings'] = dw.results
 

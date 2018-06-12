@@ -9,6 +9,8 @@ utilities_dir = os.path.join(luna_dir, 'utilities')
 
 def full_benefit_analysis(servicenum, consumption, backfeed, utilitybill):
 
+    results = {}
+
     dw = DataWarehouse('admin')
 
     with open(os.path.join(utilities_dir, 'full_benefit_analysis.sql'),'r') as file:
@@ -21,9 +23,13 @@ def full_benefit_analysis(servicenum, consumption, backfeed, utilitybill):
 
     bindvars = [{'serviceNum': servicenum}]
 
-    dw.query_results(sql[0], bindvars=bindvars[0])
+    try:
+        dw.query_results(sql[0], bindvars=bindvars[0])
+    except Exception as e:
+        results['error'] = e
+        return results
 
-    results = {'account': dw.results, 'error': None}
+    results['account'] = dw.results
 
     if len(results['account']) == 0:
         results['error'] = '{} is not a valid service number.'.format(servicenum)
@@ -58,29 +64,31 @@ def full_benefit_analysis(servicenum, consumption, backfeed, utilitybill):
 
     i = 0
     while i < len(consumption):
-        results['production'][i].append(consumption[i])
-        results['production'][i].append(backfeed[i])
+        results['production'][i].insert(2, backfeed[i])
+        results['production'][i].insert(3, consumption[i])
         results['production'][i].append(utilitybill[i])
         i += 1
 
     del i
 
     for month in results['production']:
-        month.append(round(month[1] + month[3] - month[4], 3)) #total consumption
-        month.append(round(month[6] * results['account'][0][9], 2)) #bill w/out solar
-        month.append(round(month[2] + month[5], 2)) #bill w/solar
-        month.append(round(month[7] - month[8], 2)) #savings
+        month.insert(2, month[1] - month[2]) #usage from panels
+        month.insert(5, round(month[2] + month[4], 3)) #total consumption
+        month.append(round(month[6] + month[7], 2)) #bill w/solar
+        month.append(round(month[5] * results['account'][0][9], 2)) #bill w/out solar
+        month.append(round(month[9] - month[8], 2)) #savings
 
     results['header'] = [
         'Month',
         'Actual',
-        'Vivint Solar Bill',
-        'Utility Consumption',
+        'Usage',
         'Excess Production Sent to Grid',
-        'Utility Bill',
+        'Utility Consumption',
         'Total Consumption',
-        'Bill w/out Solar',
+        'Vivint Solar Bill',
+        'Utility Bill',
         'Bill w/Solar',
+        'Bill w/out Solar',
         'Savings'
     ]
 
@@ -92,7 +100,7 @@ def full_benefit_analysis(servicenum, consumption, backfeed, utilitybill):
     # results['production'] = [x + [results['production'][x][2] + production['production'][5]] for x in
     #                          results['production']]
 
-    totals = [sum(j) for j in [i for i in zip(*results['production'])][1:10]]
+    totals = [sum(j) for j in [i for i in zip(*results['production'])][1:11]]
     results['production'].append([
             'Total',
             round(totals[0], 2),
@@ -103,25 +111,23 @@ def full_benefit_analysis(servicenum, consumption, backfeed, utilitybill):
             round(totals[5], 2),
             round(totals[6], 2),
             round(totals[7], 2),
-            round(totals[8], 2)
+            round(totals[8], 2),
+            round(totals[9], 2)
         ]
     )
 
     results['account'][0][9] = '${}'.format(round(results['account'][0][9], 5))
-
+    #TODO: fix formatting of background colors in full_benefit_analysis.html
     for month in results['production']:
         month[1] = '{} kWh'.format(month[1])
-        if month[2] < 0:
-            month[2] = '$({})'.format('%.2f' % abs(month[2]))
-        else:
-            month[2] = '${}'.format('%.2f' % month[2])
+        month[2] = '{} kWh'.format(month[2])
         month[3] = '{} kWh'.format(month[3])
         month[4] = '{} kWh'.format(month[4])
-        if month[5] < 0:
-            month[5] = '$({})'.format('%.2f' % abs(month[5]))
+        month[5] = '{} kWh'.format(month[5])
+        if month[6] < 0:
+            month[6] = '$({})'.format('%.2f' % abs(month[6]))
         else:
-            month[5] = '${}'.format('%.2f' % month[5])
-        month[6] = '{} kWh'.format(month[6])
+            month[6] = '${}'.format('%.2f' % month[6])
         if month[7] < 0:
             month[7] = '$({})'.format('%.2f' % abs(month[7]))
         else:
@@ -134,6 +140,10 @@ def full_benefit_analysis(servicenum, consumption, backfeed, utilitybill):
             month[9] = '$({})'.format('%.2f' % abs(month[9]))
         else:
             month[9] = '${}'.format('%.2f' % month[9])
+        if month[10] < 0:
+            month[10] = '$({})'.format('%.2f' % abs(month[10]))
+        else:
+            month[10] = '${}'.format('%.2f' % month[10])
 
 
 

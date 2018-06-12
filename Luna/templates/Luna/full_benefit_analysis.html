@@ -4,12 +4,12 @@
     <div class="main">
         <h2>Full Benefit Analysis</h2>
         <div style="width: 100%; display: inline-block;">
-            <div style="float: left; width: 30%">
+            <div style="float: left; width: 49%">
                 <form action="/calculators/full_benefit_analysis/" method="post">
                     <table class="table table-borderless">
                         <thead class="thead-dark">
                         <tr>
-                            <th colspan="4">Customer Info</th>
+                            <th colspan="5">Customer Info</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -137,11 +137,12 @@
                     </table>
                 </form>
             </div>
-            <div id="account_info" style="margin-left: 32%">
+            <div id="account_info" style="margin-left: 51%">
                 <table class="table">
                     <thead class="thead-dark">
                     <tr>
-                        <th colspan="{{ form_response.account.0|length }}">Account Information</th>
+{#                        <th colspan="{{ form_response.account.0|length }}">Account Information</th>#}
+                        <th colspan="4">Account Information</th>
                     </tr>
                     </thead>
                     {% if form_response_complete == True %}
@@ -150,26 +151,64 @@
                             <th>Service Number</th>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Street Address</th>
-                            <th>City</th>
-                            <th>State</th>
-                            <th>Zip Code</th>
-                            <th>PTO</th>
-                            <th>Utility Company</th>
-                            <th>Average Utility Rate</th>
+{#                            <th>Street Address</th>#}
+{#                            <th>City</th>#}
+{#                            <th>State</th>#}
+{#                            <th>Zip Code</th>#}
+{#                            <th>PTO</th>#}
+{#                            <th>Utility Company</th>#}
+{#                            <th>Average Utility Rate</th>#}
                         </tr>
                         </thead>
-
                         <tbody>
-
-                        {% for row in form_response.account %}
+{#                        {% for row in form_response.account %}#}
+{#                            <tr>#}
+{#                                {% for item in row %}#}
+{#                                    <td>{{ item }}</td>#}
+{#                                {% endfor %}#}
+{#                            </tr>#}
+{#                        {% endfor %}#}
                             <tr>
-                                {% for item in row %}
-                                    <td>{{ item }}</td>
-                                {% endfor %}
+                                <td>{{ form_response.account.0.0 }}</td>
+                                <td>{{ form_response.account.0.1 }}</td>
+                                <td>{{ form_response.account.0.2 }}</td>
                             </tr>
-                        {% endfor %}
                         </tbody>
+{#                    </table>#}
+{#                    <table class="table">#}
+                        <thead>
+                            <tr>
+                                <th>Street Address</th>
+                                <th>City</th>
+                                <th>State</th>
+                                <th>Zip Code</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ form_response.account.0.3 }}</td>
+                                <td>{{ form_response.account.0.4 }}</td>
+                                <td>{{ form_response.account.0.5 }}</td>
+                                <td>{{ form_response.account.0.6 }}</td>
+                            </tr>
+                        </tbody>
+{#                    </table>#}
+{#                    <table class="table">#}
+                        <thead>
+                            <tr>
+                                <th>PTO Date</th>
+                                <th>Utility Company</th>
+                                <th>Average Utility Rate</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ form_response.account.0.7 }}</td>
+                                <td>{{ form_response.account.0.8 }}</td>
+                                <td>{{ form_response.account.0.9 }}</td>
+                            </tr>
+                        </tbody>
+{#                    </table>#}
                     {% endif %}
                 </table>
             </div>
@@ -186,14 +225,15 @@
                 <thead>
                 <tr>
                     <th scope="col">Month</th>
-                    <th scope="col">Actual</th>
-                    <th scope="col">Vivint Solar Bill</th>
-                    <th scope="col">Utility Consumption</th>
-                    <th scope="col">Excess Production </br>Sent to Grid</th>
-                    <th scope="col">Utility Bill</th>
-                    <th scope="col">Total Consumption</th>
-                    <th scope="col">Bill w/out Solar</th>
-                    <th scope="col">Bill w/Solar</th>
+                    <th scope="col" style="background-color: #57c1e8">Actual</th>
+                    <th scope="col" style="background-color: #57c1e8">Usage</th>
+                    <th scope="col" style="background-color: #7764a0">Excess Production </br>Sent to Grid</th>
+                    <th scope="col" style="background-color: #e84b37">Utility Consumption</th>
+                    <th scope="col" style="background-color: #7764a0">Total Consumption</th>
+                    <th scope="col" style="background-color: #57c1e8">Vivint Solar Bill</th>
+                    <th scope="col" style="background-color: #e84b37">Utility Bill</th>
+                    <th scope="col" style="background-color: #7764a0">Bill w/Solar</th>
+                    <th scope="col" style="background-color: #e84b37">Bill w/out Solar<sup>*</sup></th>
                     <th scope="col">Savings</th>
                 </tr>
                 </thead>
@@ -215,6 +255,20 @@
                             </tr>
                         {% endif %}
                     {% endfor %}
+                    {% if form_response.error %}
+                        <tr>
+                            <td>{{ form_response.error }}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    {% endif %}
                     </tbody>
                 {% endif %}
             </table>
