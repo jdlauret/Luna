@@ -145,6 +145,8 @@ def full_benefit_analysis(servicenum, consumption, backfeed, utilitybill):
         else:
             month[10] = '${}'.format('%.2f' % month[10])
 
+    results['account'][0][7] = results['account'][0][7].strftime('%B %#d, %Y')
+
 
 
 

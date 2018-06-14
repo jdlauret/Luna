@@ -65,7 +65,13 @@ def system_performance(servicenum, startdate, enddate):
     try:
         dw.query_results(sql[1], bindvars=bindvars[1])
     except Exception as e:
-        results['error'] = e
+        if 'ORA-01476' in str(e):
+            results['error'] = str(e) + '. There were no estimates found for service' \
+                                   ' number {}.'.format(servicenum)
+        else:
+            results['error'] = e
+        print(str(e))
+        print(results['error'])
         return results
 
     results['production'] = dw.results
@@ -82,5 +88,7 @@ def system_performance(servicenum, startdate, enddate):
                                   round(totals[1], 3),
                                   round(totals[1]/totals[0], 4)
                                   ])
+
+    results['account'][0][7] = results['account'][0][7].strftime('%B %#d, %Y')
 
     return results

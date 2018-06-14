@@ -225,16 +225,21 @@
                 <thead>
                 <tr>
                     <th scope="col">Month</th>
-                    <th scope="col" style="background-color: #57c1e8">Actual</th>
-                    <th scope="col" style="background-color: #57c1e8">Usage</th>
-                    <th scope="col" style="background-color: #7764a0">Excess Production </br>Sent to Grid</th>
-                    <th scope="col" style="background-color: #e84b37">Utility Consumption</th>
-                    <th scope="col" style="background-color: #7764a0">Total Consumption</th>
-                    <th scope="col" style="background-color: #57c1e8">Vivint Solar Bill</th>
-                    <th scope="col" style="background-color: #e84b37">Utility Bill</th>
-                    <th scope="col" style="background-color: #7764a0">Bill w/Solar</th>
-                    <th scope="col" style="background-color: #e84b37">Bill w/out Solar<sup>*</sup></th>
+{#                    <th scope="col">Actual Production</th>#}
+{#                    <th scope="col">Consumption <br>from Panels</th>#}
+{#                    <th scope="col">Excess Production <br>Sent to Grid</th>#}
+{#                    <th scope="col">Consumption <br>from Utility</th>#}
+{#                    <th scope="col">Total Consumption</th>#}
+{#                    <th scope="col">Vivint Solar Bill</th>#}
+{#                    <th scope="col">Utility Bill</th>#}
+{#                    <th scope="col">Bill w/Solar</th>#}
+{#                    <th scope="col">Bill w/out Solar<sup>*</sup></th>#}
+{#                    <th scope="col">Savings</th>#}
                     <th scope="col">Savings</th>
+                    <th scope="col">Vivint Solar Bill</th>
+                    <th scope="col">Utility Bill</th>
+                    <th scope="col">Bill w/Solar</th>
+                    <th scope="col">Bill w/out Solar<sup>*</sup></th>
                 </tr>
                 </thead>
                 {% if form_response_complete == True %}
@@ -243,18 +248,141 @@
                     {% for row in form_response.production %}
                         {% if row.0 == 'Total' %}
                             <tr>
-                                {% for col in row %}
-                                    <td>{{ col }}</td>
-                                {% endfor %}
+                                <td>{{ row.0 }}</td>
+                                <td>{{ row.10 }}</td>
+                                <td>{{ row.6 }}</td>
+                                <td>{{ row.7 }}</td>
+                                <td>{{ row.8 }}</td>
+                                <td>{{ row.9 }}</td>
+{#                                {% for col in row %}#}
+{#                                    <td>{{ col }}</td>#}
+{#                                {% endfor %}#}
                             </tr>
                         {% else %}
                             <tr>
-                                {% for col in row %}
-                                    <td>{{ col }}</td>
-                                {% endfor %}
+                                <td>{{ row.0 }}</td>
+                                <td>{{ row.10 }}</td>
+                                <td>{{ row.6 }}</td>
+                                <td>{{ row.7 }}</td>
+                                <td>{{ row.8 }}</td>
+                                <td>{{ row.9 }}</td>
+{#                                {% for col in row %}#}
+{#                                    <td>{{ col }}</td>#}
+{#                                {% endfor %}#}
                             </tr>
                         {% endif %}
                     {% endfor %}
+                    </tbody>
+                </table>
+                    <br>
+                <table id="production" class="table table-striped" style="overflow: auto">
+                <thead>
+                <tr>
+                    <th scope="col">Month</th>
+{#                    <th scope="col">Actual Production</th>#}
+{#                    <th scope="col">Consumption <br>from Panels</th>#}
+{#                    <th scope="col">Excess Production <br>Sent to Grid</th>#}
+{#                    <th scope="col">Consumption <br>from Utility</th>#}
+{#                    <th scope="col">Total Consumption</th>#}
+{#                    <th scope="col">Vivint Solar Bill</th>#}
+{#                    <th scope="col">Utility Bill</th>#}
+{#                    <th scope="col">Bill w/Solar</th>#}
+{#                    <th scope="col">Bill w/out Solar<sup>*</sup></th>#}
+{#                    <th scope="col">Savings</th>#}
+                    <th scope="col">Actual Production</th>
+                    <th scope="col">Consumption <br>from Panels</th>
+                    <th scope="col">Excess Producton <br>Sent to Grid</th>
+                    <th scope="col">Consumption <br>from Utility</th>
+                    <th scope="col">Total Consumption</th>
+                </tr>
+                </thead>
+                    <tbody>
+
+                    {% for row in form_response.production %}
+                        {% if row.0 == 'Total' %}
+                            <tr>
+                                <td>{{ row.0 }}</td>
+                                <td>{{ row.1 }}</td>
+                                <td>{{ row.2 }}</td>
+                                <td>{{ row.3 }}</td>
+                                <td>{{ row.4 }}</td>
+                                <td>{{ row.5 }}</td>
+{#                                {% for col in row %}#}
+{#                                    <td>{{ col }}</td>#}
+{#                                {% endfor %}#}
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td>{{ row.0 }}</td>
+                                <td>{{ row.1 }}</td>
+                                <td>{{ row.2 }}</td>
+                                <td>{{ row.3 }}</td>
+                                <td>{{ row.4 }}</td>
+                                <td>{{ row.5 }}</td>
+{#                                {% for col in row %}#}
+{#                                    <td>{{ col }}</td>#}
+{#                                {% endfor %}#}
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                    <tr>
+                        <td><b>Definitions</b></td>
+                        <td colspan="5">
+                            <ul>
+                                <li>
+                                    <b>Savings</b>: The difference between your
+                                    <b><em>Bill w/Out Solar<sup>*</sup></em></b> and your
+                                    <b><em>Bill w/Solar</em></b>.
+                                </li>
+                                <li>
+                                    <b>Vivint Solar Bill</b>: Your Vivint Solar Bill based on the
+                                    <b><em>Actual Production</em></b> of the solar energy system at your home
+                                    and your contract rate during that month.
+                                </li>
+                                <li>
+                                    <b>Utility Bill</b>: The subtotal of your charges for energy and
+                                    connection to the grid.
+                                </li>
+                                <li>
+                                    <b>Bill w/Solar</b>: The sum of your <b><em>Utility Bill</em></b> and your
+                                    <b><em>Vivint Solar Bill</em></b>.
+                                </li>
+                                <li>
+                                    <b>Bill w/out Solar<sup>*</sup></b>: Your <b><em>Total Consumption</em></b>
+                                    multiplied by your <b><em>Average Utility Rate</em></b>.
+                                </li>
+                                <li>
+                                    <b>Actual Production</b>: The amount of energy produced by the solar energy
+                                    system at your hom.
+                                </li>
+                                <li>
+                                    <b>Consumption from Panels</b>: The amount of energy your home used that was
+                                    produced by the solar energy system.
+                                </li>
+                                <li>
+                                    <b>Excess Production Sent to Grid</b>: The amount of energy registered
+                                    by your utility's net meter.
+                                </li>
+                                <li>
+                                    <b>Consumption from Utility</b>: The amount of energy your home drew from
+                                    the grid.
+                                </li>
+                                <li>
+                                    <b>Total Consumption</b>: The total amount of energy you needed to meet
+                                    your usage habits.
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Footnote</b>
+                        </td>
+                        <td colspan="5">
+                            <b>*</b> Values are calculated using your <b><em>Total Consumption</em></b> and
+                            <b><em>Average Utility Rate</em></b>.
+                        </td>
+                    </tr>
                     {% if form_response.error %}
                         <tr>
                             <td>{{ form_response.error }}</td>

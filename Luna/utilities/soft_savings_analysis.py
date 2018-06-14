@@ -124,4 +124,6 @@ def soft_savings_analysis(servicenum, startdate, enddate):
         )
     ]
 
+    results['account'][0][7] = results['account'][0][7].strftime('%B %#d, %Y')
+
     return results
