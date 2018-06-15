@@ -37,10 +37,15 @@ def full_benefit_analysis(servicenum, consumption, backfeed, utilitybill):
     elif results['account'][0][7].date() > date.today()-timedelta(365):
         results['error'] = 'Benefit Analyses can only be performed on systems ' \
             'that have been PTO\'d for at least one year.'
+        results['account'][0][7] = results['account'][0][7].strftime('%B %#d, %Y')
+        results['account'][0][9] = '${} per kWh'.format(results['account'][0][9])
+        results['account'][0][10] = '{} kWh'.format(results['account'][0][10])
         return results
     elif results['account'][0][8] == None:
         results['error'] = 'There was no utility information found for service ' \
                                     '{}.'.format(servicenum)
+        results['account'][0][7] = results['account'][0][7].strftime('%B %#d, %Y')
+        results['account'][0][10] = '{} kWh'.format(results['account'][0][10])
         return results
 
     results['enddate'] = (date.today().replace(day=1) - timedelta(1))
@@ -62,6 +67,19 @@ def full_benefit_analysis(servicenum, consumption, backfeed, utilitybill):
                              'to {}.'.format(servicenum, startdatestring, enddatestring)
         return results
 
+    # with open(os.path.join(utilities_dir, 'monthly_consumption.sql'),'r') as file:
+    #     sql = file.read()
+    #
+    # sql = sql.split(';')
+    #
+    # try:
+    #     dw.query_results(sql[date.today().month-1], bindvars=bindvars[0])
+    # except Exception as e:
+    #     results['error'] = e
+    #     return results
+    #
+    # results['presolarconsumption'] = dw.results
+
     i = 0
     while i < len(consumption):
         results['production'][i].insert(2, backfeed[i])
@@ -78,19 +96,19 @@ def full_benefit_analysis(servicenum, consumption, backfeed, utilitybill):
         month.append(round(month[5] * results['account'][0][9], 2)) #bill w/out solar
         month.append(round(month[9] - month[8], 2)) #savings
 
-    results['header'] = [
-        'Month',
-        'Actual',
-        'Usage',
-        'Excess Production Sent to Grid',
-        'Utility Consumption',
-        'Total Consumption',
-        'Vivint Solar Bill',
-        'Utility Bill',
-        'Bill w/Solar',
-        'Bill w/out Solar',
-        'Savings'
-    ]
+    # results['header'] = [
+    #     'Month',
+    #     'Actual',
+    #     'Usage',
+    #     'Excess Production Sent to Grid',
+    #     'Utility Consumption',
+    #     'Total Consumption',
+    #     'Vivint Solar Bill',
+    #     'Utility Bill',
+    #     'Bill w/Solar',
+    #     'Bill w/out Solar',
+    #     'Savings'
+    # ]
 
     # results['production'] = [
     #     x + [results['production'][x][1] + results['production'][x][3] - results['production'][x][4]] for x in
@@ -100,7 +118,7 @@ def full_benefit_analysis(servicenum, consumption, backfeed, utilitybill):
     # results['production'] = [x + [results['production'][x][2] + production['production'][5]] for x in
     #                          results['production']]
 
-    totals = [sum(j) for j in [i for i in zip(*results['production'])][1:11]]
+    totals = [sum(j) for j in [i for i in zip(*results['production'])][1:12]]
     results['production'].append([
             'Total',
             round(totals[0], 2),
@@ -116,7 +134,9 @@ def full_benefit_analysis(servicenum, consumption, backfeed, utilitybill):
         ]
     )
 
-    results['account'][0][9] = '${}'.format(round(results['account'][0][9], 5))
+    results['account'][0][9] = '${} per kWh'.format(round(results['account'][0][9], 5))
+    results['account'][0][7] = results['account'][0][7].strftime('%B %#d, %Y')
+    results['account'][0][10] = '{} kWh'.format(results['account'][0][10])
     #TODO: fix formatting of background colors in full_benefit_analysis.html
     for month in results['production']:
         month[1] = '{} kWh'.format(month[1])
@@ -145,7 +165,7 @@ def full_benefit_analysis(servicenum, consumption, backfeed, utilitybill):
         else:
             month[10] = '${}'.format('%.2f' % month[10])
 
-    results['account'][0][7] = results['account'][0][7].strftime('%B %#d, %Y')
+
 
 
 
