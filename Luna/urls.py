@@ -15,9 +15,10 @@ automation_patterns =[
 ]
 
 wfm_patterns = [
-    url(r'^$', views.index),
+    url(r'^$', views.wfm),
     url(r'^vcaas/$', views.vcaas_data_set),
-    path('vcaas/update/<int:num>/', views.vcaas_update)
+    url(r'^vcaas/update/$', views.vcaas_update),
+    path('vcaas/update/<str:id>/', views.vcaas_update)
 ]
 
 urlpatterns = [

@@ -233,16 +233,160 @@ class CareerPath(models.Model):
         return dict(CareerPath.PERCENTAGES)[self.productivity]
 
 
-
 class AutomatorTask(models.Model):
     # TODO create AutomatorTask model once requirments are scoped out
-    day = models.DateField(
+    RECURRENCE_CHOICES = (
+        ('hourly', 'Hourly'),
+        ('daily', 'Daily'),
+        ('weekly', 'Weekly'),
+        ('monthly', 'Monthly'),
+    )
+    DATA_SOURCE_TYPES = (
+        ('sql', 'SQL'),
+        ('sql_command', 'SQL Command'),
+        ('python', 'Python'),
+    )
+    DATA_FORMAT_TYPES = (
+        ('csv', 'CSV'),
+        ('excel', 'Excel'),
+        ('google_sheets', 'Google Sheets'),
+    )
+    DYNAMIC_NAME_HELP = """<a href="http://strftime.org/">Click Here</a> for a formatting legend"""
+    task_id = models.IntegerField(
+        primary_key=True,
+        null=True,
         blank=True,
-        null=True
+    )
+    task_name = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    recurrence_type = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+        choices=RECURRENCE_CHOICES
+    )
+    recurrence_month_days = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    recurrence_week_days = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    recurrence_times = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    recurrence_minutes = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    recurrence_weeks = models.IntegerField(
+        null=True,
+        blank=True,
+    )
+    recurrence_months = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    recurrence_start_date = models.DateField(
+        default=django.utils.timezone.now,
+        null=True,
+        blank=True,
+    )
+    task_priority = models.IntegerField(
+        null=True,
+        blank=True,
+    )
+    task_owner_name = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    task_owner_email = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    created_date = models.DateField(
+        default=django.utils.timezone.now,
+        null=True,
+        blank=True,
+    )
+    data_source_type = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+        choices=DATA_SOURCE_TYPES
+    )
+    data_source_google_id = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    data_format_type = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    data_format_google_id = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    file_storage_type = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    file_storage_google_id = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    file_name = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    dynamic_file_name = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+        help_text=DYNAMIC_NAME_HELP,
+    )
+    spreadsheet_sheet_name = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    spreadsheet_start_column_number = models.IntegerField(
+        null=True,
+        blank=True,
+    )
+    spreadsheet_start_row_number = models.IntegerField(
+        null=True,
+        blank=True,
+    )
+    spreadsheet_end_column_number = models.IntegerField(
+        null=True,
+        blank=True,
+    )
+    spreadsheet_end_row_number = models.IntegerField(
+        null=True,
+        blank=True,
     )
     hour = models.IntegerField(
+        null=True,
         blank=True,
-        null=True
     )
 
 
@@ -670,16 +814,3 @@ class DataWarehouse:
 
             self.close_connection()
 
-
-class SystemPerformancePDF(PDFTemplateView):
-    template_name = 'Luna/system_performance_pdf.html'
-
-    base_url = 'file://' + settings.STATIC_URL
-    download_filename = 'System Performance.pdf'
-
-    def get_context_data(self, **kwargs):
-        return super(SystemPerformancePDF, self).get_context_data(
-            pagesize='A4',
-            title='System Performance',
-            **kwargs
-        )

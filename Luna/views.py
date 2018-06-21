@@ -68,9 +68,7 @@ def system_performance_calculator(request):
                 except Exception as e:
                     context['form_response_complete'] = False
 
-                response = render_to_response('Luna/system_performance_calc.html',
-                                              context,
-                                              RequestContext(request))
+                response = render(request, 'Luna/system_performance_calc.html', context=context)
                 return response
             else:
                 form = SystemPerformanceForm()
@@ -93,7 +91,7 @@ def system_performance_calculator(request):
             }
             return render(request, 'Luna/system_performance_calc.html', context)
     else:
-        return HttpResponseRedirect('/Luna')
+        return HttpResponseRedirect('/')
 
 
 @login_required
@@ -152,41 +150,31 @@ def performance_calculator_print(request):
 @user_passes_test(automation_access)
 def automation_page(request):
     if request.user.is_authenticated:
-        if request.method == 'POST':
-            automation_form = AutomatorForm(request.POST)
-            data_source_type = automation_form.cleaned_data['data_source_type']
-            data_source_location = automation_form.cleaned_data['data_source_location']
-            data_source_id = automation_form.cleaned_data['data_source_id']
-            data_format_type = automation_form.cleaned_data['data_format_type']
-            context = {
-                'user': request.user,
-                'start_form': automation_form,
-                'start_form_completed': True,
-                'google_sheet_form': GoogleSheetsFormat(request.POST),
-                'csv_form': CsvForm(request.POST),
-                'excel_form': ExcelForm(request.POST),
-            }
-            render_to_response('Luna/system_performance_pdf.html',
-                               context,
-                               RequestContext(request))
-        else:
-            context = {
-                'user': request.user,
-                'start_form': AutomatorForm(),
-                'google_sheet_form': GoogleSheetsFormat(),
-                'csv_form': CsvForm(),
-                'excel_form': ExcelForm(),
-            }
-            return render(request, 'Luna/automation.html', context)
+        context = {
+            'user': request.user
+        }
+        return render(request, 'Luna/automation.html', context)
     else:
-        return HttpResponseRedirect('/Luna')
+        return HttpResponseRedirect('/')
 
 
 @login_required
 @user_passes_test(automation_access)
 def create_new_task(request):
-    context = {'user': request.user}
-    return render(request, 'Luna/automation_create_new_task.html', context)
+    if request.user.is_authenticated:
+        context = {'user': request.user}
+        if request.method == 'POST':
+            form = AutomatorForm(request.POST)
+            context['form'] = form
+            if form.is_valid():
+                return render(request, 'Luna/automation_view_existing_tasks.html', context)
+            else:
+                return render(request, 'Luna/automation_create_new_task.html', context)
+        else:
+            context['form'] = AutomatorForm()
+            return render(request, 'Luna/automation_create_new_task.html', context)
+    else:
+        return HttpResponseRedirect('/')
 
 
 @login_required
@@ -201,19 +189,59 @@ def vcaas_data_set(request):
     return render(request, 'Luna/vcaas_data.html', context)
 
 
-def vcaas_update(request, num):
-    model_data = create_table_from_model(VcaasLogin)
-    header = model_data['fields']
-    model_id = model_data['table'][num][header.index('id')]
-    instance = get_object_or_404(VcaasLogin, id=model_id)
-    form = VcaasForm(request.POST or None, instance=instance)
-    context = {'form': form}
-    if form.is_valid():
-        form.save()
-        return redirect('/wfm/vcaas/')
-    update_object = context['model'][num]
-    context['update_model'] = update_object
-    return render(request, 'Luna/vcaas_update_form.html', context)
+def vcaas_update(request, id=None):
+    if request.user.is_authenticated:
+        print('authenticated')
+        if request.POST == 'POST':
+            model_data = create_table_from_model(VcaasLogin)
+            form = VcaasForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('/wfm/vcaas')
+            else:
+                model_data = create_table_from_model(VcaasLogin)
+                context = {
+                    'form': form,
+                    'model': model_data,
+                    'update_model': '',
+                }
+                update_object = context['model'][id]
+                context['update_model'] = update_object
+                return render(request, 'Luna/vcaas_update_form.html', context)
+        else:
+            print('else')
+            print(id)
+            if id is None:
+                form = VcaasForm()
+                context = {'form': form}
+                return render(request, 'Luna/vcaas_update_form.html', context)
+            else:
+                try:
+                    id = int(id)
+                    id_is_number = True
+                except ValueError:
+                    id_is_number = False
+
+                if id_is_number:
+                    form = VcaasForm(request.POST)
+                    model_data = create_table_from_model(VcaasLogin)
+                    context = {
+                        'form': form,
+                        'model': model_data,
+                        'update_model': '',
+                    }
+                    update_object = context['model'][id]
+                    context['update_model'] = update_object
+                    return render(request, 'Luna/vcaas_update_form.html', context)
+                else:
+                    form = VcaasForm(request.POST, id=id)
+                    context = {'form': form}
+                    return render(request, 'Luna/vcaas_update_form.html', context)
+
+
+def wfm(request):
+    context = {'user': request.user}
+    return render(request, 'Luna/workforce_tools.html', context)
 
 
 def create_table_from_model(model):

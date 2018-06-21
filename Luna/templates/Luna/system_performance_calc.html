@@ -1,6 +1,5 @@
 {% extends 'Luna/base.html' %}
 {% block content %}
-
     <div class="main">
         <h2>System Performance Calculator</h2>
         <div style="width: 100%; display: inline-block;">
@@ -31,14 +30,11 @@
                                     <input type="submit"
                                            formaction="/calculators/system_performance_calculator/pdf"
                                            value="Print Friendly Page" formtarget="_blank"/>
-
                                 {% endif %}
                             </td>
                             <td style="float: right" colspan="2">
-
                                 <input type="submit" value="Submit"/>
                             </td>
-
                         </tr>
                         </tbody>
                     </table>
@@ -64,9 +60,7 @@
                             <th>PTO</th>
                         </tr>
                         </thead>
-
                         <tbody>
-
                         {% for row in form_response.account %}
                             <tr>
                                 {% for item in row %}
@@ -118,6 +112,5 @@
                 {% endif %}
             </table>
         </div>
-
     </div>
 {% endblock %}

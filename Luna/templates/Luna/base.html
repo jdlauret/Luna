@@ -25,6 +25,9 @@
             {% if perms.automator_task.can_add_automator_tasks %}
                 <a href="/automation">Automation</a>
             {% endif %}
+            {% if perms.vcaas_login.can_add_vcaas_login %}
+                <a href="/wfm">Workforce Tools</a>
+            {% endif %}
             <input type="checkbox" id="menu">
             <label for="menu"><img src="{% static "images/arrow-right-white.png" %}">Calculators</label>
             <div class="menu-content">
