@@ -198,7 +198,7 @@
                             <tr>
                                 <th>PTO Date</th>
                                 <th>Utility Company</th>
-                                <th>Average Utility Rate</th>
+                                <th>Average Utility Rate<sup>*</sup></th>
                                 <th>Annual Pre-<br>Solar Consumption</th>
                             </tr>
                         </thead>
@@ -237,11 +237,11 @@
 {#                    <th scope="col">Bill w/Solar</th>#}
 {#                    <th scope="col">Bill w/out Solar<sup>*</sup></th>#}
 {#                    <th scope="col">Savings</th>#}
-                    <th scope="col">Savings</th>
                     <th scope="col">Vivint Solar Bill</th>
                     <th scope="col">Utility Bill</th>
                     <th scope="col">Bill w/Solar</th>
                     <th scope="col">Bill w/out Solar<sup>*</sup></th>
+                    <th scope="col">Savings</th>
                 </tr>
                 </thead>
                 {% if form_response_complete == True %}
@@ -251,11 +251,11 @@
                         {% if row.0 == 'Total' %}
                             <tr>
                                 <td>{{ row.0 }}</td>
-                                <td>{{ row.10 }}</td>
                                 <td>{{ row.6 }}</td>
                                 <td>{{ row.7 }}</td>
                                 <td>{{ row.8 }}</td>
                                 <td>{{ row.9 }}</td>
+                                <td>{{ row.10 }}</td>
 {#                                {% for col in row %}#}
 {#                                    <td>{{ col }}</td>#}
 {#                                {% endfor %}#}
@@ -263,11 +263,11 @@
                         {% else %}
                             <tr>
                                 <td>{{ row.0 }}</td>
-                                <td>{{ row.10 }}</td>
                                 <td>{{ row.6 }}</td>
                                 <td>{{ row.7 }}</td>
                                 <td>{{ row.8 }}</td>
                                 <td>{{ row.9 }}</td>
+                                <td>{{ row.10 }}</td>
 {#                                {% for col in row %}#}
 {#                                    <td>{{ col }}</td>#}
 {#                                {% endfor %}#}

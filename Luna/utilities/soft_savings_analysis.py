@@ -113,12 +113,14 @@ def soft_savings_analysis(servicenum, startdate, enddate):
             results['startdate'].strftime('%m/%d/%Y')
         ),
         'For that energy, you paid Vivint Solar {}.'.format(results['savings'][-1][2]),
-        'If you had paid your utility company, {}, for that same amount of energy, ' \
-        'you would have paid {}.'.format(
+        'The average utility customer of your utility, {}, would have paid {} for that same amount of energy.'.format(
             results['account'][0][8],
             results['savings'][-1][3]
         ),
-        'Your total savings since {} is {}.'.format(
+        'For the average utility customer with {}, who had {} kilowatt hours (kWh) of production since {},' \
+        ' they would have saved {}.'.format(
+            results['account'][0][8],
+            results['savings'][-1][1].split()[0],
             results['startdate'].strftime('%m/%d/%Y'),
             results['savings'][-1][4]
         )
