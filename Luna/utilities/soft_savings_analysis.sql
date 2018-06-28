@@ -7,12 +7,15 @@ select t.service_name,
     t.service_zip_code,
     trunc(t.start_billing),
     t.utility_company,
-    u.blended_rate
+    u.blended_rate,
+    m.record_type
 from sfrpt.t_dm_project t
 inner join sfrpt.t_dm_contact c
     on c.contact_id = t.contract_signer
 left join mack_damavandi.t_utility_rates u
     on upper(u.utility) = upper(t.utility_company) and u.state = t.service_state
+left join sfrpt.t_dm_contract m
+    on t.primary_contract_id = m.contract_id
 where t.service_number = :serviceNum
 ;select to_char(t.read_date,'Mon YYYY') "Month Year",
     t.actual_kwh "Actual (kWh)",

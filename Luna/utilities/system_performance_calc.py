@@ -82,13 +82,19 @@ def system_performance(servicenum, startdate, enddate):
                              'to {}.'.format(servicenum, startdatestring, enddatestring)
         return results
 
-    totals = [sum(j) for j in [i for i in zip(*results['production'])][1:3]]
+    totals = [sum(j) for j in [i for i in zip(*results['production'])][1:4]]
     results['production'].append(['Total',
                                   round(totals[0], 3),
                                   round(totals[1], 3),
-                                  round(totals[1]/totals[0], 4)
+                                  round(totals[2], 3),
+                                  round(totals[2]/totals[1], 4)
                                   ])
 
     results['account'][0][7] = results['account'][0][7].strftime('%B %#d, %Y')
 
+    for month in results['production']:
+        month[1] = '{} kWh'.format(month[1])
+        month[2] = '{} kWh'.format(month[2])
+        month[3] = '{} kWh'.format(month[3])
+        month[4] = '{0:.2%}'.format(month[4])
     return results

@@ -84,6 +84,13 @@
                 </table>
             </div>
         </div>
+            {% if form_response.error %}
+                <table>
+                    <tr>
+                        <td colspan="5">{{ form_response.error }}</td>
+                    </tr>
+                </table>
+            {% endif %}
         <div id="production_div">
             {% if form_response_complete == True %}
                 <ul>
@@ -167,15 +174,6 @@
                             <b>*</b> Values are representative of the average customer of your Utility Company.
                         </td>
                     </tr>
-                    {% if form_response.error %}
-                        <tr>
-                            <td>{{ form_response.error }}</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    {% endif %}
                     </tbody>
                 {% endif %}
             </table>

@@ -137,7 +137,7 @@ def full_benefit_analysis(servicenum, consumption, backfeed, utilitybill):
     results['account'][0][9] = '${} per kWh'.format(round(results['account'][0][9], 5))
     results['account'][0][7] = results['account'][0][7].strftime('%B %#d, %Y')
     results['account'][0][10] = '{} kWh'.format(results['account'][0][10])
-    #TODO: fix formatting of background colors in full_benefit_analysis.html
+
     for month in results['production']:
         month[1] = '{} kWh'.format(month[1])
         month[2] = '{} kWh'.format(month[2])
