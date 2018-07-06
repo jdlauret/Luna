@@ -11,8 +11,9 @@ inner join sfrpt.t_dm_contact c
     on c.contact_id = t.contract_signer
 where t.service_number = :serviceNum
 ;select to_char(t.read_date,'Mon YYYY') "Month Year",
-    nvl(t.estimated_corrected_kwh, t.estimated_kwh) "Estimate (kWh)",
-    t.actual_kwh "Actual (kWh)",
+    t.estimated_kwh "CAD Estimates",
+    nvl(t.estimated_corrected_kwh, t.estimated_kwh) "Weather Corrected Estimate",
+    t.actual_kwh "Actual",
     nvl(round(t.performance_ratio,4), round(t.actual_kwh/nvl(t.estimated_corrected_kwh, t.estimated_kwh),4)) "Performance" --t.actual_kwh/t.estimated_corrected_kwh
 from fleet_production.mv_fusion_weather_adjusted t
 inner join sfrpt.t_dm_project p

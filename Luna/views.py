@@ -7,6 +7,8 @@ from django.template import loader, Library, RequestContext
 from .models import CareerPath
 from Luna.utilities.template_updates import JsonHandler
 from .forms import *
+from .utilities.soft_savings_analysis import soft_savings_analysis
+from .utilities.full_benefit_analysis import full_benefit_analysis
 from .utilities.system_performance_calc import system_performance
 from .utilities.page_notes import *
 
@@ -22,7 +24,9 @@ def automation_access(user):
 
 
 def index(request):
-    context = {'user': request.user}
+    context = {
+        # 'user': request.user
+    }
     return render(request, 'Luna/index.html', context)
 
 
@@ -68,9 +72,8 @@ def system_performance_calculator(request):
                 except Exception as e:
                     context['form_response_complete'] = False
 
-                response = render_to_response('Luna/system_performance_calc.html',
-                                              context,
-                                              RequestContext(request))
+                response = render(request, 'Luna/system_performance_calc.html', context=context)
+
                 return response
             else:
                 form = SystemPerformanceForm()
@@ -187,3 +190,289 @@ def automation_page(request):
 def create_new_task(request):
     context = {'user': request.user}
     return render(request, 'Luna/automation_create_new_task.html', context)
+
+
+@login_required
+@user_passes_test(email_check)
+def full_benefit_calculator(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = FullBenefitForm(request.POST)
+            if form.is_valid():
+                service_number = form.cleaned_data['service_number']
+                consumption = [
+                    abs(form.cleaned_data['twelve_months_consumption']),
+                    abs(form.cleaned_data['eleven_months_consumption']),
+                    abs(form.cleaned_data['ten_months_consumption']),
+                    abs(form.cleaned_data['nine_months_consumption']),
+                    abs(form.cleaned_data['eight_months_consumption']),
+                    abs(form.cleaned_data['seven_months_consumption']),
+                    abs(form.cleaned_data['six_months_consumption']),
+                    abs(form.cleaned_data['five_months_consumption']),
+                    abs(form.cleaned_data['four_months_consumption']),
+                    abs(form.cleaned_data['three_months_consumption']),
+                    abs(form.cleaned_data['two_months_consumption']),
+                    abs(form.cleaned_data['one_months_consumption'])
+                ]
+                backfeed = [
+                    abs(form.cleaned_data['twelve_months_backfeed']),
+                    abs(form.cleaned_data['eleven_months_backfeed']),
+                    abs(form.cleaned_data['ten_months_backfeed']),
+                    abs(form.cleaned_data['nine_months_backfeed']),
+                    abs(form.cleaned_data['eight_months_backfeed']),
+                    abs(form.cleaned_data['seven_months_backfeed']),
+                    abs(form.cleaned_data['six_months_backfeed']),
+                    abs(form.cleaned_data['five_months_backfeed']),
+                    abs(form.cleaned_data['four_months_backfeed']),
+                    abs(form.cleaned_data['three_months_backfeed']),
+                    abs(form.cleaned_data['two_months_backfeed']),
+                    abs(form.cleaned_data['one_months_backfeed'])
+                ]
+                utility_bill = [
+                    form.cleaned_data['twelve_months_utility_bill'],
+                    form.cleaned_data['eleven_months_utility_bill'],
+                    form.cleaned_data['ten_months_utility_bill'],
+                    form.cleaned_data['nine_months_utility_bill'],
+                    form.cleaned_data['eight_months_utility_bill'],
+                    form.cleaned_data['seven_months_utility_bill'],
+                    form.cleaned_data['six_months_utility_bill'],
+                    form.cleaned_data['five_months_utility_bill'],
+                    form.cleaned_data['four_months_utility_bill'],
+                    form.cleaned_data['three_months_utility_bill'],
+                    form.cleaned_data['two_months_utility_bill'],
+                    form.cleaned_data['one_months_utility_bill']
+                ]
+                # TODO pass parameters to Mack's function
+                context = {
+                    'form': form,
+                    'user': request.user,
+                    'form_response_complete': True,
+                    'form_response': {},
+                    'legal_footer': print_page_legal_footer,
+                }
+                try:
+                    results = full_benefit_analysis(service_number, consumption, backfeed, utility_bill)
+                    context['form_response'] = results
+                except Exception as e:
+                    context['form_response_complete'] = False
+
+                response = render(request, 'Luna/full_benefit_analysis.html', context=context)
+
+                return response
+            else:
+                form = FullBenefitForm()
+                context = {
+                    'form': form,
+                    'user': request.user,
+                    'form_response_complete': False,
+                    'form_response': {},
+                    'legal_footer': print_page_legal_footer,
+                }
+                return render(request, 'Luna/full_benefit_analysis.html', context=context)
+        else:
+            form = FullBenefitForm()
+            context = {
+                'user': request.user,
+                'form': form,
+                'form_response_complete': False,
+                'form_response': {},
+                'legal_footer': print_page_legal_footer,
+            }
+            return render(request, 'Luna/full_benefit_analysis.html', context)
+    else:
+        return HttpResponseRedirect('/Luna')
+
+
+@login_required
+@user_passes_test(email_check)
+def full_benefit_print(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = FullBenefitForm(request.POST)
+            if form.is_valid():
+                service_number = form.cleaned_data['service_number']
+                consumption = [
+                    form.cleaned_data['twelve_months_consumption'],
+                    form.cleaned_data['eleven_months_consumption'],
+                    form.cleaned_data['ten_months_consumption'],
+                    form.cleaned_data['nine_months_consumption'],
+                    form.cleaned_data['eight_months_consumption'],
+                    form.cleaned_data['seven_months_consumption'],
+                    form.cleaned_data['six_months_consumption'],
+                    form.cleaned_data['five_months_consumption'],
+                    form.cleaned_data['four_months_consumption'],
+                    form.cleaned_data['three_months_consumption'],
+                    form.cleaned_data['two_months_consumption'],
+                    form.cleaned_data['one_months_consumption']
+                ]
+                backfeed = [
+                    form.cleaned_data['twelve_months_backfeed'],
+                    form.cleaned_data['eleven_months_backfeed'],
+                    form.cleaned_data['ten_months_backfeed'],
+                    form.cleaned_data['nine_months_backfeed'],
+                    form.cleaned_data['eight_months_backfeed'],
+                    form.cleaned_data['seven_months_backfeed'],
+                    form.cleaned_data['six_months_backfeed'],
+                    form.cleaned_data['five_months_backfeed'],
+                    form.cleaned_data['four_months_backfeed'],
+                    form.cleaned_data['three_months_backfeed'],
+                    form.cleaned_data['two_months_backfeed'],
+                    form.cleaned_data['one_months_backfeed']
+                ]
+                utility_bill = [
+                    form.cleaned_data['twelve_months_utility_bill'],
+                    form.cleaned_data['eleven_months_utility_bill'],
+                    form.cleaned_data['ten_months_utility_bill'],
+                    form.cleaned_data['nine_months_utility_bill'],
+                    form.cleaned_data['eight_months_utility_bill'],
+                    form.cleaned_data['seven_months_utility_bill'],
+                    form.cleaned_data['six_months_utility_bill'],
+                    form.cleaned_data['five_months_utility_bill'],
+                    form.cleaned_data['four_months_utility_bill'],
+                    form.cleaned_data['three_months_utility_bill'],
+                    form.cleaned_data['two_months_utility_bill'],
+                    form.cleaned_data['one_months_utility_bill']
+                ]
+                # TODO pass parameters to Mack's function
+                context = {
+                    'form': form,
+                    'user': request.user,
+                    'form_response_complete': True,
+                    'form_response': {},
+                    'legal_footer': print_page_legal_footer,
+                }
+                try:
+                    results = full_benefit_analysis(service_number, consumption, backfeed, utility_bill)
+                    context['form_response'] = results
+                except Exception as e:
+                    context['form_response_complete'] = False
+
+                response = render_to_response('Luna/full_benefit_analysis_pdf.html',
+                                              context,
+                                              RequestContext(request))
+                return response
+            else:
+                form = FullBenefitForm()
+                context = {
+                    'form': form,
+                    'user': request.user,
+                    'form_response_complete': False,
+                    'form_response': {},
+                    'legal_footer': print_page_legal_footer,
+                }
+                return render(request, 'Luna/full_benefit_analysis_pdf.html', context)
+        else:
+            form = FullBenefitForm()
+            context = {
+                'user': request.user,
+                'form': form,
+                'form_response_complete': False,
+                'form_response': {},
+                'legal_footer': print_page_legal_footer,
+            }
+            return render(request, 'Luna/full_benefit_analysis_pdf.html', context)
+    else:
+        return HttpResponseRedirect('/Luna')
+
+
+@login_required
+@user_passes_test(email_check)
+def soft_savings_calculator(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = SoftSavingsForm(request.POST)
+            if form.is_valid():
+                service_number = form.cleaned_data['service_number']
+                start_date = form.cleaned_data['start_date']
+                end_date = form.cleaned_data['end_date']
+                # TODO pass parameters to Mack's function
+                context = {
+                    'form': form,
+                    'user': request.user,
+                    'form_response_complete': True,
+                    'form_response': {},
+                    'legal_footer': print_page_legal_footer,
+                }
+                try:
+                    results = soft_savings_analysis(service_number, start_date, end_date)
+                    context['form_response'] = results
+                except Exception as e:
+                    context['form_response_complete'] = False
+
+                response = render(request, 'Luna/soft_savings_analysis.html', context=context)
+
+                return response
+            else:
+                form = SoftSavingsForm()
+                context = {
+                    'form': form,
+                    'user': request.user,
+                    'form_response_complete': False,
+                    'form_response': {},
+                    'legal_footer': print_page_legal_footer,
+                }
+                return render(request, 'Luna/soft_savings_analysis.html', context=context)
+        else:
+            form = SystemPerformanceForm()
+            context = {
+                'user': request.user,
+                'form': form,
+                'form_response_complete': False,
+                'form_response': {},
+                'legal_footer': print_page_legal_footer,
+            }
+            return render(request, 'Luna/soft_savings_analysis.html', context)
+    else:
+        return HttpResponseRedirect('/Luna')
+
+
+@login_required
+@user_passes_test(email_check)
+def soft_savings_print(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = SoftSavingsForm(request.POST)
+            if form.is_valid():
+                service_number = form.cleaned_data['service_number']
+                start_date = form.cleaned_data['start_date']
+                end_date = form.cleaned_data['end_date']
+                # TODO pass parameters to Mack's function
+                context = {
+                    'form': form,
+                    'user': request.user,
+                    'form_response_complete': True,
+                    'form_response': {},
+                    'legal_footer': print_page_legal_footer,
+                }
+                try:
+                    results = soft_savings_analysis(service_number, start_date, end_date)
+                    context['form_response'] = results
+                except Exception as e:
+                    context['form_response_complete'] = False
+
+                response = render_to_response('Luna/soft_savings_analysis_pdf.html',
+                                              context,
+                                              RequestContext(request))
+                return response
+            else:
+                form = SoftSavingsForm()
+                context = {
+                    'form': form,
+                    'user': request.user,
+                    'form_response_complete': False,
+                    'form_response': {},
+                    'legal_footer': print_page_legal_footer,
+                }
+                return render(request, 'Luna/soft_savings_analysis_pdf.html', context)
+        else:
+            form = SoftSavingsForm()
+            context = {
+                'user': request.user,
+                'form': form,
+                'form_response_complete': False,
+                'form_response': {},
+                'legal_footer': print_page_legal_footer,
+            }
+            return render(request, 'Luna/soft_savings_analysis_pdf.html', context)
+    else:
+        return HttpResponseRedirect('/Luna')

@@ -1,0 +1,408 @@
+{% extends 'Luna/base.html' %}
+{% block content %}
+
+    <div class="main">
+        <h2>Full Benefit Analysis</h2>
+        <div style="width: 100%; display: inline-block;">
+            <div style="float: left; width: 49%">
+                <form action="/calculators/full_benefit_analysis/" method="post">
+                    <table class="table table-borderless">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th colspan="5">Customer Info</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{ form.non_field_errors }}</td>
+                        </tr>
+                        <tr>
+                            <td><label for="{{ form.service_number.id_for_label }}">{{ form.service_number.label }}</label></td>
+                            <td colspan="2">{{ form.service_number }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td colspan="1">Consumption</td>
+                            <td colspan="1">Backfeed</td>
+                            <td colspan="1">Utility Bill</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">{{ form.labels.twelve }}</td>
+                            <td colspan="1">{{ form.twelve_months_consumption }}</td>
+                            <td colspan="1">{{ form.twelve_months_backfeed }}</td>
+                            <td colspan="1">{{ form.twelve_months_utility_bill }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">{{ form.labels.eleven }}</td>
+                            <td colspan="1">{{ form.eleven_months_consumption }}</td>
+                            <td colspan="1">{{ form.eleven_months_backfeed }}</td>
+                            <td colspan="1">{{ form.eleven_months_utility_bill }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">{{ form.labels.ten }}</td>
+                            <td colspan="1">{{ form.ten_months_consumption }}</td>
+                            <td colspan="1">{{ form.ten_months_backfeed }}</td>
+                            <td colspan="1">{{ form.ten_months_utility_bill }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">{{ form.labels.nine }}</td>
+                            <td colspan="1">{{ form.nine_months_consumption }}</td>
+                            <td colspan="1">{{ form.nine_months_backfeed }}</td>
+                            <td colspan="1">{{ form.nine_months_utility_bill }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">{{ form.labels.eight }}</td>
+                            <td colspan="1">{{ form.eight_months_consumption }}</td>
+                            <td colspan="1">{{ form.eight_months_backfeed }}</td>
+                            <td colspan="1">{{ form.eight_months_utility_bill }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">{{ form.labels.seven }}</td>
+                            <td colspan="1">{{ form.seven_months_consumption }}</td>
+                            <td colspan="1">{{ form.seven_months_backfeed }}</td>
+                            <td colspan="1">{{ form.seven_months_utility_bill }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">{{ form.labels.six }}</td>
+                            <td colspan="1">{{ form.six_months_consumption }}</td>
+                            <td colspan="1">{{ form.six_months_backfeed }}</td>
+                            <td colspan="1">{{ form.six_months_utility_bill }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">{{ form.labels.five }}</td>
+                            <td colspan="1">{{ form.five_months_consumption }}</td>
+                            <td colspan="1">{{ form.five_months_backfeed }}</td>
+                            <td colspan="1">{{ form.five_months_utility_bill }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">{{ form.labels.four }}</td>
+                            <td colspan="1">{{ form.four_months_consumption }}</td>
+                            <td colspan="1">{{ form.four_months_backfeed }}</td>
+                            <td colspan="1">{{ form.four_months_utility_bill }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">{{ form.labels.three }}</td>
+                            <td colspan="1">{{ form.three_months_consumption }}</td>
+                            <td colspan="1">{{ form.three_months_backfeed }}</td>
+                            <td colspan="1">{{ form.three_months_utility_bill }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">{{ form.labels.two }}</td>
+                            <td colspan="1">{{ form.two_months_consumption }}</td>
+                            <td colspan="1">{{ form.two_months_backfeed }}</td>
+                            <td colspan="1">{{ form.two_months_utility_bill }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">{{ form.labels.one }}</td>
+                            <td colspan="1">{{ form.one_months_consumption }}</td>
+                            <td colspan="1">{{ form.one_months_backfeed }}</td>
+                            <td colspan="1">{{ form.one_months_utility_bill }}</td>
+                        </tr>
+{#                        {% for row in form.grid %}#}
+{#                            <tr>#}
+{#                                <td>{{ row }}</td>#}
+{#                                {% for item in row %}#}
+{#                                    {% if item.errors %}#}
+{#                                        <td>{{ item.errors }}</td>#}
+{#                                    {% endif %}#}
+{#                                    <td colspan="1">{{ item }}</td>#}
+{#                                {% endfor %}#}
+{#                            </tr>#}
+{#                        {% endfor %}#}
+{#                        {% for field in form %}#}
+{#                            <tr>#}
+{#                                {% if field.errors %}#}
+{#                                    <td>{{ field.errors }}</td>#}
+{#                                {% endif %}#}
+{#                                <td><label for="{{ field.id_for_label }}">{{ field.label }} </label></td>#}
+{#                                <td colspan="1">{{ field }}</td>#}
+{#                            </tr>#}
+{#                        {% endfor %}#}
+                        <tr>
+                            <td colspan="4">
+                                {% if form_response_complete == True %}
+                                    <input type="submit"
+                                           formaction="/calculators/full_benefit_analysis/pdf"
+                                           value="Print Friendly Page" formtarget="_blank"/>
+
+                                {% endif %}
+                            </td>
+                            <td style="float: right" colspan="2">
+
+                                <input type="submit" value="Submit"/>
+                            </td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+            <div id="account_info" style="margin-left: 51%">
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+{#                        <th colspan="{{ form_response.account.0|length }}">Account Information</th>#}
+                        <th colspan="4">Account Information</th>
+                    </tr>
+                    </thead>
+                    {% if form_response_complete == True %}
+                        <thead>
+                        <tr>
+                            <th>Service Number</th>
+                            <th>Name</th>
+                            <th>Email</th>
+{#                            <th>Street Address</th>#}
+{#                            <th>City</th>#}
+{#                            <th>State</th>#}
+{#                            <th>Zip Code</th>#}
+{#                            <th>PTO</th>#}
+{#                            <th>Utility Company</th>#}
+{#                            <th>Average Utility Rate</th>#}
+                        </tr>
+                        </thead>
+                        <tbody>
+{#                        {% for row in form_response.account %}#}
+{#                            <tr>#}
+{#                                {% for item in row %}#}
+{#                                    <td>{{ item }}</td>#}
+{#                                {% endfor %}#}
+{#                            </tr>#}
+{#                        {% endfor %}#}
+                            <tr>
+                                <td>{{ form_response.account.0.0 }}</td>
+                                <td>{{ form_response.account.0.1 }}</td>
+                                <td>{{ form_response.account.0.2 }}</td>
+                            </tr>
+                        </tbody>
+{#                    </table>#}
+{#                    <table class="table">#}
+                        <thead>
+                            <tr>
+                                <th>Street Address</th>
+                                <th>City</th>
+                                <th>State</th>
+                                <th>Zip Code</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ form_response.account.0.3 }}</td>
+                                <td>{{ form_response.account.0.4 }}</td>
+                                <td>{{ form_response.account.0.5 }}</td>
+                                <td>{{ form_response.account.0.6 }}</td>
+                            </tr>
+                        </tbody>
+{#                    </table>#}
+{#                    <table class="table">#}
+                        <thead>
+                            <tr>
+                                <th>PTO Date</th>
+                                <th>Utility Company</th>
+                                <th>Average Utility Rate<sup>*</sup></th>
+                                <th>Annual Pre-<br>Solar Consumption</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ form_response.account.0.7 }}</td>
+                                <td>{{ form_response.account.0.8 }}</td>
+                                <td>{{ form_response.account.0.9 }}</td>
+                                <td>{{ form_response.account.0.10 }}</td>
+                            </tr>
+                        </tbody>
+{#                    </table>#}
+                    {% endif %}
+                </table>
+            </div>
+        </div>
+        <div id="production_div">
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th colspan="{{ form_response.production.0|length }}">Analysis by Month</th>
+                </tr>
+                </thead>
+            </table>
+            <table id="production" class="table table-striped" style="overflow: auto">
+                <thead>
+                <tr>
+                    <th scope="col">Month</th>
+{#                    <th scope="col">Actual Production</th>#}
+{#                    <th scope="col">Consumption <br>from Panels</th>#}
+{#                    <th scope="col">Excess Production <br>Sent to Grid</th>#}
+{#                    <th scope="col">Consumption <br>from Utility</th>#}
+{#                    <th scope="col">Total Consumption</th>#}
+{#                    <th scope="col">Vivint Solar Bill</th>#}
+{#                    <th scope="col">Utility Bill</th>#}
+{#                    <th scope="col">Bill w/Solar</th>#}
+{#                    <th scope="col">Bill w/out Solar<sup>*</sup></th>#}
+{#                    <th scope="col">Savings</th>#}
+                    <th scope="col">Vivint Solar Bill</th>
+                    <th scope="col">Utility Bill</th>
+                    <th scope="col">Bill w/Solar</th>
+                    <th scope="col">Bill w/out Solar<sup>*</sup></th>
+                    <th scope="col">Savings</th>
+                </tr>
+                </thead>
+                {% if form_response_complete == True %}
+                    <tbody>
+
+                    {% for row in form_response.production %}
+                        {% if row.0 == 'Total' %}
+                            <tr>
+                                <td>{{ row.0 }}</td>
+                                <td>{{ row.6 }}</td>
+                                <td>{{ row.7 }}</td>
+                                <td>{{ row.8 }}</td>
+                                <td>{{ row.9 }}</td>
+                                <td>{{ row.10 }}</td>
+{#                                {% for col in row %}#}
+{#                                    <td>{{ col }}</td>#}
+{#                                {% endfor %}#}
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td>{{ row.0 }}</td>
+                                <td>{{ row.6 }}</td>
+                                <td>{{ row.7 }}</td>
+                                <td>{{ row.8 }}</td>
+                                <td>{{ row.9 }}</td>
+                                <td>{{ row.10 }}</td>
+{#                                {% for col in row %}#}
+{#                                    <td>{{ col }}</td>#}
+{#                                {% endfor %}#}
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+                    <br>
+                <table id="production" class="table table-striped" style="overflow: auto">
+                <thead>
+                <tr>
+                    <th scope="col">Month</th>
+{#                    <th scope="col">Actual Production</th>#}
+{#                    <th scope="col">Consumption <br>from Panels</th>#}
+{#                    <th scope="col">Excess Production <br>Sent to Grid</th>#}
+{#                    <th scope="col">Consumption <br>from Utility</th>#}
+{#                    <th scope="col">Total Consumption</th>#}
+{#                    <th scope="col">Vivint Solar Bill</th>#}
+{#                    <th scope="col">Utility Bill</th>#}
+{#                    <th scope="col">Bill w/Solar</th>#}
+{#                    <th scope="col">Bill w/out Solar<sup>*</sup></th>#}
+{#                    <th scope="col">Savings</th>#}
+                    <th scope="col">Actual Production</th>
+                    <th scope="col">Consumption <br>from Panels</th>
+                    <th scope="col">Excess Producton <br>Sent to Grid</th>
+                    <th scope="col">Consumption <br>from Utility</th>
+                    <th scope="col">Total Consumption</th>
+                </tr>
+                </thead>
+                    <tbody>
+
+                    {% for row in form_response.production %}
+                        {% if row.0 == 'Total' %}
+                            <tr>
+                                <td>{{ row.0 }}</td>
+                                <td>{{ row.1 }}</td>
+                                <td>{{ row.2 }}</td>
+                                <td>{{ row.3 }}</td>
+                                <td>{{ row.4 }}</td>
+                                <td>{{ row.5 }}</td>
+{#                                {% for col in row %}#}
+{#                                    <td>{{ col }}</td>#}
+{#                                {% endfor %}#}
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td>{{ row.0 }}</td>
+                                <td>{{ row.1 }}</td>
+                                <td>{{ row.2 }}</td>
+                                <td>{{ row.3 }}</td>
+                                <td>{{ row.4 }}</td>
+                                <td>{{ row.5 }}</td>
+{#                                {% for col in row %}#}
+{#                                    <td>{{ col }}</td>#}
+{#                                {% endfor %}#}
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                    <tr>
+                        <td><b>Definitions</b></td>
+                        <td colspan="5">
+                            <ul>
+                                <li>
+                                    <b>Savings</b>: The difference between your
+                                    <b><em>Bill w/Out Solar<sup>*</sup></em></b> and your
+                                    <b><em>Bill w/Solar</em></b>.
+                                </li>
+                                <li>
+                                    <b>Vivint Solar Bill</b>: Your Vivint Solar Bill based on the
+                                    <b><em>Actual Production</em></b> of the solar energy system at your home
+                                    and your contract rate during that month.
+                                </li>
+                                <li>
+                                    <b>Utility Bill</b>: The subtotal of your charges for energy and
+                                    connection to the grid.
+                                </li>
+                                <li>
+                                    <b>Bill w/Solar</b>: The sum of your <b><em>Utility Bill</em></b> and your
+                                    <b><em>Vivint Solar Bill</em></b>.
+                                </li>
+                                <li>
+                                    <b>Bill w/out Solar<sup>*</sup></b>: Your <b><em>Total Consumption</em></b>
+                                    multiplied by your <b><em>Average Utility Rate</em></b>.
+                                </li>
+                                <li>
+                                    <b>Actual Production</b>: The amount of energy produced by the solar energy
+                                    system at your hom.
+                                </li>
+                                <li>
+                                    <b>Consumption from Panels</b>: The amount of energy your home used that was
+                                    produced by the solar energy system.
+                                </li>
+                                <li>
+                                    <b>Excess Production Sent to Grid</b>: The amount of energy registered
+                                    by your utility's net meter.
+                                </li>
+                                <li>
+                                    <b>Consumption from Utility</b>: The amount of energy your home drew from
+                                    the grid.
+                                </li>
+                                <li>
+                                    <b>Total Consumption</b>: The total amount of energy you needed to meet
+                                    your usage habits.
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Footnote</b>
+                        </td>
+                        <td colspan="5">
+                            <b>*</b> Values are calculated using your <b><em>Total Consumption</em></b> and
+                            <b><em>Average Utility Rate</em></b>.
+                        </td>
+                    </tr>
+                    {% if form_response.error %}
+                        <tr>
+                            <td>{{ form_response.error }}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    {% endif %}
+                    </tbody>
+                {% endif %}
+            </table>
+        </div>
+
+    </div>
+{% endblock %}
