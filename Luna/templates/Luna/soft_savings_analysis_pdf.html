@@ -8,31 +8,74 @@
                     <th colspan="{{ form_response.account.0|length }}">Account Information</th>
                 </tr>
                 </thead>
-                {% if form_response_complete == True %}
-                    <thead>
-                    <tr>
-                        <th>Service Number</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Street Address</th>
-                        <th>City</th>
-                        <th>State</th>
-                        <th>Zip Code</th>
-                        <th>PTO</th>
-                        <th>Utility Company</th>
-                        <th>Average Utility Rate<sup>*</sup></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for row in form_response.account %}
+
+                    {% if form_response_complete == True %}
+                        <thead>
                         <tr>
-                            {% for item in row %}
-                                <td style="text-align: left">{{ item }}</td>
-                            {% endfor %}
+                            <th>Service Number</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Street Address</th>
+                            <th>City</th>
+                            <th>State</th>
+                            <th>Zip Code</th>
+{#                            <th>Street Address</th>#}
+{#                            <th>City</th>#}
+{#                            <th>State</th>#}
+{#                            <th>Zip Code</th>#}
+{#                            <th>PTO</th>#}
+{#                            <th>Utility Company</th>#}
+{#                            <th>Average Utility Rate</th>#}
                         </tr>
-                    {% endfor %}
-                    </tbody>
-                {% endif %}
+                        </thead>
+                        <tbody>
+{#                        {% for row in form_response.account %}#}
+{#                            <tr>#}
+{#                                {% for item in row %}#}
+{#                                    <td>{{ item }}</td>#}
+{#                                {% endfor %}#}
+{#                            </tr>#}
+{#                        {% endfor %}#}
+                            <tr>
+                                <td>{{ form_response.account.0.0 }}</td>
+                                <td>{{ form_response.account.0.1 }}</td>
+                                <td>{{ form_response.account.0.2 }}</td>
+                                <td>{{ form_response.account.0.3 }}</td>
+                                <td>{{ form_response.account.0.4 }}</td>
+                                <td>{{ form_response.account.0.5 }}</td>
+                                <td>{{ form_response.account.0.6 }}</td>
+                            </tr>
+                        </tbody>
+{#                    </table>#}
+{#                    <table class="table">#}
+                        <thead>
+                            <tr>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                            </tr>
+                        </tbody>
+{#                    </table>#}
+{#                    <table class="table">#}
+                        <thead>
+                            <tr>
+                                <th>PTO Date</th>
+                                <th>Utility Company</th>
+                                <th>Average Utility Rate<sup>*</sup></th>
+                                <th>Contract Type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ form_response.account.0.7 }}</td>
+                                <td>{{ form_response.account.0.8 }}</td>
+                                <td>{{ form_response.account.0.9 }}</td>
+                                <td>{{ form_response.account.0.10 }}</td>
+                            </tr>
+                        </tbody>
+{#                    </table>#}
+                    {% endif %}
             </table>
         </div>
     </div>

@@ -51,7 +51,7 @@ def soft_savings_analysis(servicenum, startdate, enddate):
     elif results['account'][0][-1] != 'Solar PPA' and results['account'][0][-1] != 'Solar Lease':
         results['error'] = 'This calculator is only for PPA and Lease customers! This customer has a' \
                            ' {}. For Loan customers, please refer them to their Loan Documents.' \
-                           ''.format(results['account'][0].pop())
+                           ''.format(results['account'][0][-1])
         results['account'][0][9] = '${}'.format(round(results['account'][0][9], 5))
         results['account'][0][7] = results['account'][0][7].strftime('%B %#d, %Y')
         return results
