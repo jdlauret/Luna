@@ -484,44 +484,37 @@ def soft_savings_print(request):
 def RTS_notes (request):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            form = RTS_notes(request.POST)
+            form = RTSForm(request.POST)
             if form.is_valid():
                 service_number = form.cleaned_data['service_number']
-                # TODO pass parameters to Mack's function
+                context = {
+                    # Form contains Name=Service Number, Value = .... Maxlength=20
+                    'form': form,
+                    # User contains person who signed into Luna
+                    'user': request.user,
+                    'form_response_complete': True,
+                    # Dictionary from function notes_wizard, plus tsr, num_modules, azimuth, and tilt
+                    'form_response': notes_wizard(service_number)
+                }
+                response = render(request, 'Luna/RTS_notes_wizard.html', context=context)
+                return response
+            else:
+                form = RTSForm()
                 context = {
                     'form': form,
                     'user': request.user,
-                    'form_response_complete': True,
-                    'form_response': {}
+                    'form_response_complete': False,
+                    'form_response': {},
                 }
-    #             try:
-    #                 results = soft_savings_analysis(service_number)
-    #                 context['form_response'] = results
-    #             except Exception as e:
-    #                 context['form_response_complete'] = False
-    #
-    #             response = render(request, 'Luna/RTS_notes_wizard.html', context=context)
-    #
-    #             return response
-    #         else:
-    #             form = SoftSavingsForm()
-    #             context = {
-    #                 'form': form,
-    #                 'user': request.user,
-    #                 'form_response_complete': False,
-    #                 'form_response': {},
-    #                 'legal_footer': print_page_legal_footer,
-    #             }
-    #             return render(request, 'Luna/RTS_notes_wizard.html', context=context)
-    #     else:
-    #         form = SystemPerformanceForm()
-    #         context = {
-    #             'user': request.user,
-    #             'form': form,
-    #             'form_response_complete': False,
-    #             'form_response': {},
-    #             'legal_footer': print_page_legal_footer,
-    #         }
-    #         return render(request, 'Luna/RTS_notes_wizard.html', context)
-    # else:
+                return render(request, 'Luna/RTS_notes_wizard.html', context=context)
+        else:
+            form = RTSForm()
+            context = {
+                'form': form,
+                'user': request.user,
+                'form_response_complete': False,
+                'form_response': {},
+            }
+            return render(request, 'Luna/RTS_notes_wizard.html', context)
+    else:
         return HttpResponseRedirect('/Luna')
