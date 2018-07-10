@@ -77,9 +77,10 @@
                         <li>{{ item }}</li>
                     {% endfor %}
                 </ul>
-            {% endif %}
 {#                Button that allows the user to copy the text below#}
                 <button id="copyButton" onclick="clickCopy()">Copy </button>
+            {% endif %}
+
         {#RTS Notes Section#}
         {% if form_response_complete == True %}
             <textarea id="copyarea" style="width: 100%; height: 500px;">
