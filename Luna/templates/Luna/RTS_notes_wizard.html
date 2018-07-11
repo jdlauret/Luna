@@ -1,0 +1,104 @@
+{% extends 'Luna/base.html' %}
+{% block content %}
+    <div class="main">
+        <h2>RTS Notes Wizard</h2>
+        <div style="width: 100%; display: inline-block;">
+            <div style="float: left; width: 30%">
+                <form action="/calculators/RTS_notes/" method="post">
+                    <table class="table table-borderless">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th colspan="3">Account Lookup</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{ form.non_field_errors }}</td>
+                        </tr>
+                        {% for field in form %}
+                            <tr>
+                                {% if field.errors %}
+                                    <td>{{ field.errors }}</td>
+                                {% endif %}
+                                <td><label for="{{ field.id_for_label }}">{{ field.label }} </label></td>
+                                <td colspan="2">{{ field }}</td>
+                            </tr>
+                        {% endfor %}
+                        <tr>
+                            <td style="float: right" colspan="2">
+                                <input style="display:inline-block;" type="submit" value="Submit"/>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+            <div id="account_info" style="margin-left: 32%">
+{#            Table for Account Information #}
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th colspan="10">Account Information</th>
+                        </tr>
+                    </thead>
+                    {% if form_response_complete == True %}
+                        <thead>
+                            <tr>
+                                <th>Service Number</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Street Address</th>
+                                <th>City</th>
+                                <th>State</th>
+                                <th>Zip Code</th>
+                            </tr>
+                        <tr>
+{#                        Inputs the account information#}
+                        {% for info in form_response.account_info %}
+                                <td>{{ info }}</td>
+                            {% endfor %}
+                            </tr>
+                    {% endif %}
+                </table>
+            </div>
+        </div>
+            {% if form_response.error %}
+                <table>
+                    <tr>
+                        <td colspan="5">{{ form_response.error }}</td>
+                    </tr>
+                </table>
+            {% endif %}
+
+        <div id="production_div">
+            {% if form_response_complete == True %}
+                <ul>
+                    {% for item in form_response.summary %}
+                        <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+{#                Button that allows the user to copy the text below#}
+                <button id="copyButton" onclick="clickCopy()">Copy </button>
+            {% endif %}
+
+        {#RTS Notes Section#}
+        {% if form_response_complete == True %}
+            <textarea id="copyarea" style="width: 100%; height: 500px;">
+                Service Number: {{ form_response.spec_info.SERVICE_NUMBER }}
+                ESC Scheduled for Date: {{ form_response.spec_info.ESC_SCHEDULED_FOR }}
+                Arrays: {{ form_response.spec_info.ARRAYS }}
+                System Size: {{ form_response.spec_info.SYSTEM_SIZE_DESIGNED_KW }} KW
+                Total Modules: {{ form_response.spec_info.MODULE_QTY }}
+                Roof Type: {{ form_response.spec_info.ROOF_TYPE }}
+                Inverter Manufacturer: {{ form_response.spec_info.INVERTER_MANUFACTURER }}
+                Inverter Model: {{ form_response.spec_info.INVERTER_MODEL }}
+                Install Notes:
+        {#Roof Section#}{% for key, values in form_response.roof_sections.items %}{#        For loop that looks for the keys in the roof sections dictionary #}
+            {{ key }}{% for key2, value in values.items %}{# for loop that lists the keys and values within the first dictionary#}
+                {{ key2 }}: {{ value }}{% endfor %}
+        {% endfor %}{% endif %}
+            </textarea>
+
+        </div>
+    </div>
+{% endblock %}

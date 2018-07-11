@@ -48,6 +48,9 @@ class SoftSavingsForm(forms.Form):
                                    'width': '100%',
                                }))
 
+class RTSForm(forms.Form):
+    service_number = forms.CharField(label='Service Number:', max_length=20, required=True)
+
 
 class FullBenefitForm(forms.Form):
     month = previous_month_end().replace(

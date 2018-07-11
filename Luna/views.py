@@ -11,6 +11,7 @@ from .utilities.soft_savings_analysis import soft_savings_analysis
 from .utilities.full_benefit_analysis import full_benefit_analysis
 from .utilities.system_performance_calc import system_performance
 from .utilities.page_notes import *
+from .utilities.RTS_notes_wizard import notes_wizard
 
 register = Library()
 
@@ -474,5 +475,46 @@ def soft_savings_print(request):
                 'legal_footer': print_page_legal_footer,
             }
             return render(request, 'Luna/soft_savings_analysis_pdf.html', context)
+    else:
+        return HttpResponseRedirect('/Luna')
+
+# Rework this code to fit RTS Wizard notes
+@login_required
+@user_passes_test(email_check)
+def RTS_notes (request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = RTSForm(request.POST)
+            if form.is_valid():
+                service_number = form.cleaned_data['service_number']
+                context = {
+                    # Form contains Name=Service Number, Value = .... Maxlength=20
+                    'form': form,
+                    # User contains person who signed into Luna
+                    'user': request.user,
+                    'form_response_complete': True,
+                    # Dictionary from function notes_wizard, plus tsr, num_modules, azimuth, and tilt
+                    'form_response': notes_wizard(service_number)
+                }
+                response = render(request, 'Luna/RTS_notes_wizard.html', context=context)
+                return response
+            else:
+                form = RTSForm()
+                context = {
+                    'form': form,
+                    'user': request.user,
+                    'form_response_complete': False,
+                    'form_response': {},
+                }
+                return render(request, 'Luna/RTS_notes_wizard.html', context=context)
+        else:
+            form = RTSForm()
+            context = {
+                'form': form,
+                'user': request.user,
+                'form_response_complete': False,
+                'form_response': {},
+            }
+            return render(request, 'Luna/RTS_notes_wizard.html', context)
     else:
         return HttpResponseRedirect('/Luna')
