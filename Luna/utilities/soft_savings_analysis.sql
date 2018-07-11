@@ -21,9 +21,10 @@ left join sfrpt.t_dm_contract m
 where t.service_number = :serviceNum
 ;select to_char(t.read_date,'Mon YYYY') "Month Year",
     t.actual_kwh "Actual (kWh)",
-    round(t.actual_kwh*nvl(coalesce(p.rate_per_kwh*power(1.029,trunc((trunc(p.start_billing)-trunc(sysdate))/365)),t.current_rate_kwh),0),2) "Vivint Solar Bill",
+    nvl(coalesce(p.rate_per_kwh*power(1.029,trunc((trunc(t.read_date)-trunc(p.start_billing))/365)),t.current_rate_kwh),0) "PPA/Lease rate per kWh",
+    round(t.actual_kwh*nvl(coalesce(p.rate_per_kwh*power(1.029,trunc((trunc(t.read_date)-trunc(p.start_billing))/365)),t.current_rate_kwh),0),2) "Vivint Solar Bill",
     round(t.actual_kwh*coalesce(u.blended_rate,u.vslr_calculated_rate),2) "Utility Bill",
-    round(t.actual_kwh*(coalesce(u.blended_rate,u.vslr_calculated_rate)-nvl(coalesce(p.rate_per_kwh*power(1.029,trunc((trunc(p.start_billing)-trunc(sysdate))/365)),t.current_rate_kwh),0)),2) "Savings"
+    round(t.actual_kwh*(coalesce(u.blended_rate,u.vslr_calculated_rate)-nvl(coalesce(p.rate_per_kwh*power(1.029,trunc((trunc(t.read_date)-trunc(p.start_billing))/365)),t.current_rate_kwh),0)),2) "Savings"
 from fleet_production.mv_fusion_weather_adjusted t
 inner join sfrpt.t_dm_project p
     on p.project_id = t.project_id
