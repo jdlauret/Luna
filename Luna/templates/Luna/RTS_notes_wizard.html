@@ -86,13 +86,13 @@
             <textarea id="copyarea" style="width: 100%; height: 500px;">
                 Service Number: {{ form_response.spec_info.SERVICE_NUMBER }}
                 ESC Scheduled for Date: {{ form_response.spec_info.ESC_SCHEDULED_FOR }}
-                Arrays: {{ form_response.spec_info.ARRAYS }}
+                Arrays: [{{ form_response.spec_info.ARRAYS }}]
                 System Size: {{ form_response.spec_info.SYSTEM_SIZE_DESIGNED_KW }} KW
                 Total Modules: {{ form_response.spec_info.MODULE_QTY }}
                 Roof Type: {{ form_response.spec_info.ROOF_TYPE }}
                 Inverter Manufacturer: {{ form_response.spec_info.INVERTER_MANUFACTURER }}
                 Inverter Model: {{ form_response.spec_info.INVERTER_MODEL }}
-                Install Notes:
+            Install Notes: [  ]
         {#Roof Section#}{% for key, values in form_response.roof_sections.items %}{#        For loop that looks for the keys in the roof sections dictionary #}
             {{ key }}{% for key2, value in values.items %}{# for loop that lists the keys and values within the first dictionary#}
                 {{ key2 }}: {{ value }}{% endfor %}
