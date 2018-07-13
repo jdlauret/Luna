@@ -1,0 +1,119 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+body{
+    padding: 10px;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+.top_pane{
+    width: 100%;
+    background: #FF8200;
+    padding: 10px;
+}
+.main_box{
+    width: 75%;
+    padding: 10px;
+}
+#redeem_box{
+    width:80%;
+    padding: 20px;
+}
+.balance_box{
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 50%;
+}
+.total_balance_box{
+    display: inline-block;
+    margin: 5px;
+    padding: 20px;
+    width: 50px;
+    height:70px;
+    background: white;
+    border: 1px solid #DBD9D9;
+    color: #656569;
+    overflow: hidden;
+    border-radius: 50%;
+}
+.total_share_coin_box{
+    display: inline-block;
+    margin: 5px;
+    padding: 20px;
+    width: 50px;
+    height: 70px;
+    background: white;
+    border: 1px solid #DBD9D9;
+    color: #656569;
+    float: left;
+    border-radius: 50%;
+}
+.btn{
+    display: inline-block;
+    padding: 20px;
+    background-color: #FF8200;
+    color: white;
+    border: 1px solid white;
+    border-radius: 5%;
+}
+.btnform{
+    display:inline-block;
+}
+.btnform_box{
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+    margin-top: 30px;
+}
+#redeem_box{
+    background-color: #959497;
+    text-align: center;
+    width: 100%;
+}
+#trans_table{
+    width: 100%;
+}
+#form_box{
+    background-color: #DBD9D9;
+    padding: 20px;
+    margin: auto;
+    width: 75%;
+}
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    width: 100%;
+    background-color: #FF8200;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #57C1E8;
+}
