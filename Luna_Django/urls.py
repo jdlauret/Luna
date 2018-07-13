@@ -25,5 +25,5 @@ urlpatterns = [
     url(r'^logout/$', auth_views.logout, name='logout'),
     url(r'^auth/', include('social_django.urls', namespace='social')),
     url(r'^admin/', admin.site.urls),
-    url(r'^coin_sharing/', include(('coin_sharing_app.urls', 'sharing'), namespace='sharing')),
+    url(r'^coin_sharing/', include(('coin_sharing_app.urls', 'sharing'), namespace='sharing')), #Coin sharing URL
 ]
