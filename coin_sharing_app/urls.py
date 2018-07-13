@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
 #   Global View of all the transactions
-    url(r'^$', views.index),
+    url(r'^global$', views.index, name="global"),
 #   URL to Agent's personal transaction view
     # url(r'^(?P<badge_id>\d+)$', views.pers_trans_view)
     url(r'^agent$', views.agent, name="agent_view"),

@@ -3,7 +3,11 @@
     margin: 0px;
 }
 body{
-    padding: 10px;
+    font-family: "Lato", sans-serif;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 table {
     border-collapse: collapse;
@@ -19,14 +23,17 @@ td, th {
 tr:nth-child(even) {
     background-color: #dddddd;
 }
+.main_body{
+    display: inline-block;
+    vertical-align: top;
+    float: right;
+    width: 80%;
+}
 .top_pane{
     width: 100%;
     background: #FF8200;
     padding: 10px;
-}
-.main_box{
-    width: 75%;
-    padding: 10px;
+    height: 140px;
 }
 #redeem_box{
     width:80%;
@@ -36,14 +43,14 @@ tr:nth-child(even) {
     overflow: hidden;
     display: inline-block;
     vertical-align: top;
-    margin-left: 50%;
+    float: right;
 }
 .total_balance_box{
     display: inline-block;
     margin: 5px;
     padding: 20px;
-    width: 50px;
-    height:70px;
+    width: 110px;
+    height:110px;
     background: white;
     border: 1px solid #DBD9D9;
     color: #656569;
@@ -54,8 +61,8 @@ tr:nth-child(even) {
     display: inline-block;
     margin: 5px;
     padding: 20px;
-    width: 50px;
-    height: 70px;
+    width: 110px;
+    height: 110px;
     background: white;
     border: 1px solid #DBD9D9;
     color: #656569;
@@ -91,7 +98,7 @@ tr:nth-child(even) {
     background-color: #DBD9D9;
     padding: 20px;
     margin: auto;
-    width: 75%;
+    width: 100%;
 }
 input[type=text], select {
     width: 100%;
