@@ -116,7 +116,16 @@ h5.sticky {
     position: sticky;
     top: -16px;
 }
-
+.top_panel{
+    background-color: #57C1E8;
+    padding: 15px;
+}
+.name_box{
+    display: block;
+    margin-left: 90%;
+    font-weight: bold;
+    color: white;
+}
 /* pattern styles */
 .careerpath_container {
     display: flex;
@@ -273,10 +282,6 @@ h5.sticky {
     font-size: 15px;
 }
 
-.collapsible-menu a {
-    list-style-type: none;
-}
-
 .collapsible-menu label {
     display: inline-block;
     cursor: pointer;
@@ -288,12 +293,22 @@ h5.sticky {
     cursor: pointer;
     display: inline-block;
 }
+#arrow{
+    height: 15px;
+    width: 15px;
+}
 
 input#menu {
     display: none;
 }
+input#coin-menu {
+    display: none;
+}
 
 input:checked ~ .menu-content {
+    max-height: 100%;
+}
+input:checked ~ .coin-menu-content {
     max-height: 100%;
 }
 

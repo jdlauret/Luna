@@ -11,6 +11,7 @@
 </head>
 <body>
 <div class="main_body">
+    <h2>Transaction Window</h2>
     <div class="top_pane">
         <div class="btnform_box">
             <form action="agent" method="POST">
@@ -24,7 +25,7 @@
                  Total Balance:
             </div>
             <div class="total_share_coin_box">
-                Coins to Share:
+                Sharing Balance:
             </div>
         </div>
     </div>
@@ -33,10 +34,11 @@
             <form action="" method="POST">
             {% csrf_token %}
             <label for="who">Who do you want to send a gift to? </label>
+
             <select agent="to_agent">
-                <option value="Agent 1">Agent 1</option>
-                <option value="Agent 2">Agent 2</option>
-                <option value="Agent 3">Agent 3</option>
+            {% for x in users %}
+                <option value="Agent 1">{{ x.badge_id }} - {{ x.full_name }}</option>
+              {% endfor %}
             </select><br><br>
 
             <label for="how_much">How much do you want to send? </label><br>

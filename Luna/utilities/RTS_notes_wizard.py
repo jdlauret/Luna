@@ -1,5 +1,4 @@
 import os
-# from datetime import date, timedelta
 from Luna.models import DataWarehouse
 
 main_dir = os.getcwd()

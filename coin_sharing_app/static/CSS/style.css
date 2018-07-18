@@ -1,17 +1,30 @@
 *{
+    font-family: "Lato", sans-serif;
     padding: 0px;
     margin: 0px;
 }
+@media print {
+    body {
+        background-color: #FFFFFF;
+        background-image: none;
+        color: #000000;
+    }
+}
+
 body{
     font-family: "Lato", sans-serif;
     width: 100%;
     height: 100%;
-    margin: 0;
+    background-color: #fdfdff;
     padding: 0;
 }
 table {
     border-collapse: collapse;
     width: 100%;
+}
+
+h2 {
+    color: #656569
 }
 
 td, th {
@@ -26,12 +39,14 @@ tr:nth-child(even) {
 .main_body{
     display: inline-block;
     vertical-align: top;
-    float: right;
-    width: 80%;
+    width: 83%;
+    padding: 10px;
+    position: fixed;
+    margin-left: 200px;
 }
 .top_pane{
     width: 100%;
-    background: #FF8200;
+    background: #3FBFAD;
     padding: 10px;
     height: 140px;
 }
@@ -71,11 +86,13 @@ tr:nth-child(even) {
 }
 .btn{
     display: inline-block;
-    padding: 20px;
-    background-color: #FF8200;
+    /*padding: 20px;*/
+    background-color: #3FBFAD;
     color: white;
     border: 1px solid white;
     border-radius: 5%;
+    box-sizing: border-box;
+    line-height: 30px
 }
 .btnform{
     display:inline-block;
@@ -112,13 +129,14 @@ input[type=text], select {
 
 input[type=submit] {
     width: 100%;
-    background-color: #FF8200;
+    background-color: #3FBFAD;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-weight: bold;
 }
 
 input[type=submit]:hover {

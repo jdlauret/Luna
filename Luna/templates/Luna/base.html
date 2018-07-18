@@ -15,6 +15,11 @@
     <link rel="stylesheet" type="text/css" href="{% static 'luna_style.css' %}"/>
 </head>
 <body>
+{#            <div class="top_panel">#}
+{#                <div class="name_box">#}
+{#                    Welcome {{ user.first_name }}!<br>#}
+{#                </div>#}
+{#            </div>#}
 <div class="sidenav">
     <a class="logo" href="{% url 'index' %}">
         <span class="logo"></span>
@@ -34,8 +39,18 @@
                 <a href="/calculators/RTS_notes">RTS Notes Wizard</a>
             </div>
         </div>
+
+        <div class="collapsible-menu">
+        <input type="checkbox" id="coin-menu">
+            <label for="coin-menu"><img id="arrow" src="{% static "resources/arrow-right-white.png" %}">Coin Sharing</label>
+            <div class="menu-content">
+                <a href="{% url 'sharing:global' %}">Everyone</a>
+                <a href="{% url 'sharing:agent_view' %}">Personal</a>
+                <a href="{% url 'sharing:transaction_view' %}">Send Coins</a>
+            </div>
+        </div>
+
         <a href="/career_path">Career Path</a>
-        <a href="{% url 'sharing:agent_view' %}">Share Coins</a>
         <hr>
         <div class="sidenav-bottom">
             <a style="width: 166px" href="/logout">Logout</a>
