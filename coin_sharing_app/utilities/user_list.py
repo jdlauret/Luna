@@ -7,8 +7,7 @@ utilities_dir = os.path.join(coin_dir, 'utilities')
 
 
 def user_list():
-    user_list = {
-        'list_of_user': {}
+    agent_list = {
     }
     dw = DataWarehouse('admin')
 
@@ -18,14 +17,18 @@ def user_list():
 
     try:
         result = dw.results
+        column = dw.column_names
+        # print('Column: ', column)
 
         if len(result) == 0:
-            user_list['error'] = 'Error'
-            return list
+            agent_list['error'] = 'Error'
+            return agent_list
 
     except Exception as e:
-        user_list['error'] = e
-        return user_list
-
-    user_list['list_of_user'] = result
-    return user_list
+        agent_list['error'] = e
+        return agent_list
+    #
+    for j, value in enumerate(result):
+        # print(value)
+        agent_list[value[0]] = value[1]
+    return agent_list

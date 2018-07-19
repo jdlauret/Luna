@@ -10,4 +10,5 @@ urlpatterns = [
 #   URL to page where you can send coins to other people
 #     url(r'^(?P<badge_id>\d+)/trans$', views.transaction)
     url(r'^transaction', views.transaction, name="transaction_view"),
+    url(r'^submit_transaction', views.submit_transaction, name="submit_transaction"),
 ]

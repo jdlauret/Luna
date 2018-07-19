@@ -31,21 +31,22 @@
     </div>
     <div class="main_box">
         <div id="form_box">
-            <form action="" method="POST">
+            <form action="submit_transaction" method="POST">
             {% csrf_token %}
             <label for="who">Who do you want to send a gift to? </label>
 
             <select agent="to_agent">
-            {% for x in users %}
-                <option value="Agent 1">{{ x.badge_id }} - {{ x.full_name }}</option>
+                <option></option>
+            {% for key, values in user_list.items %}
+                <option value={{ key }}>{{ values }} - {{ key }} </option>
               {% endfor %}
             </select><br><br>
 
             <label for="how_much">How much do you want to send? </label><br>
-            <input type="text" name="coin_amount"><br><br>
+            <input type="text" name="coin_to_give"><br><br>
 
             <label for="reason">Reason for the award? </label>
-            <input type="text" name="reason"><br><br>
+            <input type="text" name="note"><br><br>
             <input type="submit">
         </form>
     </div>
