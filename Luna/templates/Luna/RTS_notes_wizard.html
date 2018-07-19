@@ -92,7 +92,7 @@ Total Modules: {{ form_response.spec_info.MODULE_QTY }}
 Roof Type: {{ form_response.spec_info.ROOF_TYPE }}
 Inverter Manufacturer: {{ form_response.spec_info.INVERTER_MANUFACTURER }}
 Inverter Model: {{ form_response.spec_info.INVERTER_MODEL }}
-Install Notes: [  ]
+Install Notes: INSERT INSTALL NOTES HERE
 {#Roof Section#}{% for key, values in form_response.roof_sections.items %}{#        For loop that looks for the keys in the roof sections dictionary #}
 {{ key }}{% for key2, value in values.items %}{# for loop that lists the keys and values within the first dictionary#}
     {{ key2 }}: {{ value }}{% endfor %}
