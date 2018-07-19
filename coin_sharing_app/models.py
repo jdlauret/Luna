@@ -31,18 +31,26 @@ class coinManager(models.Manager):
         # once everything is validated, the user is able to enter the code in. It creates a new line in the db
 
         # return post_data['redemption_code']
-    def insert_coin_transaction(self, FROM_BADGEID, TO_BADGEID, COIN_TO_GIVE, REDEMPTION_CODE, NOTE):
-        query = "INSERT INTO coin_transaction(FROM_BADGEID, TO_BADGEID, COIN_TO_GIVE, REDEMPTION_CODE, NOTE)"
+    def insert_coin_transaction(self, clean_data, FROM_BADGEID, TO_BADGEID, COIN_TO_GIVE, REDEMPTION_CODE, NOTE):
+        # validate the information being inserted into table
+        # query = "INSERT INTO COIN_TRANSACTION(FROM_BADGEID, TO_BADGEID, COIN_TO_GIVE, REDEMPTION_CODE, NOTE)"
+        dw = DataWarehouse('admin')
+        dw.insert_data_to_table(self, COIN_TRANSACTION, FROM_BADGEID, TO_BADGEID, COIN_TO_GIVE, REDEMPTION_CODE, NOTE)
 
-class coin_status(models.Model):
-    agent_name = models.CharField(max_length=100)
-    badge_id = models.IntegerField
-    coin_give = models.IntegerField #How much you can give to another agent
-    coin_received = models.IntegerField #How much was received by another agent
-    coin_total = models.IntegerField #How much you have in your bank
+    def insert_coin_status (self, clean_data, AGENT_NAME, BADGE_ID, COIN_GIVE, COIN_RECEIVED, COIN_TOTAL):
+        # query = "INSERT INTO COIN_STATUS(AGENT_NAME, BADGE_ID, COIN_GIVE, COIN_RECEIVED, COIN_TOTAL)"
+        dw = DataWarehouse('admin')
+        dw.insert_data_to_table(self, COIN_STATUS, AGENT_NAME, BADGE_ID, COIN_GIVE, COIN_RECEIVED, COIN_TOTAL)
+
+class COIN_STATUS(models.Model):
+    AGENT_NAME = models.CharField(max_length=100)
+    BADGE_ID = models.IntegerField
+    COIN_GIVE = models.IntegerField #How much you can give to another agent
+    COIN_RECEIVED = models.IntegerField #How much was received by another agent
+    COIN_TOTAL = models.IntegerField #How much you have in your bank
     objects = coinManager()
 
-class coin_transaction(models.Model):
+class COIN_TRANSACTION(models.Model):
     FROM_BADGEID = models.IntegerField
     TO_BADGEID = models.IntegerField
     COIN_TO_GIVE = models.IntegerField #How much coin you want to give to another agent
