@@ -4,7 +4,8 @@ select t.service_name,
     t.service_address,
     t.service_city,
     t.service_state,
-    t.service_zip_code
+    t.service_zip_code,
+    t.START_BILLING
 from sfrpt.t_dm_project t
 inner join sfrpt.t_dm_contact c
     on c.contact_id = t.contract_signer
@@ -14,5 +15,4 @@ FROM SFRPT.MV_CAD_ROOF_CONFIGURATIONS T
 INNER JOIN SFRPT.T_DM_SYSTEM_DESIGN D ON T.SOLAR_CAD = D.CAD_ID
 INNER JOIN SFRPT.T_DM_PROJECT P ON D.CAD_ID = P.PRIMARY_CAD
 LEFT JOIN (SELECT * FROM SFRPT.T_DM_CASE C WHERE C.RECORD_TYPE = 'Solar - Electrical Service Change') ESC ON P.PROJECT_ID = ESC.PROJECT_ID
-WHERE P.START_BILLING IS NULL
-AND P.SERVICE_NUMBER = :serviceNum;
+WHERE P.SERVICE_NUMBER = :serviceNum;
