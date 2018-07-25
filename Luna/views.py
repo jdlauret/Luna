@@ -35,7 +35,6 @@ def index(request):
 @user_passes_test(email_check)
 def career_path(request):
     if request.user.is_authenticated:
-        template = loader.get_template('Luna/career_path.html')
 
         context = {
             'user': request.user,
