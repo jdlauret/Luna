@@ -297,6 +297,9 @@ h5.sticky {
     height: 15px;
     width: 15px;
 }
+#coin-menu{
+    display: none;
+}
 
 input#menu {
     display: none;

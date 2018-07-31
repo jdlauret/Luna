@@ -1,20 +1,28 @@
 {% extends 'Luna/base.html' %}
 {% block content %}
-<!DOCTYPE html>
+
+    <!DOCTYPE html>
 <html lang="en">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <head>
     <meta charset="UTF-8">
     <title>Transaction Window</title>
     {% load staticfiles %}
-        <link rel="stylesheet" href="{% static 'CSS/style.css' %}">
+    <link rel="stylesheet" href="{% static 'CSS/style.css' %}">
+    <script type="text/javascript" src="{% static 'JS/style.js' %}"></script>
+    <script>
+function redemption_box(){
+    alert('Badgeid: {{ badge_id }} Remption Code: {{ redemption_code }} Message: {{ NOTE }}');
+{#    TODO WORK ON POP UP WINDOW FOR REDEMPTION CODE #}
+}
+    </script>
 </head>
 <body>
 <div class="main_body">
     <h2>Transaction Window</h2>
     <div class="top_pane">
         <div class="btnform_box">
-            <form action="agent" method="POST">
+            <form action="submit_transaction" method="POST">
             {% csrf_token %}
             <button class="btn">Return to Personal View </button>
         </form>
@@ -30,24 +38,27 @@
         </div>
     </div>
     <div class="main_box">
-        <div id="form_box">
+        <div class="form_box">
+
             <form action="submit_transaction" method="POST">
             {% csrf_token %}
-            <label for="who">Who do you want to send a gift to? </label>
 
-            <select agent="to_agent">
+            <label for="who">Who do you want to send a gift to? </label>
+            <select name="TO_BADGEID" agent="to_agent">
                 <option></option>
             {% for key, values in user_list.items %}
                 <option value={{ key }}>{{ values }} - {{ key }} </option>
               {% endfor %}
             </select><br><br>
-
+            {#TODO Hidden badgeid #}
             <label for="how_much">How much do you want to send? </label><br>
-            <input type="text" name="coin_to_give"><br><br>
+            <input type="text" name="COIN_TO_GIVE"><br><br>
 
             <label for="reason">Reason for the award? </label>
-            <input type="text" name="note"><br><br>
-            <input type="submit">
+            <input type="text" id="NOTE" name="NOTE"><br><br>
+            <input type="hidden" name="badge_id">
+            <input type="hidden" name="REDEMPTION_CODE">
+            <input type="submit" onclick="redemption_box()">
         </form>
     </div>
 </div>

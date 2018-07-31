@@ -37,12 +37,10 @@
 
     <div class ="main_box">
         <div id="redeem_box">
-            <form action="" method="POST">
+            <form action="" method="POST"class="form_box">
                 {% csrf_token %}
-                <label for="redemption_code" style="border: 1px solid white; padding: 15px; color: white;">Redeem code:</label>
                 <input type="text" name="redemption_code">
-{#                <label>*case sensitive</label>#}
-                <button>Submit</button>
+                <input type="submit" value="Redeem Code">
 
             </form>
         </div>
@@ -53,12 +51,9 @@
             <th>Transaction Date: </th>
             <th>Reason: </th>
         </tr>
-        {% for x in coin_transaction %}
+        {% for x in status_coin %}
         <tr>
-            <td>{{ x.to_badgeid }}</td>
-            <td>{{ x.coin_to_give }}</td>
-            <td>Date</td>
-            <td>{{ x.note }}</td>
+            <td></td>
         </tr>
         {% endfor %}
     </table>

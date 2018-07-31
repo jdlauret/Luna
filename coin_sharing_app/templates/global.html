@@ -40,14 +40,13 @@
             <th>Transaction Date: </th>
             <th>Reason: </th>
         </tr>
-        {% for x in coin_transaction %}
+        {% for x in status_coin %}
         <tr>
-            <td>{{ x.from_badgeid }}</td>
-            <td>{{ x.to_badgeid }}</td>
-            <td>{{ x.coin_received }}</td>
-            <td>date</td>
-{#            <td>{{ x.created_at }}</td>#}
-            <td>{{ x.note }}</td>
+            <td>{{ x.FROM_BADGEID }}</td>
+            <td>{{ x.TO_BADGEID }}</td>
+            <td>{{ x.COIN_TO_GIVE }}</td>
+            <td>{{ x.CREATED_AT }}</td>
+            <td>{{ x.NOTE }}</td>
         </tr>
         {% endfor %}
     </table>
