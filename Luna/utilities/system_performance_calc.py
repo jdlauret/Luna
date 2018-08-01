@@ -37,7 +37,11 @@ def system_performance(servicenum, startdate, enddate):
     results['account'] = dw.results
 
     if len(results['account']) == 0:
-        results['error'] = '{} is not a valid service number.'.format(servicenum)
+        results['error'] = '{} is not a valid service number or the associated ' \
+                           'Project has been cancelled.'.format(servicenum)
+        return results
+    elif not results['account'][0][7]:
+        results['error'] = '{} hasn\'t received PTO yet!'.format(servicenum)
         return results
     elif startdate < results['account'][0][7].date():
         results['startdate'] = results['account'][0][7]
@@ -87,6 +91,7 @@ def system_performance(servicenum, startdate, enddate):
                                   round(totals[0], 3),
                                   round(totals[1], 3),
                                   round(totals[2], 3),
+                                  round(totals[2]/totals[0], 4),
                                   round(totals[2]/totals[1], 4)
                                   ])
 
@@ -97,4 +102,20 @@ def system_performance(servicenum, startdate, enddate):
         month[2] = '{} kWh'.format(month[2])
         month[3] = '{} kWh'.format(month[3])
         month[4] = '{0:.2%}'.format(month[4])
+        month[5] = '{0:.2%}'.format(month[5])
+
+    results['summary'] = [
+        'The solar energy system produced {} from {} to {}.'.format(
+            results['production'][-1][3],
+            results['startdate'].strftime('%m/%d/%Y'),
+            results['enddate'].strftime('%m/%d/%Y')
+        ),
+        'The solar energy system at your home operated at {} of what we expected it to ' \
+        'from {} to {}.'.format(
+            results['production'][-1][5],
+            results['startdate'].strftime('%m/%d/%Y'),
+            results['enddate'].strftime('%m/%d/%Y')
+        )
+    ]
+
     return results
