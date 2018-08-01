@@ -10,11 +10,13 @@ from sfrpt.t_dm_project t
 inner join sfrpt.t_dm_contact c
     on c.contact_id = t.contract_signer
 where t.service_number = :serviceNum
+    and t.project_status != 'Cancelled'
 ;select to_char(t.read_date,'Mon YYYY') "Month Year",
-    t.estimated_kwh "CAD Estimates",
+    t.estimated_kwh "Design Estimates",
     nvl(t.estimated_corrected_kwh, t.estimated_kwh) "Weather Corrected Estimate",
     t.actual_kwh "Actual",
-    nvl(round(t.performance_ratio,4), round(t.actual_kwh/nvl(t.estimated_corrected_kwh, t.estimated_kwh),4)) "Performance" --t.actual_kwh/t.estimated_corrected_kwh
+    round(t.actual_kwh/t.estimated_kwh,4) "Design Performance",
+    nvl(round(t.performance_ratio,4), round(t.actual_kwh/nvl(t.estimated_corrected_kwh, t.estimated_kwh),4)) "Weather Corrected Performance" --t.actual_kwh/t.estimated_corrected_kwh
 from fleet_production.mv_fusion_weather_adjusted t
 inner join sfrpt.t_dm_project p
     on p.project_id = t.project_id
