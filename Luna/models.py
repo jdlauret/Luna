@@ -35,7 +35,7 @@ class CareerPath(models.Model):
     AUXILIARY = 'auxiliary'
     SUPER_AGENT = 'super_agent'
     SERVICE = 'service'
-    SPECIALIST_1 = 'specialist_1'
+    CUSOMTER_SOLUTIONS_ADMIN = 'customer_solutions_admin'
     INBOUND_OUTBOUND = 'inbound_outbound'
     EMAIL_ADMIN = 'email_admin'
     DOCUMENTS = 'documents'
@@ -44,6 +44,7 @@ class CareerPath(models.Model):
     REP_1 = 'representative_1'
     REP_2 = 'representative_2'
     REP_3 = 'representative_3'
+    SPECIALIST_1 = 'specialist_1'
     SPECIALIST_2 = 'specialist_2'
     SPECIALIST_3 = 'specialist_3'
     TEAM_LEAD = 'team_lead'
@@ -52,7 +53,7 @@ class CareerPath(models.Model):
     TIER_1_1 = 12.00
     TIER_2_1 = 13.00
     TIER_2_2 = 13.25
-    TIER_2_3 = 13.50
+    TIER_2_3 = 13.75
     TIER_3_1 = 14.00
     TIER_3_2 = 14.25
     TIER_3_3 = 14.50
@@ -71,7 +72,7 @@ class CareerPath(models.Model):
         (SUPER_AGENT, 'Super Agent'),
         (SERVICE, 'Service'),
         (CUSTOMER_SERVICE, 'Customer Service'),
-        (SPECIALIST_1, 'Specialist 1'),
+        (CUSOMTER_SOLUTIONS_ADMIN, 'Customer Solutions Admin'),
         (RECS_AND_REBATES, 'RECs & Rebates'),
         (INBOUND_OUTBOUND, 'Inbound / Outbound'),
         (EMAIL_ADMIN, 'Email Admins'),
@@ -92,7 +93,7 @@ class CareerPath(models.Model):
         (TIER_1_1, '$12.00'),
         (TIER_2_1, '$13.00'),
         (TIER_2_2, '$13.25'),
-        (TIER_2_3, '$13.50'),
+        (TIER_2_3, '$13.75'),
         (TIER_3_1, '$14.00'),
         (TIER_3_2, '$14.25'),
         (TIER_3_3, '$14.50'),
