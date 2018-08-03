@@ -1,118 +1,188 @@
 from __future__ import unicode_literals
 import os
-import re
-import json
 import django
+import json
+import datetime as dt
+
 from django.db import models
-from Luna.models import DataWarehouse
-from .utilities.user_list import *
-from .utilities.coin_sharing_info import *
-import random
-import string
+from django.utils import timezone
+
+MAIN_DIR = os.path.dirname(os.path.realpath(__file__))
+LOGS_DIR = os.path.join(MAIN_DIR, 'logs')
+
 
 class coinManager(models.Manager):
 
-    # THIS IS A RANDOM CODE GENERATOR
-    def random_string_generator(length=12):
-        return ''.join(random.choices(string.ascii_uppercase + string.digits, k=length))
-
-    # VALIDATES THE INFORMATION IN TRANSACTION WINDOW TO SEE IF ALL THE INFORMATION IS FILLED \
-    #       ALSO CHECKS TO SEE IF THERE IS ENOUGH COINS TO SEE IF YOU CAN GIVE ANYONE COIN
-    def validate_field (self, post_data):
-        errors= []
-
-        # todo first needs to find out the badgeid of person signed on
-        # todo next it needs to filter out the table to only just the signed in person's info
-        # todo next it needs to compare the coin_give to the coin_to_give info
-        # todo once it is validated then it can input the new information to the transaction_coin table
-        # todo updates the status_coin in the coin_give section
-
-        # VALIDATES THE FIELD TO SEE IF THERE IS INFORMATION IN THE BOXES ON THE TRANSACTION PAGE
-    #     if len(post_data['TO_BADGEID']) > 0 and len(post_data['COIN_TO_GIVE']) > 0 and len(post_data['NOTE']) > 0:
-    #         pass
-    #     else:
-    #         errors.append('Cannot leave field blank')
-    #         return errors
-    #
-    # #     VALIDATES THE BALANCE TO SEE IF THERE IS ENOUGH COIN TO GIVE TO SOMEONE ELSE ON TRANSACTION PAGE
-    # #     needs to compare information between the user who is logged in and their balance
-    # #     Then needs to call the COIN_TO_GIVE and compare that to what is found in the database
-    #     if status_coin.COIN_GIVE >= post_data['COIN_TO_GIVE']:
-    #         status_coin.COIN_GIVE = status_coin.COIN_GIVE - post_data['COIN_TO_GIVE']
-    #     else:
-    #         errors.append('Not enough coins to share')
-
-    # Validates the redemption code that the user enters in the agent_view.html
-    def validate_code(self, post_data):
+    @classmethod
+    def validate_transaction(self, post_data):
         errors = []
-    #   todo finds the badgeid of person signed in
-    # todo then it looks through transaction in to_badgeid
-    # todo then it compares the redemption code to the new redemption code entered
-    # todo then it pulls up the badge id of person signed-in in the status_coin
-    # todo replaces the coin_total
-    # # checks the redemption code to other codes
-    #     if len(transaction_coin.objects.filter(REDEMPTION_CODE = post_data['REDEMPTION_CODE'])) > 0:
-    #         print('Need to validate if the code is correct')
-    #     #     call the current user signed in and compare that to the redemption code that the user receving
-    #         if transaction_coin.REDEMPTION_CODE ==  post_data['REDEMPTION_CODE']:
-    #             print('Transaction Code Accepted')
-    #
-    #     else:
-    #         errors.append('Redemption Code Invalid')
-    #         return errors
+        # VALIDATES THE FIELD TO SEE IF THERE IS INFORMATION IN THE BOXES ON THE TRANSACTION PAGE
+        # if len(badge_id) <= 0 or len(post_data['gave']) <= 0 or len(post_data['note']) <= 0:
+        #     errors.append('Cannot leave field blank')
+        #     return errors
+        # else:
+        from_badgeid = post_data['badge_id']  # grabbing badge id from post_data
+        agent_info = status.objects.get(
+            badgeid=from_badgeid)  # get's agent info from status
+        coin_given = int(post_data['gave'])
 
-        # once everything is validated, the user is able to enter the code in. It creates a new line in the db
-
-    # THIS SECTION CREATES THE TABLE DATA
-    @classmethod
-    def create_transaction(self, clean_data, badge_id, TO_BADGEID, COIN_TO_GIVE, REDEMPTION_CODE, NOTE):
-        # todo validate the information being inserted into table
-        FROM_BADGEID = self.create(FROM_BADGEID=badge_id)
-        TO_BADGEID = self.create(TO_BADGEID=TO_BADGEID)
-        COIN_TO_GIVE = self.create(COIN_TO_GIVE=COIN_TO_GIVE)
-        REDEMPTION_CODE = self.create(REDEMPTION_CODE=REDEMPTION_CODE)
-        NOTE = self.create(NOTE=NOTE)
-
-    @classmethod
-    def create_status (self, AGENT_NAME, BADGE_ID, COIN_GIVE, COIN_RECEIVED, COIN_TOTAL):
-        AGENT_NAME = self.create(AGENT_NAME=AGENT_NAME)
-        BADGE_ID = self.create(BADGE_ID=BADGE_ID)
-        COIN_GIVE = self.create(COIN_GIVE=COIN_GIVE)
-        COIN_RECEIVED = self.create(COIN_RECEIVED=COIN_RECEIVED)
-        COIN_TOTAL = self.create(COIN_TOTAL=COIN_TOTAL)
-
-    # THIS SECTION EDITS THE TABLE
-    @classmethod
-    def edit_transaction(self, FROM_BADGEID, TO_BADGEID, COIN_TO_GIVE, REDEMPTION_CODE, NOTE):
-        transaction_coin.save(FROM_BADGEID, TO_BADGEID, COIN_TO_GIVE, REDEMPTION_CODE, NOTE)
+        if coin_given > agent_info.give:
+            errors.append('Cannot give more than allotment')
+            return errors
+        # deducts the amount from the agent who gave the coin to someone else
+        else:
+            agent_info.give -= coin_given
+            agent_info.save()
+            # adds the coin to the yet to be accept
+            to_id = post_data['to_id']
+            to_badgeid = status.objects.get(badge_id=to_id)
+            to_badgeid.to_accept += post_data['gave']
+            temp = transaction(
+                from_id=post_data['from_id'],
+                to_id=post_data['to_id'],
+                gave=post_data['gave'],
+                note=post_data['note'],
+                anonymous=post_data['anonymous'],
+            )
+            temp.save()
 
     @classmethod
-    def edit_status(self, AGENT_NAME, BADGE_ID, COIN_GIVE, COIN_RECEIVED, COIN_TOTAL):
-        status_coin.save(AGENT_NAME, BADGE_ID, COIN_GIVE, COIN_RECEIVED, COIN_TOTAL)
+    def filter_from(self, post_data):
+        id = post_data['badge_id']
+        transaction.objects.get(from_id=id)
+    #     todo if anonymous is true, to_id is hidden
+    #     todo if bad_comment is true, comment is hidden
+
+    @classmethod
+    def filter_to(self, post_data):
+        id = post_data['badge_id']
+        transaction.objects.get(to_id=id)
+        #     todo if anonymous is true, to_id is hidden
+        #     todo if bad_comment is true, comment is hidden
+
+    @classmethod
+    def filter_all(self, post_data):
+        id = post_data['badge_id']
+        transaction.objects.get(from_id=id)
+        transaction.objects.get(to_id=id)
+        #     todo if anonymous is true, to_id is hidden
+        #     todo if bad_comment is true, comment is hidden
+
+    @classmethod
+    def time_limit(self):
+        log_file_path = os.path.join(LOGS_DIR, 'date_resets.json')
+        with open(log_file_path) as infile:
+            log_file = json.load(infile)
+
+        months = [
+            1,
+            4,
+            7,
+            10
+        ]
+        now = dt.date.today()
+        standard = 75
+
+        if now.month in months and now.day == 1:
+            if str(now) not in log_file.keys():
+                log_file[str(now)] = False
+
+            if not log_file[str(now)]:
+                # special badges that are given extra allotment
+                sb1 = [120690]
+                sb1_coin = 10000000 + standard
+                sb2 = [53931,
+                       207208,
+                       120220,
+                       200023,
+                       104550]
+                sb2_coin = 600 + standard
+                sb3 = [119945]
+                sb3_coin = 500 + standard
+                sb4 = [200360,
+                       123014,
+                       62836,
+                       209349]
+                sb4_coin = 300 + standard
+                sb5 = [103390,
+                       119688,
+                       201640,
+                       201662,
+                       201737,
+                       201738,
+                       201767,
+                       201846,
+                       201869,
+                       206321,
+                       206415,
+                       206417,
+                       206470,
+                       123645,
+                       206530,
+                       206563]
+                sb5_coin = 150 + standard
+                sb6 = [107938]
+                sb6_coin = 100 + standard
+                sb7 = [106452,
+                       209196,
+                       206679,
+                       95347,
+                       205821,
+                       206225,
+                       209272,
+                       209409,
+                       209144]
+                sb7_coin = 75 + standard
+                sb8 = [206225]
+                sb8_coin = 5 + standard
+
+                if status.badgeid == sb1:
+                    status.objects.update(give=sb1_coin)
+                elif status.badgeid == sb2:
+                    status.objects.update(give=sb2_coin)
+                elif status.badgeid == sb3:
+                    status.objects.update(give=sb3_coin)
+                elif status.badgeid == sb4:
+                    status.objects.update(give=sb4_coin)
+                elif status.badgeid == sb5:
+                    status.objects.update(give=sb5_coin)
+                elif status.badgeid == sb6:
+                    status.objects.update(give=sb6_coin)
+                elif status.badgeid == sb7:
+                    status.objects.update(give=sb7_coin)
+                elif status.badgeid == sb8:
+                    status.objects.update(give=sb8_coin)
+                else:
+                    status.objects.update(give=standard)
+
+                log_file[str(now)] = True
+                with open(log_file_path, 'w') as outfile:
+                    json.dump(outfile, log_file, indent=4, sort_keys=True)
 
 
 # COIN SHARING DATABASE
 # THIS TABLE IS A VIEW OF ALL THE AGENTS AND HOW MANY COINS THEY HAVE
-class status_coin(models.Model):
-    AGENT_NAME = models.CharField(max_length=100)
-    BADGE_ID = models.IntegerField()
-    # todo create a time limit on the coin_give, clears out every quarter
-    COIN_GIVE = models.IntegerField() #How much you can give to another agent
-    COIN_RECEIVED = models.IntegerField() #How much was received by another agent
-    COIN_TOTAL = models.IntegerField() #How much you have in your bank
-    CREATED_AT = models.DateTimeField(default=django.utils.timezone.now)
-    EDITED_AT = models.DateTimeField(default=django.utils.timezone.now)
+class status(models.Model):
+    name = models.CharField(max_length=100)
+    badgeid = models.IntegerField()
+    give = models.IntegerField()  # How much you can give to another agent
+    to_accept = models.IntegerField()  # Transition coin, agent can accept the coin or not
+    edited = models.DateTimeField(default=django.utils.timezone.now)
     objects = coinManager()
 
-# THIS TABLE IS A VIEW OF ALL THE TRANSACTIONS OF THE AGENTS
-class transaction_coin(models.Model):
-    FROM_BADGEID = models.IntegerField()
-    TO_BADGEID = models.IntegerField()
-    COIN_TO_GIVE = models.IntegerField() #How much coin you want to give to another agent
-    REDEMPTION_CODE = models.CharField(max_length=12) #copy over from coin_status table
-    NOTE = models.TextField()
-    CREATED_AT = models.DateTimeField(default=django.utils.timezone.now)
 
+
+
+# THIS TABLE IS A VIEW OF ALL THE TRANSACTIONS OF THE AGENTS
+class transaction(models.Model):
+    anonymous = models.BooleanField(default=False)
+    bad_comment = models.BooleanField(default=False)
+    accept = models.BooleanField(default=False)
+    from_id = models.IntegerField()
+    to_id = models.IntegerField()
+    gave = models.IntegerField()  # How much coin you want to give to another agent
+    note = models.TextField()
+    created_at = models.DateTimeField(default=django.utils.timezone.now)
     objects = coinManager()
 
 

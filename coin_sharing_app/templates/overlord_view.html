@@ -1,0 +1,74 @@
+{% extends 'Luna/base.html' %}
+{% block content %}
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <meta charset="UTF-8">
+        <title>Transaction Window</title>
+        {% load staticfiles %}
+        <link rel="stylesheet" href="{% static 'CSS/style.css' %}">
+        <script type="text/javascript" src="{% static 'JS/style.js' %}"></script>
+    </head>
+    <body>
+    <div class="main_body">
+        <h2>Overlord View</h2>
+        <div class="top_pane2">
+            <div class="btnform_box">
+                <div>
+                    <form action="agent" method="POST" style="display: inline-block">
+                        {% csrf_token %}
+                        <button class="btn">Coin Allotment</button>
+                    </form>
+                    <form action="agent" method="POST" style="display: inline-block">
+                        {% csrf_token %}
+                        <button class="btn">Transaction View</button>
+                    </form>
+                </div>
+                <br>
+                <div>
+                    <form action="" method="POST">
+                        <input type="text" value="Name" style="width: 200px; display: inline-block">
+                        <input type="text" value="Badge ID" style="width: 200px; display: inline-block">
+                        <input type="submit" value="search"
+                               style="width: 200px; display: inline-block; border: 1px solid white;">
+                    </form>
+                </div>
+                {#            todo ability to do a search#}
+                {#            todo ability to edit information in admin page#}
+
+            </div>
+            {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        <div class="main_box">
+            <table>
+                <tr>
+                    <th>Name:</th>
+                    <th>Badge ID:</th>
+                    <th>Allotment:</th>
+                    <th>Still need to accept:</th>
+                    <th>Edited Date:</th>
+                </tr>
+                <tr>
+                    {% for x in form %}
+                        <td>{{ x.fields }}</td>
+                        {#                        <td>{{ x.name }}</td>#}
+                        {#                        <td>{{ x.badgeid }}</td>#}
+                        {#                        <td>{{ x.give }}</td>#}
+                        {#                        <td>{{ x.to_accept }}</td>#}
+                        {#                        <td>{{ x.edited }}</td>#}
+                    {% endfor %}
+                </tr>
+            </table>
+        </div>
+    </div>
+    </body>
+    </html>
+{% endblock %}
