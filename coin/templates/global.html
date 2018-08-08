@@ -25,9 +25,7 @@
                     Sharing Balance: {{ coin }}
                 </div>
             </div>
-
         </div>
-
         <br><br>
         <table>
             <tr>
@@ -40,11 +38,21 @@
 
             {% for x in transaction %}
                 <tr>
-                    <td>{{ x.from_id }}</td>
-                    <td>{{ x.to_id }}</td>
-                    <td>{{ x.gave }}</td>
+                    {% if x.anonymous == 1 %}
+                        <td>Anonymous</td>
+                    {% endif %}
+                    {% if x.anonymous == 0 %}
+                        <td>{{ agent_name }}-{{ x.benefactor }}</td>
+                    {% endif %}
+                    <td>{{ x.receipient }}</td>
+                    <td>{{ x.award }}</td>
                     <td>{{ x.created_at }}</td>
-                    <td>{{ x.note }}</td>
+                    {% if x.bad_comment == 1 %}
+                        <td> No Comment</td>
+                    {% endif %}
+                    {% if x.bad_comment == 0 %}
+                        <td>{{ x.note }}</td>
+                    {% endif %}
                 </tr>
             {% endfor %}
         </table>

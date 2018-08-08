@@ -2,7 +2,7 @@ import os
 from Luna.models import DataWarehouse
 
 main_dir = os.getcwd()
-coin_dir = os.path.join(main_dir, 'coin_sharing_app')
+coin_dir = os.path.join(main_dir, 'coin')
 utilities_dir = os.path.join(coin_dir, 'utilities')
 
 

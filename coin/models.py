@@ -3,7 +3,6 @@ import os
 import django
 import json
 import datetime as dt
-
 from django.db import models
 from django.utils import timezone
 
@@ -21,52 +20,29 @@ class coinManager(models.Manager):
         #     errors.append('Cannot leave field blank')
         #     return errors
         # else:
-        from_badgeid = post_data['badge_id']  # grabbing badge id from post_data
-        agent_info = status.objects.get(
-            badgeid=from_badgeid)  # get's agent info from status
-        coin_given = int(post_data['gave'])
+        the_ID = int(post_data['badge_id'])  # grabbing badge id from post_data
+        agent_info = employee_id.objects.get(badgeid=the_ID)  # get's agent info from employee_id
+        coin_given = int(post_data['award'])
 
-        if coin_given > agent_info.give:
+        if coin_given > agent_info.allotment:
             errors.append('Cannot give more than allotment')
             return errors
         # deducts the amount from the agent who gave the coin to someone else
         else:
-            agent_info.give -= coin_given
+            agent_info.allotment -= coin_given
             agent_info.save()
             # adds the coin to the yet to be accept
-            to_id = post_data['to_id']
-            to_badgeid = status.objects.get(badge_id=to_id)
-            to_badgeid.to_accept += post_data['gave']
+            # to_id = int(post_data['to_id'])
+            # to_badgeid = employee_id.objects.get(badge_id=to_id)
+            # to_badgeid.to_accept += post_data['gave']
             temp = transaction(
-                from_id=post_data['from_id'],
-                to_id=post_data['to_id'],
-                gave=post_data['gave'],
+                benefactor=post_data['benefactor'],
+                recipient=post_data['recipient'],
+                award=post_data['award'],
                 note=post_data['note'],
                 anonymous=post_data['anonymous'],
             )
             temp.save()
-
-    @classmethod
-    def filter_from(self, post_data):
-        id = post_data['badge_id']
-        transaction.objects.get(from_id=id)
-    #     todo if anonymous is true, to_id is hidden
-    #     todo if bad_comment is true, comment is hidden
-
-    @classmethod
-    def filter_to(self, post_data):
-        id = post_data['badge_id']
-        transaction.objects.get(to_id=id)
-        #     todo if anonymous is true, to_id is hidden
-        #     todo if bad_comment is true, comment is hidden
-
-    @classmethod
-    def filter_all(self, post_data):
-        id = post_data['badge_id']
-        transaction.objects.get(from_id=id)
-        transaction.objects.get(to_id=id)
-        #     todo if anonymous is true, to_id is hidden
-        #     todo if bad_comment is true, comment is hidden
 
     @classmethod
     def time_limit(self):
@@ -136,24 +112,24 @@ class coinManager(models.Manager):
                 sb8 = [206225]
                 sb8_coin = 5 + standard
 
-                if status.badgeid == sb1:
-                    status.objects.update(give=sb1_coin)
-                elif status.badgeid == sb2:
-                    status.objects.update(give=sb2_coin)
-                elif status.badgeid == sb3:
-                    status.objects.update(give=sb3_coin)
-                elif status.badgeid == sb4:
-                    status.objects.update(give=sb4_coin)
-                elif status.badgeid == sb5:
-                    status.objects.update(give=sb5_coin)
-                elif status.badgeid == sb6:
-                    status.objects.update(give=sb6_coin)
-                elif status.badgeid == sb7:
-                    status.objects.update(give=sb7_coin)
-                elif status.badgeid == sb8:
-                    status.objects.update(give=sb8_coin)
+                if employee_id.badgeid == sb1:
+                    employee_id.objects.update(allotment=sb1_coin)
+                elif employee_id.badgeid == sb2:
+                    employee_id.objects.update(allotment=sb2_coin)
+                elif employee_id.badgeid == sb3:
+                    employee_id.objects.update(allotment=sb3_coin)
+                elif employee_id.badgeid == sb4:
+                    employee_id.objects.update(allotment=sb4_coin)
+                elif employee_id.badgeid == sb5:
+                    employee_id.objects.update(allotment=sb5_coin)
+                elif employee_id.badgeid == sb6:
+                    employee_id.objects.update(allotment=sb6_coin)
+                elif employee_id.badgeid == sb7:
+                    employee_id.objects.update(allotment=sb7_coin)
+                elif employee_id.badgeid == sb8:
+                    employee_id.objects.update(allotment=sb8_coin)
                 else:
-                    status.objects.update(give=standard)
+                    employee_id.objects.update(allotment=standard)
 
                 log_file[str(now)] = True
                 with open(log_file_path, 'w') as outfile:
@@ -162,25 +138,24 @@ class coinManager(models.Manager):
 
 # COIN SHARING DATABASE
 # THIS TABLE IS A VIEW OF ALL THE AGENTS AND HOW MANY COINS THEY HAVE
-class status(models.Model):
+class employee_id (models.Model):
     name = models.CharField(max_length=100)
     badgeid = models.IntegerField()
-    give = models.IntegerField()  # How much you can give to another agent
-    to_accept = models.IntegerField()  # Transition coin, agent can accept the coin or not
+    allotment = models.IntegerField()  # How much you can give to another agent
+    # to_accept = models.IntegerField()  # Transition coin, agent can accept the coin or not
     edited = models.DateTimeField(default=django.utils.timezone.now)
     objects = coinManager()
 
 
 
-
 # THIS TABLE IS A VIEW OF ALL THE TRANSACTIONS OF THE AGENTS
 class transaction(models.Model):
-    anonymous = models.BooleanField(default=False)
-    bad_comment = models.BooleanField(default=False)
-    accept = models.BooleanField(default=False)
-    from_id = models.IntegerField()
-    to_id = models.IntegerField()
-    gave = models.IntegerField()  # How much coin you want to give to another agent
+    anonymous = models.IntegerField(default=0)
+    bad_comment = models.IntegerField(default=0)
+    # accept = models.BooleanField(default=False)
+    benefactor = models.IntegerField()
+    recipient = models.IntegerField()
+    award = models.IntegerField()  # How much coin you want to give to another agent
     note = models.TextField()
     created_at = models.DateTimeField(default=django.utils.timezone.now)
     objects = coinManager()

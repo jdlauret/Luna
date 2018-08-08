@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Luna.apps.LunaConfig',
     'social_django',
-    'coin_sharing_app.apps.CoinSharingAppConfig',
+    'coin.apps.CoinAppConfig',
 ]
 
 MIDDLEWARE = [
