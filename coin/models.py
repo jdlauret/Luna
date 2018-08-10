@@ -1,10 +1,8 @@
 from __future__ import unicode_literals
 import os
-import django
 import json
 import datetime as dt
 from django.db import models
-from django.utils import timezone
 
 MAIN_DIR = os.path.dirname(os.path.realpath(__file__))
 LOGS_DIR = os.path.join(MAIN_DIR, 'logs')
@@ -17,9 +15,9 @@ class coinManager(models.Manager):
         errors = []
         agent_info = employee_id.objects.get(badgeid=int(post_data['badge_id']))  # get's agent info from employee_id
         rec_ID = employee_id.objects.get(badgeid=int(post_data['recipient']))
-        coin_given = int(post_data['award'])
+        coin_given=int(float(post_data['award']))
         if coin_given > agent_info.allotment:
-            errors.append('Cannot give more than allotment')
+            errors.append('Cannot give more than Sharing Balance')
             return errors
         # deducts the amount from the agent who gave the coin to someone else
         else:
@@ -48,7 +46,7 @@ class coinManager(models.Manager):
     def employee_action(self, post_data):
         errors = []
         if post_data['allotment'] == "":
-            errors.append('Cannot save blank allotment')
+            errors.append('Cannot enter in blank Sharing Balance')
             return errors
         elif int(post_data['allotment']) < 0:
             errors.append('Cannot enter in a negative number')
@@ -56,6 +54,7 @@ class coinManager(models.Manager):
         else:
             e = employee_id.objects.get(id=int(post_data['id']))
             e.allotment = int(post_data['allotment'])
+            e.edited = dt.datetime.now()
             e.save()
 
     @classmethod
@@ -157,7 +156,7 @@ class employee_id(models.Model):
     badgeid = models.IntegerField()
     allotment = models.IntegerField()  # How much you can give to another agent
     # to_accept = models.IntegerField()  # Transition coin, agent can accept the coin or not
-    edited = models.DateTimeField(default=django.utils.timezone.now)
+    edited = models.DateTimeField(default=dt.datetime.now(), blank=True)
     objects = coinManager()
 
 
@@ -172,5 +171,5 @@ class transaction(models.Model):
     recipient_name = models.CharField(max_length=100, default='To Be Filled in Later')
     award = models.IntegerField()  # How much coin you want to give to another agent
     note = models.TextField()
-    created_at = models.DateTimeField(default=django.utils.timezone.now)
+    created_at = models.DateTimeField(default=dt.datetime.now(), blank=True)
     objects = coinManager()

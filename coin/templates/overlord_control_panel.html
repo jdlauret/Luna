@@ -26,15 +26,15 @@
             <form method="post" action="employee_load">
                 <table>
                     <tr>
-                        <th>Name:</th>
-                        <th>Badge ID:</th>
-                        <th>Allotment:</th>
-                        <th>Edited:</th>
+                        <th>Name</th>
+                        <th>Badge ID</th>
+                        <th>Allotment</th>
+                        <th>Edited</th>
                     </tr>
                     <tr>
                         <td>{{ employee_info.name }}</td>
                         <td>{{ employee_info.badgeid }}</td>
-                        <td><input type="text" name="allotment" value="{{ employee_info.allotment }}"
+                        <td><input type="number" name="allotment" value="{{ employee_info.allotment }}"
                                    style="width:200px;"></td>
                         <td>{{ employee_info.edited }}</td>
                     </tr>
@@ -46,12 +46,12 @@
                 <h4>Employee Transaction History</h4>
                 <table>
                     <tr>
-                        <th>Anonymous:</th>
-                        <th>Recipient:</th>
-                        <th>Award:</th>
-                        <th>Bad Comment:</th>
-                        <th>Note:</th>
-                        <th>Transaction Date:</th>
+                        <th>Anonymous</th>
+                        <th>Recipient</th>
+                        <th style="text-align: right;">Award</th>
+                        <th>Bad Comment</th>
+                        <th>Note</th>
+                        <th>Transaction Date</th>
                     </tr>
                     {% for i in employee_history %}
                         <tr>
@@ -62,7 +62,7 @@
                                 <td>No</td>
                             {% endif %}
                             <td>{{ i.recipient_name }}</td>
-                            <td>{{ i.award }}</td>
+                            <td style="text-align: right;">{{ i.award }}</td>
                             {% if i.bad_comment == 1 %}
                                 <td><select name="bad_comment">
                                     <option value="1">Yes</option>

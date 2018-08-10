@@ -21,15 +21,16 @@
                 </form>
                 <form class="btnform" action="global" method="POST">
                     {% csrf_token %}
-                    <button class="btn">Global View</button>
+                    <button class="btn">Community View</button>
                 </form>
             </div>
 
             <div class="balance_box">
                 <div class="total_share_coin_box">
-                    Sharing Balance: {{ coin }}
+                    Sharing Balance {{ coin }}
                 </div>
             </div>
+            <p>* Select Tab</p>
         </div>
         <div class="main_box">
             <div class="tab">
@@ -38,15 +39,14 @@
                 <button class="tablinks" onclick="openCoinTab(event, 'sent_transaction')">View Sent</button>
                 {#                <button class="tablinks" onclick="openCoinTab(event, 'accepted')">Accept Coin?</button>#}
             </div>
-
             <div id="all_transaction" class="tabcontent">
                 <table id="transaction_table">
                     <tr>
-                        <th>Benefactor:</th>
+                        <th>Benefactor</th>
                         <th>Recipient</th>
-                        <th>Award:</th>
-                        <th>Transaction Date:</th>
-                        <th>Note:</th>
+                        <th style="text-align: right;">Award</th>
+                        <th>Transaction Date</th>
+                        <th>Note</th>
                         {#                        <th>Rejected?</th>#}
                     </tr>
                     {% for x in alltransaction %}
@@ -58,7 +58,7 @@
                                 <td>{{ x.benefactor_name }}</td>
                             {% endif %}
                             <td>{{ x.recipient_name }}</td>
-                            <td>{{ x.award }}</td>
+                            <td style="text-align: right;">{{ x.award }}</td>
                             <td>{{ x.created_at }}</td>
                             {% if x.bad_comment == 1 %}
                                 <td> No Comment</td>
@@ -80,10 +80,10 @@
             <div id="received_transaction" class="tabcontent">
                 <table id="from_transaction_table">
                     <tr>
-                        <th>Benefactor:</th>
-                        <th>Award:</th>
-                        <th>Date:</th>
-                        <th>Reason:</th>
+                        <th>Benefactor</th>
+                        <th style="text-align: right;">Award</th>
+                        <th>Date</th>
+                        <th>Reason</th>
                         {#                        <th>Rejected?</th>#}
                     </tr>
                     {% for x in senttransaction %}
@@ -94,7 +94,7 @@
                             {% if x.anonymous == 0 %}
                                 <td>{{ x.benefactor_name }}</td>
                             {% endif %}
-                            <td>{{ x.award }}</td>
+                            <td style="text-align: right;">{{ x.award }}</td>
                             <td>{{ x.created_at }}</td>
                             {% if x.bad_comment == 1 %}
                                 <td> No Comment</td>
@@ -116,19 +116,19 @@
             <div id="sent_transaction" class="tabcontent">
                 <table id="to_transaction_table">
                     <tr>
-                        <th>Recipient:</th>
-                        <th>Award:</th>
-                        <th>Date:</th>
-                        <th>Reason:</th>
+                        <th>Recipient</th>
+                        <th style="text-align: right;">Award</th>
+                        <th>Date</th>
+                        <th>Reason</th>
                         {#                        <th>Rejected?</th>#}
                     </tr>
                     {% for x in fromtransaction %}
                         <tr>
                             <td>{{ x.recipient_name }}</td>
-                            <td>{{ x.award }}</td>
+                            <td style="text-align: right;">{{ x.award }}</td>
                             <td>{{ x.created_at }}</td>
                             {% if x.bad_comment == 1 %}
-                                <td> No Comment</td>
+                                <td></td>
                             {% endif %}
                             {% if x.bad_comment == 0 %}
                                 <td>{{ x.note }}</td>

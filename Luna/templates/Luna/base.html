@@ -46,9 +46,9 @@
                 Sharing</label>
             <div class="menu-content">
                 {% if perms.employee_id.can_add_employee_id %}
-                    <a href="{% url 'sharing:overlord' %}">Overlord View</a>
+                    <a href="{% url 'sharing:overlord' %}">The Overlord</a>
                 {% endif %}
-                <a href="{% url 'sharing:global' %}">Everyone</a>
+                <a href="{% url 'sharing:global' %}">Community</a>
                 <a href="{% url 'sharing:agent_view' %}">Personal</a>
                 <a href="{% url 'sharing:transaction_view' %}">Send Coins</a>
             </div>
