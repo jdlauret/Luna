@@ -4,7 +4,7 @@
 <link rel="icon" href="{% static 'resources/textless_black_starless.png' %}">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
 <script src="{% static "js/scripts.js" %}"></script>
@@ -35,15 +35,19 @@
             <div class="menu-content">
                 <a href="/calculators/system_performance_calculator">System Performance</a>
                 <a href="/calculators/soft_savings_analysis">Soft Savings Analysis</a>
-{#                <a href="/calculators/full_benefit_analysis">Full Benefit Analysis</a>#}
+                {#                <a href="/calculators/full_benefit_analysis">Full Benefit Analysis</a>#}
                 <a href="/calculators/RTS_notes">RTS Notes Wizard</a>
             </div>
         </div>
 
         <div class="collapsible-menu">
-        <input type="checkbox" id="coin-menu">
-            <label for="coin-menu"><img id="arrow" src="{% static "resources/arrow-right-white.png" %}">Coin Sharing</label>
+            <input type="checkbox" id="coin-menu">
+            <label for="coin-menu"><img id="arrow" src="{% static "resources/arrow-right-white.png" %}">Coin
+                Sharing</label>
             <div class="menu-content">
+                {% if perms.employee_id.can_add_employee_id %}
+                    <a href="{% url 'sharing:overlord' %}">Overlord View</a>
+                {% endif %}
                 <a href="{% url 'sharing:global' %}">Everyone</a>
                 <a href="{% url 'sharing:agent_view' %}">Personal</a>
                 <a href="{% url 'sharing:transaction_view' %}">Send Coins</a>

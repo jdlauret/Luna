@@ -1,74 +1,121 @@
 {% extends 'Luna/base.html' %}
-{% block content %}
-
     <!DOCTYPE html>
     <html lang="en">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <head>
         <meta charset="UTF-8">
         <title>Transaction Window</title>
+        {% block content %}
         {% load staticfiles %}
         <link rel="stylesheet" href="{% static 'CSS/style.css' %}">
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script type="text/javascript" src="{% static 'JS/style.js' %}"></script>
     </head>
     <body>
     <div class="main_body">
-        <h2>Overlord View</h2>
-        <div class="top_pane2">
-            <div class="btnform_box">
-                <div>
-                    <form action="agent" method="POST" style="display: inline-block">
-                        {% csrf_token %}
-                        <button class="btn">Coin Allotment</button>
-                    </form>
-                    <form action="agent" method="POST" style="display: inline-block">
-                        {% csrf_token %}
-                        <button class="btn">Transaction View</button>
-                    </form>
-                </div>
-                <br>
-                <div>
-                    <form action="" method="POST">
-                        <input type="text" value="Name" style="width: 200px; display: inline-block">
-                        <input type="text" value="Badge ID" style="width: 200px; display: inline-block">
-                        <input type="submit" value="search"
-                               style="width: 200px; display: inline-block; border: 1px solid white;">
-                    </form>
-                </div>
-                {#            todo ability to do a search#}
-                {#            todo ability to edit information in admin page#}
-
+        <div class="top_pane2" style="height:88px; background: #656569">
+            <img id="picture" src="{% static 'Pictures/black_and_white_light.jpg' %}"></img>
+            <div id="overlord_title">
+                <h7 style="color: white;;">THE</h7>
+                <h1 style="font-weight: bold; color:white;">Overlord</h1>
             </div>
-            {% if messages %}
-                <div class="messages">
-                    {% for message in messages %}
-                        <p>{{ message }}</p>
-                    {% endfor %}
-                </div>
-            {% endif %}
         </div>
+            {#            <div style="display: inline-block; float: right;">#}
+            {#                <div class="tab"#}
+            {#                     style="background:#656569; border: #656569; display: inline-block; transform: translateY(20%); padding-right: 10px">#}
+            {##}
+            {##}
+            {#                    <button class="tablinks" onclick=" openCoinTab(event, 'employee')">Employees</button>#}
+            {#                    <button class="tablinks" onclick="openCoinTab(event, 'transaction')">Transactions</button>#}
+            {#                </div>#}
+            {#                Search Bar#}
+            {#                <form action="" method="POST" style="float: right; top:10px;">#}
+            {#                    <input type="text" name="input_value" placeholder="Enter name or badge"#}
+            {#                           style="width: 200px; display: inline-block">#}
+            {#                    <button type="submit" style="width:30px; display: inline-block; background: #656569"><i#}
+            {#                            class="fa fa-search" onclick="loadSearch"></i></button>#}
+            {#                </form>#}
+
+            {#            </div>#}
+
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
         <div class="main_box">
-            <table>
-                <tr>
-                    <th>Name:</th>
-                    <th>Badge ID:</th>
-                    <th>Allotment:</th>
-                    <th>Still need to accept:</th>
-                    <th>Edited Date:</th>
-                </tr>
-                <tr>
-                    {% for x in form %}
-                        <td>{{ x.fields }}</td>
-                        {#                        <td>{{ x.name }}</td>#}
-                        {#                        <td>{{ x.badgeid }}</td>#}
-                        {#                        <td>{{ x.give }}</td>#}
-                        {#                        <td>{{ x.to_accept }}</td>#}
-                        {#                        <td>{{ x.edited }}</td>#}
+            <form method="POST" action="overlord_view/control_panel">
+                <select name="badge_id" style="display: inline-block; width: 300px" required>
+                    <option></option>
+                    {% for key in employee %}
+                        <option value="{{ key.badgeid }}">{{ key.name }} - {{ key.badgeid }}</option>
                     {% endfor %}
-                </tr>
-            </table>
+                </select>
+                <input type="submit" style="display:inline-block; width: 200px;">
+            </form>
+
+            {# This is where we need to input the ajax to the site                             #}
+
         </div>
+
     </div>
     </body>
     </html>
 {% endblock %}
+
+{#        <div id="employee" class="tabcontent">#}
+{#            <table id="employee_table">#}
+{#                <tr>#}
+{#                    <th>Name:</th>#}
+{#                    <th>Badge ID:</th>#}
+{#                    <th>Allotment:</th>#}
+{#                    <th>Edited:</th>#}
+{#                </tr>#}
+{##}
+{#                {% for x in employee %}#}
+{#                    <tr>#}
+{#                        <td>{{ x.name }}</td>#}
+{#                        <td>{{ x.badgeid }}</td>#}
+{#                        <td><input type="text" value="{{ x.allotment }}" style="width: auto;"></td>#}
+{#                        <td>{{ x.edited }}</td>#}
+{#                    </tr>#}
+{#                {% endfor %}#}
+{#            </table>#}
+{#            <input type="submit">#}
+{#        </div>#}
+{##}
+{#        <div id="transaction" class="tabcontent">#}
+{#            <table id="transaction_table">#}
+{#                <tr>#}
+{#                    <th>Benefactor:</th>#}
+{#                    <th>Recipient</th>#}
+{#                    <th>Award:</th>#}
+{#                    <th>Note:</th>#}
+{#                    <th>Created at:</th>#}
+{#                    <th>Anonymous?</th>#}
+{#                    <th>Bad Comment?</th>#}
+{#                </tr>#}
+{##}
+{#                {% for x in transaction %}#}
+{#                    <tr>#}
+{#                        <td>{{ x.benefactor }}</td>#}
+{#                        <td>{{ x.recipient }}</td>#}
+{#                        <td>{{ x.award }}</td>#}
+{#                        <td>{{ x.note }}</td>#}
+{#                        <td>{{ x.created_at }}</td>#}
+{#                        {% if x.anonymous == 0 %}#}
+{#                            <td>No</td>#}
+{#                        {% endif %}#}
+{#                        {% if x.anonymous == 1 %}#}
+{#                            <td>Yes</td>#}
+{#                        {% endif %}#}
+{#                        <td><input type="checkbox" name="badge_comment"></td>#}
+{#                    </tr>#}
+{#                {% endfor %}#}
+{#            </table>#}
+{#            <input type="submit">#}
+{#        </div>#}

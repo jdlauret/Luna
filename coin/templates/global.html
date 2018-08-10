@@ -11,7 +11,7 @@
     </head>
     <body>
     <div class="main_body">
-        <h2>Global Window</h2>
+        {#        <h2>Global Window</h2>#}
         <div class="top_pane">
             <div class="btnform_box">
                 <form action="agent" method="POST">
@@ -29,10 +29,10 @@
         <br><br>
         <table>
             <tr>
-                <th>From:</th>
-                <th>To:</th>
-                <th>Coin Amount:</th>
-                <th>Transaction Date:</th>
+                <th>Benefactor:</th>
+                <th>Recipient:</th>
+                <th>Award:</th>
+                <th>Date:</th>
                 <th>Reason:</th>
             </tr>
 
@@ -42,9 +42,9 @@
                         <td>Anonymous</td>
                     {% endif %}
                     {% if x.anonymous == 0 %}
-                        <td>{{ agent_name }}-{{ x.benefactor }}</td>
+                        <td>{{ x.benefactor_name }}</td>
                     {% endif %}
-                    <td>{{ x.receipient }}</td>
+                    <td>{{ x.receipient_name }}</td>
                     <td>{{ x.award }}</td>
                     <td>{{ x.created_at }}</td>
                     {% if x.bad_comment == 1 %}

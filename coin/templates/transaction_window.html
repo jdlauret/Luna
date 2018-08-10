@@ -38,7 +38,7 @@
                 <form action="submit_transaction" method="POST">
                     {% csrf_token %}
                     <label for="who">Who do you want to send a gift to? </label>
-                    <select name="recipient" agent="to_agent" required>
+                    <select name="recipient" required>
                         <option></option>
                         {% for key, values in user_list.items %}
                             <option value={{ key }}>{{ values }} - {{ key }} </option>
@@ -54,7 +54,7 @@
                         <input type="text" id="note" name="note" required><br><br>
                     </div>
                     <input type="hidden" name="badge_id" value="{{ badge_id }}">
-                    <Label for ="anonymous">Anonymous?</Label>
+                    <Label for="anonymous">Anonymous?</Label>
                     <select name="anonymous">
                         <option value="0">No</option>
                         <option value="1">Yes</option>

@@ -1,19 +1,11 @@
 from django import forms
 from coin.models import employee_id, transaction
-from .utilities.user_list import user_list
 
-
-class statusForm(forms.ModelForm):
+class employeeForm(forms.ModelForm):
     class Meta:
         model = employee_id
-        fields = ['name', 'badgeid', 'allotment', 'to_accept', 'edited', ]
+        fields = ('name', 'badge_id', 'allotment', 'edited')
 
-
-class transForm(forms.ModelForm):
-
-    class Meta:
-        model = transaction
-        fields = ['recipient', 'award', 'note', 'anonymous', ]
-        to_id=(
-            user_list()
-        )
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['name'].queryset = employee_id.objects.name()

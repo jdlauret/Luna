@@ -4,9 +4,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from .models import employee_id, transaction
 from .utilities.user_list import user_list
-from .utilities.agent_name import agent_name
 from coin.utilities import find_badge_id
-
 
 def email_check(user):
     return user.email.endswith('@vivintsolar.com')
@@ -54,7 +52,6 @@ def agent(request):
 @login_required
 @user_passes_test(email_check)
 def transactions(request):
-    # todo badge_id needs to link to employee_id model
     if request.user.is_authenticated:
         email = request.user.email
         badge_id = find_badge_id(email)
@@ -72,20 +69,56 @@ def submit_transaction(request):
     if type(result) == list:
         for err in result:
             messages.error(request, err)
-        return redirect('/coin_sharing/transaction')
+        return redirect('/coin/transaction')
     messages.success(request, 'Success')
-    return redirect('/coin_sharing/transaction')
+    return redirect('/coin/transaction')
 
-
-# TODO NEED TO CREATE AN OVERLORD PAGE
+# permission view
 @login_required
 @user_passes_test(email_check)
 def overlord_view(request):
     context = {
-        'transaction': transaction.objects.all,
-        'employee_id': employee_id.objects.all,
+        'transaction': reversed(transaction.objects.all().order_by('created_at')),
+        'employee': employee_id.objects.all().order_by('name'),
     }
     return render(request, 'overlord_view.html', context)
+
+# permission view
+@login_required
+@user_passes_test(email_check)
+def control_panel(request):
+    info_request = request.POST.getlist('badge_id')
+    for i, value in enumerate(info_request):
+        requested = int(value)
+        try:
+            context={
+                'employee_info' : employee_id.objects.get(badgeid=requested),
+                'employee_history': transaction.objects.filter(benefactor=requested).order_by('created_at')
+            }
+        except Exception as e:
+            context={
+                'employee_info': employee_id.objects.get(badgeid=requested),
+            }
+        return render(request, 'overlord_control_panel.html', context)
+
+def employee_load(request):
+    result = employee_id.objects.employee_action(request.POST)
+    if type(result) == list:
+        for err in result:
+            messages.error(request, err)
+        return redirect('/coin/overlord_view')
+    messages.success(request, 'Success')
+    return redirect('/coin/overlord_view')
+
+def trans_load(request):
+    id_list = request.POST.getlist('id')
+    bad_list = request.POST.getlist('bad_comment')
+    for i, value in enumerate(id_list):
+        trans = transaction.objects.get(id=value)
+        trans.bad_comment= bad_list[i]
+        trans.save()
+    messages.success(request, 'Success')
+    return redirect('/coin/overlord_view')
 
 # def accept_coin(request):
 #     id_list = request.POST.getlist('id')

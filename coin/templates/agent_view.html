@@ -8,25 +8,11 @@
         <title>Global Transaction Window</title>
         {% load staticfiles %}
         <link rel="stylesheet" href="{% static 'CSS/style.css' %}">
-        <script>
-            function openCoinTab(evt, name) {
-                var i, tabcontent, tablinks;
-                tabcontent = document.getElementsByClassName("tabcontent");
-                for (i = 0; i < tabcontent.length; i++) {
-                    tabcontent[i].style.display = "none";
-                }
-                tablinks = document.getElementsByClassName("tablinks");
-                for (i = 0; i < tablinks.length; i++) {
-                    tablinks[i].className = tablinks[i].className.replace(" active", "");
-                }
-                document.getElementById(name).style.display = "block";
-                evt.currentTarget.className += " active";
-            }
-        </script>
+        <script src="{% static 'JS/style.js' %}"></script>
     </head>
     <body>
     <div class="main_body">
-        <h2>Personal Window</h2>
+        {#        <h2>Personal Window</h2>#}
         <div class="top_pane">
             <div class="btnform_box">
                 <form class="btnform" action="transaction_view" method="POST">
@@ -57,7 +43,7 @@
                 <table id="transaction_table">
                     <tr>
                         <th>Benefactor:</th>
-                        <th>Recipient</th>:</th>
+                        <th>Recipient</th>
                         <th>Award:</th>
                         <th>Transaction Date:</th>
                         <th>Note:</th>
@@ -69,9 +55,9 @@
                                 <td>Anonymous</td>
                             {% endif %}
                             {% if x.anonymous == 0 %}
-                                <td>{{ x.benefactor }}</td>
+                                <td>{{ x.benefactor_name }}</td>
                             {% endif %}
-                            <td>{{ x.recipient }}</td>
+                            <td>{{ x.recipient_name }}</td>
                             <td>{{ x.award }}</td>
                             <td>{{ x.created_at }}</td>
                             {% if x.bad_comment == 1 %}
@@ -94,9 +80,9 @@
             <div id="received_transaction" class="tabcontent">
                 <table id="from_transaction_table">
                     <tr>
-                        <th>From:</th>
-                        <th>Coin Amount:</th>
-                        <th>Transaction Date:</th>
+                        <th>Benefactor:</th>
+                        <th>Award:</th>
+                        <th>Date:</th>
                         <th>Reason:</th>
                         {#                        <th>Rejected?</th>#}
                     </tr>
@@ -106,7 +92,7 @@
                                 <td>Anonymous</td>
                             {% endif %}
                             {% if x.anonymous == 0 %}
-                                <td>{{ x.benefactor }}</td>
+                                <td>{{ x.benefactor_name }}</td>
                             {% endif %}
                             <td>{{ x.award }}</td>
                             <td>{{ x.created_at }}</td>
@@ -130,15 +116,15 @@
             <div id="sent_transaction" class="tabcontent">
                 <table id="to_transaction_table">
                     <tr>
-                        <th>To:</th>
-                        <th>Coin Amount:</th>
-                        <th>Transaction Date:</th>
+                        <th>Recipient:</th>
+                        <th>Award:</th>
+                        <th>Date:</th>
                         <th>Reason:</th>
                         {#                        <th>Rejected?</th>#}
                     </tr>
                     {% for x in fromtransaction %}
                         <tr>
-                            <td>{{ x.recipient }}</td>
+                            <td>{{ x.recipient_name }}</td>
                             <td>{{ x.award }}</td>
                             <td>{{ x.created_at }}</td>
                             {% if x.bad_comment == 1 %}

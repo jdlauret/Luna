@@ -15,34 +15,48 @@ class coinManager(models.Manager):
     @classmethod
     def validate_transaction(self, post_data):
         errors = []
-        # VALIDATES THE FIELD TO SEE IF THERE IS INFORMATION IN THE BOXES ON THE TRANSACTION PAGE
-        # if len(badge_id) <= 0 or len(post_data['gave']) <= 0 or len(post_data['note']) <= 0:
-        #     errors.append('Cannot leave field blank')
-        #     return errors
-        # else:
-        the_ID = int(post_data['badge_id'])  # grabbing badge id from post_data
-        agent_info = employee_id.objects.get(badgeid=the_ID)  # get's agent info from employee_id
+        agent_info = employee_id.objects.get(badgeid=int(post_data['badge_id']))  # get's agent info from employee_id
+        rec_ID = employee_id.objects.get(badgeid=int(post_data['recipient']))
         coin_given = int(post_data['award'])
-
         if coin_given > agent_info.allotment:
             errors.append('Cannot give more than allotment')
             return errors
         # deducts the amount from the agent who gave the coin to someone else
         else:
-            agent_info.allotment -= coin_given
-            agent_info.save()
-            # adds the coin to the yet to be accept
-            # to_id = int(post_data['to_id'])
-            # to_badgeid = employee_id.objects.get(badge_id=to_id)
-            # to_badgeid.to_accept += post_data['gave']
-            temp = transaction(
-                benefactor=post_data['benefactor'],
-                recipient=post_data['recipient'],
-                award=post_data['award'],
-                note=post_data['note'],
-                anonymous=post_data['anonymous'],
-            )
-            temp.save()
+            if agent_info.badgeid == rec_ID.badgeid:
+                errors.append('You cannot give coins to yourself')
+                return errors
+            else:
+                agent_info.allotment -= coin_given
+                agent_info.save()
+                # adds the coin to the yet to be accept
+                # to_id = int(post_data['to_id'])
+                # to_badgeid = employee_id.objects.get(badge_id=to_id)
+                # to_badgeid.to_accept += post_data['gave']
+                temp = transaction(
+                    benefactor_name = agent_info.name,
+                    benefactor=post_data['badge_id'],
+                    recipient=post_data['recipient'],
+                    recipient_name=rec_ID.name,
+                    award=post_data['award'],
+                    note=post_data['note'],
+                    anonymous=post_data['anonymous'],
+                )
+                temp.save()
+
+    @classmethod
+    def employee_action(self, post_data):
+        errors = []
+        if post_data['allotment'] == "":
+            errors.append('Cannot save blank allotment')
+            return errors
+        elif int(post_data['allotment']) < 0:
+            errors.append('Cannot enter in a negative number')
+            return errors
+        else:
+            e = employee_id.objects.get(id=int(post_data['id']))
+            e.allotment = int(post_data['allotment'])
+            e.save()
 
     @classmethod
     def time_limit(self):
@@ -138,7 +152,7 @@ class coinManager(models.Manager):
 
 # COIN SHARING DATABASE
 # THIS TABLE IS A VIEW OF ALL THE AGENTS AND HOW MANY COINS THEY HAVE
-class employee_id (models.Model):
+class employee_id(models.Model):
     name = models.CharField(max_length=100)
     badgeid = models.IntegerField()
     allotment = models.IntegerField()  # How much you can give to another agent
@@ -147,17 +161,16 @@ class employee_id (models.Model):
     objects = coinManager()
 
 
-
 # THIS TABLE IS A VIEW OF ALL THE TRANSACTIONS OF THE AGENTS
 class transaction(models.Model):
     anonymous = models.IntegerField(default=0)
     bad_comment = models.IntegerField(default=0)
     # accept = models.BooleanField(default=False)
     benefactor = models.IntegerField()
+    benefactor_name = models.CharField(max_length=100, default='To Be Filled in Later')
     recipient = models.IntegerField()
+    recipient_name = models.CharField(max_length=100, default='To Be Filled in Later')
     award = models.IntegerField()  # How much coin you want to give to another agent
     note = models.TextField()
     created_at = models.DateTimeField(default=django.utils.timezone.now)
     objects = coinManager()
-
-
