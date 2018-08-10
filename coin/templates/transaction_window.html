@@ -14,13 +14,13 @@
     <div class="main_body">
         <div class="top_pane">
             <div class="btnform_box">
-                <form action="agent" method="POST" style="display:inline-block;">
-                    {% csrf_token %}
-                    <button class="btn">Personal View</button>
-                </form>
                 <form class="btnform" action="global" method="POST" style="display:inline-block;">
                     {% csrf_token %}
                     <button class="btn">Community View</button>
+                </form>
+                <form action="agent" method="POST" style="display:inline-block;">
+                    {% csrf_token %}
+                    <button class="btn">Personal View</button>
                 </form>
             </div>
 
@@ -49,7 +49,7 @@
                         {% endfor %}
                     </select><br><br>
                     <label for="how_much">How much do you want to send? </label>
-                    <input type="number" name="award" required><br><br>
+                    <input type="number" min="1" name="award" required><br><br>
                     {#                    <div id="warning_box">#}
                     <label for="reason">Reason for the award? </label>
                     {#                        <span class="tooltiptext">#}

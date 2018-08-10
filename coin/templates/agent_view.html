@@ -15,13 +15,13 @@
         {#        <h2>Personal Window</h2>#}
         <div class="top_pane">
             <div class="btnform_box">
-                <form class="btnform" action="transaction_view" method="POST">
-                    {% csrf_token %}
-                    <button class="btn">Send coin</button>
-                </form>
                 <form class="btnform" action="global" method="POST">
                     {% csrf_token %}
                     <button class="btn">Community View</button>
+                </form>
+                <form class="btnform" action="transaction_view" method="POST">
+                    {% csrf_token %}
+                    <button class="btn">Send coins</button>
                 </form>
             </div>
 

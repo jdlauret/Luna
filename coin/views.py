@@ -99,7 +99,7 @@ def control_panel(request):
             try:
                 context={
                     'employee_info' : employee_id.objects.get(badgeid=requested),
-                    'employee_history': transaction.objects.filter(benefactor=requested).order_by('created_at')
+                    'employee_history': reversed(transaction.objects.filter(benefactor=requested).order_by('created_at')),
                 }
             except Exception as e:
                 context={
