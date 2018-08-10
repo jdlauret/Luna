@@ -9,6 +9,8 @@ from coin.utilities import find_badge_id
 def email_check(user):
     return user.email.endswith('@vivintsolar.com')
 
+def overlord_access(user):
+    return user.groups.filter(name='Coin_Overlord').exists()
 
 @login_required
 @user_passes_test(email_check)
@@ -75,31 +77,37 @@ def submit_transaction(request):
 
 # permission view
 @login_required
-@user_passes_test(email_check)
+@user_passes_test(overlord_access)
 def overlord_view(request):
-    context = {
-        'transaction': reversed(transaction.objects.all().order_by('created_at')),
-        'employee': employee_id.objects.all().order_by('name'),
-    }
-    return render(request, 'overlord_view.html', context)
+    if request.user.is_authenticated:
+        context = {
+            'transaction': reversed(transaction.objects.all().order_by('created_at')),
+            'employee': employee_id.objects.all().order_by('name'),
+        }
+        return render(request, 'overlord_view.html', context)
+    else:
+        return HttpResponseRedirect('/Luna')
 
 # permission view
 @login_required
-@user_passes_test(email_check)
+@user_passes_test(overlord_access)
 def control_panel(request):
-    info_request = request.POST.getlist('badge_id')
-    for i, value in enumerate(info_request):
-        requested = int(value)
-        try:
-            context={
-                'employee_info' : employee_id.objects.get(badgeid=requested),
-                'employee_history': transaction.objects.filter(benefactor=requested).order_by('created_at')
-            }
-        except Exception as e:
-            context={
-                'employee_info': employee_id.objects.get(badgeid=requested),
-            }
-        return render(request, 'overlord_control_panel.html', context)
+    if request.user.is_authenticated:
+        info_request = request.POST.getlist('badge_id')
+        for i, value in enumerate(info_request):
+            requested = int(value)
+            try:
+                context={
+                    'employee_info' : employee_id.objects.get(badgeid=requested),
+                    'employee_history': transaction.objects.filter(benefactor=requested).order_by('created_at')
+                }
+            except Exception as e:
+                context={
+                    'employee_info': employee_id.objects.get(badgeid=requested),
+                }
+            return render(request, 'overlord_control_panel.html', context)
+    else:
+        return HttpResponseRedirect('/Luna')
 
 def employee_load(request):
     result = employee_id.objects.employee_action(request.POST)
