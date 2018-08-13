@@ -4,8 +4,12 @@
 
     <div class="main">
         {% if user.is_authenticated %}
-            <h2>Welcome, {{ user.first_name }}!</h2>
-            <br>
+{#            <div class="top_pane">#}
+{#                <div class="name_box">#}
+{#                    Welcome {{ user.first_name }}!<br>#}
+{#                </div>#}
+{#            </div>#}
+            Welcome {{ user.first_name }}
 
         {% else %}
             <h2>Welcome!</h2>
