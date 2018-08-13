@@ -28,5 +28,4 @@ urlpatterns = [
     url(r'^auth/', include('social_django.urls', namespace='social')),
     url(r'^admin/', admin.site.urls),
     url(r'^coin/', include(('coin.urls', 'sharing'), namespace='sharing')), #Coin sharing URL
-]
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
