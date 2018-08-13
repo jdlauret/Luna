@@ -7,9 +7,7 @@ utilities_dir = os.path.join(coin_dir, 'utilities')
 
 
 def agent_name(badge_id):
-    user = {
-        'name': {}
-    }
+    user = {}
     dw = DataWarehouse('admin')
     with open(os.path.join(utilities_dir, 'agent_name.sql'), 'r') as file:
         sql = file.read()

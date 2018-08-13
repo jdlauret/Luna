@@ -20,22 +20,22 @@
                 </form>
                 <form class="btnform" action="transaction_view" method="POST" style="display: inline-block;">
                     {% csrf_token %}
-                    <button class="btn">Send coins</button>
+                    <button class="btn">Send Coins</button>
                 </form>
             </div>
 
             <div class="balance_box">
                 <div class="total_share_coin_box">
-                    Sharing Balance {{ coin }}
+                    <p class="s_balance">Sharing Balance: </p>{{ coin }}
                 </div>
             </div>
         </div>
         <br><br>
         <table>
             <tr>
-                <th>Benefactor</th>
-                <th>Recipient</th>
-                <th style="text-align: right;">Award</th>
+                <th>Giver</th>
+                <th>Receiver</th>
+                <th style="text-align: right;">Amount</th>
                 <th>Date</th>
                 <th>Reason</th>
             </tr>

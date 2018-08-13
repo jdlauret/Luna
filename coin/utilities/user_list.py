@@ -5,7 +5,6 @@ main_dir = os.getcwd()
 coin_dir = os.path.join(main_dir, 'coin')
 utilities_dir = os.path.join(coin_dir, 'utilities')
 
-
 def user_list():
     agent_list = {
     }

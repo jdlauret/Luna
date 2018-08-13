@@ -1,8 +1,12 @@
 from __future__ import unicode_literals
 import os
 import json
+import django
+import pytz
+from django.utils import timezone
 import datetime as dt
 from django.db import models
+from coin.utilities import agent_name
 
 MAIN_DIR = os.path.dirname(os.path.realpath(__file__))
 LOGS_DIR = os.path.join(MAIN_DIR, 'logs')
@@ -25,6 +29,7 @@ class coinManager(models.Manager):
                 errors.append('You cannot give coins to yourself')
                 return errors
             else:
+
                 agent_info.allotment -= coin_given
                 agent_info.save()
                 # adds the coin to the yet to be accept
@@ -42,6 +47,7 @@ class coinManager(models.Manager):
                 )
                 temp.save()
 
+    # OVERLORD CONTROL PANEL
     @classmethod
     def employee_action(self, post_data):
         errors = []
@@ -57,6 +63,25 @@ class coinManager(models.Manager):
             e.edited = dt.datetime.now()
             e.save()
 
+    # todo new employees are created
+    # have this access once a week
+    # go through hire date and add them to employee_id
+
+    # @classmethod
+    # def create_id(self):
+    #     log_file_path = os.path.join(LOGS_DIR, 'created_id.json')
+    #     with open(log_file_path) as infile:
+    #         log_file = json.load(infile)
+    #
+    # #     code
+    #     now = dt.date.today()
+    #
+    #
+    #     log_file[str(now)] = True
+    #     with open(log_file_path, 'w') as outfile:
+    #         json.dump(outfile, log_file, indent=4, sort_keys=True)
+
+    # CONTROLS WHO GETS WHAT ALLOTMENT
     @classmethod
     def time_limit(self):
         log_file_path = os.path.join(LOGS_DIR, 'date_resets.json')
@@ -144,6 +169,8 @@ class coinManager(models.Manager):
                 else:
                     employee_id.objects.update(allotment=standard)
 
+                employee_id.save()
+
                 log_file[str(now)] = True
                 with open(log_file_path, 'w') as outfile:
                     json.dump(outfile, log_file, indent=4, sort_keys=True)
@@ -156,7 +183,8 @@ class employee_id(models.Model):
     badgeid = models.IntegerField()
     allotment = models.IntegerField()  # How much you can give to another agent
     # to_accept = models.IntegerField()  # Transition coin, agent can accept the coin or not
-    edited = models.DateTimeField(default=dt.datetime.now(), blank=True)
+    edited = models.DateTimeField(auto_now_add=True, blank=True)
+        # default=django.utils.timezone.now(), blank=True)#('US/Mountain'))
     objects = coinManager()
 
 
@@ -171,5 +199,5 @@ class transaction(models.Model):
     recipient_name = models.CharField(max_length=100, default='To Be Filled in Later')
     award = models.IntegerField()  # How much coin you want to give to another agent
     note = models.TextField()
-    created_at = models.DateTimeField(default=dt.datetime.now(), blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, blank=True) #('US/Mountain'))
     objects = coinManager()

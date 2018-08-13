@@ -4,7 +4,9 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from .models import employee_id, transaction
 from .utilities.user_list import user_list
+from .utilities.agent_name import agent_name
 from coin.utilities import find_badge_id
+import datetime as dt
 
 def email_check(user):
     return user.email.endswith('@vivintsolar.com')
@@ -18,11 +20,11 @@ def index(request):
     if request.user.is_authenticated:
         email = request.user.email
         badge_id = find_badge_id(email)
+        # employee_id.objects.create_user(request.POST)
         agent = employee_id.objects.get(badgeid=badge_id)
         context = {
             'transaction': reversed(transaction.objects.all().order_by('created_at')[:50]),
             'coin': agent.allotment,
-            # 'agent_name': agent_name(transaction.objects.get(benefactor=agent))
         }
         return render(request, 'global.html', context)
     else:

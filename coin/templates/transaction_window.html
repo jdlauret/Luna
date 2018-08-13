@@ -7,9 +7,24 @@
     <head>
         <meta charset="UTF-8">
         <title>Transaction Window</title>
-        <link rel="stylesheet" href="{% static 'CSS/style.css' %}">
+        <link rel="stylesheet" href="{% static 'CSS/emoji.css' %}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+              integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+              crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <script type="text/javascript" src="{% static 'JS/style.js' %}"></script>
+        <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <link rel="stylesheet" href="{% static 'CSS/style.css' %}">
     </head>
+    <style>
+        body {
+            font-family: "Lato", sans-serif;
+            background-color: #fdfdff;
+        }
+    #id{
+        background: white;
+    }
+    </style>
     <body>
     <div class="main_body">
         <div class="top_pane">
@@ -26,7 +41,7 @@
 
             <div class="balance_box">
                 <div class="total_share_coin_box">
-                    Sharing Balance {{ coin }}
+                    <p class="s_balance">Sharing Balance: </p>{{ coin }}
                 </div>
             </div>
             {% if messages %}
@@ -56,21 +71,26 @@
                     <span style="color: red;">* All comments must align to the standards of the
                                 employee handbook</span>
                     <div style="float:right;">Character Limit:
-                        <input disabled maxlength="2" size="2" value="250" id="counter"></div>
-                    <input type="text" id="note" name="note" onkeyup="textCounter(this,'counter', 200);"
-                           required><br><br>
-                    {#                    </div>#}
-                    <input type="hidden" name="badge_id" value="{{ badge_id }}">
-                    <Label for="anonymous">Anonymous?</Label>
-                    <select name="anonymous">
-                        <option value="0">No</option>
-                        <option value="1">Yes</option>
-                    </select>
-                    <input type="submit">
+                        <input disabled maxlength="2" minlength="5" size="2" value="250" id="counter"></div>
+                    <p class="lead emoji-picker-container">
+                        <input type="text" id="note" name="note" onkeyup="textCounter(this,'counter', 200);"
+                               onblur="this.value=removeSpaces(this.value);" data-emojiable="true" style="font-size:14px;"><br>
+                        {#                    </div>#}
+                        <Label for="anonymous" style="font-size: 16px;">Anonymous?</Label>
+                        <select name="anonymous" style="font-size: 16px;">
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                        <input type="hidden" name="badge_id" value="{{ badge_id }}">
+                        <input type="submit" style="font-size: 16px">
                 </form>
             </div>
         </div>
     </div>
+    <script src="{% static 'JS/config.js' %}"></script>
+    <script src="{% static 'JS/util.js' %}"></script>
+    <script src="{% static 'JS/jquery.emojiarea.js' %}"></script>
+    <script src="{% static 'JS/emoji-picker.js' %}"></script>
     </body>
 {% endblock %}
 </html>

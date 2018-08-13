@@ -40,19 +40,31 @@
             {#            </div>#}
 
         {% if messages %}
-            <div class="messages">
-                {% for message in messages %}
-                    <p>{{ message }}</p>
-                {% endfor %}
-            </div>
-        {% endif %}
+                <div class="messages">
+                    {% for message in messages %}
+                        <p><span>{{ message }}</span></p>
+                    {% endfor %}
+                </div>
+            {% endif %}
 
         <div class="main_box">
             <form method="POST" action="overlord_view/control_panel">
+            Name:
                 <select name="badge_id" style="display: inline-block; width: 300px" required>
                     <option></option>
                     {% for key in employee %}
                         <option value="{{ key.badgeid }}">{{ key.name }} - {{ key.badgeid }}</option>
+                    {% endfor %}
+                </select>
+                <input type="submit" style="display:inline-block; width: 200px;">
+            </form>
+
+        <form method="POST" action="overlord_view/control_panel">
+        Badge ID:
+                <select name="badge_id" style="display: inline-block; width: 300px" required>
+                    <option></option>
+                    {% for key in employee %}
+                        <option value="{{ key.badgeid }}">{{ key.badgeid }}</option>
                     {% endfor %}
                 </select>
                 <input type="submit" style="display:inline-block; width: 200px;">
