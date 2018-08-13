@@ -1,26 +1,26 @@
 {% extends 'Luna/base.html' %}
-    <!DOCTYPE html>
-    <html lang="en">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <head>
-        <meta charset="UTF-8">
-        <title>Transaction Window</title>
-        {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <meta charset="UTF-8">
+    <title>Transaction Window</title>
+    {% block content %}
         {% load staticfiles %}
         <link rel="stylesheet" href="{% static 'CSS/style.css' %}">
         <link rel="stylesheet"
               href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script type="text/javascript" src="{% static 'JS/style.js' %}"></script>
-    </head>
-    <body>
-    <div class="main_body">
-        <div class="top_pane2" style="height:88px; background: #656569">
-            <img id="picture" src="{% static 'Pictures/black_and_white_light.jpg' %}"></img>
-            <div id="overlord_title">
-                <h7 style="color: white;;">THE</h7>
-                <h1 style="font-weight: bold; color:white;">Overlord</h1>
+        </head>
+        <body>
+        <div class="main_body">
+            <div class="top_pane2" style="height:88px; background: #656569">
+                <img id="picture" src="{% static 'Pictures/black_and_white_light.jpg' %}"></img>
+                <div id="overlord_title">
+                    <h7 style="color: white;;">THE</h7>
+                    <h1 style="font-weight: bold; color:white;">Overlord</h1>
+                </div>
             </div>
-        </div>
             {#            <div style="display: inline-block; float: right;">#}
             {#                <div class="tab"#}
             {#                     style="background:#656569; border: #656569; display: inline-block; transform: translateY(20%); padding-right: 10px">#}
@@ -39,7 +39,7 @@
 
             {#            </div>#}
 
-        {% if messages %}
+            {% if messages %}
                 <div class="messages">
                     {% for message in messages %}
                         <p><span>{{ message }}</span></p>
@@ -47,37 +47,37 @@
                 </div>
             {% endif %}
 
-        <div class="main_box">
-            <form method="POST" action="overlord_view/control_panel">
-            Name:
-                <select name="badge_id" style="display: inline-block; width: 300px" required>
-                    <option></option>
-                    {% for key in employee %}
-                        <option value="{{ key.badgeid }}">{{ key.name }} - {{ key.badgeid }}</option>
-                    {% endfor %}
-                </select>
-                <input type="submit" style="display:inline-block; width: 200px;">
-            </form>
+            <div class="main_box">
+                <form method="POST" action="overlord_view/control_panel">
+                    Name:
+                    <select name="badge_id" style="display: inline-block; width: 300px" required>
+                        <option></option>
+                        {% for key in employee %}
+                            <option value="{{ key.badgeid }}">{{ key.name }} - {{ key.badgeid }}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="submit" style="display:inline-block; width: 200px;">
+                </form>
 
-        <form method="POST" action="overlord_view/control_panel">
-        Badge ID:
-                <select name="badge_id" style="display: inline-block; width: 300px" required>
-                    <option></option>
-                    {% for key in employee %}
-                        <option value="{{ key.badgeid }}">{{ key.badgeid }}</option>
-                    {% endfor %}
-                </select>
-                <input type="submit" style="display:inline-block; width: 200px;">
-            </form>
+                <form method="POST" action="overlord_view/control_panel">
+                    Badge ID:
+                    <select name="badge_id" style="display: inline-block; width: 300px" required>
+                        <option></option>
+                        {% for key in employee %}
+                            <option value="{{ key.badgeid }}">{{ key.badgeid }}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="submit" style="display:inline-block; width: 200px;">
+                </form>
 
-            {# This is where we need to input the ajax to the site                             #}
+                {# This is where we need to input the ajax to the site                             #}
+
+            </div>
 
         </div>
-
-    </div>
-    </body>
-    </html>
-{% endblock %}
+        </body>
+        </html>
+    {% endblock %}
 
 {#        <div id="employee" class="tabcontent">#}
 {#            <table id="employee_table">#}

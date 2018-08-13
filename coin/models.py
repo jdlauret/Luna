@@ -1,12 +1,8 @@
 from __future__ import unicode_literals
 import os
 import json
-import django
-import pytz
-from django.utils import timezone
 import datetime as dt
 from django.db import models
-from coin.utilities import agent_name
 
 MAIN_DIR = os.path.dirname(os.path.realpath(__file__))
 LOGS_DIR = os.path.join(MAIN_DIR, 'logs')

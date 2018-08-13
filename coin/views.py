@@ -4,9 +4,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from .models import employee_id, transaction
 from .utilities.user_list import user_list
-from .utilities.agent_name import agent_name
 from coin.utilities import find_badge_id
-import datetime as dt
 
 def email_check(user):
     return user.email.endswith('@vivintsolar.com')
