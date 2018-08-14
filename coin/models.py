@@ -22,7 +22,7 @@ class coinManager(models.Manager):
         # deducts the amount from the agent who gave the coin to someone else
         else:
             if agent_info.badgeid == rec_ID.badgeid:
-                errors.append('You cannot give coins to yourself')
+                errors.append('You cannot give to yourself')
                 return errors
             else:
 
@@ -173,7 +173,7 @@ class coinManager(models.Manager):
 
 
 # COIN SHARING DATABASE
-# THIS TABLE IS A VIEW OF ALL THE AGENTS AND HOW MANY COINS THEY HAVE
+# THIS TABLE IS A VIEW OF ALL THE AGENTS AND HOW MANY COIN THEY HAVE
 class employee_id(models.Model):
     name = models.CharField(max_length=100)
     badgeid = models.IntegerField()

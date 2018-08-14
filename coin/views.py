@@ -35,14 +35,18 @@ def agent(request):
         email = request.user.email
         badge_id = find_badge_id(email)
         agent = employee_id.objects.get(badgeid=badge_id)
+        a1 = transaction.objects.filter(benefactor=badge_id)
+        a2 = transaction.objects.filter(recipient=badge_id)
+        # print(transaction.objects.filter((benefactor=badge_id) or (recipient=badge_id)))
         context = {
-            'alltransaction': reversed(transaction.objects.all().order_by('created_at')[:50]), #View All
-            'senttransaction': reversed(transaction.objects.filter(recipient=badge_id).order_by('created_at')[:50]), #View Sent
-            'fromtransaction': reversed(
-                transaction.objects.filter(benefactor=badge_id).order_by('created_at')[:50]), #View received
+            'allt1': reversed(a1.order_by('created_at')[:25]), #View All
+            'allt2': reversed(a2.order_by('created_at')[:25]), #View All
+
+            'senttransaction': reversed(a2.order_by('created_at')[:50]), #View Sent
+            'fromtransaction': reversed(a1.order_by('created_at')[:50]), #View received
             # 'need_to_accept': reversed(
             #     transaction.objects.filter(recipient=badge_id).filter(need_to_accept=0).filter(rejected=0).order_by(
-            #         'created_at')[:50]), #View Accepted Coins
+            #         'created_at')[:50]), #View Accepted Coin
             'employee_id': employee_id.objects.all,
             'coin': agent.allotment,
             'badge_id': badge_id,
