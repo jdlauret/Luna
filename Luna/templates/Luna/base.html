@@ -45,8 +45,10 @@
             <label for="coin-menu"><img id="arrow" src="{% static "resources/arrow-right-white.png" %}">Coin
                 Sharing</label>
             <div class="menu-content">
-                {% if perms.employee_id.can_add_employee_id %}
-                    <a href="{% url 'sharing:overlord' %}">The Overlord</a>
+                {% if user.is_authenticated %}
+                    {% if perms.employee_id.can_add_employee_id %}
+                        <a href="{% url 'sharing:overlord' %}">The Overlord</a>
+                    {% endif %}
                 {% endif %}
                 <a href="{% url 'sharing:global' %}">Community View</a>
                 <a href="{% url 'sharing:agent_view' %}">Personal View</a>
