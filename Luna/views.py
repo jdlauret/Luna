@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, render_to_response
 from django.template import loader, Library, RequestContext
+from django.contrib.auth.models import Group
 
 from .models import CareerPath
 from Luna.utilities.template_updates import JsonHandler
@@ -23,6 +24,8 @@ def email_check(user):
 def automation_access(user):
     return user.groups.filter(name='Automation Access').exists()
 
+def overlord_access(user):
+    return user.groups.filter(name='Coin_Overlord').exists()
 
 def index(request):
     context = {

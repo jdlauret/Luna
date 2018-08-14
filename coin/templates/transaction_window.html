@@ -20,10 +20,6 @@
         body {
             font-family: "Lato", sans-serif;
         }
-
-        #id {
-            background: white;
-        }
     </style>
     <body>
     <div class="main_body">
@@ -70,12 +66,14 @@
                     {#                        <span class="tooltiptext">#}
                     <span style="color: red;">* All comments must align to the standards of the
                                 employee handbook</span>
-                    <div style="float:right;">Character Limit:
-                        <input disabled maxlength="2" minlength="5" size="2" value="250" id="counter"></div>
+
+                {#                Character LIMIT#}
+{#                <span style="float:right">Character Limit: <div id="charNum"></div></span>#}
                     <p class="lead emoji-picker-container">
-                        <input type="text" id="note" name="note" onkeyup="textCounter(this,'counter', 200);"
-                               onblur="this.value=removeSpaces(this.value);" data-emojiable="true"
-                               style="font-size:14px;"><br>
+                        <input type="text" id="note" name="note" data-emojiable="true"
+                               onblur="this.value=removeSpaces(this.value);" style="font-size:14px;"
+                               maxlength="200"><br>
+
                         {#                    </div>#}
                         <Label for="anonymous" style="font-size: 16px;">Anonymous?</Label>
                         <select name="anonymous" style="font-size: 16px;">

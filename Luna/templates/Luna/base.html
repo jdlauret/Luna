@@ -45,16 +45,15 @@
             <label for="coin-menu"><img id="arrow" src="{% static "resources/arrow-right-white.png" %}">Coin
                 Sharing</label>
             <div class="menu-content">
-                {% if user.is_authenticated %}
-                    {% if perms.employee_id.can_add_employee_id %}
-                        <a href="{% url 'sharing:overlord' %}">The Overlord</a>
-                    {% endif %}
+                {% if perms.Coin_Overlord %}
+                    <a href="{% url 'sharing:overlord' %}">The Overlord</a>
                 {% endif %}
                 <a href="{% url 'sharing:global' %}">Community View</a>
                 <a href="{% url 'sharing:agent_view' %}">Personal View</a>
                 <a href="{% url 'sharing:transaction_view' %}">Send Coins</a>
             </div>
         </div>
+
 
         <a href="/career_path">Career Path</a>
         <hr>
