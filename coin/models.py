@@ -197,3 +197,4 @@ class transaction(models.Model):
     note = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True, blank=True) #('US/Mountain'))
     objects = coinManager()
+

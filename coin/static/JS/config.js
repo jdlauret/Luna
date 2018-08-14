@@ -427,7 +427,8 @@ Config.Emoji = {
     "1f456": ["\uD83D\uDC56", ["jeans"]],
     "1f457": ["\uD83D\uDC57", ["dress"]],
     "1f458": ["\uD83D\uDC58", ["kimono"]],
-    "1f459": ["\uD83D\uDC59", ["bikini"]],
+    "1f459": ["\u274C", ["x"]],
+        // ["\uD83D\uDC59", ["bikini"]],
     "1f45a": ["\uD83D\uDC5A", ["womans_clothes"]],
     "1f45b": ["\uD83D\uDC5B", ["purse"]],
     "1f45c": ["\uD83D\uDC5C", ["handbag"]],
@@ -475,8 +476,10 @@ Config.Emoji = {
     "1f486": ["\uD83D\uDC86", ["massage"]],
     "1f487": ["\uD83D\uDC87", ["haircut"]],
     "1f488": ["\uD83D\uDC88", ["barber"]],
-    "1f489": ["\uD83D\uDC89", ["syringe"]],
-    "1f48a": ["\uD83D\uDC8A", ["pill"]],
+    "1f489": ["\u274C", ["x"]],
+        // ["\uD83D\uDC89", ["syringe"]],
+    "1f48a": ["\u274C", ["x"]],
+        // ["\uD83D\uDC8A", ["pill"]],
     "1f48b": ["\uD83D\uDC8B", ["kiss"]],
     "1f48c": ["\uD83D\uDC8C", ["love_letter"]],
     "1f48d": ["\uD83D\uDC8D", ["ring"]],
@@ -633,7 +636,8 @@ Config.Emoji = {
     "1f528": ["\uD83D\uDD28", ["hammer"]],
     "1f529": ["\uD83D\uDD29", ["nut_and_bolt"]],
     "1f52a": ["\uD83D\uDD2A", ["hocho"]],
-    "1f52b": ["\uD83D\uDD2B", ["gun"]],
+    "1f52b": ["\u274C", ["x"]],
+        // ["\uD83D\uDD2B", ["gun"]],
     "1f52c": ["\uD83D\uDD2C", ["microscope"]],
     "1f52d": ["\uD83D\uDD2D", ["telescope"]],
     "1f52e": ["\uD83D\uDD2E", ["crystal_ball"]],
@@ -801,8 +805,10 @@ Config.Emoji = {
     "1f6a9": ["\uD83D\uDEA9", ["triangular_flag_on_post"]],
     "1f6aa": ["\uD83D\uDEAA", ["door"]],
     "1f6ab": ["\uD83D\uDEAB", ["no_entry_sign"]],
-    "1f6ac": ["\uD83D\uDEAC", ["smoking"]],
-    "1f6ad": ["\uD83D\uDEAD", ["no_smoking"]],
+    "1f6ac": ["\u274C", ["x"]],
+        // ["\uD83D\uDEAC", ["smoking"]],
+    "1f6ad": ["\u274C", ["x"]],
+        // ["\uD83D\uDEAD", ["no_smoking"]],
     "1f6ae": ["\uD83D\uDEAE", ["put_litter_in_its_place"]],
     "1f6af": ["\uD83D\uDEAF", ["do_not_litter"]],
     "1f6b0": ["\uD83D\uDEB0", ["potable_water"]],
@@ -838,16 +844,26 @@ Config.Emoji = {
     "0037": ["\u0037\u20E3", ["seven"]],
     "0038": ["\u0038\u20E3", ["eight"]],
     "0039": ["\u0039\u20E3", ["nine"]],
-    "1f1e8-1f1f3": ["\uD83C\uDDE8\uD83C\uDDF3", ["cn"]],
-    "1f1e9-1f1ea": ["\uD83C\uDDE9\uD83C\uDDEA", ["de"]],
-    "1f1ea-1f1f8": ["\uD83C\uDDEA\uD83C\uDDF8", ["es"]],
-    "1f1eb-1f1f7": ["\uD83C\uDDEB\uD83C\uDDF7", ["fr"]],
-    "1f1ec-1f1e7": ["\uD83C\uDDEC\uD83C\uDDE7", ["gb", "uk"]],
-    "1f1ee-1f1f9": ["\uD83C\uDDEE\uD83C\uDDF9", ["it"]],
-    "1f1ef-1f1f5": ["\uD83C\uDDEF\uD83C\uDDF5", ["jp"]],
-    "1f1f0-1f1f7": ["\uD83C\uDDF0\uD83C\uDDF7", ["kr"]],
-    "1f1f7-1f1fa": ["\uD83C\uDDF7\uD83C\uDDFA", ["ru"]],
-    "1f1fa-1f1f8": ["\uD83C\uDDFA\uD83C\uDDF8", ["us"]]
+    "1f1e8-1f1f3": ["\u274C", ["x"]],
+        // ["\uD83C\uDDE8\uD83C\uDDF3", ["cn"]],
+    "1f1e9-1f1ea": ["\u274C", ["x"]],
+        // ["\uD83C\uDDE9\uD83C\uDDEA", ["de"]],
+    "1f1ea-1f1f8": ["\u274C", ["x"]],
+        // ["\uD83C\uDDEA\uD83C\uDDF8", ["es"]],
+    "1f1eb-1f1f7": ["\u274C", ["x"]],
+        // ["\uD83C\uDDEB\uD83C\uDDF7", ["fr"]],
+    "1f1ec-1f1e7": ["\u274C", ["x"]],
+        // ["\uD83C\uDDEC\uD83C\uDDE7", ["gb", "uk"]],
+    "1f1ee-1f1f9": ["\u274C", ["x"]],
+        // ["\uD83C\uDDEE\uD83C\uDDF9", ["it"]],
+    "1f1ef-1f1f5": ["\u274C", ["x"]],
+        // ["\uD83C\uDDEF\uD83C\uDDF5", ["jp"]],
+    "1f1f0-1f1f7": ["\u274C", ["x"]],
+        // ["\uD83C\uDDF0\uD83C\uDDF7", ["kr"]],
+    "1f1f7-1f1fa": ["\u274C", ["x"]],
+        // ["\uD83C\uDDF7\uD83C\uDDFA", ["ru"]],
+    "1f1fa-1f1f8": ["\u274C", ["x"]],
+// ["\uD83C\uDDFA\uD83C\uDDF8", ["us"]]
 }
 
 Config.EmojiCategories = [
@@ -2144,9 +2160,13 @@ Config.emoji_data = {
     "1f458": [
         ["\uD83D\uDC58"], "\uE321", "\uDBB9\uDCD9", ["kimono"], 14, 3
     ],
-    "1f459": [
-        ["\uD83D\uDC59"], "\uE322", "\uDBB9\uDCDA", ["bikini"], 14, 4
+    "1f459":
+         [
+        ["\u274C"], "\uE333", "\uDBBA\uDF45", ["x"], 3, 1
     ],
+    // [
+    //     ["\uD83D\uDC59"], "\uE322", "\uDBB9\uDCDA", ["bikini"], 14, 4
+    // ],
     "1f45a": [
         ["\uD83D\uDC5A"], "\uE006", "\uDBB9\uDCDB", ["womans_clothes"], 14, 5
     ],
@@ -2289,11 +2309,17 @@ Config.emoji_data = {
         ["\uD83D\uDC88"], "\uE320", "\uDBB8\uDD99", ["barber"], 15, 21
     ],
     "1f489": [
-        ["\uD83D\uDC89"], "\uE13B", "\uDBB9\uDD09", ["syringe"], 15, 22
+        ["\u274C"], "\uE333", "\uDBBA\uDF45", ["x"], 3, 1
     ],
+    //     [
+    //     ["\uD83D\uDC89"], "\uE13B", "\uDBB9\uDD09", ["syringe"], 15, 22
+    // ],
     "1f48a": [
-        ["\uD83D\uDC8A"], "\uE30F", "\uDBB9\uDD0A", ["pill"], 15, 23
+        ["\u274C"], "\uE333", "\uDBBA\uDF45", ["x"], 3, 1
     ],
+    //     [
+    //     ["\uD83D\uDC8A"], "\uE30F", "\uDBB9\uDD0A", ["pill"], 15, 23
+    // ],
     "1f48b": [
         ["\uD83D\uDC8B"], "\uE003", "\uDBBA\uDC23", ["kiss"], 15, 24
     ],
@@ -2760,11 +2786,17 @@ Config.emoji_data = {
         ["\uD83D\uDD29"], "", "\uDBB9\uDCCB", ["nut_and_bolt"], 20, 28
     ],
     "1f52a": [
-        ["\uD83D\uDD2A"], "", "\uDBB9\uDCFA", ["hocho", "knife"], 20, 29
+        ["\u274C"], "\uE333", "\uDBBA\uDF45", ["x"], 3, 1
     ],
+    //     [
+    //     ["\uD83D\uDD2A"], "", "\uDBB9\uDCFA", ["hocho", "knife"], 20, 29
+    // ],
     "1f52b": [
-        ["\uD83D\uDD2B"], "\uE113", "\uDBB9\uDCF5", ["gun"], 21, 0
+        ["\u274C"], "\uE333", "\uDBBA\uDF45", ["x"], 3, 1
     ],
+    //     [
+    //     ["\uD83D\uDD2B"], "\uE113", "\uDBB9\uDCF5", ["gun"], 21, 0
+    // ],
     "1f52c": [
         ["\uD83D\uDD2C"], "", "", ["microscope"], 21, 1
     ],
@@ -3267,11 +3299,17 @@ Config.emoji_data = {
         ["\uD83D\uDEAB"], "", "\uDBBA\uDF48", ["no_entry_sign"], 26, 17
     ],
     "1f6ac": [
-        ["\uD83D\uDEAC"], "\uE30E", "\uDBBA\uDF1E", ["smoking"], 26, 18
+        ["\u274C"], "\uE333", "\uDBBA\uDF45", ["x"], 3, 1
     ],
+    //     [
+    //     ["\uD83D\uDEAC"], "\uE30E", "\uDBBA\uDF1E", ["smoking"], 26, 18
+    // ],
     "1f6ad": [
-        ["\uD83D\uDEAD"], "\uE208", "\uDBBA\uDF1F", ["no_smoking"], 26, 19
+        ["\u274C"], "\uE333", "\uDBBA\uDF45", ["x"], 3, 1
     ],
+// [
+//         ["\uD83D\uDEAD"], "\uE208", "\uDBBA\uDF1F", ["no_smoking"], 26, 19
+//     ],
     "1f6ae": [
         ["\uD83D\uDEAE"], "", "", ["put_litter_in_its_place"], 26, 20
     ],
@@ -3377,36 +3415,66 @@ Config.emoji_data = {
     "0039-20e3": [
         ["\u0039\uFE0F\u20E3", "\u0039\u20E3"], "\uE224", "\uDBBA\uDC36", ["nine"], 27, 24
     ],
-    "1f1e8-1f1f3": [
-        ["\uD83C\uDDE8\uD83C\uDDF3"], "\uE513", "\uDBB9\uDCED", ["cn"], 27, 25
+    "1f1e8-1f1f3":  [
+        ["\u274C"], "\uE333", "\uDBBA\uDF45", ["x"], 3, 1
     ],
+    //     [
+    //     ["\uD83C\uDDE8\uD83C\uDDF3"], "\uE513", "\uDBB9\uDCED", ["cn"], 27, 25
+    // ],
     "1f1e9-1f1ea": [
-        ["\uD83C\uDDE9\uD83C\uDDEA"], "\uE50E", "\uDBB9\uDCE8", ["de"], 27, 26
+        ["\u274C"], "\uE333", "\uDBBA\uDF45", ["x"], 3, 1
     ],
+    //     [
+    //     ["\uD83C\uDDE9\uD83C\uDDEA"], "\uE50E", "\uDBB9\uDCE8", ["de"], 27, 26
+    // ],
     "1f1ea-1f1f8": [
-        ["\uD83C\uDDEA\uD83C\uDDF8"], "\uE511", "\uDBB9\uDCEB", ["es"], 27, 27
+        ["\u274C"], "\uE333", "\uDBBA\uDF45", ["x"], 3, 1
     ],
+    //     [
+    //     ["\uD83C\uDDEA\uD83C\uDDF8"], "\uE511", "\uDBB9\uDCEB", ["es"], 27, 27
+    // ],
     "1f1eb-1f1f7": [
-        ["\uD83C\uDDEB\uD83C\uDDF7"], "\uE50D", "\uDBB9\uDCE7", ["fr"], 27, 28
+        ["\u274C"], "\uE333", "\uDBBA\uDF45", ["x"], 3, 1
     ],
+    //     [
+    //     ["\uD83C\uDDEB\uD83C\uDDF7"], "\uE50D", "\uDBB9\uDCE7", ["fr"], 27, 28
+    // ],
     "1f1ec-1f1e7": [
-        ["\uD83C\uDDEC\uD83C\uDDE7"], "\uE510", "\uDBB9\uDCEA", ["gb", "uk"], 27, 29
+        ["\u274C"], "\uE333", "\uDBBA\uDF45", ["x"], 3, 1
     ],
+    //     [
+    //     ["\uD83C\uDDEC\uD83C\uDDE7"], "\uE510", "\uDBB9\uDCEA", ["gb", "uk"], 27, 29
+    // ],
     "1f1ee-1f1f9": [
-        ["\uD83C\uDDEE\uD83C\uDDF9"], "\uE50F", "\uDBB9\uDCE9", ["it"], 28, 0
+        ["\u274C"], "\uE333", "\uDBBA\uDF45", ["x"], 3, 1
     ],
+    //     [
+    //     ["\uD83C\uDDEE\uD83C\uDDF9"], "\uE50F", "\uDBB9\uDCE9", ["it"], 28, 0
+    // ],
     "1f1ef-1f1f5": [
-        ["\uD83C\uDDEF\uD83C\uDDF5"], "\uE50B", "\uDBB9\uDCE5", ["jp"], 28, 1
+        ["\u274C"], "\uE333", "\uDBBA\uDF45", ["x"], 3, 1
     ],
+    //     [
+    //     ["\uD83C\uDDEF\uD83C\uDDF5"], "\uE50B", "\uDBB9\uDCE5", ["jp"], 28, 1
+    // ],
     "1f1f0-1f1f7": [
-        ["\uD83C\uDDF0\uD83C\uDDF7"], "\uE514", "\uDBB9\uDCEE", ["kr"], 28, 2
+        ["\u274C"], "\uE333", "\uDBBA\uDF45", ["x"], 3, 1
     ],
+    //     [
+    //     ["\uD83C\uDDF0\uD83C\uDDF7"], "\uE514", "\uDBB9\uDCEE", ["kr"], 28, 2
+    // ],
     "1f1f7-1f1fa": [
-        ["\uD83C\uDDF7\uD83C\uDDFA"], "\uE512", "\uDBB9\uDCEC", ["ru"], 28, 3
+        ["\u274C"], "\uE333", "\uDBBA\uDF45", ["x"], 3, 1
     ],
+    //     [
+    //     ["\uD83C\uDDF7\uD83C\uDDFA"], "\uE512", "\uDBB9\uDCEC", ["ru"], 28, 3
+    // ],
     "1f1fa-1f1f8": [
-        ["\uD83C\uDDFA\uD83C\uDDF8"], "\uE50C", "\uDBB9\uDCE6", ["us"], 28, 4
-    ]
+        ["\u274C"], "\uE333", "\uDBBA\uDF45", ["x"], 3, 1
+    ],
+    //     [
+    //     ["\uD83C\uDDFA\uD83C\uDDF8"], "\uE50C", "\uDBB9\uDCE6", ["us"], 28, 4
+    // ]
 };
 
 Config.smileys = {
