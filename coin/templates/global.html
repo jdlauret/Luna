@@ -1,0 +1,66 @@
+{% extends 'Luna/base.html' %}
+{% block content %}
+    <!DOCTYPE html>
+    <html lang="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <meta charset="UTF-8">
+        <title>Global Transaction Window</title>
+        {% load staticfiles %}
+        <link rel="stylesheet" href="{% static 'CSS/coin_style.css' %}">
+    </head>
+    <body>
+    <div class="main_body">
+        {#        <h2>Global Window</h2>#}
+        <div class="top_pane">
+            <div class="btnform_box">
+                <form action="agent" method="POST" style="display:inline-block;">
+                    {% csrf_token %}
+                    <button class="btn">Personal View</button>
+                </form>
+                <form class="btnform" action="transaction_view" method="POST" style="display: inline-block;">
+                    {% csrf_token %}
+                    <button class="btn">Send Coins</button>
+                </form>
+            </div>
+
+            <div class="balance_box">
+                <div class="total_share_coin_box">
+                    <p class="s_balance">Sharing Balance: </p>{{ coin }}
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <table>
+            <tr>
+                <th>Giver</th>
+                <th>Receiver</th>
+                <th style="text-align: right;">Amount</th>
+                <th>Date</th>
+                <th>Reason</th>
+            </tr>
+
+            {% for x in transaction %}
+                <tr>
+                    {% if x.anonymous == 1 %}
+                        <td>Anonymous</td>
+                    {% endif %}
+                    {% if x.anonymous == 0 %}
+                        <td>{{ x.benefactor_name }}</td>
+                    {% endif %}
+                    <td>{{ x.recipient_name }}</td>
+                    <td style="text-align: right;">{{ x.award }}</td>
+                    <td>{{ x.created_at }}</td>
+                    {% if x.bad_comment == 1 %}
+                        <td></td>
+                    {% endif %}
+                    {% if x.bad_comment == 0 %}
+                        <td>{{ x.note }}</td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    </body>
+    </html>
+{% endblock %}

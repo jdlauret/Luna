@@ -48,7 +48,7 @@
                 <table class="table">
                     <thead class="thead-dark">
                     <tr>
-                        <th colspan="10">Account Information</th>
+                        <th colspan="11">Account Information</th>
                     </tr>
                     </thead>
                     {% if form_response_complete == True %}
@@ -64,6 +64,7 @@
                             <th>PTO</th>
                             <th>Utility Company</th>
                             <th>Average Utility Rate<sup>*</sup></th>
+                            <th>Contract Type</th>
                         </tr>
                         </thead>
 
@@ -84,21 +85,54 @@
                 </table>
             </div>
         </div>
+        <div id="production_div">
+{#            {% if form_response_complete == True %}#}
+{#                <table class="table">#}
+{#                    <thead class="table-info">#}
+{#                        <tr>#}
+{#                            <th colspan="{{ form_response.savings.0|length }}">Talking Points</th>#}
+{#                        </tr>#}
+{#                    </thead>#}
+{#                    <tr>#}
+{#                        <td>#}
+{#                            <ul>#}
+{#                                {% for item in form_response.summary %}#}
+{#                                    <li>{{ item }}</li>#}
+{#                                {% endfor %}#}
+{#                            </ul>#}
+{#                        </td>#}
+{#                    </tr>#}
+{#                </table>#}
+{#            {% endif %}#}
             {% if form_response.error %}
-                <table>
+                <table class="table">
+                    <thead class="table-danger">
+                        <tr>
+                            <th colspan="{{ form_response.savings.0|length }}">ERROR!</th>
+                        </tr>
+                    </thead>
                     <tr>
-                        <td colspan="5">{{ form_response.error }}</td>
+                        <td>{{ form_response.error }}</td>
                     </tr>
                 </table>
-            {% endif %}
-        <div id="production_div">
-            {% if form_response_complete == True %}
-                <ul>
-                    {% for item in form_response.summary %}
-                        <li>{{ item }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
+{#            {% elif form_response_complete == True %}#}
+             {% else %}
+                <table class="table">
+                    <thead class="table-dark">
+                        <tr>
+                            <th colspan="{{ form_response.savings.0|length }}">Talking Points</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td>
+                            <ul>
+                                {% for item in form_response.summary %}
+                                    <li>{{ item }}</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
             <table class="table">
                 <thead class="thead-dark">
                 <tr>
@@ -111,6 +145,7 @@
                 <tr>
                     <th scope="col">Month</th>
                     <th scope="col">Actual Production <br>from the PV System</th>
+                    <th scope="col">PPA/Lease Rate <br>per kWh</th>
                     <th scope="col">Vivint Solar Bill</th>
                     <th scope="col">Utility Bill<sup>*</sup></th>
                     <th scope="col">Savings<sup>*</sup></th>
@@ -177,6 +212,7 @@
                     </tbody>
                 {% endif %}
             </table>
+        {% endif %}
         </div>
 
     </div>

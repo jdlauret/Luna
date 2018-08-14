@@ -41,29 +41,45 @@ def soft_savings_analysis(servicenum, startdate, enddate):
     elif results['account'][0][7].date() > date.today()-timedelta(30):
         results['error'] = 'The system hasn\'t been PTO\'d for more than 30 days.'
         return results
+    elif not results['account'][0][7]:
+        results['error'] = 'The system hasn\'t been PTO\'d yet!'
+        results['account'][0][9] = '${}'.format(round(results['account'][0][9], 5))
+        return results
+    # elif results['account'][0][7].date() > date.today()-timedelta(365):
+    #     results['error'] = 'Benefit Analyses can only be performed on systems ' \
+    #         'that have been PTO\'d for at least one year.'
+    #     results['account'][0][7] = results['account'][0][7].strftime('%B %#d, %Y')
+    #     results['account'][0][9] = '${} per kWh'.format(results['account'][0][9])
+    #     return results
     elif results['account'][0][8] == None:
         results['error'] = 'There was no utility information found for service ' \
                                     '{}.'.format(servicenum)
+        results['account'][0][7] = results['account'][0][7].strftime('%B %#d, %Y')
+        return results
+    elif results['account'][0][-1] != 'Solar PPA' and results['account'][0][-1] != 'Solar Lease':
+        results['error'] = 'This calculator is only for PPA and Lease customers! This customer has a' \
+                           ' {}. For Loan customers, please refer them to their Loan Documents.' \
+                           ''.format(results['account'][0][-1])
+        results['account'][0][9] = '${}'.format(round(results['account'][0][9], 5))
+        results['account'][0][7] = results['account'][0][7].strftime('%B %#d, %Y')
         return results
     elif startdate < results['account'][0][7].date():
         results['startdate'] = results['account'][0][7]
         startdatestring = results['startdate'].strftime('%m/%d/%Y')
-    elif results['account'][0][-1] != 'Solar PPA' and results['account'][0][-1] != 'Solar Lease':
-        results['error'] = 'This calculator is only for PPA and Lease customers! This customer has a' \
-                           ' {}. For Loan customers, please refer them to their Loan Documents.' \
-                           ''.format(results['account'][0].pop())
-        results['account'][0][9] = '${}'.format(round(results['account'][0][9], 5))
-        results['account'][0][7] = results['account'][0][7].strftime('%B %#d, %Y')
-        return results
     else:
         results['startdate'] = startdate
         startdatestring = results['startdate'].replace(day=1).strftime('%m/%d/%Y')
+        # results['enddate'] = (date.today().replace(day=1) - timedelta(1))
+        # enddatestring = results['enddate'].strftime('%m/%d/%Y')
+        # results['startdate'] = (results['enddate'] - timedelta(365)).replace(month=results['enddate'].month % 12 + 1,
+        #                                                                      day=1)
+        # startdatestring = results['startdate'].strftime('%m/%d/%Y')
 
     results['account'][0][9] = '${}'.format(round(results['account'][0][9], 5))
 
     if enddate >= date.today() and enddate < results['startdate'].date() + timedelta(30) and results['startdate'] == results['account'][0][7]:
-        # enddatestring = (date.today().replace(day=1) - timedelta(1)).strftime('%m/%d/%Y')
-        # results['enddate'] = date.today().replace(day=1) - timedelta(1)
+        enddatestring = (date.today().replace(day=1) - timedelta(1)).strftime('%m/%d/%Y')
+        results['enddate'] = date.today().replace(day=1) - timedelta(1)
         results['error'] = "The system has not been PTO'd for at least two weeks."
         return results
         # results['enddate'] = startdate + timedelta(14)
@@ -91,20 +107,23 @@ def soft_savings_analysis(servicenum, startdate, enddate):
                                      'to {}.'.format(servicenum, startdatestring, enddatestring)
         return results
 
-    totals = [sum(j) for j in [i for i in zip(*results['savings'])][1:5]]
+    totals = [sum(j) for j in [i for i in zip(*results['savings'])][1:6]]
     results['savings'].append(['Total',
                                   round(totals[0], 2),
-                                  round(totals[1], 2),
+                                  '',
                                   round(totals[2], 2),
-                                  round(totals[3], 2)
+                                  round(totals[3], 2),
+                                  round(totals[4], 2)
                                   ])
 
     for month in results['savings']:
         month[1] = '{} kWh'.format(month[1])
-        if month[2] < 0:
-            month[2] = '$({})'.format('%.2f' % abs(month[2]))
+        if not month[2]:
+            pass
+        elif month[2] < 0:
+            month[2] = '$({})'.format('%.5f' % abs(month[2]))
         else:
-            month[2] = '${}'.format('%.2f' % month[2])
+            month[2] = '${}'.format('%.5f' % month[2])
         if month[3] < 0:
             month[3] = '$({})'.format('%.2f' % abs(month[3]))
         else:
@@ -113,23 +132,27 @@ def soft_savings_analysis(servicenum, startdate, enddate):
             month[4] = '$({})'.format('%.2f' % abs(month[4]))
         else:
             month[4] = '${}'.format('%.2f' % month[4])
+        if month[5] < 0:
+            month[5] = '$({})'.format('%.2f' % abs(month[5]))
+        else:
+            month[5] = '${}'.format('%.2f' % month[5])
 
     results['summary'] = [
         'Your system has produced {} kilowatt hours (kWh) since {}.'.format(
             results['savings'][-1][1].split()[0],
             results['startdate'].strftime('%m/%d/%Y')
         ),
-        'For that energy, you paid Vivint Solar {}.'.format(results['savings'][-1][2]),
+        'For that energy, you paid Vivint Solar {}.'.format(results['savings'][-1][3]),
         'The average utility customer of your utility, {}, would have paid {} for that same amount of energy.'.format(
             results['account'][0][8],
-            results['savings'][-1][3]
+            results['savings'][-1][4]
         ),
         'For the average utility customer with {}, who had {} kilowatt hours (kWh) of production since {},' \
         ' they would have saved {}.'.format(
             results['account'][0][8],
             results['savings'][-1][1].split()[0],
             results['startdate'].strftime('%m/%d/%Y'),
-            results['savings'][-1][4]
+            results['savings'][-1][5]
         )
     ]
 
