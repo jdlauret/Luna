@@ -420,7 +420,8 @@ Config.Emoji = {
         // ["\uD83D\uDC49", ["point_right"]],
     "1f44a": ["\uD83D\uDC4A", ["facepunch", "punch"]],
     "1f44b": ["\uD83D\uDC4B", ["wave"]],
-    "1f44c": ["\uD83D\uDC4C", ["ok_hand"]],
+    "1f44c": ["\u274C", ["x"]],
+        // ["\uD83D\uDC4C", ["ok_hand"]],
     "1f44d": ["\uD83D\uDC4D", ["+1", "thumbsup"]],
     "1f44e": ["\uD83D\uDC4E", ["-1", "thumbsdown"]],
     "1f44f": ["\uD83D\uDC4F", ["clap"]],
@@ -2158,8 +2159,11 @@ Config.emoji_data = {
         ["\uD83D\uDC4B"], "\uE41E", "\uDBBA\uDF9D", ["wave"], 13, 20
     ],
     "1f44c": [
-        ["\uD83D\uDC4C"], "\uE420", "\uDBBA\uDF9F", ["ok_hand"], 13, 21
+        ["\u274C"], "\uE333", "\uDBBA\uDF45", ["x"], 3, 1
     ],
+    // [
+    //     ["\uD83D\uDC4C"], "\uE420", "\uDBBA\uDF9F", ["ok_hand"], 13, 21
+    // ],
     "1f44d": [
         ["\uD83D\uDC4D"], "\uE00E", "\uDBBA\uDF97", ["+1", "thumbsup"], 13, 22
     ],
