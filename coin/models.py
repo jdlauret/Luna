@@ -91,7 +91,7 @@ class coinManager(models.Manager):
             10
         ]
         now = dt.date.today()
-        standard = 75
+        standard = 250
 
         if now.month in months and now.day == 1:
             if str(now) not in log_file.keys():

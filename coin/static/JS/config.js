@@ -406,12 +406,18 @@ Config.Emoji = {
     "1f440": ["\uD83D\uDC40", ["eyes"]],
     "1f442": ["\uD83D\uDC42", ["ear"]],
     "1f443": ["\uD83D\uDC43", ["nose"]],
-    "1f444": ["\uD83D\uDC44", ["lips"]],
-    "1f445": ["\uD83D\uDC45", ["tongue"]],
-    "1f446": ["\uD83D\uDC46", ["point_up_2"]],
-    "1f447": ["\uD83D\uDC47", ["point_down"]],
-    "1f448": ["\uD83D\uDC48", ["point_left"]],
-    "1f449": ["\uD83D\uDC49", ["point_right"]],
+    "1f444": ["\u274C", ["x"]],
+        // ["\uD83D\uDC44", ["lips"]],
+    "1f445": ["\u274C", ["x"]],
+        // ["\uD83D\uDC45", ["tongue"]],
+    "1f446": ["\u274C", ["x"]],
+        // ["\uD83D\uDC46", ["point_up_2"]],
+    "1f447": ["\u274C", ["x"]],
+        // ["\uD83D\uDC47", ["point_down"]],
+    "1f448": ["\u274C", ["x"]],
+        // ["\uD83D\uDC48", ["point_left"]],
+    "1f449": ["\u274C", ["x"]],
+        // ["\uD83D\uDC49", ["point_right"]],
     "1f44a": ["\uD83D\uDC4A", ["facepunch", "punch"]],
     "1f44b": ["\uD83D\uDC4B", ["wave"]],
     "1f44c": ["\uD83D\uDC4C", ["ok_hand"]],
@@ -480,11 +486,13 @@ Config.Emoji = {
         // ["\uD83D\uDC89", ["syringe"]],
     "1f48a": ["\u274C", ["x"]],
         // ["\uD83D\uDC8A", ["pill"]],
-    "1f48b": ["\uD83D\uDC8B", ["kiss"]],
+    "1f48b": ["\u274C", ["x"]],
+        // ["\uD83D\uDC8B", ["kiss"]],
     "1f48c": ["\uD83D\uDC8C", ["love_letter"]],
     "1f48d": ["\uD83D\uDC8D", ["ring"]],
     "1f48e": ["\uD83D\uDC8E", ["gem"]],
-    "1f48f": ["\uD83D\uDC8F", ["couplekiss"]],
+    "1f48f": ["\u274C", ["x"]],
+        // ["\uD83D\uDC8F", ["couplekiss"]],
     "1f490": ["\uD83D\uDC90", ["bouquet"]],
     "1f491": ["\uD83D\uDC91", ["couple_with_heart"]],
     "1f492": ["\uD83D\uDC92", ["wedding"]],
@@ -507,10 +515,14 @@ Config.Emoji = {
     "1f4a3": ["\uD83D\uDCA3", ["bomb"]],
     "1f4a4": ["\uD83D\uDCA4", ["zzz"]],
     "1f4a5": ["\uD83D\uDCA5", ["boom", "collision"]],
-    "1f4a6": ["\uD83D\uDCA6", ["sweat_drops"]],
-    "1f4a7": ["\uD83D\uDCA7", ["droplet"]],
-    "1f4a8": ["\uD83D\uDCA8", ["dash"]],
-    "1f4a9": ["\uD83D\uDCA9", ["hankey", "poop", "shit"]],
+    "1f4a6": ["\u274C", ["x"]],
+        // ["\uD83D\uDCA6", ["sweat_drops"]],
+    "1f4a7": ["\u274C", ["x"]],
+        // ["\uD83D\uDCA7", ["droplet"]],
+    "1f4a8": ["\u274C", ["x"]],
+        // ["\uD83D\uDCA8", ["dash"]],
+    "1f4a9": ["\u274C", ["x"]],
+        // ["\uD83D\uDCA9", ["hankey", "poop", "shit"]],
     "1f4aa": ["\uD83D\uDCAA", ["muscle"]],
     "1f4ab": ["\uD83D\uDCAB", ["dizzy"]],
     "1f4ac": ["\uD83D\uDCAC", ["speech_balloon"]],
@@ -708,10 +720,14 @@ Config.Emoji = {
     "1f614": ["\uD83D\uDE14", ["pensive"]],
     "1f615": ["\uD83D\uDE15", ["confused"]],
     "1f616": ["\uD83D\uDE16", ["confounded"]],
-    "1f617": ["\uD83D\uDE17", ["kissing"]],
-    "1f618": ["\uD83D\uDE18", ["kissing_heart"]],
-    "1f619": ["\uD83D\uDE19", ["kissing_smiling_eyes"]],
-    "1f61a": ["\uD83D\uDE1A", ["kissing_closed_eyes"]],
+    "1f617": ["\u274C", ["x"]],
+        // ["\uD83D\uDE17", ["kissing"]],
+    "1f618": ["\u274C", ["x"]],
+        // ["\uD83D\uDE18", ["kissing_heart"]],
+    "1f619": ["\u274C", ["x"]],
+        // ["\uD83D\uDE19", ["kissing_smiling_eyes"]],
+    "1f61a": ["\u274C", ["x"]],
+        // ["\uD83D\uDE1A", ["kissing_closed_eyes"]],
     "1f61b": ["\uD83D\uDE1B", ["stuck_out_tongue"]],
     "1f61c": ["\uD83D\uDE1C", ["stuck_out_tongue_winking_eye"], ";p"],
     "1f61d": ["\uD83D\uDE1D", ["stuck_out_tongue_closed_eyes"]],
@@ -746,7 +762,8 @@ Config.Emoji = {
     "1f63a": ["\uD83D\uDE3A", ["smiley_cat"]],
     "1f63b": ["\uD83D\uDE3B", ["heart_eyes_cat"]],
     "1f63c": ["\uD83D\uDE3C", ["smirk_cat"]],
-    "1f63d": ["\uD83D\uDE3D", ["kissing_cat"]],
+    "1f63d": ["\u274C", ["x"]],
+        // ["\uD83D\uDE3D", ["kissing_cat"]],
     "1f63e": ["\uD83D\uDE3E", ["pouting_cat"]],
     "1f63f": ["\uD83D\uDE3F", ["crying_cat_face"]],
     "1f640": ["\uD83D\uDE40", ["scream_cat"]],
@@ -760,7 +777,8 @@ Config.Emoji = {
     "1f64c": ["\uD83D\uDE4C", ["raised_hands"]],
     "1f64d": ["\uD83D\uDE4D", ["person_frowning"]],
     "1f64e": ["\uD83D\uDE4E", ["person_with_pouting_face"]],
-    "1f64f": ["\uD83D\uDE4F", ["pray"]],
+    "1f64f": ["\u274C", ["x"]],
+        // ["\uD83D\uDE4F", ["pray"]],
     "1f680": ["\uD83D\uDE80", ["rocket"]],
     "1f681": ["\uD83D\uDE81", ["helicopter"]],
     "1f682": ["\uD83D\uDE82", ["steam_locomotive"]],
@@ -2098,23 +2116,41 @@ Config.emoji_data = {
         ["\uD83D\uDC43"], "\uE41A", "\uDBB8\uDD92", ["nose"], 13, 12
     ],
     "1f444": [
-        ["\uD83D\uDC44"], "\uE41C", "\uDBB8\uDD93", ["lips"], 13, 13
+        ["\u274C"], "\uE333", "\uDBBA\uDF45", ["x"], 3, 1
     ],
+    //     [
+    //     ["\uD83D\uDC44"], "\uE41C", "\uDBB8\uDD93", ["lips"], 13, 13
+    // ],
     "1f445": [
-        ["\uD83D\uDC45"], "\uE409", "\uDBB8\uDD94", ["tongue"], 13, 14
+        ["\u274C"], "\uE333", "\uDBBA\uDF45", ["x"], 3, 1
     ],
+    //     [
+    //     ["\uD83D\uDC45"], "\uE409", "\uDBB8\uDD94", ["tongue"], 13, 14
+    // ],
     "1f446": [
-        ["\uD83D\uDC46"], "\uE22E", "\uDBBA\uDF99", ["point_up_2"], 13, 15
+        ["\u274C"], "\uE333", "\uDBBA\uDF45", ["x"], 3, 1
     ],
+    //     [
+    //     ["\uD83D\uDC46"], "\uE22E", "\uDBBA\uDF99", ["point_up_2"], 13, 15
+    // ],
     "1f447": [
-        ["\uD83D\uDC47"], "\uE22F", "\uDBBA\uDF9A", ["point_down"], 13, 16
+        ["\u274C"], "\uE333", "\uDBBA\uDF45", ["x"], 3, 1
     ],
+    //     [
+    //     ["\uD83D\uDC47"], "\uE22F", "\uDBBA\uDF9A", ["point_down"], 13, 16
+    // ],
     "1f448": [
-        ["\uD83D\uDC48"], "\uE230", "\uDBBA\uDF9B", ["point_left"], 13, 17
+        ["\u274C"], "\uE333", "\uDBBA\uDF45", ["x"], 3, 1
     ],
+    //     [
+    //     ["\uD83D\uDC48"], "\uE230", "\uDBBA\uDF9B", ["point_left"], 13, 17
+    // ],
     "1f449": [
-        ["\uD83D\uDC49"], "\uE231", "\uDBBA\uDF9C", ["point_right"], 13, 18
+        ["\u274C"], "\uE333", "\uDBBA\uDF45", ["x"], 3, 1
     ],
+    //     [
+    //     ["\uD83D\uDC49"], "\uE231", "\uDBBA\uDF9C", ["point_right"], 13, 18
+    // ],
     "1f44a": [
         ["\uD83D\uDC4A"], "\uE00D", "\uDBBA\uDF96", ["facepunch", "punch"], 13, 19
     ],
@@ -2321,8 +2357,11 @@ Config.emoji_data = {
     //     ["\uD83D\uDC8A"], "\uE30F", "\uDBB9\uDD0A", ["pill"], 15, 23
     // ],
     "1f48b": [
-        ["\uD83D\uDC8B"], "\uE003", "\uDBBA\uDC23", ["kiss"], 15, 24
+        ["\u274C"], "\uE333", "\uDBBA\uDF45", ["x"], 3, 1
     ],
+    //     [
+    //     ["\uD83D\uDC8B"], "\uE003", "\uDBBA\uDC23", ["kiss"], 15, 24
+    // ],
     "1f48c": [
         ["\uD83D\uDC8C"], "\uE103\uE328", "\uDBBA\uDC24", ["love_letter"], 15, 25
     ],
@@ -2333,8 +2372,11 @@ Config.emoji_data = {
         ["\uD83D\uDC8E"], "\uE035", "\uDBBA\uDC26", ["gem"], 15, 27
     ],
     "1f48f": [
-        ["\uD83D\uDC8F"], "\uE111", "\uDBBA\uDC27", ["couplekiss"], 15, 28
+        ["\u274C"], "\uE333", "\uDBBA\uDF45", ["x"], 3, 1
     ],
+    //     [
+    //     ["\uD83D\uDC8F"], "\uE111", "\uDBBA\uDC27", ["couplekiss"], 15, 28
+    // ],
     "1f490": [
         ["\uD83D\uDC90"], "\uE306", "\uDBBA\uDC28", ["bouquet"], 15, 29
     ],
@@ -2402,17 +2444,29 @@ Config.emoji_data = {
         ["\uD83D\uDCA5"], "", "\uDBBA\uDF5A", ["boom", "collision"], 16, 20
     ],
     "1f4a6": [
-        ["\uD83D\uDCA6"], "\uE331", "\uDBBA\uDF5B", ["sweat_drops"], 16, 21
+        ["\u274C"], "\uE333", "\uDBBA\uDF45", ["x"], 3, 1
     ],
+    //     [
+    //     ["\uD83D\uDCA6"], "\uE331", "\uDBBA\uDF5B", ["sweat_drops"], 16, 21
+    // ],
     "1f4a7": [
-        ["\uD83D\uDCA7"], "\uE331", "\uDBBA\uDF5C", ["droplet"], 16, 22
+        ["\u274C"], "\uE333", "\uDBBA\uDF45", ["x"], 3, 1
     ],
+    //     [
+    //     ["\uD83D\uDCA7"], "\uE331", "\uDBBA\uDF5C", ["droplet"], 16, 22
+    // ],
     "1f4a8": [
-        ["\uD83D\uDCA8"], "\uE330", "\uDBBA\uDF5D", ["dash"], 16, 23
+        ["\u274C"], "\uE333", "\uDBBA\uDF45", ["x"], 3, 1
     ],
+    //     [
+    //     ["\uD83D\uDCA8"], "\uE330", "\uDBBA\uDF5D", ["dash"], 16, 23
+    // ],
     "1f4a9": [
-        ["\uD83D\uDCA9"], "\uE05A", "\uDBB9\uDCF4", ["hankey", "poop", "shit"], 16, 24
+        ["\u274C"], "\uE333", "\uDBBA\uDF45", ["x"], 3, 1
     ],
+    //     [
+    //     ["\uD83D\uDCA9"], "\uE05A", "\uDBB9\uDCF4", ["hankey", "poop", "shit"], 16, 24
+    // ],
     "1f4aa": [
         ["\uD83D\uDCAA"], "\uE14C", "\uDBBA\uDF5E", ["muscle"], 16, 25
     ],
@@ -3008,17 +3062,29 @@ Config.emoji_data = {
         ["\uD83D\uDE16"], "\uE407", "\uDBB8\uDF3F", ["confounded"], 23, 10
     ],
     "1f617": [
-        ["\uD83D\uDE17"], "", "", ["kissing"], 23, 11
+        ["\u274C"], "\uE333", "\uDBBA\uDF45", ["x"], 3, 1
     ],
+    //     [
+    //     ["\uD83D\uDE17"], "", "", ["kissing"], 23, 11
+    // ],
     "1f618": [
-        ["\uD83D\uDE18"], "\uE418", "\uDBB8\uDF2C", ["kissing_heart"], 23, 12
+        ["\u274C"], "\uE333", "\uDBBA\uDF45", ["x"], 3, 1
     ],
+    //     [
+    //     ["\uD83D\uDE18"], "\uE418", "\uDBB8\uDF2C", ["kissing_heart"], 23, 12
+    // ],
     "1f619": [
-        ["\uD83D\uDE19"], "", "", ["kissing_smiling_eyes"], 23, 13
+        ["\u274C"], "\uE333", "\uDBBA\uDF45", ["x"], 3, 1
     ],
+    //     [
+    //     ["\uD83D\uDE19"], "", "", ["kissing_smiling_eyes"], 23, 13
+    // ],
     "1f61a": [
-        ["\uD83D\uDE1A"], "\uE417", "\uDBB8\uDF2D", ["kissing_closed_eyes"], 23, 14
+        ["\u274C"], "\uE333", "\uDBBA\uDF45", ["x"], 3, 1
     ],
+    //     [
+    //     ["\uD83D\uDE1A"], "\uE417", "\uDBB8\uDF2D", ["kissing_closed_eyes"], 23, 14
+    // ],
     "1f61b": [
         ["\uD83D\uDE1B"], "", "", ["stuck_out_tongue"], 23, 15, ":p"
     ],
@@ -3122,8 +3188,11 @@ Config.emoji_data = {
         ["\uD83D\uDE3C"], "\uE404", "\uDBB8\uDF4F", ["smirk_cat"], 24, 18
     ],
     "1f63d": [
-        ["\uD83D\uDE3D"], "\uE418", "\uDBB8\uDF4B", ["kissing_cat"], 24, 19
+        ["\u274C"], "\uE333", "\uDBBA\uDF45", ["x"], 3, 1
     ],
+    //     [
+    //     ["\uD83D\uDE3D"], "\uE418", "\uDBB8\uDF4B", ["kissing_cat"], 24, 19
+    // ],
     "1f63e": [
         ["\uD83D\uDE3E"], "\uE416", "\uDBB8\uDF4E", ["pouting_cat"], 24, 20
     ],
@@ -3164,8 +3233,11 @@ Config.emoji_data = {
         ["\uD83D\uDE4E"], "\uE416", "\uDBB8\uDF5A", ["person_with_pouting_face"], 25, 2
     ],
     "1f64f": [
-        ["\uD83D\uDE4F"], "\uE41D", "\uDBB8\uDF5B", ["pray"], 25, 3
+        ["\u274C"], "\uE333", "\uDBBA\uDF45", ["x"], 3, 1
     ],
+    //     [
+    //     ["\uD83D\uDE4F"], "\uE41D", "\uDBB8\uDF5B", ["pray"], 25, 3
+    // ],
     "1f680": [
         ["\uD83D\uDE80"], "\uE10D", "\uDBB9\uDFED", ["rocket"], 25, 4
     ],
@@ -3495,8 +3567,8 @@ Config.smileys = {
     ":'(": "cry",
     "=)": "smiley",
     "=-)": "smiley",
-    ":*": "kiss",
-    ":-*": "kiss",
+    // ":*": "kiss",
+    // ":-*": "kiss",
     ":>": "laughing",
     ":->": "laughing",
     "8)": "sunglasses",
