@@ -9,16 +9,16 @@
         <title>Transaction Window</title>
 
 {#        JAVASCRIPT#}
-        <script type="text/javascript" src="{% static 'JS/coin_style.js' %}"></script>
+        <script type="text/javascript" src="{% static 'coin/JS/coin_style.js' %}"></script>
         <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 {#        CSS#}
-        <link rel="stylesheet" href="{% static 'CSS/coin_style.css' %}">
-        <link rel="stylesheet" href="{% static 'CSS/emoji.css' %}">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
-              integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
-              crossorigin="anonymous">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{% static 'coin/CSS/coin_style.css' %}">
+{#        <link rel="stylesheet" href="{% static 'CSS/emoji.css' %}">#}
+{#        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"#}
+{#              integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"#}
+{#              crossorigin="anonymous">#}
+{#        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">#}
 
     </head>
     <body>
@@ -74,10 +74,13 @@
                     </select></th>
                     <th><input type="number" min="1" name="award"></th>
 
-                    <th><p class="lead emoji-picker-container">
-                        <input type="text" id="note" name="note" data-emojiable="true"
-                               onblur="this.value=removeSpaces(this.value);" style="font-size:14px;"
-                               maxlength="200"></p></th>
+                <th>
+                    <input type="text" id="note" name="note" style="font-size:14px;" maxlength="200">
+                </th>
+{#                    <th><p class="lead emoji-picker-container">#}
+{#                        <input type="text" id="note" name="note" data-emojiable="true"#}
+{#                               onblur="this.value=removeSpaces(this.value);" style="font-size:14px;"#}
+{#                               maxlength="200"></p></th>#}
 
                     <th><select name="anonymous" style="font-size: 16px;">
                         <option value="0">No</option>

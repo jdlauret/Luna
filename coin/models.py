@@ -110,22 +110,19 @@ class coinManager(models.Manager):
         with open(log_file_path) as infile:
             log_file = json.load(infile)
 
-        months = [
-            1,
-            4,
-            7,
-            10
-        ]
+        months = [1,4,7,10]
+        monthly= [2,3,5,6,8,9,11,12]
         now = dt.date.today()
         standard = 250
-
+        # if statement if it's the first of the month and the first of hte quarter, set to 250
+        # if it's the first of the month but not the first of the quarter increase balance by 250
         if now.month in months and now.day == 1:
             if str(now) not in log_file.keys():
                 log_file[str(now)] = False
 
             if not log_file[str(now)]:
                 # special badges that are given extra allotment
-                sb1 = [120690]
+                sb1 = [120690] #Clark
                 sb1_coin = 10000000 + standard
                 sb2 = [53931,
                        207208,
@@ -224,3 +221,9 @@ class transaction(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, blank=True) #('US/Mountain'))
     objects = coinManager()
 
+class leaders(models.Model):
+    name = models.CharField(max_length=100, default='To Be Filled in Later')
+    badge_num = models.IntegerField()
+    amount = models.IntegerField()
+    objects = coinManager()
+    created = models.DateTimeField(auto_now_add=True, blank=True)
