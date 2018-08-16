@@ -10,6 +10,7 @@ LOGS_DIR = os.path.join(MAIN_DIR, 'logs')
 
 class coinManager(models.Manager):
 
+    # DEALS WITH THE TRANSACTION PAGE
     @classmethod
     def validate_transaction(self, post_data):
         errors = []
@@ -58,6 +59,31 @@ class coinManager(models.Manager):
             e.allotment = int(post_data['allotment'])
             e.edited = dt.datetime.now()
             e.save()
+
+    # ADDS TRANSACTION FROM OVERLORD PAGE
+    @classmethod
+    def ol_transaction(self, post_data):
+        errors = []
+        agent_info = employee_id.objects.get(badgeid=int(post_data['badge_id']))  # get's agent info from employee_id
+        rec_ID = employee_id.objects.get(badgeid=int(post_data['recipient']))
+        coin_given = int(float(post_data['award']))
+
+        # SAVES THE TRANSACTION THAT WAS CREATED BY OVERLORD
+        temp=transaction(
+            benefactor_name = agent_info.name,
+            benefactor=post_data['badge_id'],
+            recipient=post_data['recipient'],
+            recipient_name=rec_ID.name,
+            award=post_data['award'],
+            note=post_data['note'],
+            anonymous=post_data['anonymous'],
+        )
+        temp.save()
+
+        # DEDUCTS THE TRANSACTION ALLOTMENT FROM WHO CREATED THE TRANSACTION
+        agent_info.allotment -= coin_given
+        agent_info.save()
+
 
     # todo new employees are created
     # have this access once a week
@@ -172,7 +198,8 @@ class coinManager(models.Manager):
                     json.dump(outfile, log_file, indent=4, sort_keys=True)
 
 
-# COIN SHARING DATABASE
+# COIN SHARING DATABASE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 # THIS TABLE IS A VIEW OF ALL THE AGENTS AND HOW MANY COIN THEY HAVE
 class employee_id(models.Model):
     name = models.CharField(max_length=100)
@@ -180,7 +207,6 @@ class employee_id(models.Model):
     allotment = models.IntegerField()  # How much you can give to another agent
     # to_accept = models.IntegerField()  # Transition coin, agent can accept the coin or not
     edited = models.DateTimeField(auto_now_add=True, blank=True)
-        # default=django.utils.timezone.now(), blank=True)#('US/Mountain'))
     objects = coinManager()
 
 
