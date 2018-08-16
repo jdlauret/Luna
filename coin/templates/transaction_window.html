@@ -27,14 +27,23 @@
     <div class="main_body">
         <div class="top_pane">
             <div class="btnform_box">
+
                 <form class="btnform" action="global" method="POST" style="display:inline-block;">
                     {% csrf_token %}
                     <button class="btn">Community View</button>
                 </form>
+
                 <form action="agent" method="POST" style="display:inline-block;">
                     {% csrf_token %}
                     <button class="btn">Personal View</button>
                 </form>
+
+                <form style="display:inline-block;"
+                      onclick="window.open('https://store.vivintsolar.com/', '_blank'); return false;">
+                    <button class="btn">Store</button>
+                </form>
+
+
             </div>
 
             <div class="balance_box">
@@ -45,6 +54,14 @@
                     {{ coin }}
                 </div>
             </div>
+            <div class="comment_box">
+                <br>{#                add comments here                      #}
+                <br>{#                add comments here                      #}
+                <div style="color:purple; vertical-align: bottom;">Gifted coin will not reflect in store till next
+                    Tuesday
+                </div>
+            </div>
+
             {% if messages %}
                 <div class="messages">
                     {% for message in messages %}
@@ -72,26 +89,26 @@
                     <span style="color: red;">* All comments must align to the standards of the
                                 employee handbook</span>
 
-                {#                Character LIMIT#}
-{#                <span style="float:right">Character Limit: <div id="charNum"></div></span>#}
+                    {#                Character LIMIT#}
+                    {#                <span style="float:right">Character Limit: <div id="charNum"></div></span>#}
                     <p class="lead emoji-picker-container">
-                        <input type="text" id="note" name="note" data-emojiable="true"
-                               onblur="this.value=removeSpaces(this.value);" style="font-size:14px;"
+                        <input type="text" id="note" name="note" data-emojiable="true" style="font-size:14px;"
                                maxlength="200"></p><br>
+                    {#                onblur="this.value=removeSpaces(this.value);" #}
 
-                        {#                    </div>#}
-                        <Label for="anonymous" style="font-size: 16px;">Anonymous?</Label>
-                        <select name="anonymous" style="font-size: 16px;">
-                            <option value="0">No</option>
-                            <option value="1">Yes</option>
-                        </select>
-                        <input type="hidden" name="badge_id" value="{{ badge_id }}">
-                        <input type="submit" style="font-size: 16px">
+                    {#                    </div>#}
+                    <Label for="anonymous" style="font-size: 16px;">Anonymous?</Label>
+                    <select name="anonymous" style="font-size: 16px;">
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                    <input type="hidden" name="badge_id" value="{{ badge_id }}">
+                    <input type="submit" style="font-size: 16px">
                 </form>
             </div>
         </div>
-    <p style="font-size: 12px;">If you have any questions or comments please contact
-    <a href="mailto:elizabeth.clark@vivintsolar.com?Subject=Coin%20Question%20or%20Comment">Clark</a></p>
+        <p style="font-size: 12px;">If you have any questions or comments please contact
+            <a href="mailto:elizabeth.clark@vivintsolar.com?Subject=Coin%20Question%20or%20Comment">Clark</a></p>
     </div>
     <script src="{% static 'JS/config.js' %}"></script>
     <script src="{% static 'JS/util.js' %}"></script>

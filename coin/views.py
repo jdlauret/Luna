@@ -23,9 +23,9 @@ def index(request):
         # employee_id.objects.create_user(request.POST)
         agent = employee_id.objects.get(badgeid=badge_id)
         t1 = transaction.objects.all().order_by('created_at')
-        # print(t1[-50])
+
         context = {
-            'transaction': reversed(t1),
+            'transaction': t1.reverse()[:50],
             'coin': agent.allotment,
         }
         return render(request, 'global.html', context)
@@ -40,15 +40,15 @@ def agent(request):
         email = request.user.email
         badge_id = find_badge_id(email)
         agent = employee_id.objects.get(badgeid=badge_id)
-        a1 = transaction.objects.filter(benefactor=badge_id)
-        a2 = transaction.objects.filter(recipient=badge_id)
+        a1 = transaction.objects.filter(benefactor=badge_id).order_by('created_at')
+        a2 = transaction.objects.filter(recipient=badge_id).order_by('created_at')
         # print(transaction.objects.filter((benefactor=badge_id) or (recipient=badge_id)))
         context = {
-            'allt1': reversed(a1.order_by('created_at')),  # View All
-            'allt2': reversed(a2.order_by('created_at')),  # View All
+            'allt1': a1.reverse()[:25],  # View All
+            'allt2': a2.reverse()[:25],  # View All
 
-            'senttransaction': reversed(a2.order_by('created_at')),  # View Sent
-            'fromtransaction': reversed(a1.order_by('created_at')),  # View received
+            'senttransaction': a2.reverse()[:50],  # View Sent
+            'fromtransaction': a1.reverse()[:50],  # View received
             # 'need_to_accept': reversed(
             #     transaction.objects.filter(recipient=badge_id).filter(need_to_accept=0).filter(rejected=0).order_by(
             #         'created_at')[:50]), #View Accepted Coin
