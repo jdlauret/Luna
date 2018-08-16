@@ -76,14 +76,15 @@ tr:nth-child(even) {
 .total_share_coin_box {
     display: inline-block;
     margin: 5px;
-    padding: 8px;
-    width: 145px;
-    height: 145px;
+    padding: 20px;
+    width: 150px;
+    height: 150px;
     background: white;
     border: 1px solid #DBD9D9;
     color: #656569;
     float: left;
     border-radius: 50%;
+    overflow-wrap: break-word;
 }
 
 .btn {
@@ -269,6 +270,7 @@ input[type=submit]:hover {
 p.s_balance {
     font-weight: bold;
     word-wrap: break-word;
+    width: 140px;
 }
 
 #clock {
