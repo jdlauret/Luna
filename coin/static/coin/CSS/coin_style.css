@@ -26,7 +26,7 @@ tr:nth-child(even) {
 
 .top_pane {
     width: 100%;
-    height: 170px;
+    height: 180px;
     background: #57C1E8;
     padding: 10px;
 }
@@ -87,6 +87,13 @@ tr:nth-child(even) {
 }
 
 .btn {
+    display: inline-block;
+    background-color: #57C1E8;
+    color: white;
+    border: 1px solid white;
+    border-radius: 5%;
+}
+#store_btn{
     display: inline-block;
     background-color: #57C1E8;
     color: white;
@@ -261,10 +268,17 @@ input[type=submit]:hover {
 
 p.s_balance {
     font-weight: bold;
+    word-wrap: break-word;
 }
 
 #clock {
     text-align: center;
     font-size: 11px;
     margin-top: 0px;
+}
+.comment_box{
+    /*background-color: green;*/
+    width: 80%;
+    padding: 5px;
+
 }

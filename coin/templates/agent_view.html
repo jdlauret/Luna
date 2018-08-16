@@ -24,6 +24,9 @@
                     {% csrf_token %}
                     <button class="btn">Send Coin</button>
                 </form>
+                <form style="display:inline-block;" onclick="window.open('https://store.vivintsolar.com/', '_blank'); return false;">
+                    <button class="btn">Store</button>
+                </form>
             </div>
 
             <div class="balance_box">
@@ -34,7 +37,15 @@
                     {{ coin }}
                 </div>
             </div>
-            <p style="padding: 20px 0; color:red;">* Select Tab</p>
+
+            <div class="comment_box">
+                <br>{#                add comments here                      #}
+
+                <div style="color:purple; vertical-align: bottom;">Gifted coin will not reflect in store till next Tuesday
+                    <div style="color:red;">Select tab below</div>
+                </div>
+            </div>
+
         </div>
         <div class="main_box">
             <div class="tab">

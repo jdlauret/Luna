@@ -1,8 +1,9 @@
 // Set the date we're counting down to
-d1="Jan 1, 2019"
-d2="Apr 1, 2019"
-d3="Jul 1, 2019"
-d4="Oct 1, 2018"
+//if statement comparing two dates
+d1="Jan 1, 2019";
+d2="Apr 1, 2019";
+d3="Jul 1, 2019";
+d4="Oct 1, 2018";
 
 var countDownDate = new Date(d4).getTime();
 
