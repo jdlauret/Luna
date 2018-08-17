@@ -15,29 +15,12 @@
         <body>
         <div class="main_body">
             <div class="top_pane2" style="height:88px; background: #656569">
-                <img id="picture" src="{% static 'Pictures/black_and_white_light.jpg' %}"></img>
+                <img id="picture" src="{% static 'coin/Pictures/black_and_white_light.jpg' %}"></img>
                 <div id="overlord_title">
                     <h7 style="color: white;;">THE</h7>
                     <h1 style="font-weight: bold; color:white;">Overlord</h1>
                 </div>
             </div>
-            {#            <div style="display: inline-block; float: right;">#}
-            {#                <div class="tab"#}
-            {#                     style="background:#656569; border: #656569; display: inline-block; transform: translateY(20%); padding-right: 10px">#}
-            {##}
-            {##}
-            {#                    <button class="tablinks" onclick=" openCoinTab(event, 'employee')">Employees</button>#}
-            {#                    <button class="tablinks" onclick="openCoinTab(event, 'transaction')">Transactions</button>#}
-            {#                </div>#}
-            {#                Search Bar#}
-            {#                <form action="" method="POST" style="float: right; top:10px;">#}
-            {#                    <input type="text" name="input_value" placeholder="Enter name or badge"#}
-            {#                           style="width: 200px; display: inline-block">#}
-            {#                    <button type="submit" style="width:30px; display: inline-block; background: #656569"><i#}
-            {#                            class="fa fa-search" onclick="loadSearch"></i></button>#}
-            {#                </form>#}
-
-            {#            </div>#}
 
             {% if messages %}
                 <div class="messages">
@@ -78,56 +61,3 @@
         </body>
         </html>
     {% endblock %}
-
-{#        <div id="employee" class="tabcontent">#}
-{#            <table id="employee_table">#}
-{#                <tr>#}
-{#                    <th>Name:</th>#}
-{#                    <th>Badge ID:</th>#}
-{#                    <th>Allotment:</th>#}
-{#                    <th>Edited:</th>#}
-{#                </tr>#}
-{##}
-{#                {% for x in employee %}#}
-{#                    <tr>#}
-{#                        <td>{{ x.name }}</td>#}
-{#                        <td>{{ x.badgeid }}</td>#}
-{#                        <td><input type="text" value="{{ x.allotment }}" style="width: auto;"></td>#}
-{#                        <td>{{ x.edited }}</td>#}
-{#                    </tr>#}
-{#                {% endfor %}#}
-{#            </table>#}
-{#            <input type="submit">#}
-{#        </div>#}
-{##}
-{#        <div id="transaction" class="tabcontent">#}
-{#            <table id="transaction_table">#}
-{#                <tr>#}
-{#                    <th>Benefactor:</th>#}
-{#                    <th>Recipient</th>#}
-{#                    <th>Award:</th>#}
-{#                    <th>Note:</th>#}
-{#                    <th>Created at:</th>#}
-{#                    <th>Anonymous?</th>#}
-{#                    <th>Bad Comment?</th>#}
-{#                </tr>#}
-{##}
-{#                {% for x in transaction %}#}
-{#                    <tr>#}
-{#                        <td>{{ x.benefactor }}</td>#}
-{#                        <td>{{ x.recipient }}</td>#}
-{#                        <td>{{ x.award }}</td>#}
-{#                        <td>{{ x.note }}</td>#}
-{#                        <td>{{ x.created_at }}</td>#}
-{#                        {% if x.anonymous == 0 %}#}
-{#                            <td>No</td>#}
-{#                        {% endif %}#}
-{#                        {% if x.anonymous == 1 %}#}
-{#                            <td>Yes</td>#}
-{#                        {% endif %}#}
-{#                        <td><input type="checkbox" name="badge_comment"></td>#}
-{#                    </tr>#}
-{#                {% endfor %}#}
-{#            </table>#}
-{#            <input type="submit">#}
-{#        </div>#}

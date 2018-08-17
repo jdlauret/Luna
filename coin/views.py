@@ -25,7 +25,7 @@ def index(request):
         t1 = transaction.objects.all().order_by('created_at')
 
         context = {
-            'transaction': t1.reverse()[:50],
+            'transaction': t1.reverse()[:100],
             'coin': agent.allotment,
         }
         return render(request, 'global.html', context)
