@@ -42,7 +42,7 @@ $(function () {
     // Initializes and creates emoji set from sprite sheet
     window.emojiPicker = new EmojiPicker({
         emojiable_selector: '[data-emojiable=true]',
-        assetsPath: '../static/Pictures/',
+        assetsPath: '../static/coin/Pictures',
         popupButtonClasses: 'fa fa-smile-o'
     });
     // Finds all elements with `emojiable_selector` and converts them to rich emoji input fields

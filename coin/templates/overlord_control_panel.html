@@ -14,10 +14,10 @@
 
 {#        CSS#}
         <link rel="stylesheet" href="{% static 'coin/CSS/coin_style.css' %}">
-{#        <link rel="stylesheet" href="{% static 'CSS/emoji.css' %}">#}
-{#        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"#}
-{#              integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"#}
-{#              crossorigin="anonymous">#}
+        <link rel="stylesheet" href="{% static 'CSS/emoji.css' %}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+              integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+              crossorigin="anonymous">
 {#        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">#}
 
     </head>
@@ -26,7 +26,7 @@
 {#    TITLE/TOP PANEL OF OVERLORD CONTROL PAGE#}
     <div class="main_body">
         <div class="top_pane2" style="height:88px; background: #656569">
-            <img id="picture" src="{% static 'Pictures/black_and_white_light.jpg' %}"></img>
+            <img id="picture" src="{% static 'coin/Pictures/black_and_white_light.jpg' %}"></img>
             <div id="overlord_title">
                 <h7 style="color: white;;">THE</h7>
                 <h1 style="font-weight: bold; color:white;">Overlord</h1>
@@ -75,7 +75,8 @@
                     <th><input type="number" min="1" name="award"></th>
 
                 <th>
-                    <input type="text" id="note" name="note" style="font-size:14px;" maxlength="200">
+                            <input type="text" id="note" name="note" data-emojiable-input='unicode' style="font-size:14px; background:white;"
+                                   maxlength="200">
                 </th>
 {#                    <th><p class="lead emoji-picker-container">#}
 {#                        <input type="text" id="note" name="note" data-emojiable="true"#}
@@ -136,9 +137,9 @@
         </form>
 
     </div>
-    <script src="{% static 'JS/config.js' %}"></script>
-    <script src="{% static 'JS/util.js' %}"></script>
-    <script src="{% static 'JS/jquery.emojiarea.js' %}"></script>
-    <script src="{% static 'JS/emoji-picker.js' %}"></script>
+    <script src="{% static 'coin/JS/config.js' %}"></script>
+    <script src="{% static 'coin/JS/util.js' %}"></script>
+    <script src="{% static 'coin/JS/jquery.emojiarea.js' %}"></script>
+    <script src="{% static 'coin/JS/emoji-picker.js' %}"></script>
     </body>
 {% endblock %}

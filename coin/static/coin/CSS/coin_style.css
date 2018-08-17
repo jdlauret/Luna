@@ -44,13 +44,10 @@ tr:nth-child(even) {
     /*position: fixed;*/
 }
 
-.main_box {
-}
-
-#redeem_box {
-    width: 80%;
-    padding: 20px;
-}
+/*#redeem_box {*/
+    /*width: 80%;*/
+    /*padding: 20px;*/
+/*}*/
 
 .balance_box {
     overflow: hidden;
@@ -94,26 +91,10 @@ tr:nth-child(even) {
     border: 1px solid white;
     border-radius: 5%;
 }
-#store_btn{
-    display: inline-block;
-    background-color: #57C1E8;
-    color: white;
-    border: 1px solid white;
-    border-radius: 5%;
-}
 
 .btn:hover {
     background-color: white;
     color: #57C1E8;
-}
-
-.btn2 {
-    display: inline-block;
-    background-color: #57C1E8;
-    color: white;
-    border: 1px solid white;
-    border-radius: 5%;
-    width: 85px;
 }
 
 .btnform {
@@ -125,12 +106,6 @@ tr:nth-child(even) {
     overflow: hidden;
     vertical-align: top;
     margin-top: 30px;
-}
-
-#redeem_box {
-    background-color: #DBD9D9;
-    text-align: center;
-    width: 100%;
 }
 
 #transaction_table {
@@ -179,26 +154,25 @@ input[type=submit]:hover {
     background-color: white;
     color: #57C1E8;
 }
-
 /* Tooltip text */
-.tooltiptext {
-    display: inline-block;
-    visibility: hidden;
-    width: auto;
-    background-color: black;
-    color: white;
-    text-align: center;
-    border-radius: 6px;
+/*.tooltiptext {*/
+    /*display: inline-block;*/
+    /*visibility: hidden;*/
+    /*width: auto;*/
+    /*background-color: black;*/
+    /*color: white;*/
+    /*text-align: center;*/
+    /*border-radius: 6px;*/
 
-    /* Position the tooltip text - see examples below! */
-    position: absolute;
-    z-index: 1;
-}
+    /*!* Position the tooltip text - see examples below! *!*/
+    /*position: absolute;*/
+    /*z-index: 1;*/
+/*}*/
 
-/* Show the tooltip text when you mouse over the tooltip container */
-#warning_box:hover, .tooltiptext {
-    visibility: visible;
-}
+/*!* Show the tooltip text when you mouse over the tooltip container *!*/
+/*#warning_box:hover, .tooltiptext {*/
+    /*visibility: visible;*/
+/*}*/
 
 /* Style the tab */
 .tab {
@@ -270,13 +244,12 @@ input[type=submit]:hover {
 p.s_balance {
     font-weight: bold;
     word-wrap: break-word;
-    width: 140px;
 }
 
 #clock {
     text-align: center;
     font-size: 11px;
-    margin-top: 0px;
+    margin-top: 0;
 }
 .comment_box{
     /*background-color: green;*/

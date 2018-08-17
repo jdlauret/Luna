@@ -1,119 +1,120 @@
 {% extends 'Luna/base.html' %}
-{% load static %}
-{% block content %}
-    <!DOCTYPE html>
-    <html lang="en">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <head>
-        <meta charset="UTF-8">
-        <title>Transaction Window</title>
+<!DOCTYPE html>
+<html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <meta charset="UTF-8">
+    <title>Transaction Window</title>
+    {% load staticfiles %}
+    {% block content %}
+
+        <link rel="stylesheet" href="{% static 'coin/CSS/coin_style.css' %}">
         <link rel="stylesheet" href="{% static 'coin/CSS/emoji.css' %}">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
-              integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
-              crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <script type="text/javascript" src="{% static 'coin/JS/coin_style.js' %}"></script>
         <script type="text/javascript" src="{% static 'coin/JS/clock.js' %}"></script>
-        <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-        <link rel="stylesheet" href="{% static 'coin/CSS/coin_style.css' %}">
-    </head>
-    <style>
-        body {
-            font-family: "Lato", sans-serif;
-        }
-    </style>
+        {#        <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>#}
 
-    <body>
-    <div class="main_body">
-        <div class="top_pane">
-            <div class="btnform_box">
-
-                <form class="btnform" action="global" method="POST" style="display:inline-block;">
-                    {% csrf_token %}
-                    <button class="btn">Community View</button>
-                </form>
-
-                <form action="agent" method="POST" style="display:inline-block;">
-                    {% csrf_token %}
-                    <button class="btn">Personal View</button>
-                </form>
-
-                <form style="display:inline-block;"
-                      onclick="window.open('https://store.vivintsolar.com/', '_blank'); return false;">
-                    <button class="btn">Store</button>
-                </form>
+        {#        EMOJI GITHUB SITE#}
+        {#        https://github.com/OneSignal/emoji-picker    #}
 
 
-            </div>
+        </head>
+        <style>
+            body {
+                font-family: "Lato", sans-serif;
+            }
+        </style>
 
-            <div class="balance_box">
-                <div class="total_share_coin_box">
-                    <p class="s_balance">Sharing Balance:</p>
-                    <div style="font-size: 12px;">Expiration Date</div>
-                    <div id="clock"></div>
-                    {{ coin }}
+        <body>
+        <div class="main_body">
+            <div class="top_pane">
+                <div class="btnform_box">
+                    <form class="btnform" action="global" method="POST" style="display:inline-block;">
+                        {% csrf_token %}
+                        <button class="btn">Community View</button>
+                    </form>
+
+                    <form action="agent" method="POST" style="display:inline-block;">
+                        {% csrf_token %}
+                        <button class="btn">Personal View</button>
+                    </form>
+
+                    <form style="display:inline-block;"
+                          onclick="window.open('https://store.vivintsolar.com/', '_blank'); return false;">
+                        <button class="btn">Store</button>
+                    </form>
+
                 </div>
-            </div>
-            <div class="comment_box">
-                <br>{#                add comments here                      #}
-                <br>{#                add comments here                      #}
-                <div style="color:purple; vertical-align: bottom;">Gifted coin will not reflect in store till next
-                    Tuesday
-                </div>
-            </div>
 
-            {% if messages %}
-                <div class="messages">
-                    {% for message in messages %}
-                        <p><span>{{ message }}</span></p>
-                    {% endfor %}
+                <div class="balance_box">
+                    <div class="total_share_coin_box">
+                        <p class="s_balance">Sharing Balance:</p>
+                        <div style="font-size: 12px;">Expiration Date</div>
+                        <div id="clock"></div>
+                        {{ coin }}
+                    </div>
                 </div>
-            {% endif %}
-        </div>
-        <div class="main_box">
-            <div class="form_box">
-                <form action="submit_transaction" method="POST">
-                    {% csrf_token %}
-                    <label for="who">Who do you want to send a gift to? </label>
-                    <select name="recipient" required>
-                        <option></option>
-                        {% for key, values in user_list.items %}
-                            <option value={{ key }}>{{ values }} - {{ key }} </option>
+                <div class="comment_box">
+                    <br>{#                add comments here                      #}
+                    <br>{#                add comments here                      #}
+                    <div style="color:purple; vertical-align: bottom;">Gifted coin will not reflect in store till next
+                        Tuesday
+                    </div>
+                </div>
+
+                {% if messages %}
+                    <div class="messages">
+                        {% for message in messages %}
+                            <p><span>{{ message }}</span></p>
                         {% endfor %}
-                    </select><br><br>
-                    <label for="how_much">How much do you want to send? </label>
-                    <input type="number" min="1" name="award" required><br><br>
-                    {#                    <div id="warning_box">#}
-                    <label for="reason">Reason for the award? </label>
-                    {#                        <span class="tooltiptext">#}
-                    <span style="color: red;">* All comments must align to the standards of the
+                    </div>
+                {% endif %}
+            </div>
+            <div class="main_box">
+                <div class="form_box">
+                    <form action="submit_transaction" method="POST">
+                        {% csrf_token %}
+                        <label for="who">Who do you want to send a gift to? </label>
+                        <select name="recipient" required>
+                            <option></option>
+                            {% for key, values in user_list.items %}
+                                <option value={{ key }}>{{ values }} - {{ key }} </option>
+                            {% endfor %}
+                        </select><br><br>
+                        <label for="how_much">How much do you want to send? </label>
+                        <input type="number" min="1" name="award" required><br><br>
+                        {#                    <div id="warning_box">#}
+                        <label for="reason">Reason for the award? </label>
+                        {#                        <span class="tooltiptext">#}
+                        <span style="color: red;">* All comments must align to the standards of the
                                 employee handbook</span>
 
-                    {#                Character LIMIT#}
-                    {#                <span style="float:right">Character Limit: <div id="charNum"></div></span>#}
-                    <p class="lead emoji-picker-container">
-                        <input type="text" id="note" name="note" data-emojiable="true" style="font-size:14px;"
-                               maxlength="200"></p><br>
-                    {#                onblur="this.value=removeSpaces(this.value);" #}
+                        {#                Character LIMIT#}
+                        {#                <span style="float:right">Character Limit: <div id="charNum"></div></span>#}
+                        <p class="lead emoji-picker-container">
+                            <input type="text" id="note" name="note" data-emojiable-input='unicode' data-emojiable='true'
+                                   style="font-size:14px;" maxlength="200"></p><br>
+                        {#                onblur="this.value=removeSpaces(this.value);" #}
 
-                    {#                    </div>#}
-                    <Label for="anonymous" style="font-size: 16px;">Anonymous?</Label>
-                    <select name="anonymous" style="font-size: 16px;">
-                        <option value="0">No</option>
-                        <option value="1">Yes</option>
-                    </select>
-                    <input type="hidden" name="badge_id" value="{{ badge_id }}">
-                    <input type="submit" style="font-size: 16px">
-                </form>
+                        {#                    </div>#}
+                        <Label for="anonymous" style="font-size: 16px;">Anonymous?</Label>
+                        <select name="anonymous" style="font-size: 16px;">
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                        <input type="hidden" name="badge_id" value="{{ badge_id }}">
+                        <input type="submit" style="font-size: 16px">
+                    </form>
+                </div>
             </div>
+            <p style="font-size: 12px;">If you have any questions or comments please contact
+                <a href="mailto:elizabeth.clark@vivintsolar.com?Subject=Coin%20Question%20or%20Comment">Clark</a></p>
         </div>
-        <p style="font-size: 12px;">If you have any questions or comments please contact
-            <a href="mailto:elizabeth.clark@vivintsolar.com?Subject=Coin%20Question%20or%20Comment">Clark</a></p>
-    </div>
-    <script src="{% static 'JS/config.js' %}"></script>
-    <script src="{% static 'JS/util.js' %}"></script>
-    <script src="{% static 'JS/jquery.emojiarea.js' %}"></script>
-    <script src="{% static 'JS/emoji-picker.js' %}"></script>
-    </body>
-{% endblock %}
+        <script src="{% static 'coin/JS/config.js' %}"></script>
+        <script src="{% static 'coin/JS/util.js' %}"></script>
+        <script src="{% static 'coin/JS/jquery.emojiarea.js' %}"></script>
+        <script src="{% static 'coin/JS/emoji-picker.js' %}"></script>
+        </body>
+    {% endblock %}
 </html>
