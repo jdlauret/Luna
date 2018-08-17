@@ -9,7 +9,6 @@ LOGS_DIR = os.path.join(MAIN_DIR, 'logs')
 
 
 class coinManager(models.Manager):
-
     # DEALS WITH THE TRANSACTION PAGE
     @classmethod
     def validate_transaction(self, post_data):
@@ -84,7 +83,7 @@ class coinManager(models.Manager):
         agent_info.allotment -= coin_given
         agent_info.save()
 
-
+    # CHECKS IF THERE IS A NEW EMPLOYEE AND ADDS THEM TO THE TABLE ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     # todo new employees are created
     # have this access once a week
     # go through hire date and add them to employee_id
@@ -103,9 +102,9 @@ class coinManager(models.Manager):
     #     with open(log_file_path, 'w') as outfile:
     #         json.dump(outfile, log_file, indent=4, sort_keys=True)
 
-    # CONTROLS WHO GETS WHAT ALLOTMENT
+    # SCHEDULED REFRESH OF THE COINS, EMPLOYEES AND LEADERSHIP ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     @classmethod
-    def time_limit(self):
+    def scheduled_refresh_of_coin(self):
         log_file_path = os.path.join(LOGS_DIR, 'date_resets.json')
         with open(log_file_path) as infile:
             log_file = json.load(infile)
@@ -114,79 +113,35 @@ class coinManager(models.Manager):
         monthly= [2,3,5,6,8,9,11,12]
         now = dt.date.today()
         standard = 250
-        # if statement if it's the first of the month and the first of hte quarter, set to 250
-        # if it's the first of the month but not the first of the quarter increase balance by 250
+
+        # CHECKS THE DATE AND SEES IF IT'S THE QUARTER OR NOT, CLEARS EVERYTHING OUT AND STARTS REFRESH
         if now.month in months and now.day == 1:
             if str(now) not in log_file.keys():
                 log_file[str(now)] = False
 
             if not log_file[str(now)]:
-                # special badges that are given extra allotment
-                sb1 = [120690] #Clark
-                sb1_coin = 10000000 + standard
-                sb2 = [53931,
-                       207208,
-                       120220,
-                       200023,
-                       104550]
-                sb2_coin = 600 + standard
-                sb3 = [119945]
-                sb3_coin = 500 + standard
-                sb4 = [200360,
-                       123014,
-                       62836,
-                       209349]
-                sb4_coin = 300 + standard
-                sb5 = [103390,
-                       119688,
-                       201640,
-                       201662,
-                       201737,
-                       201738,
-                       201767,
-                       201846,
-                       201869,
-                       206321,
-                       206415,
-                       206417,
-                       206470,
-                       123645,
-                       206530,
-                       206563]
-                sb5_coin = 150 + standard
-                sb6 = [107938]
-                sb6_coin = 100 + standard
-                sb7 = [106452,
-                       209196,
-                       206679,
-                       95347,
-                       205821,
-                       206225,
-                       209272,
-                       209409,
-                       209144]
-                sb7_coin = 75 + standard
-                sb8 = [206225]
-                sb8_coin = 5 + standard
-
-                if employee_id.badgeid == sb1:
-                    employee_id.objects.update(allotment=sb1_coin)
-                elif employee_id.badgeid == sb2:
-                    employee_id.objects.update(allotment=sb2_coin)
-                elif employee_id.badgeid == sb3:
-                    employee_id.objects.update(allotment=sb3_coin)
-                elif employee_id.badgeid == sb4:
-                    employee_id.objects.update(allotment=sb4_coin)
-                elif employee_id.badgeid == sb5:
-                    employee_id.objects.update(allotment=sb5_coin)
-                elif employee_id.badgeid == sb6:
-                    employee_id.objects.update(allotment=sb6_coin)
-                elif employee_id.badgeid == sb7:
-                    employee_id.objects.update(allotment=sb7_coin)
-                elif employee_id.badgeid == sb8:
-                    employee_id.objects.update(allotment=sb8_coin)
+                if employee_id.badgeid == leaders.badge_num:
+                    employee_id.objects.update(allotment=leaders.amount)
                 else:
                     employee_id.objects.update(allotment=standard)
+
+                employee_id.save()
+
+                log_file[str(now)] = True
+                with open(log_file_path, 'w') as outfile:
+                    json.dump(outfile, log_file, indent=4, sort_keys=True)
+
+        # CHECKS IF THE DATE IS THE BEGINNING OF MONTH AND ADDS COIN TO WHAT THEY ALREADY HAVE
+        elif now.month in monthly and now.day ==1:
+            if str(now) not in log_file.keys():
+                log_file[str(now)] = False
+            if not log_file[str(now)]:
+                total = employee_id.objects.get(badgeid=leaders.badge_num)
+
+                if employee_id.badgeid == leaders.badge_num:
+                    employee_id.objects.update(allotment=leaders.amount+total.allotment)
+                else:
+                    employee_id.objects.update(allotment=standard+total.allotment)
 
                 employee_id.save()
 
@@ -219,6 +174,7 @@ class transaction(models.Model):
     award = models.IntegerField()  # How much coin you want to give to another agent
     note = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True, blank=True) #('US/Mountain'))
+    redeemed = models.IntegerField(default=0)
     objects = coinManager()
 
 class leaders(models.Model):

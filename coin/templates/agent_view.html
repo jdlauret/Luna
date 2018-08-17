@@ -26,7 +26,8 @@
                     {% csrf_token %}
                     <button class="btn">Send Coin</button>
                 </form>
-                <form style="display:inline-block;" onclick="window.open('https://store.vivintsolar.com/', '_blank'); return false;">
+                <form style="display:inline-block;"
+                      onclick="window.open('https://store.vivintsolar.com/', '_blank'); return false;">
                     <button class="btn">Store</button>
                 </form>
             </div>
@@ -43,7 +44,8 @@
             <div class="comment_box">
                 <br>{#                add comments here                      #}
 
-                <div style="color:purple; vertical-align: bottom;">Gifted coin will not reflect in store till next Tuesday
+                <div style="color:purple; vertical-align: bottom;">Gifted coin will not reflect in store till next
+                    Tuesday
                     <div style="color:red;">Select tab below</div>
                 </div>
             </div>
@@ -63,6 +65,7 @@
                         <th style="text-align: right;">Amount</th>
                         <th>Transaction Date</th>
                         <th>Note</th>
+                        <th>Redeemed</th>
                     </tr>
                     {% for x in allt1 %}
                         <tr>
@@ -80,6 +83,11 @@
                             {% endif %}
                             {% if x.bad_comment == 0 %}
                                 <td>{{ x.note }}</td>
+                            {% endif %}
+                            {% if x.redeemed == 0 %}
+                                <td>No</td>
+                            {% else %}
+                                <td>Yes</td>
                             {% endif %}
                         </tr>
                     {% endfor %}
@@ -100,6 +108,11 @@
                             {% if x.bad_comment == 0 %}
                                 <td>{{ x.note }}</td>
                             {% endif %}
+                            {% if x.redeemed == 0 %}
+                                <td>No</td>
+                            {% else %}
+                                <td>Yes</td>
+                            {% endif %}
                         </tr>
                     {% endfor %}
                 </table>
@@ -112,6 +125,7 @@
                         <th style="text-align: right;">Amount</th>
                         <th>Date</th>
                         <th>Reason</th>
+                        <th>Redeemed</th>
                     </tr>
                     {% for x in senttransaction %}
                         <tr>
@@ -129,6 +143,11 @@
                             {% if x.bad_comment == 0 %}
                                 <td>{{ x.note }}</td>
                             {% endif %}
+                            {% if x.redeemed == 0 %}
+                                <td>No</td>
+                            {% else %}
+                                <td>Yes</td>
+                            {% endif %}
                         </tr>
                     {% endfor %}
                 </table>
@@ -141,6 +160,7 @@
                         <th style="text-align: right;">Amount</th>
                         <th>Date</th>
                         <th>Reason</th>
+                        <th>Redeemed</th>
                     </tr>
                     {% for x in fromtransaction %}
                         <tr>
@@ -153,7 +173,11 @@
                             {% if x.bad_comment == 0 %}
                                 <td>{{ x.note }}</td>
                             {% endif %}
-
+                            {% if x.redeemed == 0 %}
+                                <td>No</td>
+                            {% else %}
+                                <td>Yes</td>
+                            {% endif %}
                         </tr>
                     {% endfor %}
                 </table>
