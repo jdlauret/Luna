@@ -85,8 +85,6 @@ class coinManager(models.Manager):
 
     # CHECKS IF THERE IS A NEW EMPLOYEE AND ADDS THEM TO THE TABLE ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     # todo new employees are created
-    # have this access once a week
-    # go through hire date and add them to employee_id
 
     # @classmethod
     # def create_id(self):
