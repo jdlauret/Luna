@@ -17,8 +17,6 @@
 
         {#        EMOJI GITHUB SITE#}
         {#        https://github.com/OneSignal/emoji-picker    #}
-
-
         </head>
         <style>
             body {
@@ -62,7 +60,6 @@
                         Tuesday
                     </div>
                 </div>
-
                 {% if messages %}
                     <div class="messages">
                         {% for message in messages %}
@@ -70,6 +67,7 @@
                         {% endfor %}
                     </div>
                 {% endif %}
+
             </div>
             <div class="main_box">
                 <div class="form_box">
@@ -93,7 +91,8 @@
                         {#                Character LIMIT#}
                         {#                <span style="float:right">Character Limit: <div id="charNum"></div></span>#}
                         <p class="lead emoji-picker-container">
-                            <input type="text" id="note" name="note" data-emojiable-input='unicode' data-emojiable='true'
+                            <input type="text" id="note" name="note" data-emojiable-input='unicode'
+                                   data-emojiable='true'
                                    style="font-size:14px;" maxlength="200"></p><br>
                         {#                onblur="this.value=removeSpaces(this.value);" #}
 

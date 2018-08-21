@@ -8,22 +8,22 @@
         <meta charset="UTF-8">
         <title>Transaction Window</title>
 
-{#        JAVASCRIPT#}
+        {#        JAVASCRIPT#}
         <script type="text/javascript" src="{% static 'coin/JS/coin_style.js' %}"></script>
         <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 
-{#        CSS#}
+        {#        CSS#}
         <link rel="stylesheet" href="{% static 'coin/CSS/coin_style.css' %}">
         <link rel="stylesheet" href="{% static 'CSS/emoji.css' %}">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
               integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
               crossorigin="anonymous">
-{#        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">#}
+        {#        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">#}
 
     </head>
     <body>
 
-{#    TITLE/TOP PANEL OF OVERLORD CONTROL PAGE#}
+    {#    TITLE/TOP PANEL OF OVERLORD CONTROL PAGE#}
     <div class="main_body">
         <div class="top_pane2" style="height:88px; background: #656569">
             <img id="picture" src="{% static 'coin/Pictures/black_and_white_light.jpg' %}"></img>
@@ -33,7 +33,7 @@
             </div>
         </div>
 
-{#    SHOWS THE EMPLOYEE INFORMATION: NAME, BADGE, ALLOTMENT AND TIME EDITED#}
+        {#    SHOWS THE EMPLOYEE INFORMATION: NAME, BADGE, ALLOTMENT AND TIME EDITED#}
         <form method="POST" action="employee_load">
             <br><h4>Employee Information</h4>
             <table>
@@ -55,7 +55,7 @@
             <input type="submit" style="width: 200px;">
         </form>
 
-{#    CREATES A TRANSACTION FROM THE EMPLOYEE YOU SIGNED INTO AND EXTRACTS THEIR ALLOTMENT #}
+        {#    CREATES A TRANSACTION FROM THE EMPLOYEE YOU SIGNED INTO AND EXTRACTS THEIR ALLOTMENT #}
         <form method="POST" action="overlord_create_trans">
             <br><h4>Create Transaction</h4>
             <table>
@@ -74,14 +74,15 @@
                     </select></th>
                     <th><input type="number" min="1" name="award"></th>
 
-                <th>
-                            <input type="text" id="note" name="note" data-emojiable-input='unicode' style="font-size:14px; background:white;"
-                                   maxlength="200">
-                </th>
-{#                    <th><p class="lead emoji-picker-container">#}
-{#                        <input type="text" id="note" name="note" data-emojiable="true"#}
-{#                               onblur="this.value=removeSpaces(this.value);" style="font-size:14px;"#}
-{#                               maxlength="200"></p></th>#}
+                    <th>
+                        <input type="text" id="note" name="note" data-emojiable-input='unicode'
+                               style="font-size:14px; background:white;"
+                               maxlength="200">
+                    </th>
+                    {#                    <th><p class="lead emoji-picker-container">#}
+                    {#                        <input type="text" id="note" name="note" data-emojiable="true"#}
+                    {#                               onblur="this.value=removeSpaces(this.value);" style="font-size:14px;"#}
+                    {#                               maxlength="200"></p></th>#}
 
                     <th><select name="anonymous" style="font-size: 16px;">
                         <option value="0">No</option>
@@ -89,11 +90,11 @@
                     </select></th>
                 </tr>
             </table>
-            <input type="hidden" name="id" value="{{ employee_info.id }}">
+            <input type="hidden" name="id" value="{{ employee_info.badgeid }}">
             <input type="submit" style="width: 200px;">
         </form>
 
-{#    SHOWS THE EMPLOYEE TRANSACTION HISTORY AND HAS THE ABILITY TO REMOVE BAD COMMENTS#}
+        {#    SHOWS THE EMPLOYEE TRANSACTION HISTORY AND HAS THE ABILITY TO REMOVE BAD COMMENTS#}
         <form method="POST" action="trans_load">
             <br><h4>Employee Transaction History</h4>
             <table>
@@ -104,6 +105,7 @@
                     <th>Bad Comment</th>
                     <th>Note</th>
                     <th>Transaction Date</th>
+                    <th>Redeemed</th>
                 </tr>
                 {% for i in employee_history %}
                     <tr>
@@ -129,6 +131,12 @@
                         {% endif %}
                         <td>{{ i.note }}</td>
                         <td>{{ i.created_at }}</td>
+                        {% if i.redeemed == 1 %}
+                            <td>Yes</td>
+                        {% endif %}
+                        {% if i.redeemed == 0 %}
+                            <td>No</td>
+                        {% endif %}
                         <input type="hidden" name="id" value="{{ i.id }}">
                     </tr>
                 {% endfor %}
