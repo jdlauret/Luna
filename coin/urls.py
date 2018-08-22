@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'^overlord_view/control_panel$', views.control_panel, name="control"),
     url(r'^overlord_view/employee_load', views.employee_load, name="employee_load"),
     url(r'^overlord_view/trans_load', views.trans_load, name="trans_load"),
+    url(r'^overlord_view/overlord_create_trans', views.overlord_create_trans, name="create_trans"),
 ]

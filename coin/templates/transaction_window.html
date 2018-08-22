@@ -17,8 +17,6 @@
 
         {#        EMOJI GITHUB SITE#}
         {#        https://github.com/OneSignal/emoji-picker    #}
-
-
         </head>
         <style>
             body {
@@ -29,6 +27,7 @@
         <body>
         <div class="main_body">
             <div class="top_pane">
+
                 <div class="btnform_box">
                     <form class="btnform" action="global" method="POST" style="display:inline-block;">
                         {% csrf_token %}
@@ -44,7 +43,6 @@
                           onclick="window.open('https://store.vivintsolar.com/', '_blank'); return false;">
                         <button class="btn">Store</button>
                     </form>
-
                 </div>
 
                 <div class="balance_box">
@@ -55,6 +53,7 @@
                         {{ coin }}
                     </div>
                 </div>
+
                 <div class="comment_box">
                     <br>{#                add comments here                      #}
                     <br>{#                add comments here                      #}
@@ -70,6 +69,7 @@
                         {% endfor %}
                     </div>
                 {% endif %}
+
             </div>
             <div class="main_box">
                 <div class="form_box">
@@ -83,7 +83,7 @@
                             {% endfor %}
                         </select><br><br>
                         <label for="how_much">How much do you want to send? </label>
-                        <input type="number" min="1" name="award" required><br><br>
+                        <input type="number" min="5" name="award" required><br><br>
                         {#                    <div id="warning_box">#}
                         <label for="reason">Reason for the award? </label>
                         {#                        <span class="tooltiptext">#}
@@ -93,7 +93,8 @@
                         {#                Character LIMIT#}
                         {#                <span style="float:right">Character Limit: <div id="charNum"></div></span>#}
                         <p class="lead emoji-picker-container">
-                            <input type="text" id="note" name="note" data-emojiable-input='unicode' data-emojiable='true'
+                            <input type="text" id="note" name="note" data-emojiable-input='unicode'
+                                   data-emojiable='true'
                                    style="font-size:14px;" maxlength="200"></p><br>
                         {#                onblur="this.value=removeSpaces(this.value);" #}
 
@@ -117,4 +118,5 @@
         <script src="{% static 'coin/JS/emoji-picker.js' %}"></script>
         </body>
     {% endblock %}
+
 </html>

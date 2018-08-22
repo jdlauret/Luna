@@ -22,7 +22,8 @@
                     {% csrf_token %}
                     <button class="btn">Send Coin</button>
                 </form>
-                <form style="display:inline-block;" onclick="window.open('https://store.vivintsolar.com/', '_blank'); return false;">
+                <form style="display:inline-block;"
+                      onclick="window.open('https://store.vivintsolar.com/', '_blank'); return false;">
                     <button class="btn">Store</button>
                 </form>
             </div>
@@ -43,14 +44,13 @@
                 </div>
             </div>
         </div>
-        <br><br>
         <table>
             <tr>
                 <th>Giver</th>
                 <th>Receiver</th>
                 <th style="text-align: right;">Amount</th>
                 <th>Date</th>
-                <th>Reason</th>
+                <th width="60%">Reason</th>
             </tr>
 
             {% for x in transaction %}
@@ -73,8 +73,26 @@
                 </tr>
             {% endfor %}
         </table>
+
         <p style="font-size: 12px;">If you have any questions or comments please contact
             <a href="mailto:elizabeth.clark@vivintsolar.com?Subject=Coin%20Question%20or%20Comment">Clark</a></p>
+        <div class="pagination">
+            <span class="step-links">
+                {% if transaction.has_previous %}
+                    <a href="?page=1">&laquo; FIRST</a>
+                    <a href="?page={{ transaction.previous_page_number }}">PREVIOUS</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ transaction.number }} of {{ transaction.paginator.num_pages }}
+                </span>
+
+                {% if transaction.has_next %}
+                    <a href="?page={{ transaction.next_page_number }}">NEXT</a>
+                    <a href="?page={{ transaction.paginator.num_pages }}">LAST &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
     </div>
     </body>
     </html>

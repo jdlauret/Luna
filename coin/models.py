@@ -4,10 +4,6 @@ import json
 import datetime as dt
 from django.db import models
 
-MAIN_DIR = os.path.dirname(os.path.realpath(__file__))
-LOGS_DIR = os.path.join(MAIN_DIR, 'logs')
-
-
 class coinManager(models.Manager):
     # DEALS WITH THE TRANSACTION PAGE
     @classmethod
@@ -63,14 +59,14 @@ class coinManager(models.Manager):
     @classmethod
     def ol_transaction(self, post_data):
         errors = []
-        agent_info = employee_id.objects.get(badgeid=int(post_data['badge_id']))  # get's agent info from employee_id
+        agent_info = employee_id.objects.get(badgeid=int(post_data['id']))  # get's agent info from employee_id
         rec_ID = employee_id.objects.get(badgeid=int(post_data['recipient']))
         coin_given = int(float(post_data['award']))
 
         # SAVES THE TRANSACTION THAT WAS CREATED BY OVERLORD
         temp=transaction(
             benefactor_name = agent_info.name,
-            benefactor=post_data['badge_id'],
+            benefactor=post_data['id'],
             recipient=post_data['recipient'],
             recipient_name=rec_ID.name,
             award=post_data['award'],
@@ -83,71 +79,6 @@ class coinManager(models.Manager):
         agent_info.allotment -= coin_given
         agent_info.save()
 
-    # CHECKS IF THERE IS A NEW EMPLOYEE AND ADDS THEM TO THE TABLE ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    # todo new employees are created
-
-    # @classmethod
-    # def create_id(self):
-    #     log_file_path = os.path.join(LOGS_DIR, 'created_id.json')
-    #     with open(log_file_path) as infile:
-    #         log_file = json.load(infile)
-    #
-    # #     code
-    #     now = dt.date.today()
-    #
-    #
-    #     log_file[str(now)] = True
-    #     with open(log_file_path, 'w') as outfile:
-    #         json.dump(outfile, log_file, indent=4, sort_keys=True)
-
-    # SCHEDULED REFRESH OF THE COINS, EMPLOYEES AND LEADERSHIP ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    @classmethod
-    def scheduled_refresh_of_coin(self):
-        log_file_path = os.path.join(LOGS_DIR, 'date_resets.json')
-        with open(log_file_path) as infile:
-            log_file = json.load(infile)
-
-        months = [1,4,7,10]
-        monthly= [2,3,5,6,8,9,11,12]
-        now = dt.date.today()
-        standard = 250
-
-        # CHECKS THE DATE AND SEES IF IT'S THE QUARTER OR NOT, CLEARS EVERYTHING OUT AND STARTS REFRESH
-        if now.month in months and now.day == 1:
-            if str(now) not in log_file.keys():
-                log_file[str(now)] = False
-
-            if not log_file[str(now)]:
-                if employee_id.badgeid == leaders.badge_num:
-                    employee_id.objects.update(allotment=leaders.amount)
-                else:
-                    employee_id.objects.update(allotment=standard)
-
-                employee_id.save()
-
-                log_file[str(now)] = True
-                with open(log_file_path, 'w') as outfile:
-                    json.dump(outfile, log_file, indent=4, sort_keys=True)
-
-        # CHECKS IF THE DATE IS THE BEGINNING OF MONTH AND ADDS COIN TO WHAT THEY ALREADY HAVE
-        elif now.month in monthly and now.day ==1:
-            if str(now) not in log_file.keys():
-                log_file[str(now)] = False
-            if not log_file[str(now)]:
-                total = employee_id.objects.get(badgeid=leaders.badge_num)
-
-                if employee_id.badgeid == leaders.badge_num:
-                    employee_id.objects.update(allotment=leaders.amount+total.allotment)
-                else:
-                    employee_id.objects.update(allotment=standard+total.allotment)
-
-                employee_id.save()
-
-                log_file[str(now)] = True
-                with open(log_file_path, 'w') as outfile:
-                    json.dump(outfile, log_file, indent=4, sort_keys=True)
-
-
 # COIN SHARING DATABASE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # THIS TABLE IS A VIEW OF ALL THE AGENTS AND HOW MANY COIN THEY HAVE
@@ -157,6 +88,7 @@ class employee_id(models.Model):
     allotment = models.IntegerField()  # How much you can give to another agent
     # to_accept = models.IntegerField()  # Transition coin, agent can accept the coin or not
     edited = models.DateTimeField(auto_now_add=True, blank=True)
+    terminated = models.IntegerField(default=0)
     objects = coinManager()
 
 
