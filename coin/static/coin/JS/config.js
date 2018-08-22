@@ -1,3 +1,10 @@
+// Emoji removal:
+//  ["\u274C", ["x"]],
+//  [
+//         ["\u274C"], "\uE333", "\uDBBA\uDF45", ["x"], 3, 1
+//     ],
+
+
 'use strict';
 var Config = {};
 Config.Emoji = {

@@ -2,10 +2,24 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from django.shortcuts import render, redirect
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+
 from .models import employee_id, transaction
 from .utilities.user_list import user_list
 from coin.utilities import find_badge_id
+from coin.utilities.create_new_user import new_user
+from coin.utilities.scheduled_refresh import scheduled_refresh
+from coin.utilities.change_status_termination import terminated_user
 
+# TODO SEND EMAILS -> NOTIFICATION SYSTEM
+# TODO MOVE EVERYTHING TO MODEL FORM
+# TODO AUTOMATOR TO UPLOAD TRANSACTION HISTORY
+# TODO ONLY ACCESS CERTAIN PARTS OF THE SITE FOR CERTAIN PEOPLE
+# TODO SUBMIT PICTURES WHAT THEY WANT IN THE STORE
+# idea generator:
+# submit pictures of what they would like in the store
+# votes?
+# TODO Community Like button
 
 def email_check(user):
     return user.email.endswith('@vivintsolar.com')
@@ -18,14 +32,21 @@ def overlord_access(user):
 @user_passes_test(email_check)
 def index(request):
     if request.user.is_authenticated:
+        new_user() #Creates New users
+        scheduled_refresh() #Adds 250 every month, and refreshes coin every quarter
+        terminated_user() # Changes the status of those who have been terminated daily
         email = request.user.email
         badge_id = find_badge_id(email)
         # employee_id.objects.create_user(request.POST)
         agent = employee_id.objects.get(badgeid=badge_id)
-        t1 = transaction.objects.all().order_by('created_at')
+        t1 = transaction.objects.all().order_by('created_at').reverse()
+        paginator = Paginator(t1, 15)
 
+        page= request.GET.get('page')
+        transaction_list = paginator.get_page(page)
+        # t1.reverse()[:12], -> Context next to transaction
         context = {
-            'transaction': t1.reverse()[:100],
+            'transaction': transaction_list,
             'coin': agent.allotment,
         }
         return render(request, 'global.html', context)
@@ -93,7 +114,7 @@ def overlord_view(request):
     if request.user.is_authenticated:
         context = {
             'transaction': reversed(transaction.objects.all().order_by('created_at')),
-            'employee': employee_id.objects.all().order_by('name'),
+            'employee': employee_id.objects.filter(terminated=0).order_by('name'),
         }
         return render(request, 'overlord_view.html', context)
     else:
