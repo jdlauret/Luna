@@ -4,38 +4,34 @@ import json
 import datetime as dt
 from django.db import models
 
+
 class coinManager(models.Manager):
     # DEALS WITH THE TRANSACTION PAGE
     @classmethod
     def validate_transaction(self, post_data):
         errors = []
-        agent_info = employee_id.objects.get(badgeid=int(post_data['badge_id']))  # get's agent info from employee_id
-        rec_ID = employee_id.objects.get(badgeid=int(post_data['recipient']))
+        agent_info = employee_id.objects.get(badgeid=int(post_data['benefactor'])) #GRABS BENEFACTOR FROM POST_DATA INPUTS INTO EMPLOYEE_ID
+        rec_ID = employee_id.objects.get(badgeid=int(post_data['recipient']))  #GRABS RECIPIENT FROM POST_DATA INPUTS INTO EMPLOYEE_ID
         coin_given=int(float(post_data['award']))
         if coin_given > agent_info.allotment:
-            errors.append('Cannot give more than Sharing Balance')
+            errors.append('Exceeds Sharing Balance')
             return errors
-        # deducts the amount from the agent who gave the coin to someone else
+        # BENEFACTOR AND RECIPIENT CANNOT BE THE SAME
         else:
             if agent_info.badgeid == rec_ID.badgeid:
-                errors.append('You cannot give to yourself')
+                errors.append('Please Share')
                 return errors
             else:
-
                 agent_info.allotment -= coin_given
                 agent_info.save()
-                # adds the coin to the yet to be accept
-                # to_id = int(post_data['to_id'])
-                # to_badgeid = employee_id.objects.get(badge_id=to_id)
-                # to_badgeid.to_accept += post_data['gave']
                 temp = transaction(
                     benefactor_name = agent_info.name,
-                    benefactor=post_data['badge_id'],
-                    recipient=post_data['recipient'],
+                    benefactor= agent_info.badgeid,
+                    recipient=rec_ID.badgeid,
                     recipient_name=rec_ID.name,
-                    award=post_data['award'],
+                    award=coin_given,
                     note=post_data['note'],
-                    anonymous=post_data['anonymous'],
+                    anonymous=int(post_data['anonymous']),
                 )
                 temp.save()
 

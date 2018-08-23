@@ -11,6 +11,8 @@ from coin.utilities.create_new_user import new_user
 from coin.utilities.scheduled_refresh import scheduled_refresh
 from coin.utilities.change_status_termination import terminated_user
 
+from coin.forms import transactionForm
+
 # TODO SEND EMAILS -> NOTIFICATION SYSTEM
 # TODO MOVE EVERYTHING TO MODEL FORM
 # TODO AUTOMATOR TO UPLOAD TRANSACTION HISTORY
@@ -49,7 +51,7 @@ def index(request):
             'transaction': transaction_list,
             'coin': agent.allotment,
         }
-        return render(request, 'global.html', context)
+        return render(request, 'Coin/global.html', context)
     else:
         return HttpResponseRedirect('/Luna')
 
@@ -77,7 +79,7 @@ def agent(request):
             'coin': agent.allotment,
             'badge_id': badge_id,
         }
-        return render(request, 'agent_view.html', context)
+        return render(request, 'Coin/agent_view.html', context)
     else:
         return HttpResponseRedirect('/Luna')
 
@@ -89,12 +91,12 @@ def transactions(request):
         email = request.user.email
         badge_id = find_badge_id(email)
         agent = employee_id.objects.get(badgeid=badge_id)
-        context = {
+        context={
             'badge_id': badge_id,
             'user_list': user_list(),
             'coin': agent.allotment,
         }
-        return render(request, 'transaction_window.html', context)
+        return render(request, 'Coin/transaction_window.html', context)
 
 # VALIDATES THE TRANSACTION THAT IS SUBMITTED
 def submit_transaction(request):
@@ -116,7 +118,7 @@ def overlord_view(request):
             'transaction': reversed(transaction.objects.all().order_by('created_at')),
             'employee': employee_id.objects.filter(terminated=0).order_by('name'),
         }
-        return render(request, 'overlord_view.html', context)
+        return render(request, 'Coin/overlord_view.html', context)
     else:
         return HttpResponseRedirect('/Luna')
 
@@ -140,7 +142,7 @@ def control_panel(request):
                 context = {
                     'employee_info': employee_id.objects.get(badgeid=requested),
                 }
-            return render(request, 'overlord_control_panel.html', context)
+            return render(request, 'Coin/overlord_control_panel.html', context)
     else:
         return HttpResponseRedirect('/Luna')
 

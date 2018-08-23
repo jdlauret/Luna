@@ -1,0 +1,67 @@
+{#TODO WORK ON AGENT VIEW#}
+{#TODO WORK ON GLOBAL#}
+{#TODO WORK ON OVERLORD CONTROL PANEL#}
+{#TODO WORK ON OVERLORD VIEW#}
+{% extends 'Coin/transaction_base.html' %}
+{% load bootstrap3 %}
+{% load static %}
+{% block top_pane %}
+    <link rel="stylesheet" href="{% static 'coin/CSS/coin_style.css' %}">
+    <link rel="stylesheet" href="{% static 'coin/CSS/emoji.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="{% static 'coin/JS/coin_style.js' %}"></script>
+    <script type="text/javascript" src="{% static 'coin/JS/clock.js' %}"></script>
+
+    <div class="main_body">
+        <br>
+        <form role="form" method="POST" action="submit_transaction">
+            {% csrf_token %}
+            {#        RECIPIENT SECTION~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+            <label class="form-check-label" for="recipient">Who do you want to send it to? </label>
+            <select name="recipient" required>
+                <option></option>
+                {% for key, values in user_list.items %}
+                    <option value={{ key }}>{{ values }} - {{ key }} </option>
+                {% endfor %}
+            </select>
+
+            {#        AMOUNT YOU WANT TO SEND!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! #}
+            <label class="form-check-label" for="award">How much do you want to send? </label>
+            <input type="number" min="5" name="award" required><br><br>
+
+            {#        REASON FOR AWARD~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+            <label class="form-check-label" for="note">Reason for award? </label>
+            <p class="lead emoji-picker-container">
+                <input type="text" id="note" name="note" data-emojiable-input='unicode'
+                       data-emojiable='true'
+                       style="font-size:14px;" maxlength="200">
+            </p>
+            {#        ANONYMOUS~````````````````````````````````````````````````````````````````#}
+
+            <label class="form-check-label" for="anonymous">Anonymous?</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="anonymous" id="radio1" value="0"
+                       checked><label class="form-check-label" for="anonymous1">No</label>
+
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="anonymous" id="radio2" value="Yes">
+                <label class="form-check-label" for="anonymous2">Yes</label>
+            </div>
+
+            <input type="hidden" name="benefactor" value="{{ badge_id }}">
+            <div class="form-group">
+                <button type="submit" class="trans_btn">Submit</button>
+                <p style="font-size: 12px;">If you have any questions or comments please contact
+                    <a href="mailto:elizabeth.clark@vivintsolar.com?Subject=Coin%20Question%20or%20Comment">Clark</a>
+                </p>
+            </div>
+        </form>
+    </div>
+
+    <script src="{% static 'coin/JS/config.js' %}"></script>
+    <script src="{% static 'coin/JS/util.js' %}"></script>
+    <script src="{% static 'coin/JS/jquery.emojiarea.js' %}"></script>
+    <script src="{% static 'coin/JS/emoji-picker.js' %}"></script>
+
+{% endblock %}
