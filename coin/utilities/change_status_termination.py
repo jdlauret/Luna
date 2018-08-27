@@ -41,10 +41,11 @@ def terminated_user():
     #
     for j, value in enumerate(result):
         agent_list[value[0]] = value[1]
+        print('Test')
 
     # log_json = False
-
     # key-full name, value- badge id
+
     for key, value in agent_list.items():
         try:
             old_employee = employee_id.objects.get(badgeid=value)
@@ -52,6 +53,7 @@ def terminated_user():
                 if old_employee:  # True
                     old_employee.terminated = 1
                     old_employee.save()
+                    print('saved changes')
         except Exception as e:
             pass
 

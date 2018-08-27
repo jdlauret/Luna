@@ -254,7 +254,7 @@ class DataWarehouse:
     DataWarehouse class is used for interacting with the Vivint Solar Data Warehouse
     """
 
-    # Unversal Character set to remove from strings and replace with a regular space
+    # Universal Character set to remove from strings and replace with a regular space
     bad_characters = [chr(9), chr(10), chr(13)]
 
     def __init__(self, user, connection_type='prod', encoding='utf-8'):

@@ -34,9 +34,9 @@ def overlord_access(user):
 @user_passes_test(email_check)
 def index(request):
     if request.user.is_authenticated:
-        new_user() #Creates New users
-        scheduled_refresh() #Adds 250 every month, and refreshes coin every quarter
-        terminated_user() # Changes the status of those who have been terminated daily
+        new_user()                #Creates New users
+        scheduled_refresh()       #Adds 250 every month, and refreshes coin every quarter
+        terminated_user()         # Changes the status of those who have been terminated daily
         email = request.user.email
         badge_id = find_badge_id(email)
         # employee_id.objects.create_user(request.POST)
