@@ -29,6 +29,8 @@ tr:nth-child(even) {
     height: 180px;
     background: #57C1E8;
     padding: 10px;
+    border-top-right-radius: 50px;
+    /*border-top-left-radius: 50px;*/
 }
 
 .top_pane2 {
@@ -36,11 +38,13 @@ tr:nth-child(even) {
     height: 200px;
     background: #57C1E8;
     padding: 10px;
+    border-top-right-radius: 50px;
+    /*border-top-left-radius: 50px;*/
 }
 
 .main_body {
-    margin-left: 205px;
-    width: 82%;
+    margin-left: 195px;
+    /*width: 90%;*/
     /*position: fixed;*/
 }
 
@@ -73,14 +77,14 @@ tr:nth-child(even) {
 .total_share_coin_box {
     display: inline-block;
     margin: 5px;
-    padding: 20px;
+    padding: 10px;
     width: 150px;
     height: 150px;
     background: white;
     border: 1px solid #DBD9D9;
     color: #656569;
     float: left;
-    border-radius: 50%;
+    border-radius: 30%;
     overflow-wrap: break-word;
 }
 
@@ -89,10 +93,21 @@ tr:nth-child(even) {
     background-color: #57C1E8;
     color: white;
     border: 1px solid white;
-    border-radius: 5%;
+    border-radius: 10%;
 }
 
 .btn:hover {
+    background-color: white;
+    color: #57C1E8;
+}
+.trans_btn {
+    display: inline-block;
+    background-color: #57C1E8;
+    color: white;
+    border: 1px solid white;
+}
+
+.trans_btn:hover {
     background-color: white;
     color: #57C1E8;
 }
@@ -218,8 +233,9 @@ input[type=submit]:hover {
 .messages {
     color: white;
     width: 100%;
-    text-align: center;
+    margin-top: 40px;
     font-size: 25px;
+    background: green;
 }
 
 .messages span {
@@ -256,4 +272,8 @@ p.s_balance {
     width: 80%;
     padding: 5px;
 
+}
+.message_box{
+    display: inline-block;
+    padding-left: 150px;
 }

@@ -41,7 +41,6 @@ def terminated_user():
     #
     for j, value in enumerate(result):
         agent_list[value[0]] = value[1]
-        print('Test')
 
     # log_json = False
     # key-full name, value- badge id
