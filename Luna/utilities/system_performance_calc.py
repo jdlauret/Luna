@@ -9,8 +9,10 @@ utilities_dir = os.path.join(luna_dir, 'utilities')
 
 def system_performance(servicenum, startdate, enddate):
 
+    results = {}
+
     if enddate < startdate:
-        results = {'error': 'The start date you entered ({}) must come before the end date you entered ({}).'.format(startdate.strftime('%m/%d/%Y'), enddate.strftime('%m/%d/%Y'))}
+        results['error'] = 'The start date you entered ({}) must come before the end date you entered ({}).'.format(startdate.strftime('%m/%d/%Y'), enddate.strftime('%m/%d/%Y'))
         return results
 
     dw = DataWarehouse('admin')
@@ -26,9 +28,13 @@ def system_performance(servicenum, startdate, enddate):
 
     bindvars = [{'serviceNum': servicenum}]
 
-    dw.query_results(sql[0], bindvars=bindvars[0])
+    try:
+        dw.query_results(sql[0], bindvars=bindvars[0])
+    except Exception as e:
+        results['error'] = e
+        return results
 
-    results = {'account': dw.results}
+    results['account'] = dw.results
 
     if len(results['account']) == 0:
         results['error'] = '{} is not a valid service number.'.format(servicenum)
@@ -56,7 +62,17 @@ def system_performance(servicenum, startdate, enddate):
                  'startDate': startdatestring,
                  'endDate': enddatestring})
 
-    dw.query_results(sql[1], bindvars=bindvars[1])
+    try:
+        dw.query_results(sql[1], bindvars=bindvars[1])
+    except Exception as e:
+        if 'ORA-01476' in str(e):
+            results['error'] = str(e) + '. There were no estimates found for service' \
+                                   ' number {}.'.format(servicenum)
+        else:
+            results['error'] = e
+        print(str(e))
+        print(results['error'])
+        return results
 
     results['production'] = dw.results
 
@@ -66,11 +82,19 @@ def system_performance(servicenum, startdate, enddate):
                              'to {}.'.format(servicenum, startdatestring, enddatestring)
         return results
 
-    totals = [sum(j) for j in [i for i in zip(*results['production'])][1:3]]
+    totals = [sum(j) for j in [i for i in zip(*results['production'])][1:4]]
     results['production'].append(['Total',
                                   round(totals[0], 3),
                                   round(totals[1], 3),
-                                  round(totals[1]/totals[0], 4)
+                                  round(totals[2], 3),
+                                  round(totals[2]/totals[1], 4)
                                   ])
 
+    results['account'][0][7] = results['account'][0][7].strftime('%B %#d, %Y')
+
+    for month in results['production']:
+        month[1] = '{} kWh'.format(month[1])
+        month[2] = '{} kWh'.format(month[2])
+        month[3] = '{} kWh'.format(month[3])
+        month[4] = '{0:.2%}'.format(month[4])
     return results

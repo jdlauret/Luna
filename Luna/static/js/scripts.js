@@ -46,3 +46,15 @@ function printPage() {
     //Get the print button and put it into a variable
     window.print()
 }
+
+//Copy documents to clipboard
+function clickCopy() {
+  /* Get the text field */
+  var copyText = document.getElementById("copyarea");
+
+  /* Select the text field */
+  copyText.select();
+
+  /* Copy the text inside the text field */
+  document.execCommand("copy");
+}

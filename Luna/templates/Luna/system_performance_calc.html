@@ -48,7 +48,7 @@
                 <table class="table">
                     <thead class="thead-dark">
                     <tr>
-                        <th colspan="{{ form_response.account.0|length }}">Account Information</th>
+                        <th colspan="8">Account Information</th>
                     </tr>
                     </thead>
                     {% if form_response_complete == True %}
@@ -76,6 +76,9 @@
                         {% endfor %}
                         </tbody>
                     {% endif %}
+{#                    {% if form_response_complete == False %}#}
+{#                        <p>False</p>#}
+{#                    {% endif %}#}
                 </table>
             </div>
         </div>
@@ -91,8 +94,9 @@
                 <thead>
                 <tr>
                     <th scope="col">Month</th>
-                    <th scope="col">Estimate (kWh)</th>
-                    <th scope="col">Actual (kWh)</th>
+                    <th scope="col">CAD Estimate</th>
+                    <th scope="col">Weather Corrected Estimate</th>
+                    <th scope="col">Actual Production</th>
                     <th scope="col">Performance Ratio</th>
                 </tr>
                 </thead>
@@ -114,6 +118,14 @@
                             </tr>
                         {% endif %}
                     {% endfor %}
+                    {% if form_response.error %}
+                        <tr>
+                            <td>{{ form_response.error }}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    {% endif %}
                     </tbody>
                 {% endif %}
             </table>

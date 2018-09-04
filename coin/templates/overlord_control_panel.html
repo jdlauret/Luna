@@ -1,0 +1,88 @@
+{% extends 'Luna/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <meta charset="UTF-8">
+    <title>Transaction Window</title>
+    {% block content %}
+        {% load staticfiles %}
+        <link rel="stylesheet" href="{% static 'CSS/style.css' %}">
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+        <script type="text/javascript" src="{% static 'JS/style.js' %}"></script>
+        </head>
+        <body>
+        <div class="main_body">
+            <div class="top_pane2" style="height:88px; background: #656569">
+                <img id="picture" src="{% static 'Pictures/black_and_white_light.jpg' %}"></img>
+                <div id="overlord_title">
+                    <h7 style="color: white;;">THE</h7>
+                    <h1 style="font-weight: bold; color:white;">Overlord</h1>
+                </div>
+            </div>
+            <h4>Employee Information</h4>
+            <form method="post" action="employee_load">
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Badge ID</th>
+                        <th>Allotment</th>
+                        <th>Edited</th>
+                    </tr>
+                    <tr>
+                        <td>{{ employee_info.name }}</td>
+                        <td>{{ employee_info.badgeid }}</td>
+                        <td><input type="number" name="allotment" value="{{ employee_info.allotment }}"
+                                   style="width:200px;"></td>
+                        <td>{{ employee_info.edited }}</td>
+                    </tr>
+                </table>
+                <input type="hidden" name="id" value="{{ employee_info.id }}">
+                <input type="submit" style="width: 200px;">
+            </form>
+            <form method="post" action="trans_load">
+                <h4>Employee Transaction History</h4>
+                <table>
+                    <tr>
+                        <th>Anonymous</th>
+                        <th>Reciver</th>
+                        <th style="text-align: right;">Amount</th>
+                        <th>Bad Comment</th>
+                        <th>Note</th>
+                        <th>Transaction Date</th>
+                    </tr>
+                    {% for i in employee_history %}
+                        <tr>
+                            {% if i.anonymous == 1 %}
+                                <td>Yes</td>
+                            {% endif %}
+                            {% if i.anonymous == 0 %}
+                                <td>No</td>
+                            {% endif %}
+                            <td>{{ i.recipient_name }}</td>
+                            <td style="text-align: right;">{{ i.award }}</td>
+                            {% if i.bad_comment == 1 %}
+                                <td><select name="bad_comment">
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select></td>
+                            {% endif %}
+                            {% if i.bad_comment == 0 %}
+                                <td><select name="bad_comment">
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select></td>
+                            {% endif %}
+                            <td>{{ i.note }}</td>
+                            <td>{{ i.created_at }}</td>
+                            <input type="hidden" name="id" value="{{ i.id }}">
+                        </tr>
+                    {% endfor %}
+                </table>
+                <input type="submit" style="width: 200px;">
+            </form>
+        </div>
+        </body>
+    {% endblock %}

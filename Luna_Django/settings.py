@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Luna.apps.LunaConfig',
     'social_django',
+    'coin.apps.CoinAppConfig',
 ]
 
 MIDDLEWARE = [
@@ -129,7 +130,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'US/Mountain'
 
 USE_I18N = True
 

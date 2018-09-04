@@ -22,9 +22,10 @@ from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    url('', include('Luna.urls')),
+    url('', include('Luna.urls'), name='luna'),
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout, name='logout'),
     url(r'^auth/', include('social_django.urls', namespace='social')),
     url(r'^admin/', admin.site.urls),
+    url(r'^coin/', include(('coin.urls', 'sharing'), namespace='sharing')), #Coin sharing URL
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
