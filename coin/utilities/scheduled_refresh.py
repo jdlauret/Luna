@@ -32,7 +32,7 @@ def scheduled_refresh():
 
             else:
                 new_allotment2 = employee_id.objects.get(badgeid=leaders.badge_num)
-                if new_allotment2.terminated ==0:
+                if new_allotment2.terminated == 0:
                     new_allotment2.allotment = standard
                     new_allotment2.save()
                 else:

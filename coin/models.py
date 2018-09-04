@@ -89,7 +89,7 @@ class employee_id(models.Model):
 
 
 # THIS TABLE IS A VIEW OF ALL THE TRANSACTIONS OF THE AGENTS
-class transaction(models.Model):
+class transaction (models.Model):
     anonymous = models.IntegerField(default=0)
     bad_comment = models.IntegerField(default=0)
     # accept = models.BooleanField(default=False)
@@ -103,7 +103,7 @@ class transaction(models.Model):
     redeemed = models.IntegerField(default=0)
     objects = coinManager()
 
-class leaders(models.Model):
+class leaders (models.Model):
     name = models.CharField(max_length=100, default='To Be Filled in Later')
     badge_num = models.IntegerField()
     amount = models.IntegerField()
