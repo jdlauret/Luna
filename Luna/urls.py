@@ -12,6 +12,9 @@ calculator_patterns = [
     # url(r'^full_benefit_analysis/$', views.full_benefit_calculator),
     # url(r'^full_benefit_analysis/pdf$', views.full_benefit_print, name='Full Benefit Analysis'),
     url(r'^RTS_notes/$', views.RTS_notes),
+    url(r'^Customer_Solutions/$', views.customer_solutions),
+    url(r'^Customer_Solutions/buyout/pdf$', views.customer_solutions_buyout, name='Customer Solutions buyout'),
+    url(r'^Customer_Solutions/prepayment/pdf$', views.customer_solutions_prepayment, name='Customer Solutions prepayment'),
 ]
 
 automation_patterns =[

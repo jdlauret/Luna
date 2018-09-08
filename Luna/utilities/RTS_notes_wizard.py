@@ -26,6 +26,7 @@ def notes_wizard (servicenum):
         # first query results
         dw.query_results(sql[0], bindvars=bindvars)
         account_information = dw.results[0]
+        install_notes['account_info'] = account_information
         # error message if service number is not valid
         if len(account_information) == 0:
             install_notes['error'] = '{} is not a valid service number.'.format(servicenum)
@@ -51,28 +52,22 @@ def notes_wizard (servicenum):
         roof_section_columns = dw.column_names
 
     except Exception as e:
-        install_notes['error'] = e
+        install_notes['error'] = 'CAD change was made recently, will not be available till tomorrow'
         return install_notes
 
     # Total Solar Roof Integer
     tsr = 0
 
     # install notes combine both account information and column information into one list
-    # for i, value in enumerate(account_information):
-    #     install_notes['account_info'][account_information_columns[i]] = value
-    install_notes['account_info'] = account_information
     if install_notes['account_info'][7] == None:
         pass
     else:
         install_notes['account_info'][7] = install_notes['account_info'][7].strftime('%B %#d, %Y')
-    # print(type(install_notes['account_info'][7]))
-    # print(install_notes['account_info'])
+
     # combines roof_section info and column name together
     for j, value in enumerate(roof_section_info):
         install_notes['spec_info'][roof_section_columns[j]] = value
     install_notes['spec_column'] = roof_section_columns
-
-    # print('print this section:', install_notes['spec_info'])
 
     # pulls the total solar roof information and turns the string into a integer
     tsr = int(roof_section_info[roof_section_columns.index('TOTAL_SOLAR_ROOFS')])
@@ -80,9 +75,6 @@ def notes_wizard (servicenum):
     for k in range(tsr):
         new_section = 'Roof Section ' + str(k + 1) + ':'
         install_notes['roof_sections'][new_section] = {
-            # roof_section_info[roof_section_columns.index('NUM_MODULES_DESIGNED')].split(',')[k],
-            # roof_section_info[roof_section_columns.index('ROOF_AZIMUTH_DESIGNED')].split(',')[k],
-            # roof_section_info[roof_section_columns.index('ROOF_TILT')].split(',')[k],
             'Number of Modules': roof_section_info[roof_section_columns.index('NUM_MODULES_DESIGNED')].split(',')[k],
             'Azimuth': roof_section_info[roof_section_columns.index('ROOF_AZIMUTH_DESIGNED')].split(',')[k],
             'Tilt': roof_section_info[roof_section_columns.index('ROOF_TILT')].split(',')[k],
