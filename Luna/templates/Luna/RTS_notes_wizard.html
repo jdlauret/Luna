@@ -18,7 +18,7 @@
                         {% for field in form %}
                             <tr>
                                 {% if field.errors %}
-                                    <td>{{ field.errors }}</td>
+                                    <td style="color:red;"><b>{{ field.errors }}</b></td>
                                 {% endif %}
                                 <td><label for="{{ field.id_for_label }}">{{ field.label }} </label></td>
                                 <td colspan="2">{{ field }}</td>
@@ -34,43 +34,42 @@
                 </form>
             </div>
             <div id="account_info" style="margin-left: 32%">
-{#            Table for Account Information #}
+                {#            Table for Account Information #}
                 <table class="table">
                     <thead class="thead-dark">
-                        <tr>
-                            <th colspan="10">Account Information</th>
-                        </tr>
+                    <tr>
+                        <th colspan="10">Account Information</th>
+                    </tr>
                     </thead>
                     {% if form_response_complete == True %}
                         <thead>
-                            <tr>
-                                <th>Service Number</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Street Address</th>
-                                <th>City</th>
-                                <th>State</th>
-                                <th>Zip Code</th>
-                                <th>PTO Date</th>
-                            </tr>
                         <tr>
-{#                        Inputs the account information#}
-                        {% for info in form_response.account_info %}
+                            <th>Service Number</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Street Address</th>
+                            <th>City</th>
+                            <th>State</th>
+                            <th>Zip Code</th>
+                            <th>PTO Date</th>
+                        </tr>
+                        <tr>
+                            {#                        Inputs the account information#}
+                            {% for info in form_response.account_info %}
                                 <td>{{ info }}</td>
                             {% endfor %}
-                            </tr>
+                        </tr>
                     {% endif %}
                 </table>
             </div>
         </div>
-            {% if form_response.error %}
-                <table>
-                    <tr>
-                        <td colspan="5">{{ form_response.error }}</td>
-                    </tr>
-                </table>
-            {% endif %}
-
+        {% if form_response.error %}
+            <table>
+                <tr>
+                    <td colspan="5" style="color:red;"><b>{{ form_response.error }}</b></td>
+                </tr>
+            </table>
+        {% endif %}
         <div id="production_div">
             {% if form_response_complete == True %}
                 <ul>
@@ -78,12 +77,12 @@
                         <li>{{ item }}</li>
                     {% endfor %}
                 </ul>
-{#                Button that allows the user to copy the text below#}
-                <button id="copyButton" onclick="clickCopy()">Copy </button>
+                {#                Button that allows the user to copy the text below#}
+                <button id="copyButton" onclick="clickCopy()">Copy</button>
             {% endif %}
-{#RTS Notes Section#}
-{% if form_response_complete == True %}
-<textarea id="copyarea" style="width: 100%; height: 500px;">
+            {#RTS Notes Section#}
+            {% if form_response_complete == True %}
+                <textarea id="copyarea" style="width: 100%; height: 500px;">
 Service Number: {{ form_response.spec_info.SERVICE_NUMBER }}
 ESC Scheduled for Date: {{ form_response.spec_info.ESC_SCHEDULED_FOR }}
 Arrays: CHECK VISUAL CAD FOR INFO{#    {{ form_response.spec_info.ARRAYS }}#}
@@ -101,4 +100,5 @@ Install Notes: INSERT INSTALL NOTES HERE
 
         </div>
     </div>
+    {% endif %}
 {% endblock %}

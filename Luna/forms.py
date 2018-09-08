@@ -51,7 +51,6 @@ class SoftSavingsForm(forms.Form):
 class RTSForm(forms.Form):
     service_number = forms.CharField(label='Service Number:', max_length=20, required=True)
 
-
 class FullBenefitForm(forms.Form):
     month = previous_month_end().replace(
         month=previous_month_end().month % 12 + 1,
