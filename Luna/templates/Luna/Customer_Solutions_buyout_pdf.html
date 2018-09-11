@@ -24,22 +24,20 @@
                     <td>Date:</td>
                     <td>{{ date }}</td>
                 </tr>
-                <tr>
-                    <td>Service #:</td>
-                    <td>{{ form_response.service_number }}</td>
-                </tr>
             </table>
         </div>
-    </div>
-    <br><br><br><br>
+    </div><br>
     {#    Bill~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
     <div style="width:59%; display: inline-block;">
         <div style="background-color: #656569; color: white; font-size:20px; padding: 15px;">Fee Estimate</div>
         <table>
-            <tr>
-                <td>Service Number</td>
-                <td>{{ form_response.service_number }}</td>
-            </tr>
+            {% for row in form_response.account_info %}
+                <tr>
+                    {% for item in row %}
+                        <td>{{ item }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
             <tr>
                 <td>Customer Name</td>
                 <td>{{ form_response.name }}</td>
@@ -54,11 +52,13 @@
     <div style="width:40%; display:inline-block; float:right;">
         <div style="background-color: #656569; color: white; font-size:20px; padding: 15px;">Services</div>
     </div>
-<br><br><br>
+    <br><br><br>
     <div>
         <table style="width: 100%;">
             <tr>
-                <th style="background-color: #656569; color: white; font-size:20px; padding: 15px; width:20%;">Description</th>
+                <th style="background-color: #656569; color: white; font-size:20px; padding: 15px; width:20%;">
+                    Description
+                </th>
                 <th style="background-color: #656569; color: white; font-size:20px; padding: 15px;">Services</th>
                 <th style="background-color: #656569; color: white; font-size:20px; padding: 15px;">Amount</th>
             </tr>
@@ -69,19 +69,20 @@
             </tr>
         </table>
     </div>
-<br><br>
-    <p>If you have any question about this fee, please contact Vivint Solar Customer Service at (801) 404-4129 ext.2 or by
-    email at feebilling@vivintsolar.com </p>
+    <br><br>
+    <p>If you have any question about this fee, please contact Vivint Solar Customer Service at (801) 404-4129 ext.2 or
+        by
+        email at feebilling@vivintsolar.com </p>
     <p>
-    Thank you,
+        Thank you,
     </p>
 
     image
 
     <p>
-    Simply Brighter / Vivintsolar.com
-    1800 W. Ashton Blvd.
-    Lehi, Utah 84043
+        Simply Brighter / Vivintsolar.com
+        1800 W. Ashton Blvd.
+        Lehi, Utah 84043
     </p>
 
 {% endblock %}

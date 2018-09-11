@@ -8,7 +8,7 @@ utilities_dir = os.path.join(luna_dir, 'utilities')
 def prepay_calc(servicenum):
     notes = {}
     dw = DataWarehouse('admin')
-    with open(os.path.join(utilities_dir, 'buyout_calc.sql'), 'r') as file:
+    with open(os.path.join(utilities_dir, 'prepayment_calc.sql'), 'r') as file:
         sql = file.read()
     sql = sql.split(';')
     if 'S-' in servicenum.upper():
@@ -17,7 +17,7 @@ def prepay_calc(servicenum):
 
     try:
         dw.query_results(sql[0], bindvars=bindvars)
-        account_information = dw.results[0]
+        notes['account'] = dw.results[0]
 
     except Exception as e:
         notes['error'] = e

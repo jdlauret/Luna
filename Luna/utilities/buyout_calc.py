@@ -30,7 +30,6 @@ def buyout_calc(servicenum):
         return notes
 
     notes['account_info'] = account_information
-
     try:
         dw.query_results(sql[1], bindvars=bindvars)
         query_results = dw.results[0]
