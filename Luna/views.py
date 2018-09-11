@@ -430,7 +430,6 @@ def soft_savings_calculator(request):
     else:
         return HttpResponseRedirect('/Luna')
 
-
 @login_required
 @user_passes_test(email_check)
 def soft_savings_print(request):
@@ -532,14 +531,18 @@ def customer_solutions(request):
             if form.is_valid():
                 service_number = form.cleaned_data['service_number']
                 context = {
-                    # Form contains Name=service_number, Value = .... Maxlength=20
                     'form': form,
-                    # User contains person who signed into Luna
                     'user': request.user,
                     'form_response_complete': True,
                     'form_response': buyout_calc(service_number),
                     'date': dt.today().strftime('%m/%d/%y')
                 }
+                try:
+                    results = buyout_calc(service_number)
+                    context['form_response'] = results
+                except Exception as e:
+                    context['form_response_complete'] = False
+
                 response = render(request, 'Luna/Customer_Solutions.html', context=context)
                 return response
             else:
@@ -566,8 +569,8 @@ def customer_solutions(request):
         return HttpResponseRedirect('/Luna')
 
 @login_required
-@user_passes_test(email_check)
-def customer_solutions_buyout(request):
+@user_passes_test
+def buyout_print(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
             form = RTSForm(request.POST)
@@ -577,30 +580,34 @@ def customer_solutions_buyout(request):
                     'form': form,
                     'user': request.user,
                     'form_response_complete': True,
-                    'form_response': buyout_calc(service_number),
+                    'form_response': {},
                     'legal_footer': print_page_legal_footer,
-                    'date': dt.today().strftime('%m/%d/%y')
                 }
+                try:
+                    results = buyout_calc(service_number)
+                    context['form_response'] = results
+                except Exception as e:
+                    context['form_response_complete'] = False
+                response = render_to_response('Luna/Customer_Solutions_buyout_pdf.html', context, RequestContext(request))
+                return response
             else:
-                form = RTSForm(request.POST)
+                form = RTSForm()
                 context = {
                     'form': form,
                     'user': request.user,
                     'form_response_complete': False,
                     'form_response': {},
                     'legal_footer': print_page_legal_footer,
-                    'date': dt.today().strftime('%m/%d/%y')
                 }
                 return render(request, 'Luna/Customer_Solutions_buyout_pdf.html', context)
         else:
-            form = RTSForm(request.POST)
+            form = RTSForm()
             context = {
-                'user': request.user,
                 'form': form,
+                'user': request.user,
                 'form_response_complete': False,
                 'form_response': {},
                 'legal_footer': print_page_legal_footer,
-                'date': dt.today().strftime('%m/%d/%y')
             }
             return render(request, 'Luna/Customer_Solutions_buyout_pdf.html', context)
     else:
@@ -608,7 +615,7 @@ def customer_solutions_buyout(request):
 
 @login_required
 @user_passes_test(email_check)
-def customer_solutions_prepayment(request):
+def prepayment_print(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
             form = RTSForm(request.POST)
