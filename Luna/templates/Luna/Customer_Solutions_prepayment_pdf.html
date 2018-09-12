@@ -1,4 +1,173 @@
 {% extends "Luna/print_base.html" %}
 {% block content %}
+    <style>
+        * {
+            color: #656569;
+        }
 
+        .bar {
+            background-color: #656569;
+            color: white;
+            font-size: 20px;
+            padding: 15px;
+        }
+    </style>
+    {#    Header~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+    <div id="top_address_info">
+        <div id="address" style="display: inline-block; padding: 10px; width: 50%;">
+            <p style="font-size: 20px;">
+                vivint.Solar<br>
+                1800 W Ashton Blvd.<br>
+                Lehi, Utah 84043<br>
+            </p>
+        </div>
+
+        <div id="billing"
+             style="display: inline-block; padding: 10px; width: 40%; float:right; vertical-align: top;">
+            <p style="font-size: 30px; font-weight:bolder"><b>Prepayment Bill: </b></p>
+            <hr>
+            <table>
+                <tr>
+                    <td>Date:</td>
+                    <td style="padding: 0px 0px 0px 20px;">{{ date }}</td>
+                </tr>
+                <tr>
+                    <td>Service Number:</td>
+                    <td style="padding: 0px 0px 0px 20px;">{{ form_response.service_number }}</td>
+                </tr>
+            </table>
+        </div>
+    </div><br><br>
+    <table style="width:80%; padding: 0px 0px 0px 20px;">
+        <tr>
+            <th style="width:30%;"></th>
+            <th style="width:70%;"></th>
+        </tr>
+        <tr>
+            <td>Calculated Prepayment Price as of:</td>
+            <td>{{ date }}</td>
+        </tr>
+        <tr>
+            <td>Current Month of Contract:</td>
+            <td>{{ form_response.current_contract }}</td>
+        </tr>
+        <tr>
+            <td>Remaining Months included in Prepayment Price:</td>
+            <td>{{ form_response.remaining_contract }}</td>
+        </tr>
+        <tr style="background: skyblue;">
+            <td>Current Prepayment Value:</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Service Number:</td>
+            <td>S-{{ form_response.service_number }}</td>
+        </tr>
+        <tr>
+            <td>Customer Name:</td>
+            <td>{{ form_response2.name }}</td>
+        </tr>
+        <td>Property Address:</td>
+        <td>{{ form_response2.address }} {{ form_response2.city }} {{ form_response2.state }} {{ form_response2.zipcode }}</td>
+        </tr>
+        <tr>
+            <td>System Size (kW):</td>
+            <td>{{ form_response.system_size }}</td>
+        </tr>
+        <tr>
+            <td>Annual Escalator*:</td>
+            <td>{{ form_response.escalator }}</td>
+        </tr>
+        <tr>
+            <td>Payment Dates:</td>
+            <td>As set forth in the {{ form_response.record_type }}, Your monthly payment of the Energy Price is due
+                upon
+                Your reciept of the invoice.
+            </td>
+        </tr>
+        <tr>
+            <td>Payment Frequency:</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Number of Payments:</td>
+            <td>240 during initial Term of the {{ form_response.record_type }}</td>
+        </tr>
+        <tr>
+            <td>Prepayment</td>
+            <td>
+                <table style="width:100%;">
+                    <tr>
+                        <th style="padding:0px 10px;">Year</th>
+                        <th style="width:50%;">Estimated Prepayment Amount</th>
+                        <th style="padding:0px 10px;">Year</th>
+                        <th style="width:50%;">Estimated Prepayment Amount</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td></td>
+                        <td>11</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td></td>
+                        <td>12</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td></td>
+                        <td>13</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td></td>
+                        <td>14</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td></td>
+                        <td>15</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td></td>
+                        <td>16</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td></td>
+                        <td>17</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td></td>
+                        <td>18</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td></td>
+                        <td>19</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td></td>
+                        <td>20</td>
+                    </tr>
+                    As of In-Service Date
+                    Estimated Prepayment Amount does not include: (i) monthly payments for partial
+                    years, (iii) amounts due but not yet paid, and (iii) applicable taxes.
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>Late Charges and interest:</td>
+            <td>As set forth in the {{ form_response.record_type }}, late charges will only be imposed in the case
+                of payments that are more than ten (10) days past due. Such late charges will be Fifteen Dollars ($15)
+            </td>
+        </tr>
+        <tr>
+            <td>Tax Obligations: </td>
+            <td>Taxes are based on Your state and local tax rates and are subject to change.</td>
+        </tr>
+    </table>
 {% endblock %}
