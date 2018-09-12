@@ -13,6 +13,11 @@ from .utilities.full_benefit_analysis import full_benefit_analysis
 from .utilities.system_performance_calc import system_performance
 from .utilities.page_notes import *
 from .utilities.RTS_notes_wizard import notes_wizard
+<<<<<<< dev_branch
+=======
+from .utilities.buyout_calc import buyout_calc
+from .utilities.prepayment_calc import prepay_calc
+>>>>>>> Update 2
 
 register = Library()
 
@@ -520,3 +525,136 @@ def RTS_notes (request):
             return render(request, 'Luna/RTS_notes_wizard.html', context)
     else:
         return HttpResponseRedirect('/Luna')
+<<<<<<< dev_branch
+=======
+
+@login_required
+@user_passes_test(email_check)
+def customer_solutions(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = CSForm(request.POST)
+            if form.is_valid():
+                service_number = form.cleaned_data['service_number']
+                service_number = service_number.replace('S-', '')
+                context = {
+                    'form': form,
+                    'user': request.user,
+                    'form_response_complete': True,
+                    'form_response': {},
+                    'form_response2': {},
+                    'legal_footer': print_page_legal_footer,
+                    'date': dt.today().strftime('%m/%d/%y'),
+                }
+                try:
+                    results = buyout_calc(service_number)
+                    results2 = prepay_calc(service_number)
+                    context['form_response'] = results
+                    context['form_response2'] = results2
+                except Exception as e:
+                    context['form_response_complete'] = False
+
+                response = render(request, 'Luna/Customer_Solutions.html', context=context)
+                return response
+            else:
+                form = CSForm()
+                context = {
+                    'form': form,
+                    'user': request.user,
+                    'form_response_complete': False,
+                    'form_response': {},
+                    'legal_footer': print_page_legal_footer,
+                    'date': dt.today().strftime('%m/%d/%y')
+                }
+                return render(request, 'Luna/Customer_Solutions.html', context=context)
+        else:
+            form = CSForm()
+            context = {
+                'user': request.user,
+                'form': form,
+                'form_response_complete': False,
+                'form_response': {},
+                'legal_footer': print_page_legal_footer,
+                'date': dt.today().strftime('%m/%d/%y')
+            }
+            return render(request, 'Luna/Customer_Solutions.html', context=context)
+    else:
+        return HttpResponseRedirect('/Luna')
+
+@login_required
+@user_passes_test(email_check)
+def buyout_print(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            num = request.POST
+            num = num.getlist('service_number')
+            num = num[0]
+            context = {
+                'user': request.user,
+                'form_response_complete': True,
+                'form_response': {},
+                'legal_footer': print_page_legal_footer,
+                'date': dt.today().strftime('%m/%d/%y'),
+            }
+            try:
+                results = buyout_calc(num)
+                context['form_response'] = results
+            except Exception as e:
+                context['form_response_complete'] = False
+
+            response = render_to_response('Luna/Customer_Solutions_buyout_pdf.html',
+                                          context,
+                                          RequestContext(request))
+            return response
+        else:
+            context = {
+                'user': request.user,
+                'form_response_complete': False,
+                'form_response': {},
+                'legal_footer': print_page_legal_footer,
+                'date': dt.today().strftime('%m/%d/%y'),
+            }
+            return render(request, 'Luna/Customer_Solutions_buyout_pdf.html', context)
+    else:
+        return HttpResponseRedirect('/Luna')
+
+@login_required
+@user_passes_test(email_check)
+def prepayment_print(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            num = request.POST
+            num = num.getlist('service_number')
+            num = num[0]
+            context = {
+                'user': request.user,
+                'form_response_complete': True,
+                'form_response': {},
+                'form_response2': {},
+                'legal_footer': print_page_legal_footer,
+                'date': dt.today().strftime('%m/%d/%y'),
+            }
+            try:
+                results = prepay_calc(num)
+                results2 = buyout_calc(num)
+                context['form_response'] = results
+                context['form_response2'] = results2
+            except Exception as e:
+                context['form_response_complete'] = False
+
+            response = render_to_response('Luna/Customer_Solutions_prepayment_pdf.html',
+                                          context,
+                                          RequestContext(request))
+            return response
+        else:
+            context = {
+                'user': request.user,
+                'form_response_complete': False,
+                'form_response': {},
+                'legal_footer': print_page_legal_footer,
+                'date': dt.today().strftime('%m/%d/%y')
+            }
+            return render(request, 'Luna/Customer_Solutions_prepayment_pdf.html', context)
+    else:
+        return HttpResponseRedirect('/Luna')
+>>>>>>> Update 2
