@@ -522,6 +522,8 @@ def RTS_notes (request):
             return render(request, 'Luna/RTS_notes_wizard.html', context)
     else:
         return HttpResponseRedirect('/Luna')
+<<<<<<< dev_branch
+=======
 
 @login_required
 @user_passes_test(email_check)
