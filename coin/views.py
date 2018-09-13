@@ -7,9 +7,9 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from .models import employee_id, transaction
 from .utilities.user_list import user_list
 from coin.utilities import find_badge_id
-from coin.utilities.create_new_user import new_user
-from coin.utilities.scheduled_refresh import scheduled_refresh
-from coin.utilities.change_status_termination import terminated_user
+# from coin.utilities.create_new_user import new_user
+# from coin.utilities.scheduled_refresh import scheduled_refresh
+# from coin.utilities.change_status_termination import terminated_user
 
 # TODO SEND EMAILS -> NOTIFICATION SYSTEM
 # TODO MOVE EVERYTHING TO MODEL FORM
