@@ -36,14 +36,15 @@ def soft_savings_analysis(servicenum, startdate, enddate):
     results['account'] = dw.results
 
     if len(results['account']) == 0:
-        results['error'] = '{} is not a valid service number.'.format(servicenum)
-        return results
-    elif results['account'][0][7].date() > date.today()-timedelta(30):
-        results['error'] = 'The system hasn\'t been PTO\'d for more than 30 days.'
+        results['error'] = '{} is not a valid service number or the associated ' \
+                           'Solar Project has been cancelled.'.format(servicenum)
         return results
     elif not results['account'][0][7]:
         results['error'] = 'The system hasn\'t been PTO\'d yet!'
         results['account'][0][9] = '${}'.format(round(results['account'][0][9], 5))
+        return results
+    elif results['account'][0][7].date() > date.today()-timedelta(30):
+        results['error'] = 'The system hasn\'t been PTO\'d for more than 30 days.'
         return results
     # elif results['account'][0][7].date() > date.today()-timedelta(365):
     #     results['error'] = 'Benefit Analyses can only be performed on systems ' \
@@ -116,45 +117,122 @@ def soft_savings_analysis(servicenum, startdate, enddate):
                                   round(totals[4], 2)
                                   ])
 
-    for month in results['savings']:
-        month[1] = '{} kWh'.format(month[1])
-        if not month[2]:
-            pass
-        elif month[2] < 0:
-            month[2] = '$({})'.format('%.5f' % abs(month[2]))
-        else:
-            month[2] = '${}'.format('%.5f' % month[2])
-        if month[3] < 0:
-            month[3] = '$({})'.format('%.2f' % abs(month[3]))
-        else:
-            month[3] = '${}'.format('%.2f' % month[3])
-        if month[4] < 0:
-            month[4] = '$({})'.format('%.2f' % abs(month[4]))
-        else:
-            month[4] = '${}'.format('%.2f' % month[4])
-        if month[5] < 0:
-            month[5] = '$({})'.format('%.2f' % abs(month[5]))
-        else:
-            month[5] = '${}'.format('%.2f' % month[5])
+    if results['savings'][-1][5] < 0:
+        results['summary'] = [
+            'The calculation shows that this customer is not saving money with our system. ' \
+            'They have paid ${} more to us than they would have paid their utility company ' \
+            'for the energy the system produced.'.format(-results['savings'][-1][5])
+        ]
 
-    results['summary'] = [
-        'Your system has produced {} kilowatt hours (kWh) since {}.'.format(
-            results['savings'][-1][1].split()[0],
-            results['startdate'].strftime('%m/%d/%Y')
-        ),
-        'For that energy, you paid Vivint Solar {}.'.format(results['savings'][-1][3]),
-        'The average utility customer of your utility, {}, would have paid {} for that same amount of energy.'.format(
-            results['account'][0][8],
-            results['savings'][-1][4]
-        ),
-        'For the average utility customer with {}, who had {} kilowatt hours (kWh) of production since {},' \
-        ' they would have saved {}.'.format(
-            results['account'][0][8],
-            results['savings'][-1][1].split()[0],
-            results['startdate'].strftime('%m/%d/%Y'),
-            results['savings'][-1][5]
+        for month in results['savings']:
+            month[1] = '{} kWh'.format(month[1])
+            if not month[2]:
+                pass
+            elif month[2] < 0:
+                month[2] = '$({})'.format('%.5f' % abs(month[2]))
+            else:
+                month[2] = '${}'.format('%.5f' % month[2])
+            if month[3] < 0:
+                month[3] = '$({})'.format('%.2f' % abs(month[3]))
+            else:
+                month[3] = '${}'.format('%.2f' % month[3])
+            if month[4] < 0:
+                month[4] = '$({})'.format('%.2f' % abs(month[4]))
+            else:
+                month[4] = '${}'.format('%.2f' % month[4])
+            if month[5] < 0:
+                month[5] = '$({})'.format('%.2f' % abs(month[5]))
+            else:
+                month[5] = '${}'.format('%.2f' % month[5])
+
+        results['summary'].extend(
+            [
+                'Your system has produced {} kilowatt hours (kWh) since {}.'.format(
+                    results['savings'][-1][1].split()[0],
+                    results['startdate'].strftime('%m/%d/%Y')
+                ),
+                'For that energy, you paid Vivint Solar {}.'.format(results['savings'][-1][3]),
+                'The average utility customer of your utility, {}, would have paid {} for that same amount of energy.'.format(
+                    results['account'][0][8],
+                    results['savings'][-1][4]
+                ),
+                'For the average utility customer with {}, who had {} kilowatt hours (kWh) of production since {},' \
+                ' they would have saved {}.'.format(
+                    results['account'][0][8],
+                    results['savings'][-1][1].split()[0],
+                    results['startdate'].strftime('%m/%d/%Y'),
+                    results['savings'][-1][5]
+                ),
+                'From {} to {}, the solar energy system at your home has produced enough energy to offset the carbon ' \
+                'emissions of {} miles driven by the average passenger car (according to the EPA\'s Greenhouse Gas ' \
+                'Equivalencies Calculator).'.format(
+                    results['startdate'].strftime('%m/%d/%Y'),
+                    results['enddate'].strftime('%m/%d/%Y'),
+                    round(float(results['savings'][-1][1].split()[0])*1.824,1)
+                ),
+            'From {} to {}, the solar energy system at your home has offset the same amount of carbon ' \
+                'emissions as {} newly planted trees (according to the EPA\'s Greenhouse Gas ' \
+                'Equivalencies Calculator).'.format(
+                    results['startdate'].strftime('%m/%d/%Y'),
+                    results['enddate'].strftime('%m/%d/%Y'),
+                    int(round(float(results['savings'][-1][1].split()[0])*0.0391,0))
+                )
+            ]
         )
-    ]
+    else:
+        for month in results['savings']:
+            month[1] = '{} kWh'.format(month[1])
+            if not month[2]:
+                pass
+            elif month[2] < 0:
+                month[2] = '$({})'.format('%.5f' % abs(month[2]))
+            else:
+                month[2] = '${}'.format('%.5f' % month[2])
+            if month[3] < 0:
+                month[3] = '$({})'.format('%.2f' % abs(month[3]))
+            else:
+                month[3] = '${}'.format('%.2f' % month[3])
+            if month[4] < 0:
+                month[4] = '$({})'.format('%.2f' % abs(month[4]))
+            else:
+                month[4] = '${}'.format('%.2f' % month[4])
+            if month[5] < 0:
+                month[5] = '$({})'.format('%.2f' % abs(month[5]))
+            else:
+                month[5] = '${}'.format('%.2f' % month[5])
+
+        results['summary'] = [
+            'Your system has produced {} kilowatt hours (kWh) since {}.'.format(
+                results['savings'][-1][1].split()[0],
+                results['startdate'].strftime('%m/%d/%Y')
+            ),
+            'For that energy, you paid Vivint Solar {}.'.format(results['savings'][-1][3]),
+            'The average utility customer of your utility, {}, would have paid {} for that same amount of energy.'.format(
+                results['account'][0][8],
+                results['savings'][-1][4]
+            ),
+            'For the average utility customer with {}, who had {} kilowatt hours (kWh) of production since {},' \
+            ' they would have saved {}.'.format(
+                results['account'][0][8],
+                results['savings'][-1][1].split()[0],
+                results['startdate'].strftime('%m/%d/%Y'),
+                results['savings'][-1][5]
+            ),
+            'From {} to {}, the solar energy system at your home has produced enough energy to offset the carbon ' \
+            'emissions of {} miles driven by the average passenger car (according to the EPA\'s Greenhouse Gas ' \
+            'Equivalencies Calculator).'.format(
+                results['startdate'].strftime('%m/%d/%Y'),
+                results['enddate'].strftime('%m/%d/%Y'),
+                round(float(results['savings'][-1][1].split()[0])*1.824,1)
+            ),
+            'From {} to {}, the solar energy system at your home has offset the same amount of carbon ' \
+            'emissions as {} newly planted trees (according to the EPA\'s Greenhouse Gas ' \
+            'Equivalencies Calculator).'.format(
+                results['startdate'].strftime('%m/%d/%Y'),
+                results['enddate'].strftime('%m/%d/%Y'),
+                round(float(results['savings'][-1][1].split()[0])*0.0391,0)
+            )
+        ]
 
     results['account'][0][7] = results['account'][0][7].strftime('%B %#d, %Y')
 

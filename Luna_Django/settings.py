@@ -93,8 +93,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.oracle',
         'NAME': 'dw.vivintsolar.com/dw',
-        'USER': 'JDLAURET',
-        'PASSWORD': 'Gaussrifle1'
+        'USER': os.environ.get('DATA_WAREHOUSE_USER'),
+        'PASSWORD': os.environ.get('DATA_WAREHOUSE_PASSWORD')
     }
 }
 
