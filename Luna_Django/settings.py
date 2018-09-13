@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG =False
 
 ALLOWED_HOSTS = [
     '10.30.4.83',
@@ -42,19 +42,20 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_AUTH_EXTRA_ARGUMENTS = {'hd': 'vivintsolar.com'}
 # Application definition
 
 INSTALLED_APPS = [
+    'Luna.apps.LunaConfig',
+    'coin.apps.CoinAppConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Luna.apps.LunaConfig',
     'social_django',
-    'coin.apps.CoinAppConfig',
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
+    # 'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     # 'django.middleware.csrf.CsrfViewMiddleware',
@@ -92,8 +93,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.oracle',
         'NAME': 'dw.vivintsolar.com/dw',
-        'USER': 'JDLAURET',
-        'PASSWORD': 'Gaussrifle1'
+        'USER': os.environ.get('DATA_WAREHOUSE_USER'),
+        'PASSWORD': os.environ.get('DATA_WAREHOUSE_PASSWORD')
     }
 }
 
@@ -124,9 +125,18 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+STATICFILES_FINDERS= [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
+
+DEFAULT = {
+    'django.contrib.static.finders.FileSystemFinder',
+    'django.contrib.static.finders.AppDirectoriesFinder',
+}
 
 LANGUAGE_CODE = 'en-us'
 
@@ -142,4 +152,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(os.getcwd(), 'Luna/static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    # os.path.join(os.getcwd(), 'Luna/static')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "coin", "static"),
+    os.path.join(BASE_DIR, "Luna", "static"),
+]
+

@@ -1,11 +1,11 @@
 from django import forms
 from coin.models import employee_id, transaction
 
-class employeeForm(forms.ModelForm):
-    class Meta:
-        model = employee_id
-        fields = ('name', 'badge_id', 'allotment', 'edited')
+class transactionForm(forms.ModelForm):
+    recipient = forms.IntegerField(label='Recipient')
+    award = forms.IntegerField(label='Award')
+    note = forms.TextInput(label='Note')
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['name'].queryset = employee_id.objects.name()
+    class Meta:
+        model = transaction
+        fields = ['recipient', 'award', 'note']

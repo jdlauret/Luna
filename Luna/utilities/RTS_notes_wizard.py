@@ -1,4 +1,5 @@
 import os
+from datetime import date, timedelta
 from Luna.models import DataWarehouse
 
 main_dir = os.getcwd()
@@ -60,6 +61,11 @@ def notes_wizard (servicenum):
     # for i, value in enumerate(account_information):
     #     install_notes['account_info'][account_information_columns[i]] = value
     install_notes['account_info'] = account_information
+    if install_notes['account_info'][7] == None:
+        pass
+    else:
+        install_notes['account_info'][7] = install_notes['account_info'][7].strftime('%B %#d, %Y')
+    # print(type(install_notes['account_info'][7]))
     # print(install_notes['account_info'])
     # combines roof_section info and column name together
     for j, value in enumerate(roof_section_info):
