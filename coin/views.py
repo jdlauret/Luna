@@ -7,9 +7,9 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from .models import employee_id, transaction
 from .utilities.user_list import user_list
 from coin.utilities import find_badge_id
-from coin.utilities.create_new_user import new_user
-from coin.utilities.scheduled_refresh import scheduled_refresh
-from coin.utilities.change_status_termination import terminated_user
+# from coin.utilities.create_new_user import new_user
+# from coin.utilities.scheduled_refresh import scheduled_refresh
+# from coin.utilities.change_status_termination import terminated_user
 
 # TODO SEND EMAILS -> NOTIFICATION SYSTEM
 # TODO MOVE EVERYTHING TO MODEL FORM
@@ -32,9 +32,9 @@ def overlord_access(user):
 @user_passes_test(email_check)
 def index(request):
     if request.user.is_authenticated:
-        new_user() #Creates New users
-        scheduled_refresh() #Adds 250 every month, and refreshes coin every quarter
-        terminated_user() # Changes the status of those who have been terminated daily
+        # new_user() #Creates New users
+        # scheduled_refresh() #Adds 250 every month, and refreshes coin every quarter
+        # terminated_user() # Changes the status of those who have been terminated daily
         email = request.user.email
         badge_id = find_badge_id(email)
         # employee_id.objects.create_user(request.POST)
