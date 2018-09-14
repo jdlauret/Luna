@@ -1,3 +1,4 @@
+-- TODO NEED TO CONVERT TO SNOWFLAKE, CURRENTLY WAITING FOR UTILITY RATE TO BE CONVERTED
 select t.service_name,
     c.full_name,
     c.email,
@@ -17,9 +18,11 @@ left join mack_damavandi.t_utility_rates u
 left join sfrpt.t_dm_system_design sd
     on sd.cad_id = t.primary_cad
 where t.service_number = :serviceNum
+
 ;select to_char(t.read_date,'Mon YYYY') "Month Year",
     t.actual_kwh "Actual (kWh)",
-    round(t.actual_kwh*nvl(coalesce(p.rate_per_kwh*power(1.029,trunc((trunc(p.start_billing)-trunc(sysdate))/365)),t.current_rate_kwh),0),2) "Vivint Solar Bill"
+    round(t.actual_kwh*nvl(coalesce(p.rate_per_kwh*power(1.029,trunc((trunc(p.start_billing)-trunc(sysdate))/365)),
+                                    t.current_rate_kwh),0),2) "Vivint Solar Bill"
 from fleet_production.mv_fusion_weather_adjusted t
 inner join sfrpt.t_dm_project p
     on p.project_id = t.project_id

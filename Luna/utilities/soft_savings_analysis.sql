@@ -1,3 +1,4 @@
+-- TODO NEED TO CONVERT THIS TO SNOWFLAKE
 select t.service_name,
     c.full_name,
     c.email,
@@ -20,6 +21,7 @@ left join sfrpt.t_dm_contract m
     on t.primary_contract_id = m.contract_id
 where t.service_number = :serviceNum
     and t.project_status != 'Cancelled'
+
 ;select to_char(t.read_date,'Mon YYYY') "Month Year",
     t.actual_kwh "Actual (kWh)",
     nvl(coalesce(p.rate_per_kwh*power(1.029,trunc((trunc(t.read_date)-trunc(p.start_billing))/365)),t.current_rate_kwh),0) "PPA/Lease rate per kWh",

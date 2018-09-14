@@ -1,3 +1,4 @@
+-- TODO NEED TO TRANSFER TO SNOWFLAKE, BUT TABLE NOT FOUND IN POST-INSTALL CURRENTLY
 select distinct
     ec.jan_kwh,
     ec.feb_kwh,
