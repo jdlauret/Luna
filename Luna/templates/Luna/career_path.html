@@ -131,7 +131,7 @@
                         {% for item in job_description %}
                             <div class="click" id="{{ item.id }}">
                                 <br>
-                                <h4>{{ item.department_display }} - {{ item.function_display }}
+                                <h4>{{ item.department_display }} {{ item.function_display }}
                                     - {{ item.position_display }}</h4>
                                 <div class="inner-container">
                                     <div class="far-left">
@@ -166,7 +166,11 @@
                                         {% endif %}
                                         {% if item.error_rate != None %}
                                             <br>
-                                            <b>Error Rate < </b>{{ item.error_rate_display }}
+                                            <b>Error Rate < </b>{{ item.error_rate_display }} over a rolling 1 month<br>
+                                            &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                                            period <b>OR</b> <= 10 errors per<br>
+                                            &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                                            week
                                         {% endif %}
                                         {% if item.productivity != None %}
                                             <br>
