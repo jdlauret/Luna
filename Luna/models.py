@@ -117,6 +117,7 @@ class CareerPath(models.Model):
 
     PERCENTAGES = (
         (0, '0%'),
+        (2.5, '2.5%'),
         (3, '3%'),
         (5, '5%'),
         (7, '7%'),
@@ -154,12 +155,12 @@ class CareerPath(models.Model):
         max_length=200,
         choices=POSITIONS
     )
-    qa = models.IntegerField(
+    qa = models.FloatField(
         choices=PERCENTAGES,
         null=True,
         blank=True
     )
-    productivity = models.IntegerField(
+    productivity = models.FloatField(
         choices=PERCENTAGES,
         null=True,
         blank=True
@@ -172,33 +173,33 @@ class CareerPath(models.Model):
         null=True,
         blank=True
     )
-    adh = models.IntegerField(
+    adh = models.FloatField(
         null=True,
         blank=True,
         choices=PERCENTAGES,
     )
-    availability = models.IntegerField(
+    availability = models.FloatField(
         null=True,
         blank=True
     )
-    error_rate = models.IntegerField(
+    error_rate = models.FloatField(
         null=True,
         blank=True
     )
-    efficiency = models.IntegerField(
+    efficiency = models.FloatField(
         null=True,
         blank=True
     )
-    duration = models.IntegerField(
-        default=90,
+    duration = models.FloatField(
+        default=90.0,
         blank=True,
         null=True,
     )
-    nps = models.IntegerField(
+    nps = models.FloatField(
         null=True,
         blank=True
     )
-    field_qa_nps_score = models.IntegerField(
+    field_qa_nps_score = models.FloatField(
         null=True,
         blank=True
     )
