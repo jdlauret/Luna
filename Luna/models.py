@@ -24,7 +24,8 @@ python manage.py migrate
 
 class CareerPath(models.Model):
     # Department Codes
-    REAL_TIME_SCHEDULING = 'real_time_scheduling'
+    # REAL_TIME_SCHEDULING = 'real_time_scheduling'
+    CENTRAL_SCHEDULING = 'central_scheduling'
     CUSTOMER_SERVICE = 'customer_service'
     CUSTOMER_SOLUTIONS = 'customer_solutions'
     RECS_AND_REBATES = 'recs_and_rebates'
@@ -35,7 +36,9 @@ class CareerPath(models.Model):
     AUXILIARY = 'auxiliary'
     SUPER_AGENT = 'super_agent'
     SERVICE = 'service'
-    CUSOMTER_SOLUTIONS_ADMIN = 'customer_solutions_admin'
+    CUSTOMER_SOLUTIONS_ADMIN = 'customer_solutions_admin'
+    TRANSFER = 'transfer'
+    RESOLUTION = 'resolution'
     INBOUND_OUTBOUND = 'inbound_outbound'
     EMAIL_ADMIN = 'email_admin'
     DOCUMENTS = 'documents'
@@ -59,10 +62,11 @@ class CareerPath(models.Model):
     TIER_3_3 = 14.50
 
     DEPARTMENTS = (
-        (REAL_TIME_SCHEDULING, 'Real Time Scheduling'),
-        (CUSTOMER_SERVICE, 'Customer Service'),
+        # (REAL_TIME_SCHEDULING, 'real time scheduling'),
+        (CENTRAL_SCHEDULING, 'Central Scheduling'),
+        (CUSTOMER_SERVICE, ''),
         (CUSTOMER_SOLUTIONS, 'Customer Solutions'),
-        (RECS_AND_REBATES, 'RECs & Rebates'),
+        (RECS_AND_REBATES, ''),
         (RELATIONS, 'Relations')
     )
 
@@ -72,17 +76,19 @@ class CareerPath(models.Model):
         (SUPER_AGENT, 'Super Agent'),
         (SERVICE, 'Service'),
         (CUSTOMER_SERVICE, 'Customer Service'),
-        (CUSOMTER_SOLUTIONS_ADMIN, 'Customer Solutions Admin'),
-        (RECS_AND_REBATES, 'RECs & Rebates'),
+        (TRANSFER, 'Transfer'),
+        (RESOLUTION, 'Resolution'),
+        (CUSTOMER_SOLUTIONS_ADMIN, 'Admin'),
+        (RECS_AND_REBATES, 'REC & Rebates'),
         (INBOUND_OUTBOUND, 'Inbound / Outbound'),
         (EMAIL_ADMIN, 'Email Admins'),
         (DOCUMENTS, 'Documents'),
     )
 
     POSITIONS = (
-        (REP_1, 'Representative 1'),
-        (REP_2, 'Representative 2'),
-        (REP_3, 'Representative 3'),
+        (REP_1, 'Rep 1'),
+        (REP_2, 'Rep 2'),
+        (REP_3, 'Rep 3'),
         (SPECIALIST_1, 'Specialist 1'),
         (SPECIALIST_2, 'Specialist 2'),
         (SPECIALIST_3, 'Specialist 3'),
@@ -111,7 +117,9 @@ class CareerPath(models.Model):
 
     PERCENTAGES = (
         (0, '0%'),
+        (3, '3%'),
         (5, '5%'),
+        (7, '7%'),
         (10, '10%'),
         (20, '20%'),
         (30, '30%'),
@@ -156,9 +164,9 @@ class CareerPath(models.Model):
         null=True,
         blank=True
     )
-    aht = models.IntegerField(
+    aht = models.FloatField(
         null=True,
-        blank=True
+        blank=True,
     )
     aph = models.FloatField(
         null=True,

@@ -6,7 +6,7 @@
                     "position": "Customer Service"
                 },
                 {
-                    "position": "Representative 1",
+                    "position": "Rep 1",
                     "id": 23,
                     "position_data": {
                         "id": 23,
@@ -14,7 +14,7 @@
                         "pay_rate": 12.0,
                         "department": "customer_service",
                         "function": "customer_service",
-                        "position": "representative_1",
+                        "position": "rep_1",
                         "qa": 60,
                         "productivity": null,
                         "aht": 12,
@@ -30,7 +30,7 @@
                     }
                 },
                 {
-                    "position": "Representative 2",
+                    "position": "Rep 2",
                     "id": 24,
                     "position_data": {
                         "id": 24,
@@ -38,7 +38,7 @@
                         "pay_rate": 13.0,
                         "department": "customer_service",
                         "function": "customer_service",
-                        "position": "representative_2",
+                        "position": "rep_2",
                         "qa": 70,
                         "productivity": null,
                         "aht": 10,
@@ -86,7 +86,7 @@
                     "position": ""
                 },
                 {
-                    "position": "Representative 3",
+                    "position": "Rep 3",
                     "id": 25,
                     "position_data": {
                         "id": 25,
@@ -94,7 +94,7 @@
                         "pay_rate": 13.25,
                         "department": "customer_service",
                         "function": "customer_service",
-                        "position": "representative_3",
+                        "position": "rep_3",
                         "qa": 70,
                         "productivity": null,
                         "aht": 12,
@@ -199,7 +199,7 @@
                     "position": "Customer Solutions Admin"
                 },
                 {
-                    "position": "Representative 1",
+                    "position": "Rep 1",
                     "id": 30,
                     "position_data": {
                         "id": 30,
@@ -207,7 +207,7 @@
                         "pay_rate": 12.0,
                         "department": "customer_solutions",
                         "function": "customer_solutions_admin",
-                        "position": "representative_1",
+                        "position": "rep_1",
                         "qa": null,
                         "productivity": null,
                         "aht": null,
@@ -223,7 +223,7 @@
                     }
                 },
                 {
-                    "position": "Representative 2",
+                    "position": "Rep 2",
                     "id": 31,
                     "position_data": {
                         "id": 31,
@@ -231,7 +231,7 @@
                         "pay_rate": 13.0,
                         "department": "customer_solutions",
                         "function": "customer_solutions_admin",
-                        "position": "representative_2",
+                        "position": "rep_2",
                         "qa": null,
                         "productivity": null,
                         "aht": null,
@@ -258,7 +258,7 @@
                     "position": ""
                 },
                 {
-                    "position": "Representative 3",
+                    "position": "Rep 3",
                     "id": 32,
                     "position_data": {
                         "id": 32,
@@ -266,7 +266,7 @@
                         "pay_rate": 13.25,
                         "department": "customer_solutions",
                         "function": "customer_solutions_admin",
-                        "position": "representative_3",
+                        "position": "rep_3",
                         "qa": null,
                         "productivity": null,
                         "aht": null,
@@ -309,7 +309,7 @@
                     "position": ""
                 },
                 {
-                    "position": "Representative 2",
+                    "position": "Rep 2",
                     "id": 33,
                     "position_data": {
                         "id": 33,
@@ -317,7 +317,7 @@
                         "pay_rate": 13.0,
                         "department": "customer_solutions",
                         "function": "super_agent",
-                        "position": "representative_2",
+                        "position": "rep_2",
                         "qa": 70,
                         "productivity": null,
                         "aht": null,
@@ -365,7 +365,7 @@
                     "position": ""
                 },
                 {
-                    "position": "Representative 3",
+                    "position": "Rep 3",
                     "id": 34,
                     "position_data": {
                         "id": 34,
@@ -373,7 +373,7 @@
                         "pay_rate": 13.25,
                         "department": "customer_solutions",
                         "function": "super_agent",
-                        "position": "representative_3",
+                        "position": "repe_3",
                         "qa": 70,
                         "productivity": null,
                         "aht": null,
@@ -478,7 +478,7 @@
                     "position": "Recs And Rebates"
                 },
                 {
-                    "position": "Representative 1",
+                    "position": "Rep 1",
                     "id": 39,
                     "position_data": {
                         "id": 39,
@@ -486,14 +486,14 @@
                         "pay_rate": 12.0,
                         "department": "recs_and_rebates",
                         "function": "recs_and_rebates",
-                        "position": "representative_1",
+                        "position": "rep_1",
                         "qa": null,
                         "productivity": 75,
                         "aht": null,
                         "aph": null,
                         "adh": null,
                         "availability": null,
-                        "error_rate": 20,
+                        "error_rate": 7,
                         "efficiency": null,
                         "duration": 90,
                         "nps": null,
@@ -502,7 +502,7 @@
                     }
                 },
                 {
-                    "position": "Representative 2",
+                    "position": "Rep 2",
                     "id": 40,
                     "position_data": {
                         "id": 40,
@@ -510,14 +510,14 @@
                         "pay_rate": 13.0,
                         "department": "recs_and_rebates",
                         "function": "recs_and_rebates",
-                        "position": "representative_2",
+                        "position": "rep_2",
                         "qa": null,
                         "productivity": 80,
                         "aht": null,
                         "aph": null,
                         "adh": null,
                         "availability": null,
-                        "error_rate": 20,
+                        "error_rate": 5,
                         "efficiency": null,
                         "duration": 90,
                         "nps": null,
@@ -541,7 +541,7 @@
                         "aph": null,
                         "adh": null,
                         "availability": null,
-                        "error_rate": 5,
+                        "error_rate": 2.5,
                         "efficiency": null,
                         "duration": 90,
                         "nps": null,
@@ -558,7 +558,7 @@
                     "position": ""
                 },
                 {
-                    "position": "Representative 3",
+                    "position": "Rep 3",
                     "id": 41,
                     "position_data": {
                         "id": 41,
@@ -566,14 +566,14 @@
                         "pay_rate": 13.25,
                         "department": "recs_and_rebates",
                         "function": "recs_and_rebates",
-                        "position": "representative_3",
+                        "position": "rep_3",
                         "qa": null,
                         "productivity": 80,
                         "aht": null,
                         "aph": null,
                         "adh": null,
                         "availability": null,
-                        "error_rate": 20,
+                        "error_rate": 5,
                         "efficiency": null,
                         "duration": 90,
                         "nps": null,
@@ -597,7 +597,7 @@
                         "aph": null,
                         "adh": null,
                         "availability": null,
-                        "error_rate": 5,
+                        "error_rate": 2.5,
                         "efficiency": null,
                         "duration": 90,
                         "nps": null,
@@ -632,7 +632,7 @@
                         "aph": null,
                         "adh": null,
                         "availability": null,
-                        "error_rate": 5,
+                        "error_rate": 2.5,
                         "efficiency": null,
                         "duration": null,
                         "nps": null,
@@ -643,22 +643,22 @@
             ]
         }
     },
-    "Real Time Scheduling": {
+    "Central Scheduling": {
         "Inbound": {
             "1": [
                 {
                     "position": "Inbound"
                 },
                 {
-                    "position": "Representative 1",
+                    "position": "Rep 1",
                     "id": 2,
                     "position_data": {
                         "id": 2,
                         "tier_level": 1.1,
                         "pay_rate": 12.0,
-                        "department": "real_time_scheduling",
+                        "department": "central_scheduling",
                         "function": "inbound",
-                        "position": "representative_1",
+                        "position": "rep_1",
                         "qa": 60,
                         "productivity": null,
                         "aht": 10,
@@ -674,15 +674,15 @@
                     }
                 },
                 {
-                    "position": "Representative 2",
+                    "position": "Rep 2",
                     "id": 3,
                     "position_data": {
                         "id": 3,
                         "tier_level": 2.1,
                         "pay_rate": 13.0,
-                        "department": "real_time_scheduling",
+                        "department": "central_scheduling",
                         "function": "inbound",
-                        "position": "representative_2",
+                        "position": "rep_2",
                         "qa": 70,
                         "productivity": null,
                         "aht": 8,
@@ -709,15 +709,15 @@
                     "position": ""
                 },
                 {
-                    "position": "Representative 3",
+                    "position": "Rep 3",
                     "id": 4,
                     "position_data": {
                         "id": 4,
                         "tier_level": 2.2,
                         "pay_rate": 13.25,
-                        "department": "real_time_scheduling",
+                        "department": "central_scheduling",
                         "function": "inbound",
-                        "position": "representative_3",
+                        "position": "rep_3",
                         "qa": 70,
                         "productivity": null,
                         "aht": 8,
@@ -753,12 +753,12 @@
                         "id": 5,
                         "tier_level": 3.3,
                         "pay_rate": 14.5,
-                        "department": "real_time_scheduling",
+                        "department": "central_scheduling",
                         "function": "inbound",
                         "position": "team_lead",
                         "qa": 80,
                         "productivity": null,
-                        "aht": 7,
+                        "aht": 8.0,
                         "aph": 3.0,
                         "adh": 90,
                         "availability": null,
@@ -781,18 +781,18 @@
                     "position": ""
                 },
                 {
-                    "position": "Representative 2",
+                    "position": "Rep 2",
                     "id": 6,
                     "position_data": {
                         "id": 6,
                         "tier_level": 2.1,
                         "pay_rate": 13.0,
-                        "department": "real_time_scheduling",
+                        "department": "central_scheduling",
                         "function": "auxiliary",
-                        "position": "representative_2",
+                        "position": "rep_2",
                         "qa": 70,
                         "productivity": null,
-                        "aht": 5,
+                        "aht": 6.5,
                         "aph": 6.0,
                         "adh": 85,
                         "availability": null,
@@ -816,18 +816,18 @@
                     "position": ""
                 },
                 {
-                    "position": "Representative 3",
+                    "position": "Rep 3",
                     "id": 7,
                     "position_data": {
                         "id": 7,
                         "tier_level": 2.2,
                         "pay_rate": 13.25,
-                        "department": "real_time_scheduling",
+                        "department": "central_scheduling",
                         "function": "auxiliary",
-                        "position": "representative_3",
+                        "position": "rep_3",
                         "qa": 70,
                         "productivity": null,
-                        "aht": 5,
+                        "aht": 6.5,
                         "aph": 6.0,
                         "adh": 85,
                         "availability": null,
@@ -857,12 +857,12 @@
                         "id": 8,
                         "tier_level": 2.3,
                         "pay_rate": 13.75,
-                        "department": "real_time_scheduling",
+                        "department": "central_scheduling",
                         "function": "auxiliary",
                         "position": "specialist_1",
                         "qa": 70,
                         "productivity": null,
-                        "aht": 5,
+                        "aht": 6.5,
                         "aph": 6.0,
                         "adh": 85,
                         "availability": null,
@@ -881,12 +881,12 @@
                         "id": 9,
                         "tier_level": 3.3,
                         "pay_rate": 14.5,
-                        "department": "real_time_scheduling",
+                        "department": "central_scheduling",
                         "function": "auxiliary",
                         "position": "team_lead",
                         "qa": 80,
                         "productivity": null,
-                        "aht": 4,
+                        "aht": 8,
                         "aph": 4.0,
                         "adh": 90,
                         "availability": null,
@@ -909,25 +909,25 @@
                     "position": ""
                 },
                 {
-                    "position": "Representative 2",
+                    "position": "Rep 2",
                     "id": 10,
                     "position_data": {
                         "id": 10,
                         "tier_level": 2.1,
                         "pay_rate": 13.0,
-                        "department": "real_time_scheduling",
+                        "department": "central_scheduling",
                         "function": "super_agent",
-                        "position": "representative_2",
+                        "position": "rep_2",
                         "qa": 70,
                         "productivity": null,
-                        "aht": 5,
+                        "aht": 7.5,
                         "aph": 6.0,
                         "adh": 85,
                         "availability": null,
                         "error_rate": null,
                         "efficiency": null,
                         "duration": 90,
-                        "nps": 7,
+                        "nps": null,
                         "field_qa_nps_score": null,
                         "job_description": "\u2022 Performing Defcons/Backfilling/Office optimization\r\n\u2022 Communicates daily with their assigned OM to ensure calendar optimization and good field relations\r\n\u2022 Auditing 100% of accounts within assigned Region"
                     }
@@ -939,19 +939,19 @@
                         "id": 13,
                         "tier_level": 3.1,
                         "pay_rate": 14.0,
-                        "department": "real_time_scheduling",
+                        "department": "central_scheduling",
                         "function": "super_agent",
                         "position": "specialist_2",
                         "qa": 80,
                         "productivity": null,
-                        "aht": 5,
+                        "aht": 8,
                         "aph": 6.0,
                         "adh": 90,
                         "availability": null,
                         "error_rate": null,
                         "efficiency": null,
                         "duration": 90,
-                        "nps": 9,
+                        "nps": null,
                         "field_qa_nps_score": null,
                         "job_description": "\u2022 Region Lead - A Super Agent who ensures all offices have audits completed and installs filled within a specific region with two other agents\r\n\u2022 Maintain Good Standing with Vivint Solar\r\n\u2022 Proficient in scheduling preferences for all offices in the region\r\n\u2022 Gives back-up assistance as needed to other regional agents\r\n\u2022 Reports and coordinates necessary up training needs of individual agents with Supervisor and TL for their region"
                     }
@@ -965,25 +965,25 @@
                     "position": ""
                 },
                 {
-                    "position": "Representative 3",
+                    "position": "Rep 3",
                     "id": 11,
                     "position_data": {
                         "id": 11,
                         "tier_level": 2.2,
                         "pay_rate": 13.25,
-                        "department": "real_time_scheduling",
+                        "department": "central_scheduling",
                         "function": "super_agent",
-                        "position": "representative_3",
+                        "position": "rep_3",
                         "qa": 70,
                         "productivity": null,
-                        "aht": 5,
+                        "aht": 7.5,
                         "aph": 6.0,
                         "adh": 85,
                         "availability": null,
                         "error_rate": null,
                         "efficiency": null,
                         "duration": 90,
-                        "nps": 7,
+                        "nps": null,
                         "field_qa_nps_score": null,
                         "job_description": "\u2022 Proficient in scheduling Installations for Reps,Techs and Customers\r\n\u2022 Completing Daily Regional Install Confirmation Dialer Tasks\r\n\u2022 Assist in completing daily Permit approved list- Dialer Tasks\r\n\u2022 Provides overflow support for inbound calls\r\n\u2022 Maintains communication throughout each day with OM"
                     }
@@ -1006,19 +1006,19 @@
                         "id": 12,
                         "tier_level": 2.3,
                         "pay_rate": 13.75,
-                        "department": "real_time_scheduling",
+                        "department": "central_scheduling",
                         "function": "super_agent",
                         "position": "specialist_1",
                         "qa": 70,
                         "productivity": null,
-                        "aht": 5,
+                        "aht": 7.5,
                         "aph": 6.0,
                         "adh": 85,
                         "availability": null,
                         "error_rate": null,
                         "efficiency": null,
                         "duration": 90,
-                        "nps": 7,
+                        "nps": null,
                         "field_qa_nps_score": null,
                         "job_description": "\u2022 75% of assigned offices Install Calendar Filled\r\n\u2022 Competent to schedule service appointments per OM request\r\n\u2022 Coordinates with DM over their region to help fill the install calendar"
                     }
@@ -1030,19 +1030,19 @@
                         "id": 81,
                         "tier_level": 3.3,
                         "pay_rate": 14.5,
-                        "department": "real_time_scheduling",
+                        "department": "central_scheduling",
                         "function": "super_agent",
                         "position": "team_lead",
                         "qa": 80,
                         "productivity": null,
-                        "aht": 5,
+                        "aht": 8,
                         "aph": 6.0,
                         "adh": 90,
                         "availability": null,
                         "error_rate": null,
                         "efficiency": null,
                         "duration": null,
-                        "nps": 9,
+                        "nps": null,
                         "field_qa_nps_score": null,
                         "job_description": "\u2022 50% of time is dedicated to floor support and monitoring phone queues\r\n\u2022 50% of time is dedicated to super agent responsibilities\r\n\u2022 Manage Multiple Offices\r\n\u2022 Leadership Skills\r\n\u2022 Maintain Good Standing with Vivint Solar\r\n\u2022 Ability to provide feedback to agents and performs side by sides\r\n\u2022 Advanced Knowledge of Central scheduling and maximizing processes and efficiency\r\n\u2022 Knowledge of other departments processes\r\n\u2022 Responsible for handling 2nd level escalations\r\n\u2022 Manage/ monitor team's workflow\r\n\u2022 Master at Salesforce Navigation\r\n\r\nPromotion to Team Lead based on position availability in Workday"
                     }
@@ -1058,15 +1058,15 @@
                     "position": ""
                 },
                 {
-                    "position": "Representative 2",
+                    "position": "Rep 2",
                     "id": 14,
                     "position_data": {
                         "id": 14,
                         "tier_level": 2.1,
                         "pay_rate": 13.0,
-                        "department": "real_time_scheduling",
+                        "department": "central_scheduling",
                         "function": "service",
-                        "position": "representative_2",
+                        "position": "rep_2",
                         "qa": 70,
                         "productivity": null,
                         "aht": 9,
@@ -1088,12 +1088,12 @@
                         "id": 21,
                         "tier_level": 3.1,
                         "pay_rate": 14.0,
-                        "department": "real_time_scheduling",
+                        "department": "central_scheduling",
                         "function": "service",
                         "position": "specialist_2",
                         "qa": 80,
                         "productivity": null,
-                        "aht": 8,
+                        "aht": 9.5,
                         "aph": 5.0,
                         "adh": 90,
                         "availability": null,
@@ -1114,15 +1114,15 @@
                     "position": ""
                 },
                 {
-                    "position": "Representative 3",
+                    "position": "Rep 3",
                     "id": 15,
                     "position_data": {
                         "id": 15,
                         "tier_level": 2.2,
                         "pay_rate": 13.25,
-                        "department": "real_time_scheduling",
+                        "department": "central_scheduling",
                         "function": "service",
-                        "position": "representative_3",
+                        "position": "rep_3",
                         "qa": 70,
                         "productivity": null,
                         "aht": 9,
@@ -1155,7 +1155,7 @@
                         "id": 16,
                         "tier_level": 2.3,
                         "pay_rate": 13.75,
-                        "department": "real_time_scheduling",
+                        "department": "central_scheduling",
                         "function": "service",
                         "position": "specialist_1",
                         "qa": 70,
@@ -1179,12 +1179,12 @@
                         "id": 22,
                         "tier_level": 3.3,
                         "pay_rate": 14.5,
-                        "department": "real_time_scheduling",
+                        "department": "central_scheduling",
                         "function": "service",
                         "position": "team_lead",
                         "qa": 80,
                         "productivity": null,
-                        "aht": 8,
+                        "aht": 9.5,
                         "aph": 5.0,
                         "adh": 90,
                         "availability": null,
@@ -1206,7 +1206,7 @@
                     "position": "Inbound Outbound"
                 },
                 {
-                    "position": "Representative 1",
+                    "position": "Rep 1",
                     "id": 45,
                     "position_data": {
                         "id": 45,
@@ -1214,7 +1214,7 @@
                         "pay_rate": 12.0,
                         "department": "relations",
                         "function": "inbound_outbound",
-                        "position": "representative_1",
+                        "position": "rep_1",
                         "qa": 60,
                         "productivity": null,
                         "aht": null,
@@ -1230,7 +1230,7 @@
                     }
                 },
                 {
-                    "position": "Representative 2",
+                    "position": "Rep 2",
                     "id": 46,
                     "position_data": {
                         "id": 46,
@@ -1238,7 +1238,7 @@
                         "pay_rate": 13.0,
                         "department": "relations",
                         "function": "inbound_outbound",
-                        "position": "representative_2",
+                        "position": "rep_2",
                         "qa": 70,
                         "productivity": null,
                         "aht": null,
@@ -1286,7 +1286,7 @@
                     "position": ""
                 },
                 {
-                    "position": "Representative 3",
+                    "position": "Rep 3",
                     "id": 47,
                     "position_data": {
                         "id": 47,
@@ -1294,7 +1294,7 @@
                         "pay_rate": 13.25,
                         "department": "relations",
                         "function": "inbound_outbound",
-                        "position": "representative_3",
+                        "position": "rep_3",
                         "qa": 70,
                         "productivity": null,
                         "aht": null,
@@ -1400,7 +1400,7 @@
                     "position": ""
                 },
                 {
-                    "position": "Representative 2",
+                    "position": "Rep 2",
                     "id": 52,
                     "position_data": {
                         "id": 52,
@@ -1408,7 +1408,7 @@
                         "pay_rate": 13.0,
                         "department": "relations",
                         "function": "email_admin",
-                        "position": "representative_2",
+                        "position": "rep_2",
                         "qa": 70,
                         "productivity": null,
                         "aht": null,
@@ -1456,7 +1456,7 @@
                     "position": ""
                 },
                 {
-                    "position": "Representative 3",
+                    "position": "Rep 3",
                     "id": 53,
                     "position_data": {
                         "id": 53,
@@ -1464,7 +1464,7 @@
                         "pay_rate": 13.25,
                         "department": "relations",
                         "function": "email_admin",
-                        "position": "representative_3",
+                        "position": "rep_3",
                         "qa": 70,
                         "productivity": null,
                         "aht": null,
@@ -1570,7 +1570,7 @@
                     "position": ""
                 },
                 {
-                    "position": "Representative 2",
+                    "position": "Rep 2",
                     "id": 58,
                     "position_data": {
                         "id": 58,
@@ -1578,7 +1578,7 @@
                         "pay_rate": 13.0,
                         "department": "relations",
                         "function": "documents",
-                        "position": "representative_2",
+                        "position": "rep_2",
                         "qa": 70,
                         "productivity": null,
                         "aht": null,
@@ -1626,7 +1626,7 @@
                     "position": ""
                 },
                 {
-                    "position": "Representative 3",
+                    "position": "Rep 3",
                     "id": 59,
                     "position_data": {
                         "id": 59,
@@ -1634,7 +1634,7 @@
                         "pay_rate": 13.25,
                         "department": "relations",
                         "function": "documents",
-                        "position": "representative_3",
+                        "position": "rep_3",
                         "qa": 70,
                         "productivity": null,
                         "aht": null,

@@ -20,7 +20,6 @@ register = Library()
 def email_check(user):
     return user.email.endswith('@vivintsolar.com')
 
-
 def automation_access(user):
     return user.groups.filter(name='Automation Access').exists()
 

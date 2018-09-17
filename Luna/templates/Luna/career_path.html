@@ -166,7 +166,11 @@
                                         {% endif %}
                                         {% if item.error_rate != None %}
                                             <br>
-                                            <b>Error Rate < </b>{{ item.error_rate_display }}
+                                            <b>Error Rate < </b>{{ item.error_rate_display }} over a rolling 1 month<br>
+                                            &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                                            period <b>OR</b> <= 10 errors per<br>
+                                            &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                                            week
                                         {% endif %}
                                         {% if item.productivity != None %}
                                             <br>
