@@ -56,9 +56,9 @@ def build_career_path():
                         value3.append({'position': ''})
 
     rts_key_order = ['Inbound', 'Auxiliary', 'Super Agent', 'Service']
-    customer_solutions_order = ['Customer Solutions Admin', 'Super Agent']
+    customer_solutions_order = ['Customer Solutions Admin', 'Super Agent', 'Transfer', 'Resolution']
     relations_order = ['Inbound Outbound', 'Email Admin', 'Documents']
-    new_dict['Real Time Scheduling'] = OrderedDict(sorted(new_dict['Real Time Scheduling'].items(),
+    new_dict['Central Scheduling'] = OrderedDict(sorted(new_dict['Central Scheduling'].items(),
                                                           key=lambda j: rts_key_order.index(j[0])))
     new_dict['Customer Solutions'] = OrderedDict(sorted(new_dict['Customer Solutions'].items(),
                                                         key=lambda j: customer_solutions_order.index(j[0])))

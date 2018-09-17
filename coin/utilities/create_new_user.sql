@@ -1,0 +1,18 @@
+SELECT W.FULL_NAME, W.BADGE_ID, HIRE_DATE
+FROM WORKDAY.V_WORKDAY_CURRENT_V2 W
+WHERE W.TERMINATED = '0'
+AND W.WORK_EMAIL_ADDRESS != 'NULL'
+AND trunc(W.HIRE_DATE) < trunc(current_date)
+and trunc(W.HIRE_DATE) >= trunc(current_date -7)
+-- trunc(CURRENT_DATE)
+    AND (COST_CENTER_ID = '3400'
+         OR COST_CENTER_ID = '3470'
+         or COST_CENTER_ID = '3700')
+
+
+
+
+
+-- HIRE DATE: 2018-02-19 00:00:00
+--(CURRENT_DATE , 'YYYY-MM-DD')
+
