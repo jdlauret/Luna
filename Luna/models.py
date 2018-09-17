@@ -35,6 +35,7 @@ class CareerPath(models.Model):
     INBOUND = 'inbound'
     AUXILIARY = 'auxiliary'
     SUPER_AGENT = 'super_agent'
+    CUSTOMER_SOLUTIONS = 'customer_solutions'
     SERVICE = 'service'
     CUSTOMER_SOLUTIONS_ADMIN = 'customer_solutions_admin'
     TRANSFER = 'transfer'
@@ -44,9 +45,9 @@ class CareerPath(models.Model):
     DOCUMENTS = 'documents'
 
     # Position Codes
-    REP_1 = 'representative_1'
-    REP_2 = 'representative_2'
-    REP_3 = 'representative_3'
+    REP_1 = 'rep_1'
+    REP_2 = 'rep_2'
+    REP_3 = 'rep_3'
     SPECIALIST_1 = 'specialist_1'
     SPECIALIST_2 = 'specialist_2'
     SPECIALIST_3 = 'specialist_3'
@@ -74,6 +75,7 @@ class CareerPath(models.Model):
         (INBOUND, 'Inbound'),
         (AUXILIARY, 'Auxiliary'),
         (SUPER_AGENT, 'Super Agent'),
+        (CUSTOMER_SOLUTIONS, 'Customer Solutions'),
         (SERVICE, 'Service'),
         (CUSTOMER_SERVICE, 'Customer Service'),
         (TRANSFER, 'Transfer'),
