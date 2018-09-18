@@ -6,14 +6,22 @@ select t.service_name,
     t.service_state,
     t.service_zip_code,
     trunc(t.start_billing),
-    t.utility_company,
-    u.blended_rate,
+    case
+        when upper(t.utility_schedule_rate) like '%CARE%' and t.service_state = 'CA' then t.utility_company||' - CARE'
+        when upper(t.utility_schedule_rate) like '%FERA%' and t.service_state = 'CA' then t.utility_company||' - FERA'
+        else t.utility_company
+    end utility_comapny,
+    nvl(u.blended_rate,u.vslr_calculated_rate) blended_rate,
     m.record_type
 from sfrpt.t_dm_project t
 inner join sfrpt.t_dm_contact c
     on c.contact_id = t.contract_signer
 left join mack_damavandi.t_utility_match x
-    on upper(x.sf_utility_name) = upper(t.utility_company) and x.sf_state = t.service_state
+    on upper(x.sf_utility_name) = upper(case
+                                            when upper(t.utility_schedule_rate) like '%CARE%' and t.service_state = 'CA' then t.utility_company||' - CARE'
+                                            when upper(t.utility_schedule_rate) like '%FERA%' and t.service_state = 'CA' then t.utility_company||' - FERA'
+                                            else t.utility_company
+                                        end) and x.sf_state = t.service_state
 inner join mack_damavandi.t_utility_rates_summary u
     on u.state = x.cm_state and upper(u.utility) = upper(x.cm_utility_name)
 left join sfrpt.t_dm_contract m
@@ -30,7 +38,11 @@ from fleet_production.mv_fusion_weather_adjusted t
 inner join sfrpt.t_dm_project p
     on p.project_id = t.project_id
 left join mack_damavandi.t_utility_match x
-    on upper(x.sf_utility_name) = upper(p.utility_company) and x.sf_state = p.service_state
+    on upper(x.sf_utility_name) = upper(case
+                                            when upper(p.utility_schedule_rate) like '%CARE%' and p.service_state = 'CA' then p.utility_company||' - CARE'
+                                            when upper(p.utility_schedule_rate) like '%FERA%' and p.service_state = 'CA' then p.utility_company||' - FERA'
+                                            else p.utility_company
+                                        end) and x.sf_state = p.service_state
 inner join mack_damavandi.t_utility_rates_summary u
     on u.state = x.cm_state and upper(u.utility) = upper(x.cm_utility_name)
 where p.service_number = :serviceNum
