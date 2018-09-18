@@ -64,7 +64,7 @@
                     {% for key1, value1 in career_path_data.items %}
                         {# key1 is department level #}
                         <section>
-                            <h4 class="sticky">{{ key1 }}</h4>
+                            <h4 class="sticky">&nbsp{{ key1 }}</h4>
                             {% for key2, value2 in value1.items %}
                                 <hr>
                                 {% for key3, value3 in value2.items %}
@@ -166,11 +166,7 @@
                                         {% endif %}
                                         {% if item.error_rate != None %}
                                             <br>
-                                            <b>Error Rate < </b>{{ item.error_rate_display }} over a rolling 1 month<br>
-                                            &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-                                            period <b>OR</b> <= 10 errors per<br>
-                                            &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-                                            week
+                                            <b>Error Rate < </b>{{ item.error_rate }}
                                         {% endif %}
                                         {% if item.productivity != None %}
                                             <br>

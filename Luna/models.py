@@ -28,7 +28,7 @@ class CareerPath(models.Model):
     CENTRAL_SCHEDULING = 'central_scheduling'
     CUSTOMER_SERVICE = 'customer_service'
     CUSTOMER_SOLUTIONS = 'customer_solutions'
-    RECS_AND_REBATES = 'recs_and_rebates'
+    RECS_AND_REBATES = 'RECs_&_rebates'
     RELATIONS = 'relations'
 
     # Function Codes
@@ -66,7 +66,7 @@ class CareerPath(models.Model):
         # (REAL_TIME_SCHEDULING, 'real time scheduling'),
         (CENTRAL_SCHEDULING, 'Central Scheduling'),
         (CUSTOMER_SERVICE, ''),
-        (CUSTOMER_SOLUTIONS, 'Customer Solutions'),
+        (CUSTOMER_SOLUTIONS, ''),
         (RECS_AND_REBATES, ''),
         (RELATIONS, 'Relations')
     )
@@ -80,8 +80,8 @@ class CareerPath(models.Model):
         (CUSTOMER_SERVICE, 'Customer Service'),
         (TRANSFER, 'Transfer'),
         (RESOLUTION, 'Resolution'),
-        (CUSTOMER_SOLUTIONS_ADMIN, 'Admin'),
-        (RECS_AND_REBATES, 'REC & Rebates'),
+        (CUSTOMER_SOLUTIONS_ADMIN, 'Customer Solutions Admin'),
+        (RECS_AND_REBATES, 'RECs & Rebates'),
         (INBOUND_OUTBOUND, 'Inbound / Outbound'),
         (EMAIL_ADMIN, 'Email Admins'),
         (DOCUMENTS, 'Documents'),
@@ -137,6 +137,13 @@ class CareerPath(models.Model):
         (100, '100%'),
     )
 
+    # ERROR_RATE = (
+    #     (7, '7% over a rolling 1 month period OR ≤ 10 errors per week '),
+    #     (5, '5% over a rolling 1 month period OR ≤ 10 errors per week '),
+    #     (2, '2.5% over a rolling 1 month period OR ≤ 10 errors per week '),
+    #     (0, ''),
+    # )
+
     tier_level = models.FloatField(
         choices=TIER_LEVELS
     )
@@ -184,9 +191,8 @@ class CareerPath(models.Model):
         null=True,
         blank=True
     )
-    error_rate = models.FloatField(
-        null=True,
-        blank=True
+    error_rate = models.CharField(
+        max_length=500
     )
     efficiency = models.FloatField(
         null=True,
@@ -234,15 +240,15 @@ class CareerPath(models.Model):
     def efficiency_display(self):
         return dict(CareerPath.PERCENTAGES)[self.efficiency]
 
-    def error_rate_display(self):
-        return dict(CareerPath.PERCENTAGES)[self.error_rate]
+    # def error_rate_display(self):
+    #     return dict(CareerPath.ERROR_RATE)[self.error_rate]
 
     def productivity_display(self):
         return dict(CareerPath.PERCENTAGES)[self.productivity]
 
 
 class AutomatorTask(models.Model):
-    # TODO create AutomatorTask model once requirments are scoped out
+    # TODO create AutomatorTask model once requirements are scoped out
     day = models.DateField(
         blank=True,
         null=True
