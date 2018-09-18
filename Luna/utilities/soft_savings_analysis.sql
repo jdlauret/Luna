@@ -11,7 +11,7 @@ select t.service_name,
         when upper(t.utility_schedule_rate) like '%FERA%' and t.service_state = 'CA' then t.utility_company||' - FERA'
         else t.utility_company
     end utility_comapny,
-    u.blended_rate,
+    nvl(u.blended_rate,u.vslr_calculated_rate) blended_rate,
     m.record_type
 from sfrpt.t_dm_project t
 inner join sfrpt.t_dm_contact c
