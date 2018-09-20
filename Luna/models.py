@@ -29,7 +29,7 @@ class CareerPath(models.Model):
     CUSTOMER_SERVICE = 'customer_service'
     CUSTOMER_SOLUTIONS = 'customer_solutions'
     RECS_AND_REBATES = 'RECs_&_rebates'
-    RELATIONS = 'relations'
+    CUSTOMER_RELATIONS = 'customer_relations'
 
     # Function Codes
     INBOUND = 'inbound'
@@ -68,23 +68,23 @@ class CareerPath(models.Model):
         (CUSTOMER_SERVICE, ''),
         (CUSTOMER_SOLUTIONS, ''),
         (RECS_AND_REBATES, ''),
-        (RELATIONS, 'Relations')
+        (CUSTOMER_RELATIONS, 'Customer Relations')
     )
 
     FUNCTIONS = (
-        (INBOUND, 'Inbound'),
-        (AUXILIARY, 'Auxiliary'),
-        (SUPER_AGENT, 'Super Agent'),
+        (INBOUND, ' - Inbound'),
+        (AUXILIARY, ' - Auxiliary'),
+        (SUPER_AGENT, ' - Super Agent'),
         (CUSTOMER_SOLUTIONS, 'Customer Solutions'),
-        (SERVICE, 'Service'),
+        (SERVICE, ' - Service'),
         (CUSTOMER_SERVICE, 'Customer Service'),
         (TRANSFER, 'Transfer'),
         (RESOLUTION, 'Resolution'),
         (CUSTOMER_SOLUTIONS_ADMIN, 'Customer Solutions Admin'),
         (RECS_AND_REBATES, 'RECs & Rebates'),
-        (INBOUND_OUTBOUND, 'Inbound / Outbound'),
-        (EMAIL_ADMIN, 'Email Admins'),
-        (DOCUMENTS, 'Documents'),
+        (INBOUND_OUTBOUND, ' - Inbound / Outbound'),
+        (EMAIL_ADMIN, ' - Email Admins'),
+        (DOCUMENTS, ' - Documents'),
     )
 
     POSITIONS = (
@@ -136,13 +136,6 @@ class CareerPath(models.Model):
         (90, '90%'),
         (100, '100%'),
     )
-
-    # ERROR_RATE = (
-    #     (7, '7% over a rolling 1 month period OR ≤ 10 errors per week '),
-    #     (5, '5% over a rolling 1 month period OR ≤ 10 errors per week '),
-    #     (2, '2.5% over a rolling 1 month period OR ≤ 10 errors per week '),
-    #     (0, ''),
-    # )
 
     tier_level = models.FloatField(
         choices=TIER_LEVELS
