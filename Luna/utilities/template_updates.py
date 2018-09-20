@@ -62,7 +62,7 @@ def build_career_path():
                                                           key=lambda j: rts_key_order.index(j[0])))
     new_dict['Customer Solutions'] = OrderedDict(sorted(new_dict['Customer Solutions'].items(),
                                                         key=lambda j: customer_solutions_order.index(j[0])))
-    new_dict['Relations'] = OrderedDict(sorted(new_dict['Relations'].items(),
+    new_dict['Customer Relations'] = OrderedDict(sorted(new_dict['Customer Relations'].items(),
                                                key=lambda j: relations_order.index(j[0])))
 
     with open(os.path.join(JSON_STORAGE_DIR, 'career_path.json'), 'w') as outfile:
