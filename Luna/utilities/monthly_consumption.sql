@@ -1,4 +1,3 @@
--- TODO NEED TO TRANSFER TO SNOWFLAKE, BUT TABLE NOT FOUND IN POST-INSTALL CURRENTLY
 select distinct
     ec.jan_kwh,
     ec.feb_kwh,
@@ -192,3 +191,5 @@ from lostraff.mv_pr_energy_consumption ec
 inner join sfrpt.t_dm_project p
     on p.project_id = ec.project_id
 where p.service_number = :serviceNum
+
+-- SNOWFLAKE

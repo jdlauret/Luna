@@ -63,6 +63,6 @@ order by t.read_date;
 --                                 AND L.MONTH = E.MONTH
 --                                 AND L.YEAR = E.YEAR
 --                           )
--- AND P.SERVICE_NUMBER = :serviceNum
--- AND E.READ_DATE BETWEEN TO_DATE(:startDate, 'MM/DD/YYYY') AND TO_DATE(:endDate, 'MM/DD/YYYY')
+-- AND P.SERVICE_NUMBER = '5828288'
+-- AND E.READ_DATE BETWEEN :startDate AND :endDate
 -- ORDER BY E.READ_DATE;
