@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 import os
 import json
+import pytz
 import datetime as dt
 from django.db import models
 
@@ -52,7 +53,7 @@ class coinManager(models.Manager):
         else:
             e = employee_id.objects.get(id=int(post_data['id']))
             e.allotment = int(post_data['allotment'])
-            e.edited = dt.datetime.now()
+            e.edited = dt.datetime.now(pytz.timezone('US/Mountain'))
             e.save()
 
     # ADDS TRANSACTION FROM OVERLORD PAGE
