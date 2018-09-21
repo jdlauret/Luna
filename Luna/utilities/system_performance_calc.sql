@@ -39,7 +39,7 @@ order by t.read_date;
 --       P.SERVICE_CITY,
 --       P.SERVICE_STATE,
 --       P.SERVICE_ZIP_CODE,
---       TRUNC(P.START_BILLING, 'DAY')
+--       TRUNC('D', P.START_BILLING)
 -- FROM VSLR.RPT.T_PROJECT AS P
 -- INNER JOIN VSLR.RPT.T_CONTACT AS CO ON CO.CONTACT_ID = P.CONTRACT_SIGNER
 -- WHERE P.PROJECT_STATUS != 'Cancelled'
@@ -63,6 +63,6 @@ order by t.read_date;
 --                                 AND L.MONTH = E.MONTH
 --                                 AND L.YEAR = E.YEAR
 --                           )
--- AND P.SERVICE_NUMBER = '5828288'
+-- AND P.SERVICE_NUMBER = :serviceNum
 -- AND E.READ_DATE BETWEEN :startDate AND :endDate
 -- ORDER BY E.READ_DATE;
