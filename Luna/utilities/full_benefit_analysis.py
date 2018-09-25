@@ -1,10 +1,14 @@
 import os
 from datetime import date, timedelta
 from Luna.models import DataWarehouse
+from models import SnowFlakeDW, SnowflakeConsole
 
 main_dir = os.getcwd()
 luna_dir = os.path.join(main_dir, 'Luna')
 utilities_dir = os.path.join(luna_dir, 'utilities')
+
+DB = SnowFlakeDW()
+DB.set_user('MACK_DAMAVANDI')
 
 
 def full_benefit_analysis(servicenum, consumption, backfeed, utilitybill):

@@ -69,7 +69,7 @@ def system_performance_calculator(request):
                     'legal_footer': print_page_legal_footer,
                 }
                 try:
-                    results = system_performance(service_number, start_date, end_date)
+                    results = system_performance(str(service_number), str(start_date), str(end_date))
                     context['form_response'] = results
                 except Exception as e:
                     context['form_response_complete'] = False
@@ -120,7 +120,7 @@ def performance_calculator_print(request):
                     'legal_footer': print_page_legal_footer,
                 }
                 try:
-                    results = system_performance(service_number, start_date, end_date)
+                    results = system_performance(str(service_number), str(start_date), str(end_date))
                     context['form_response'] = results
                 except Exception as e:
                     context['form_response_complete'] = False
@@ -384,6 +384,7 @@ def soft_savings_calculator(request):
         if request.method == 'POST':
             form = SoftSavingsForm(request.POST)
             if form.is_valid():
+                print('form is valid')
                 service_number = form.cleaned_data['service_number']
                 start_date = form.cleaned_data['start_date']
                 end_date = form.cleaned_data['end_date']
@@ -395,10 +396,14 @@ def soft_savings_calculator(request):
                     'form_response': {},
                     'legal_footer': print_page_legal_footer,
                 }
+                print('first context', context)
                 try:
-                    results = soft_savings_analysis(service_number, start_date, end_date)
+                    results = soft_savings_analysis(str(service_number), str(start_date), str(end_date))
                     context['form_response'] = results
+                    # TODO remove print
+                    print('second context', context)
                 except Exception as e:
+                    print('error', str(e))
                     context['form_response_complete'] = False
 
                 response = render(request, 'Luna/soft_savings_analysis.html', context=context)
