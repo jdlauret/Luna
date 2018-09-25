@@ -396,14 +396,10 @@ def soft_savings_calculator(request):
                     'form_response': {},
                     'legal_footer': print_page_legal_footer,
                 }
-                print('first context', context)
                 try:
                     results = soft_savings_analysis(str(service_number), str(start_date), str(end_date))
                     context['form_response'] = results
-                    # TODO remove print
-                    print('second context', context)
                 except Exception as e:
-                    print('error', str(e))
                     context['form_response_complete'] = False
 
                 response = render(request, 'Luna/soft_savings_analysis.html', context=context)
