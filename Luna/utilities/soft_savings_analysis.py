@@ -72,7 +72,7 @@ def soft_savings_analysis(servicenum, startdate, enddate):
         results['startdate'] = results['account'][7]
         startdatestring = results['startdate'].strftime('%Y-%m-%d')
     else:
-        results['startdate'] = startdate
+        results['startdate'] = dt.datetime.strptime(startdate, '%Y-%m-%d').date()
         startdatestring = results['startdate'].replace(day=1).strftime('%Y-%m-%d')
         # results['enddate'] = (date.today().replace(day=1) - timedelta(1))
         # enddatestring = results['enddate'].strftime('%Y-%m-%d')
