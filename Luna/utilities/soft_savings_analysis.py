@@ -1,10 +1,15 @@
 import os
+import datetime as dt
 from datetime import date, timedelta
 from Luna.models import DataWarehouse
+from models import SnowFlakeDW, SnowflakeConsole
 
 main_dir = os.getcwd()
 luna_dir = os.path.join(main_dir, 'Luna')
 utilities_dir = os.path.join(luna_dir, 'utilities')
+
+DB = SnowFlakeDW()
+DB.set_user('MACK_DAMAVANDI')
 
 
 def soft_savings_analysis(servicenum, startdate, enddate):
@@ -12,38 +17,37 @@ def soft_savings_analysis(servicenum, startdate, enddate):
     results = {}
 
     if enddate < startdate:
-        results = {'error': 'The start date you entered ({}) must come before the end date you entered ({}).'.format(startdate.strftime('%m/%d/%Y'), enddate.strftime('%m/%d/%Y'))}
+        results = {'error': 'The start date you entered ({}) must come before the end date you entered ({}).'.format(startdate.strftime('%Y-%m-%d'), enddate.strftime('%Y-%m-%d'))}
         return results
-
-    dw = DataWarehouse('admin')
-
-    with open(os.path.join(utilities_dir, 'soft_savings_analysis.sql'),'r') as file:
-        sql = file.read()
-
-    sql = sql.split(';')
 
     if 'S-' in servicenum.upper():
         servicenum = servicenum.upper().replace('S-','')
 
-    bindvars = [{'serviceNum': servicenum}]
-
     try:
-        dw.query_results(sql[0], bindvars=bindvars[0])
+        DB.open_connection()
+        DW = SnowflakeConsole(DB)
+        with open(os.path.join(utilities_dir, 'soft_savings_analysis.sql'),'r') as file:
+            sql = file.read()
+        sql = sql.split(';')
+
+        query = sql[0].format(service_number=str(servicenum))
+        DW.execute_query(query)
+
     except Exception as e:
         results['error'] = e
         return results
 
-    results['account'] = dw.results
+    results['account'] = DW.query_results[0]
 
     if len(results['account']) == 0:
         results['error'] = '{} is not a valid service number or the associated ' \
                            'Solar Project has been cancelled.'.format(servicenum)
         return results
-    elif not results['account'][0][7]:
+    elif not results['account'][7]:
         results['error'] = 'The system hasn\'t been PTO\'d yet!'
-        results['account'][0][9] = '${}'.format(round(results['account'][0][9], 5))
+        results['account'][9] = '${}'.format(round(results['account'][9], 5))
         return results
-    elif results['account'][0][7].date() > date.today()-timedelta(30):
+    elif results['account'][7] > date.today()-timedelta(30):
         results['error'] = 'The system hasn\'t been PTO\'d for more than 30 days.'
         return results
     # elif results['account'][0][7].date() > date.today()-timedelta(365):
@@ -52,55 +56,61 @@ def soft_savings_analysis(servicenum, startdate, enddate):
     #     results['account'][0][7] = results['account'][0][7].strftime('%B %#d, %Y')
     #     results['account'][0][9] = '${} per kWh'.format(results['account'][0][9])
     #     return results
-    elif results['account'][0][8] == None:
+    elif results['account'][8] == None:
         results['error'] = 'There was no utility information found for service ' \
                                     '{}.'.format(servicenum)
-        results['account'][0][7] = results['account'][0][7].strftime('%B %#d, %Y')
+        results['account'][7] = results['account'][7].strftime('%B %#d, %Y')
         return results
-    elif results['account'][0][-1] != 'Solar PPA' and results['account'][0][-1] != 'Solar Lease':
+    elif results['account'][-1] != 'Solar PPA' and results['account'][-1] != 'Solar Lease':
         results['error'] = 'This calculator is only for PPA and Lease customers! This customer has a' \
                            ' {}. For Loan customers, please refer them to their Loan Documents.' \
-                           ''.format(results['account'][0][-1])
-        results['account'][0][9] = '${}'.format(round(results['account'][0][9], 5))
-        results['account'][0][7] = results['account'][0][7].strftime('%B %#d, %Y')
+                           ''.format(results['account'][-1])
+        results['account'][9] = '${}'.format(round(results['account'][9], 5))
+        results['account'][7] = results['account'][7].strftime('%B %#d, %Y')
         return results
-    elif startdate < results['account'][0][7].date():
-        results['startdate'] = results['account'][0][7]
-        startdatestring = results['startdate'].strftime('%m/%d/%Y')
+    elif dt.datetime.strptime(startdate, '%Y-%m-%d').date() < results['account'][7]:
+        results['startdate'] = results['account'][7]
+        startdatestring = results['startdate'].strftime('%Y-%m-%d')
     else:
-        results['startdate'] = startdate
-        startdatestring = results['startdate'].replace(day=1).strftime('%m/%d/%Y')
+        results['startdate'] = dt.datetime.strptime(startdate, '%Y-%m-%d').date()
+        startdatestring = results['startdate'].replace(day=1).strftime('%Y-%m-%d')
         # results['enddate'] = (date.today().replace(day=1) - timedelta(1))
-        # enddatestring = results['enddate'].strftime('%m/%d/%Y')
+        # enddatestring = results['enddate'].strftime('%Y-%m-%d')
         # results['startdate'] = (results['enddate'] - timedelta(365)).replace(month=results['enddate'].month % 12 + 1,
         #                                                                      day=1)
-        # startdatestring = results['startdate'].strftime('%m/%d/%Y')
+        # startdatestring = results['startdate'].strftime('%Y-%m-%d')
 
-    results['account'][0][9] = '${}'.format(round(results['account'][0][9], 5))
+    results['account'][9] = '${}'.format(round(results['account'][9], 5))
 
-    if enddate >= date.today() and enddate < results['startdate'].date() + timedelta(30) and results['startdate'] == results['account'][0][7]:
-        enddatestring = (date.today().replace(day=1) - timedelta(1)).strftime('%m/%d/%Y')
+    if dt.datetime.strptime(enddate, '%Y-%m-%d').date() >= date.today() \
+            and dt.datetime.strptime(enddate, '%Y-%m-%d').date() < results['startdate'] + timedelta(30) \
+            and results['startdate'] == results['account'][7]:
+        enddatestring = (date.today().replace(day=1) - timedelta(1)).strftime('%Y-%m-%d')
         results['enddate'] = date.today().replace(day=1) - timedelta(1)
         results['error'] = "The system has not been PTO'd for at least two weeks."
         return results
         # results['enddate'] = startdate + timedelta(14)
-        # enddatestring = results['enddate'].strftime('%m/%d/%Y')
+        # enddatestring = results['enddate'].strftime('%Y-%m-%d')
     else:
-        results['enddate'] = enddate
-        enddatestring = results['enddate'].replace(day=1).strftime('%m/%d/%Y')
+        results['enddate'] = dt.datetime.strptime(enddate, '%Y-%m-%d').date()
+        enddatestring = results['enddate'].replace(day=1).strftime('%Y-%m-%d')
 
 
-    bindvars.append({'serviceNum': servicenum,
-                 'startDate': startdatestring,
-                 'endDate': enddatestring})
-
+    # bindvars.append({'serviceNum': servicenum,
+    #              'startDate': startdatestring,
+    #              'endDate': enddatestring})
+    query_2 = sql[1].format(service_number=str(servicenum), start_date=str(startdate), end_date=str(enddate))
     try:
-        dw.query_results(sql[1], bindvars=bindvars[1])
+        DW.execute_query(query_2)
+
     except Exception as e:
         results['error'] = e
         return results
 
-    results['savings'] = dw.results
+    finally:
+        DB.close_connection()
+
+    results['savings'] = DW.query_results
 
     if len(results['savings']) == 0:
         results['error'] = 'There was no Actual production ' \
@@ -149,7 +159,7 @@ def soft_savings_analysis(servicenum, startdate, enddate):
             [
                 'Your system has produced {} kilowatt hours (kWh) since {}.'.format(
                     results['savings'][-1][1].split()[0],
-                    results['startdate'].strftime('%m/%d/%Y')
+                    results['startdate'].strftime('%Y-%m-%d')
                 ),
                 'For that energy, you paid Vivint Solar {}.'.format(results['savings'][-1][3]),
                 'The average utility customer of your utility, {}, would have paid {} for that same amount of energy.'.format(
@@ -160,21 +170,21 @@ def soft_savings_analysis(servicenum, startdate, enddate):
                 ' they would have saved {}.'.format(
                     results['account'][0][8],
                     results['savings'][-1][1].split()[0],
-                    results['startdate'].strftime('%m/%d/%Y'),
+                    results['startdate'].strftime('%Y-%m-%d'),
                     results['savings'][-1][5]
                 ),
                 'From {} to {}, the solar energy system at your home has produced enough energy to offset the carbon ' \
                 'emissions of {} miles driven by the average passenger car (according to the EPA\'s Greenhouse Gas ' \
                 'Equivalencies Calculator).'.format(
-                    results['startdate'].strftime('%m/%d/%Y'),
-                    results['enddate'].strftime('%m/%d/%Y'),
+                    results['startdate'].strftime('%Y-%m-%d'),
+                    results['enddate'].strftime('%Y-%m-%d'),
                     round(float(results['savings'][-1][1].split()[0])*1.824,1)
                 ),
             'From {} to {}, the solar energy system at your home has offset the same amount of carbon ' \
                 'emissions as {} newly planted trees (according to the EPA\'s Greenhouse Gas ' \
                 'Equivalencies Calculator).'.format(
-                    results['startdate'].strftime('%m/%d/%Y'),
-                    results['enddate'].strftime('%m/%d/%Y'),
+                    results['startdate'].strftime('%Y-%m-%d'),
+                    results['enddate'].strftime('%Y-%m-%d'),
                     int(round(float(results['savings'][-1][1].split()[0])*0.0391,0))
                 )
             ]
@@ -204,7 +214,7 @@ def soft_savings_analysis(servicenum, startdate, enddate):
         results['summary'] = [
             'Your system has produced {} kilowatt hours (kWh) since {}.'.format(
                 results['savings'][-1][1].split()[0],
-                results['startdate'].strftime('%m/%d/%Y')
+                results['startdate'].strftime('%Y-%m-%d')
             ),
             'For that energy, you paid Vivint Solar {}.'.format(results['savings'][-1][3]),
             'The average utility customer of your utility, {}, would have paid {} for that same amount of energy.'.format(
@@ -215,25 +225,25 @@ def soft_savings_analysis(servicenum, startdate, enddate):
             ' they would have saved {}.'.format(
                 results['account'][0][8],
                 results['savings'][-1][1].split()[0],
-                results['startdate'].strftime('%m/%d/%Y'),
+                results['startdate'].strftime('%Y-%m-%d'),
                 results['savings'][-1][5]
             ),
             'From {} to {}, the solar energy system at your home has produced enough energy to offset the carbon ' \
             'emissions of {} miles driven by the average passenger car (according to the EPA\'s Greenhouse Gas ' \
             'Equivalencies Calculator).'.format(
-                results['startdate'].strftime('%m/%d/%Y'),
-                results['enddate'].strftime('%m/%d/%Y'),
+                results['startdate'].strftime('%Y-%m-%d'),
+                results['enddate'].strftime('%Y-%m-%d'),
                 round(float(results['savings'][-1][1].split()[0])*1.824,1)
             ),
             'From {} to {}, the solar energy system at your home has offset the same amount of carbon ' \
             'emissions as {} newly planted trees (according to the EPA\'s Greenhouse Gas ' \
             'Equivalencies Calculator).'.format(
-                results['startdate'].strftime('%m/%d/%Y'),
-                results['enddate'].strftime('%m/%d/%Y'),
+                results['startdate'].strftime('%Y-%m-%d'),
+                results['enddate'].strftime('%Y-%m-%d'),
                 round(float(results['savings'][-1][1].split()[0])*0.0391,0)
             )
         ]
 
-    results['account'][0][7] = results['account'][0][7].strftime('%B %#d, %Y')
+    results['account'][7] = results['account'][7].strftime('%B %#d, %Y')
 
     return results

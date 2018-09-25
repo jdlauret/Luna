@@ -7,6 +7,7 @@ from coin.models import employee_id, leaders
 MAIN_DIR = os.path.dirname(os.path.realpath(__file__))
 LOGS_DIR = os.path.join(MAIN_DIR, 'logs')
 
+
 # SCHEDULED REFRESH OF THE COINS, EMPLOYEES AND LEADERSHIP ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def scheduled_refresh():
     log_file_path = os.path.join(LOGS_DIR, 'date_resets.json')

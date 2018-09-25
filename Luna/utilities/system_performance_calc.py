@@ -1,10 +1,15 @@
 import os
+import datetime as dt
 from datetime import date, timedelta
 from Luna.models import DataWarehouse
+from models import SnowFlakeDW, SnowflakeConsole
 
 main_dir = os.getcwd()
 luna_dir = os.path.join(main_dir, 'Luna')
 utilities_dir = os.path.join(luna_dir, 'utilities')
+
+DB = SnowFlakeDW()
+DB.set_user('MACK_DAMAVANDI')
 
 
 def system_performance(servicenum, startdate, enddate):
@@ -12,45 +17,46 @@ def system_performance(servicenum, startdate, enddate):
     results = {}
 
     if enddate < startdate:
-        results['error'] = 'The start date you entered ({}) must come before the end date you entered ({}).'.format(startdate.strftime('%m/%d/%Y'), enddate.strftime('%m/%d/%Y'))
+        results['error'] = 'The start date you entered ({}) must come before the end date you entered ({}).'\
+            .format(startdate.strftime('%Y-%m-%d'), enddate.strftime('%Y-%m-%d'))
         return results
-
-    dw = DataWarehouse('admin')
-
-    file = open(os.path.join(utilities_dir, 'system_performance_calc.sql'),'r')
-    sql = file.read()
-    file.close()
-
-    sql = sql.split(';')
 
     if 'S-' in servicenum.upper():
         servicenum = servicenum.upper().replace('S-','')
 
-    bindvars = [{'serviceNum': servicenum}]
-
     try:
-        dw.query_results(sql[0], bindvars=bindvars[0])
+        DB.open_connection()
+        DW = SnowflakeConsole(DB)
+        with open (os.path.join(utilities_dir, 'system_performance_calc.sql'), 'r') as file:
+            sql = file.read()
+        sql = sql.split(';')
+
+        query = sql[0].format(service_number = str(servicenum))
+        DW.execute_query(query)
+
     except Exception as e:
         results['error'] = e
         return results
 
-    results['account'] = dw.results
+    results['account'] = DW.query_results[0]
 
     if len(results['account']) == 0:
         results['error'] = '{} is not a valid service number or the associated ' \
                            'Project has been cancelled.'.format(servicenum)
         return results
-    elif not results['account'][0][7]:
+    elif not results['account'][7]:
         results['error'] = '{} hasn\'t received PTO yet!'.format(servicenum)
         return results
-    elif startdate < results['account'][0][7].date():
-        results['startdate'] = results['account'][0][7]
-        startdatestring = results['startdate'].strftime('%m/%d/%Y')
+    elif dt.datetime.strptime(startdate, '%Y-%m-%d').date() < results['account'][7]:
+        results['startdate'] = results['account'][7]
+        startdatestring = results['startdate'].strftime('%Y-%m-%d')
     else:
-        results['startdate'] = startdate
-        startdatestring = results['startdate'].replace(day=1).strftime('%m/%d/%Y')
+        results['startdate'] = dt.datetime.strptime(startdate, '%Y-%m-%d').date()
+        startdatestring = results['startdate'].replace(day=1).strftime('%Y-%m-%d')
 
-    if enddate >= date.today() and enddate < results['startdate'].date() + timedelta(14) and results['startdate'] == results['account'][0][7]:
+    if dt.datetime.strptime(enddate, '%Y-%m-%d').date() >= date.today() \
+            and dt.datetime.strptime(enddate, '%Y-%m-%d').date() < results['startdate']\
+            + timedelta(14) and results['startdate'] == results['account'][0][7]:
         # enddatestring = (date.today().replace(day=1) - timedelta(1)).strftime('%m/%d/%Y')
         # results['enddate'] = date.today().replace(day=1) - timedelta(1)
         results['error'] = "The system has not been PTO'd for at least two weeks."
@@ -58,27 +64,18 @@ def system_performance(servicenum, startdate, enddate):
         # results['enddate'] = startdate + timedelta(14)
         # enddatestring = results['enddate'].strftime('%m/%d/%Y')
     else:
-        results['enddate'] = enddate
-        enddatestring = results['enddate'].replace(day=1).strftime('%m/%d/%Y')
+        results['enddate'] = dt.datetime.strptime(enddate, '%Y-%m-%d').date()
+        enddatestring = results['enddate'].replace(day=1).strftime('%Y-%m-%d')
 
 
-    bindvars.append({'serviceNum': servicenum,
-                 'startDate': startdatestring,
-                 'endDate': enddatestring})
-
+    query_2 = sql[1].format(service_number=str(servicenum), start_date=str(startdate), end_date=str(enddate))
     try:
-        dw.query_results(sql[1], bindvars=bindvars[1])
+        DW.execute_query(query_2)
     except Exception as e:
-        if 'ORA-01476' in str(e):
-            results['error'] = str(e) + '. There were no estimates found for service' \
-                                   ' number {}.'.format(servicenum)
-        else:
-            results['error'] = e
-        print(str(e))
-        print(results['error'])
+        results['error'] = e
         return results
 
-    results['production'] = dw.results
+    results['production'] = DW.query_results
 
     if len(results['production']) == 0:
         results['error'] = 'There were no CAD estimates or Actual production ' \
@@ -86,16 +83,16 @@ def system_performance(servicenum, startdate, enddate):
                              'to {}.'.format(servicenum, startdatestring, enddatestring)
         return results
 
-    totals = [sum(j) for j in [i for i in zip(*results['production'])][1:4]]
+    totals = [sum(j) for j in [i for i in zip(* results['production'])][1:4]]
     results['production'].append(['Total',
                                   round(totals[0], 3),
                                   round(totals[1], 3),
                                   round(totals[2], 3),
-                                  round(totals[2]/totals[0], 4),
-                                  round(totals[2]/totals[1], 4)
+                                  round(float(totals[2])/totals[0], 4),
+                                  round(float(totals[2])/totals[1], 4)
                                   ])
 
-    results['account'][0][7] = results['account'][0][7].strftime('%B %#d, %Y')
+    results['account'][7] = results['account'][7].strftime('%B %#d, %Y')
 
     for month in results['production']:
         month[1] = '{} kWh'.format(month[1])

@@ -22,13 +22,11 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for row in form_response.account %}
-                        <tr>
-                            {% for item in row %}
-                                <td style="text-align: left">{{ item }}</td>
-                            {% endfor %}
-                        </tr>
-                    {% endfor %}
+                    <tr>
+                                {% for item in form_response.account %}
+                                    <td>{{ item }}</td>
+                                {% endfor %}
+                            </tr>
                     </tbody>
                 {% endif %}
             </table>

@@ -70,58 +70,57 @@
 
                         <tbody>
 
-                        {% for row in form_response.account %}
-                            <tr>
-                                {% for item in row %}
-                                    <td>{{ item }}</td>
-                                {% endfor %}
-                            </tr>
-                        {% endfor %}
+                        <tr>
+                            {% for item in form_response.account %}
+                                <td>{{ item }}</td>
+                            {% endfor %}
+                        </tr>
+
                         </tbody>
                     {% endif %}
-{#                    {% if form_response_complete == False %}#}
-{#                        <p>False</p>#}
-{#                    {% endif %}#}
+                    {#                    {% if form_response_complete == False %}#}
+                    {#                        <p>False</p>#}
+                    {#                    {% endif %}#}
                 </table>
             </div>
         </div>
         <div id="production_div">
-{#            {% if form_response_complete == True %}#}
-{#                <table class="table">#}
-{#                    <thead class="table-info">#}
-{#                        <tr>#}
-{#                            <th colspan="{{ form_response.savings.0|length }}">Talking Points</th>#}
-{#                        </tr>#}
-{#                    </thead>#}
-{#                    <tr>#}
-{#                        <td>#}
-{#                            <ul>#}
-{#                                {% for item in form_response.summary %}#}
-{#                                    <li>{{ item }}</li>#}
-{#                                {% endfor %}#}
-{#                            </ul>#}
-{#                        </td>#}
-{#                    </tr>#}
-{#                </table>#}
-{#            {% endif %}#}
+            {#            {% if form_response_complete == True %}#}
+            {#                <table class="table">#}
+            {#                    <thead class="table-info">#}
+            {#                        <tr>#}
+            {#                            <th colspan="{{ form_response.savings.0|length }}">Talking Points</th>#}
+            {#                        </tr>#}
+            {#                    </thead>#}
+            {#                    <tr>#}
+            {#                        <td>#}
+            {#                            <ul>#}
+            {#                                {% for item in form_response.summary %}#}
+            {#                                    <li>{{ item }}</li>#}
+            {#                                {% endfor %}#}
+            {#                            </ul>#}
+            {#                        </td>#}
+            {#                    </tr>#}
+            {#                </table>#}
+            {#            {% endif %}#}
             {% if form_response.error %}
                 <table class="table">
                     <thead class="table-danger">
-                        <tr>
-                            <th colspan="{{ form_response.savings.0|length }}">ERROR!</th>
-                        </tr>
+                    <tr>
+                        <th colspan="{{ form_response.savings.0|length }}">ERROR!</th>
+                    </tr>
                     </thead>
                     <tr>
                         <td>{{ form_response.error }}</td>
                     </tr>
                 </table>
-{#            {% elif form_response_complete == True %}#}
-             {% else %}
+                {#            {% elif form_response_complete == True %}#}
+            {% else %}
                 <table class="table">
                     <thead class="table-dark">
-                        <tr>
-                            <th colspan="{{ form_response.savings.0|length }}">Talking Points</th>
-                        </tr>
+                    <tr>
+                        <th colspan="{{ form_response.savings.0|length }}">Talking Points</th>
+                    </tr>
                     </thead>
                     <tr>
                         <td>
@@ -133,86 +132,90 @@
                         </td>
                     </tr>
                 </table>
-            <table class="table">
-                <thead class="thead-dark">
-                <tr>
-                    <th colspan="{{ form_response.savings.0|length }}">Analysis by Month</th>
-                </tr>
-                </thead>
-            </table>
-            <table id="production" class="table table-striped" style="overflow: auto">
-                <thead>
-                <tr>
-                    <th scope="col">Month</th>
-                    <th scope="col">Actual Production <br>from the PV System</th>
-                    <th scope="col">PPA/Lease Rate <br>per kWh</th>
-                    <th scope="col">Vivint Solar Bill</th>
-                    <th scope="col">Utility Bill<sup>*</sup></th>
-                    <th scope="col">Savings<sup>*</sup></th>
-                </tr>
-                </thead>
-                {% if form_response_complete == True %}
-                    <tbody>
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th colspan="{{ form_response.savings.0|length }}">Analysis by Month</th>
+                    </tr>
+                    </thead>
+                </table>
+                <table id="production" class="table table-striped" style="overflow: auto">
+                    <thead>
+                    <tr>
+                        <th scope="col">Month</th>
+                        <th scope="col">Actual Production <br>from the PV System</th>
+                        <th scope="col">PPA/Lease Rate <br>per kWh</th>
+                        <th scope="col">Vivint Solar Bill</th>
+                        <th scope="col">Utility Bill<sup>*</sup></th>
+                        <th scope="col">Savings<sup>*</sup></th>
+                    </tr>
+                    </thead>
+                    {% if form_response_complete == True %}
+                        <tbody>
 
-                    {% for row in form_response.savings %}
-                        {% if row.0 == 'Total' %}
-                            <tr>
-                                {% for col in row %}
-                                    <td>{{ col }}</td>
-                                {% endfor %}
-                            </tr>
-                        {% else %}
-                            <tr>
-                                {% for col in row %}
-                                    <td>{{ col }}</td>
-                                {% endfor %}
-                            </tr>
-                        {% endif %}
-                    {% endfor %}
-                    <tr>
-                        <td><b>Definitions</b></td>
-                        <td colspan="5">
-                            <ul>
-                                <li>
-                                    <b>Average Utility Rate<sup>*</sup></b>: The utility rate (per kilowatt hour) paid
-                                    by the average customer of your utility company.
-                                </li>
-                                <li>
-                                    <b>Savings<sup>*</sup></b>: The difference between your
-                                    <b><em>Utility Bill<sup>*</sup></em></b> and your
-                                    <b><em>Vivint Solar Bill</em></b>.
-                                </li>
-                                <li>
-                                    <b>Vivint Solar Bill</b>: Your Vivint Solar Bill based on the
-                                    <b><em>Actual Production from the PV System</em></b> of the solar energy system at
-                                    your home and your contract rate during that month.
-                                </li>
-                                <li>
-                                    <b>Utility Bill<sup>*</sup></b>: This value is calculated by multiplying your
-                                    <b><em>Average Utility Rate<sup>*</sup></em></b> and your
-                                    <b><em>Actual Production from the PV System</em></b>. This is not necessarily what
-                                    you paid your utility company, but what you could have had to pay your utility
-                                    company for receiving the same amount of power generated by the PV system from
-                                    the grid.
-                                <li>
-                                    <b>Actual Production from the PV System</b>: The amount of energy produced by the
-                                    solar energy system at your home.
-                                </li>
-                            </ul>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <b>Footnote</b>
-                        </td>
-                        <td colspan="5">
-                            <b>*</b> Values are representative of the average customer of your Utility Company.
-                        </td>
-                    </tr>
-                    </tbody>
-                {% endif %}
-            </table>
-        {% endif %}
+                        {% for row in form_response.savings %}
+                            {% if row.0 == 'Total' %}
+                                <tr>
+                                    {% for col in row %}
+                                        <td>{{ col }}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    {% for col in row %}
+                                        <td>{{ col }}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        <tr>
+                            <td><b>Definitions</b></td>
+                            <td colspan="5">
+                                <ul>
+                                    <li>
+                                        <b>Average Utility Rate<sup>*</sup></b>: The utility rate (per kilowatt hour)
+                                        paid
+                                        by the average customer of your utility company.
+                                    </li>
+                                    <li>
+                                        <b>Savings<sup>*</sup></b>: The difference between your
+                                        <b><em>Utility Bill<sup>*</sup></em></b> and your
+                                        <b><em>Vivint Solar Bill</em></b>.
+                                    </li>
+                                    <li>
+                                        <b>Vivint Solar Bill</b>: Your Vivint Solar Bill based on the
+                                        <b><em>Actual Production from the PV System</em></b> of the solar energy system
+                                        at
+                                        your home and your contract rate during that month.
+                                    </li>
+                                    <li>
+                                        <b>Utility Bill<sup>*</sup></b>: This value is calculated by multiplying your
+                                        <b><em>Average Utility Rate<sup>*</sup></em></b> and your
+                                        <b><em>Actual Production from the PV System</em></b>. This is not necessarily
+                                        what
+                                        you paid your utility company, but what you could have had to pay your utility
+                                        company for receiving the same amount of power generated by the PV system from
+                                        the grid.
+                                    <li>
+                                        <b>Actual Production from the PV System</b>: The amount of energy produced by
+                                        the
+                                        solar energy system at your home.
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Footnote</b>
+                            </td>
+                            <td colspan="5">
+                                <b>*</b> Values are representative of the average customer of your Utility Company.
+                            </td>
+                        </tr>
+                        </tbody>
+                    {% endif %}
+                </table>
+            {% endif %}
         </div>
 
     </div>
