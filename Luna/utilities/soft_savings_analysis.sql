@@ -38,5 +38,5 @@ WHERE T.LIFETIME_TOTAL_DAYS = (
                               AND W.YEAR = T.YEAR
                               )
 AND P.SERVICE_NUMBER ='{service_number}'
-AND T.READ_DATE BETWEEN TO_DATE('{startDate}', 'MM/DD/YYYY') AND TO_DATE('{endDate}', 'MM/DD/YYYY')
+AND T.READ_DATE BETWEEN TO_DATE('{start_date}', 'MM/DD/YYYY') AND TO_DATE('{end_date}', 'MM/DD/YYYY')
 ORDER BY T.READ_DATE
