@@ -66,14 +66,11 @@
                         </thead>
 
                         <tbody>
-
-                        {% for row in form_response.account %}
                             <tr>
-                                {% for item in row %}
+                                {% for item in form_response.account %}
                                     <td>{{ item }}</td>
                                 {% endfor %}
                             </tr>
-                        {% endfor %}
                         </tbody>
                     {% endif %}
 {#                    {% if form_response_complete == False %}#}

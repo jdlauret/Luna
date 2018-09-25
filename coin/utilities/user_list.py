@@ -1,23 +1,25 @@
 import os
 from Luna.models import DataWarehouse
+from models import SnowFlakeDW, SnowflakeConsole
 
 main_dir = os.getcwd()
 coin_dir = os.path.join(main_dir, 'coin')
 utilities_dir = os.path.join(coin_dir, 'utilities')
 
-def user_list():
-    agent_list = {
-    }
-    dw = DataWarehouse('admin')
+DB = SnowFlakeDW()
+DB.set_user('MACK_DAMAVANDI')
 
-    with open(os.path.join(utilities_dir, 'user_list.sql'), 'r') as file:
-        sql = file.read()
-    dw.query_results(sql, bindvars=None)
+def user_list():
+    agent_list = {}
 
     try:
-        result = dw.results
-        column = dw.column_names
-        # print('Column: ', column)
+        DB.open_connection()
+        DW = SnowflakeConsole(DB)
+        with open(os.path.join(utilities_dir, 'user_list.sql'), 'r') as file:
+            sql = file.read()
+        DW.execute_query(sql, bindvars=None)
+        result = DW.query_results
+        column = DW.column_names
 
         if len(result) == 0:
             agent_list['error'] = 'Error'
@@ -26,6 +28,9 @@ def user_list():
     except Exception as e:
         agent_list['error'] = e
         return agent_list
+
+    finally:
+        DB.close_connection()
     #
     for j, value in enumerate(result):
         # print(value)

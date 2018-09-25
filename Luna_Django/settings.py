@@ -91,10 +91,12 @@ WSGI_APPLICATION = 'Luna_Django.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.oracle',
-        'NAME': 'dw.vivintsolar.com/dw',
-        'USER': os.environ.get('DATA_WAREHOUSE_USER'),
-        'PASSWORD': os.environ.get('DATA_WAREHOUSE_PASSWORD')
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'HOST': 'luna-prod.cfjzwtytsd7q.us-west-2.rds.amazonaws.com',
+        'PORT': '5432',
+        'USER': os.environ.get('POSTGRES_USER'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD')
     }
 }
 
