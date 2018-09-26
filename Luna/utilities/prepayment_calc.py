@@ -1,28 +1,42 @@
 import os
-from Luna.models import DataWarehouse
 from datetime import datetime as dt
+from models import SnowFlakeDW, SnowflakeConsole
 
 main_dir = os.getcwd()
 luna_dir = os.path.join(main_dir, 'Luna')
 utilities_dir = os.path.join(luna_dir, 'utilities')
 
+DB = SnowFlakeDW()
+DB.set_user('MACK_DAMAVANDI')
+
 def prepay_calc(servicenum):
     notes = {}
-    dw = DataWarehouse('admin')
-    with open(os.path.join(utilities_dir, 'prepayment_calc.sql'), 'r') as file:
-        sql = file.read()
-    sql = sql.split(';')
+
     if 'S-' in servicenum.upper():
-        servicenum = servicenum.upper().replace('S-', '')
-    bindvars = {'serviceNum': servicenum}
+        servicenum = servicenum.upper().replace('S-','')
 
     try:
-        dw.query_results(sql[0], bindvars=bindvars)
-        results = dw.results[0]
+        DB.open_connection()
+        DW = SnowflakeConsole(DB)
+        with open(os.path.join(utilities_dir, 'prepayment_calc.sql'), 'r') as file:
+            sql = file.read()
+        sql = sql.split(';')
+
+        query = sql[0].format(service_number=str(servicenum))
+        DW.execute_query(query)
+        results = DW.query_results[0]
+
+        if len(results) == 0:
+            notes['error'] = '{} is not a valid service number.'.format(servicenum)
+            return notes
 
     except Exception as e:
         notes['error'] = e
         return notes
+
+    finally:
+        DB.close_connection()
+
     for i, value in enumerate(results):
         notes[i] = value
     notes['remaining_contract'] = notes.pop(8)
