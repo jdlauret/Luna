@@ -82,8 +82,8 @@ class CareerPath(models.Model):
         (RESOLUTION, 'Resolution'),
         (CUSTOMER_SOLUTIONS_ADMIN, 'Customer Solutions Admin'),
         (RECS_AND_REBATES, 'RECs & Rebates'),
-        (INBOUND_OUTBOUND, ' - Inbound / Outbound'),
-        (EMAIL_ADMIN, ' - Email Admins'),
+        (INBOUND_OUTBOUND, ' - Inbound/Outbound'),
+        (EMAIL_ADMIN, ' - Email Admin'),
         (DOCUMENTS, ' - Documents'),
     )
 
