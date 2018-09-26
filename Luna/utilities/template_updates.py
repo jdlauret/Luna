@@ -6,6 +6,8 @@ from collections import OrderedDict
 
 JSON_STORAGE_DIR = os.path.join(os.getcwd(), 'Luna\\templates\\json_storage')
 
+# ANY TYPE OF CHANGE TO TEMPLATE_UPDATE, PLEASE CHANGE Rec to RECs TO SHOW CHANGES IN CAREER PATH
+# ADDITIONAL CHANGE INBOUND OUTBOUND TO INBOUND/OUTBOUND
 
 def build_career_path():
     departments = [x['department'] for x in CareerPath.objects.order_by().values('department').distinct()]
