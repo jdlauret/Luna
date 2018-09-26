@@ -1,19 +1,19 @@
-select t.service_name,
-    c.full_name,
-    c.email,
-    t.service_address,
-    t.service_city,
-    t.service_state,
-    t.service_zip_code
-from sfrpt.t_dm_project t
-inner join sfrpt.t_dm_contact c
-    on c.contact_id = t.contract_signer
-where t.service_number = :serviceNum;
+SELECT
+    T.SERVICE_NAME,
+    INITCAP(C.FULL_NAME),
+    C.EMAIL,
+    INITCAP(T.SERVICE_ADDRESS),
+    INITCAP(T.SERVICE_CITY),
+    T.SERVICE_STATE,
+    T.SERVICE_ZIP_CODE
+FROM VSLR.RPT.T_PROJECT AS T
+INNER JOIN VSLR.RPT.T_CONTACT AS C ON C.CONTACT_ID = T.CONTRACT_SIGNER
+WHERE T.SERVICE_NUMBER = '{service_number}';
 
 SELECT
-      P.SERVICE_NUMBER,
-      D.SYSTEM_SIZE_ACTUAL,
-       D.REMAINING_CONTRACT_TERM
-FROM SFRPT.MV_SYSTEM_DETAILS D
-INNER JOIN SFRPT.T_DM_PROJECT P ON D.PROJECT_NAME = P.PROJECT_NAME
-WHERE P.SERVICE_NUMBER = :serviceNum;
+    P.SERVICE_NUMBER,
+    L.SYSTEM_SIZE_ACTUAL,
+    P.REMAINING_CONTRACT_TERM
+FROM VSLR.RPT.V_LOAN_DETAILS AS L
+INNER JOIN VSLR.RPT.T_PROJECT AS P ON L.PROJECT_NAME = P.PROJECT_NAME
+WHERE P.SERVICE_NUMBER = '{service_number}'
