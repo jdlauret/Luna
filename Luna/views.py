@@ -449,7 +449,7 @@ def soft_savings_print(request):
                     'legal_footer': print_page_legal_footer,
                 }
                 try:
-                    results = soft_savings_analysis(service_number, start_date, end_date)
+                    results = soft_savings_analysis(str(service_number), str(start_date), str(end_date))
                     context['form_response'] = results
                 except Exception as e:
                     context['form_response_complete'] = False
