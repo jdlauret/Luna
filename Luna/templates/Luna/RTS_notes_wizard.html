@@ -78,6 +78,7 @@
                         <li>{{ item }}</li>
                     {% endfor %}
                 </ul>
+                <b style="color: red;"> * Please use salesforce to fill in information labeled "None" in roof section and array </b><br>
 {#                Button that allows the user to copy the text below#}
                 <button id="copyButton" onclick="clickCopy()">Copy </button>
             {% endif %}
@@ -86,7 +87,7 @@
 <textarea id="copyarea" style="width: 100%; height: 500px;">
 Service Number: {{ form_response.spec_info.SERVICE_NUMBER }}
 ESC Scheduled for Date: {{ form_response.spec_info.ESC_SCHEDULED_FOR }}
-Arrays: INSERT INFO FROM VISUAL CAD HERE {#            [{{ form_response.spec_info.ARRAYS }}]#}
+Arrays: {{ form_response.spec_info.ARRAYS }}
 System Size: {{ form_response.spec_info.SYSTEM_SIZE_DESIGNED_KW }} KW
 Total Modules: {{ form_response.spec_info.MODULE_QTY }}
 Roof Type: {{ form_response.spec_info.ROOF_TYPE }}

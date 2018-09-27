@@ -10,46 +10,46 @@ utilities_dir = os.path.join(luna_dir, 'utilities')
 DB = SnowFlakeDW()
 DB.set_user('MACK_DAMAVANDI')
 
-
+# todo where is consumption, backfeed, and utility bill called?
 def full_benefit_analysis(servicenum, consumption, backfeed, utilitybill):
 
     results = {}
 
-    dw = DataWarehouse('admin')
-
-    with open(os.path.join(utilities_dir, 'full_benefit_analysis.sql'),'r') as file:
-        sql = file.read()
-
-    sql = sql.split(';')
-
     if 'S-' in servicenum.upper():
         servicenum = servicenum.upper().replace('S-','')
 
-    bindvars = [{'serviceNum': servicenum}]
-
     try:
-        dw.query_results(sql[0], bindvars=bindvars[0])
+        DB.open_connection()
+        DW = SnowflakeConsole(DB)
+        with open (os.path.join(utilities_dir, 'full_benefit_analysis.sql'), 'r') as file:
+            sql = file.read()
+        sql = sql.split(';')
+
+        query = sql[0].format(service_number=str(servicenum))
+        DW.execute_query(query)
+
     except Exception as e:
         results['error'] = e
         return results
 
-    results['account'] = dw.results
+    results['account'] = DW.query_results[0]
+
 
     if len(results['account']) == 0:
         results['error'] = '{} is not a valid service number.'.format(servicenum)
         return results
-    elif results['account'][0][7].date() > date.today()-timedelta(365):
+    elif results['account'][7].date() > date.today()-timedelta(365):
         results['error'] = 'Benefit Analyses can only be performed on systems ' \
             'that have been PTO\'d for at least one year.'
-        results['account'][0][7] = results['account'][0][7].strftime('%B %#d, %Y')
-        results['account'][0][9] = '${} per kWh'.format(results['account'][0][9])
-        results['account'][0][10] = '{} kWh'.format(results['account'][0][10])
+        results['account'][7] = results['account'][7].strftime('%B %#d, %Y')
+        results['account'][9] = '${} per kWh'.format(results['account'][9])
+        results['account'][10] = '{} kWh'.format(results['account'][10])
         return results
-    elif results['account'][0][8] == None:
+    elif results['account'][8] == None:
         results['error'] = 'There was no utility information found for service ' \
                                     '{}.'.format(servicenum)
-        results['account'][0][7] = results['account'][0][7].strftime('%B %#d, %Y')
-        results['account'][0][10] = '{} kWh'.format(results['account'][0][10])
+        results['account'][7] = results['account'][7].strftime('%B %#d, %Y')
+        results['account'][10] = '{} kWh'.format(results['account'][10])
         return results
 
     results['enddate'] = (date.today().replace(day=1) - timedelta(1))
@@ -57,13 +57,19 @@ def full_benefit_analysis(servicenum, consumption, backfeed, utilitybill):
     results['startdate'] = (results['enddate'] - timedelta(365)).replace(month=results['enddate'].month % 12 + 1, day=1)
     startdatestring = results['startdate'].strftime('%m/%d/%Y')
 
-    bindvars.append({'serviceNum': servicenum,
-                 'startDate': startdatestring,
-                 'endDate': enddatestring})
+    # TODO query is calling start and enddate, but not called in here
+    query_2 = sql[1].format(service_number=str(servicenum), start_date=str(startdate), end_date=str(enddate))
+    try:
+        DW.execute_query(query_2)
 
-    dw.query_results(sql[1], bindvars=bindvars[1])
+    except Exception as e:
+        results['error'] = e
+        return results
 
-    results['production'] = dw.results
+    finally:
+        DB.close_connection()
+
+    results['production'] = DW.query_results
 
     if len(results['production']) == 0:
         results['error'] = 'There was no Actual production ' \
@@ -77,12 +83,12 @@ def full_benefit_analysis(servicenum, consumption, backfeed, utilitybill):
     # sql = sql.split(';')
     #
     # try:
-    #     dw.query_results(sql[date.today().month-1], bindvars=bindvars[0])
+    #     DW.query_results(sql[date.today().month-1], bindvars=bindvars[0])
     # except Exception as e:
     #     results['error'] = e
     #     return results
     #
-    # results['presolarconsumption'] = dw.results
+    # results['presolarconsumption'] = DW.results
 
     i = 0
     while i < len(consumption):
@@ -97,7 +103,7 @@ def full_benefit_analysis(servicenum, consumption, backfeed, utilitybill):
         month.insert(2, month[1] - month[2]) #usage from panels
         month.insert(5, round(month[2] + month[4], 3)) #total consumption
         month.append(round(month[6] + month[7], 2)) #bill w/solar
-        month.append(round(month[5] * results['account'][0][9], 2)) #bill w/out solar
+        month.append(round(month[5] * results['account'][9], 2)) #bill w/out solar
         month.append(round(month[9] - month[8], 2)) #savings
 
     # results['header'] = [
@@ -138,9 +144,9 @@ def full_benefit_analysis(servicenum, consumption, backfeed, utilitybill):
         ]
     )
 
-    results['account'][0][9] = '${} per kWh'.format(round(results['account'][0][9], 5))
-    results['account'][0][7] = results['account'][0][7].strftime('%B %#d, %Y')
-    results['account'][0][10] = '{} kWh'.format(results['account'][0][10])
+    results['account'][9] = '${} per kWh'.format(round(results['account'][9], 5))
+    results['account'][7] = results['account'][7].strftime('%B %#d, %Y')
+    results['account'][10] = '{} kWh'.format(results['account'][10])
 
     for month in results['production']:
         month[1] = '{} kWh'.format(month[1])
@@ -182,7 +188,7 @@ def full_benefit_analysis(servicenum, consumption, backfeed, utilitybill):
     #             results['savings'][-1][1],
     #             results['startdate'].strftime('%m/%d/%Y'),
     #             '%.2f' % results['savings'][-1][2],
-    #             results['account'][0][8],
+    #             results['account'][8],
     #             '%.2f' % results['savings'][-1][3],
     #             results['startdate'].strftime('%m/%d/%Y'),
     #             '%.2f' % results['savings'][-1][4]
