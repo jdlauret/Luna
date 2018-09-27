@@ -74,7 +74,6 @@ def notes_wizard (servicenum):
     for j, value in enumerate(roof_section_info):
         install_notes['spec_info'][roof_section_columns[j]] = value
     install_notes['spec_column'] = roof_section_columns
-    print('spec notes', install_notes['spec_info'])
 
 
     # pulls the total solar roof information and turns the string into a integer
