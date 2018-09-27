@@ -583,8 +583,10 @@ def work_notes_print(request):
                     'form_response_complete': True,
                     'form_response': {},
                     'legal_footer': print_page_legal_footer,
-                    'date': dt.now(),
+                    'date': dt.today().strftime('%m/%d/%y'),
+                    'instructions': request.POST['instructions'],
                 }
+                print(context)
                 try:
                     results = work_order(str(service_number))
                     context['form_response'] = results
@@ -602,6 +604,8 @@ def work_notes_print(request):
                     'form_response_complete': False,
                     'form_response': {},
                     'legal_footer': print_page_legal_footer,
+                    'date': dt.today().strftime('%m/%d/%y'),
+                    'instructions': request.POST['instructions'],
                 }
                 return render(request, 'Luna/work_notes_pdf.html', context=context)
         else:
@@ -612,6 +616,8 @@ def work_notes_print(request):
                 'form_response_complete': False,
                 'form_response': {},
                 'legal_footer': print_page_legal_footer,
+                'date': dt.today().strftime('%m/%d/%y'),
+                'instructions': request.POST['instructions'],
             }
             return render(request, 'Luna/work_notes_pdf.html', context)
     else:

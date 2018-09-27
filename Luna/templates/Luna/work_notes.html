@@ -71,10 +71,11 @@
             {% endif %}
 
         <div id="production_div">
+        {% csrf_token %}
             {% if form_response_complete == True %}
                 <form action="/calculators/work_order/pdf" method="POST">
-                    <label>Special Instructions: </label><br>
-                    <textarea></textarea><br>
+                    <label>Insert Special Instructions: </label><br>
+                    <textarea style="width: 500px;" name="instructions" ></textarea><br>
                     <input type="submit" value="Submit Print Friendly Page" formtarget="_blank"/>
                 </form>
             {% endif %}
