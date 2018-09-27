@@ -14,13 +14,14 @@ DB.set_user('MACK_DAMAVANDI')
 def notes_wizard (servicenum):
     install_notes = {
         'account_info': {},
-        'arrays': 0,
+        'arrays': {},
         'spec_info': {},
         'roof_sections': {},
         'form_response_complete': False
     }
 
-    servicenum = servicenum.upper().replace('S-', '')
+    if 'S-' in servicenum.upper():
+        servicenum = servicenum.upper().replace('S-' , '')
 
     try:
         DB.open_connection()
@@ -28,9 +29,8 @@ def notes_wizard (servicenum):
         with open(os.path.join(utilities_dir, 'RTS_notes_wizard.sql'), 'r') as file:
             sql = file.read()
         sql = sql.split(';')
-        DW.execute_query(sql[0], bindvars=servicenum)
+        DW.execute_query(sql[0].format(service_number=str(servicenum)))
         account_information = DW.query_results[0]
-
         install_notes['account_info'] = account_information
         if install_notes['account_info'][7] == None:
             pass
@@ -48,16 +48,16 @@ def notes_wizard (servicenum):
 
     try:
         # Execute second query results
-        DW.execute_query(sql[1], bindvars=servicenum)
+        DW.execute_query(sql[1].format(service_number=str(servicenum)))
         # Second query results
+        roof_section_columns = DW.query_columns
         roof_section_info = DW.query_results[0]
+
         # error message when no installation notes are pulled up
         if len(roof_section_info) == 0:
             install_notes['error'] = 'There was no Installation Notes and ' \
                                'Information found for Service Number {}'.format(servicenum)
             return install_notes
-        # second query Column Names
-        roof_section_columns = DW.query_columns
 
     except Exception as e:
         install_notes['error'] = e
