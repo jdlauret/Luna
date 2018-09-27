@@ -1,6 +1,7 @@
 import os
 import datetime as dt
 from datetime import date, timedelta
+from decimal import *
 from Luna.models import DataWarehouse
 from models import SnowFlakeDW, SnowflakeConsole
 
@@ -88,8 +89,8 @@ def system_performance(servicenum, startdate, enddate):
                                   round(totals[0], 3),
                                   round(totals[1], 3),
                                   round(totals[2], 3),
-                                  round(float(totals[2])/totals[0], 4),
-                                  round(float(totals[2])/totals[1], 4)
+                                  round(Decimal(totals[2])/totals[0], 4),
+                                  round(Decimal(totals[2])/totals[1], 4)
                                   ])
 
     results['account'][7] = results['account'][7].strftime('%B %#d, %Y')
