@@ -385,7 +385,7 @@ def soft_savings_calculator(request):
         if request.method == 'POST':
             form = SoftSavingsForm(request.POST)
             if form.is_valid():
-                print('form is valid')
+
                 service_number = form.cleaned_data['service_number']
                 start_date = form.cleaned_data['start_date']
                 end_date = form.cleaned_data['end_date']
