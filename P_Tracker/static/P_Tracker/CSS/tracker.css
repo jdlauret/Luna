@@ -1,0 +1,10 @@
+.shift_body{
+    margin-left: 210px;
+}
+.main_body{
+    width: 100%;
+    padding: 20px;
+}
+.error_box{
+    color: red;
+}
