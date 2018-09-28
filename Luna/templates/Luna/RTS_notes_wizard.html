@@ -78,7 +78,7 @@
                         <li>{{ item }}</li>
                     {% endfor %}
                 </ul>
-                <b style="color: red;"> * Please use salesforce to fill in information labeled "N/A" in roof section and array </b><br>
+                <b style="color: red;"> * Please use salesforce to fill in information labeled "N/A"  </b><br>
 {#                Button that allows the user to copy the text below#}
                 <button id="copyButton" onclick="clickCopy()">Copy </button>
             {% endif %}
@@ -86,7 +86,7 @@
 {% if form_response_complete == True %}
 <textarea id="copyarea" style="width: 100%; height: 500px;">
 Service Number: {{ form_response.spec_info.SERVICE_NUMBER }}
-ESC Scheduled for Date: N/A {#    {{ form_response.spec_info.ESC_SCHEDULED_FOR }}#}
+ESC Scheduled for Date: {{ form_response.spec_info.ESC_SCHEDULED_FOR }}
 Arrays: N/A {# {{ form_response.spec_info.ARRAYS }}#}
 System Size: {{ form_response.spec_info.SYSTEM_SIZE_DESIGNED_KW }} KW
 Total Modules: {{ form_response.spec_info.MODULE_QTY }}
@@ -96,11 +96,10 @@ Inverter Model: {{ form_response.spec_info.INVERTER_MODEL }}
 Install Notes: INSERT INSTALL NOTES HERE
 {#Roof Section#}{% for key, values in form_response.roof_sections.items %}
 {{ key }}{% for key2, value in values.items %}
-    {{ key2 }}: N/A {% endfor %}
+    {{ key2 }}: {{ value }} {% endfor %}
 {% endfor %}{% endif %}
 </textarea>
 
         </div>
     </div>
 {% endblock %}
-{#{{ value }}#}
