@@ -10,7 +10,6 @@ utilities_dir = os.path.join(luna_dir, 'utilities')
 DB = SnowFlakeDW()
 DB.set_user('MACK_DAMAVANDI')
 
-
 def notes_wizard (servicenum):
     install_notes = {
         'account_info': {},
@@ -73,22 +72,24 @@ def notes_wizard (servicenum):
     # combines roof_section info and column name together
     for j, value in enumerate(roof_section_info):
         install_notes['spec_info'][roof_section_columns[j]] = value
-    install_notes['spec_column'] = roof_section_columns
-
 
     # pulls the total solar roof information and turns the string into a integer
     tsr = int(roof_section_info[roof_section_columns.index('TOTAL_SOLAR_ROOFS')])
+
+    t1 = roof_section_info[roof_section_columns.index('NUM_MODULES')].split(',')
+    t2 = roof_section_info[roof_section_columns.index('ROOF_AZIMUTH')].split(',')
+    t3 = roof_section_info[roof_section_columns.index('ROOF_TILT')].split(',')
+
     # for loop for how many roof sections it should create and places the number of modules, azimuth and tilt into each section
+
     for k in range(tsr):
         new_section = 'Roof Section ' + str(k + 1) + ':'
         install_notes['roof_sections'][new_section] = {
-            # roof_section_info[roof_section_columns.index('NUM_MODULES_DESIGNED')].split(',')[k],
-            # roof_section_info[roof_section_columns.index('ROOF_AZIMUTH_DESIGNED')].split(',')[k],
-            # roof_section_info[roof_section_columns.index('ROOF_TILT')].split(',')[k],
-            'Number of Modules': roof_section_info[roof_section_columns.index('TOTAL_MODULES_DESIGNED')],
-            'Azimuth': roof_section_info[roof_section_columns.index('AZIMUTH')],
-            'Tilt': roof_section_info[roof_section_columns.index('TILT')],
+            'Number of Modules': t1[k],
+            'Azimuth': t2[k],
+            'Tilt': t3[k],
         }
+
     install_notes['form_response_complete'] = True
 
     return install_notes
