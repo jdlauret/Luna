@@ -1,0 +1,46 @@
+{% extends 'Luna/base.html' %}
+{% block content %}
+    <head>
+    <title>Productivity Tracker</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'P_Tracker/CSS/tracker.css' %}">
+    </head>
+    <div class="shift_body">
+        <div class="main_body" style="padding-top: 200px;">
+            <div class="container" style="width: 50%;">
+                <div class="error_box">
+
+                </div>
+            {% csrf_token %}
+                <form action="create" method="POST">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="First name" name="fname">
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Last name" name="lname">
+                                </div>
+                            </div>
+                            <br>
+                            <input type="text" class="form-control" placeholder="Badge ID" name="badge">
+                            <br>
+                            <div class="row">
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Password" name="pwd">
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Confirm PW" name="pwd2">
+                                </div>
+                            </div>
+                            <br>
+                            <input type="text" class="form-control" placeholder="Given Code" name="code"><br>
+                            <input type="submit" class="btn btn-default" value="Create">
+                        </div>
+                    </div>
+
+                </form>
+
+        </div>
+    </div>
+{% endblock %}

@@ -44,6 +44,7 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_AUTH_EXTRA_ARGUMENTS = {'hd': 'vivintsolar.com'}
 INSTALLED_APPS = [
     'Luna.apps.LunaConfig',
     'coin.apps.CoinAppConfig',
+    'P_Tracker.apps.P_TrackerAppConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -159,5 +160,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "coin", "static"),
     os.path.join(BASE_DIR, "Luna", "static"),
+    os.path.join(BASE_DIR, "P_Tracker", "static"),
 ]
 
