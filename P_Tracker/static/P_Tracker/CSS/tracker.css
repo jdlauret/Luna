@@ -1,10 +1,42 @@
-.shift_body{
-    margin-left: 210px;
+* {
+    padding: 0px;
+    margin: 0px;
 }
+
+body {
+    font-family: "Lato", sans-serif;
+    color: color: #656569;
+}
+
+#top_pane{
+    height: 380px;
+    padding: 50px 10px 10px 10px;
+}
+
+.shift_body{
+    margin-left: 190px;
+}
+
 .main_body{
     width: 100%;
     padding: 20px;
 }
+
 .error_box{
     color: red;
+}
+
+.block{
+    border-style: solid;
+    padding: 10px;
+    display: inline-block;
+}
+
+table{
+    border-collapse: collapse;
+}
+
+table, th, td{
+    border: 1px solid black;
+    padding: 10px;
 }
