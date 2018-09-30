@@ -5,7 +5,7 @@ d2="Apr 1, 2019";
 d3="Jul 1, 2019";
 d4="Oct 1, 2018";
 
-var countDownDate = new Date(d4).getTime();
+var countDownDate = new Date(d1).getTime();
 
 // Update the count down every 1 second
 var x = setInterval(function() {
