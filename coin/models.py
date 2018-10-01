@@ -64,21 +64,25 @@ class coinManager(models.Manager):
         rec_ID = employee_id.objects.get(badgeid=int(post_data['recipient']))
         coin_given = int(float(post_data['award']))
 
-        # SAVES THE TRANSACTION THAT WAS CREATED BY OVERLORD
-        temp=transaction(
-            benefactor_name = agent_info.name,
-            benefactor=post_data['id'],
-            recipient=post_data['recipient'],
-            recipient_name=rec_ID.name,
-            award=post_data['award'],
-            note=post_data['note'],
-            anonymous=post_data['anonymous'],
-        )
-        temp.save()
+        if len(agent_info) < 0 :
+            errors.append('Please Add New Employee')
+            return errors
+        else:\
+            # SAVES THE TRANSACTION THAT WAS CREATED BY OVERLORD
+            temp = transaction(
+                benefactor_name = agent_info.name,
+                benefactor=post_data['id'],
+                recipient=post_data['recipient'],
+                recipient_name=rec_ID.name,
+                award=post_data['award'],
+                note=post_data['note'],
+                anonymous=post_data['anonymous'],
+            )
+            temp.save()
 
         # DEDUCTS THE TRANSACTION ALLOTMENT FROM WHO CREATED THE TRANSACTION
-        agent_info.allotment -= coin_given
-        agent_info.save()
+            agent_info.allotment -= coin_given
+            agent_info.save()
 
 # COIN SHARING DATABASE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
