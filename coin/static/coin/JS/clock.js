@@ -4,6 +4,7 @@ d1="Jan 1, 2019";
 d2="Apr 1, 2019";
 d3="Jul 1, 2019";
 d4="Oct 1, 2018";
+d5 ="Nov 1, 2018";
 
 var countDownDate = new Date(d1).getTime();
 
