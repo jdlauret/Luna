@@ -528,10 +528,11 @@ def work_notes(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
             form = RTSForm(request.POST)
-            if form.is_valid():
+            if form.is_valid() and request.POST['type']:
                 service_number = form.cleaned_data['service_number']
                 context = {
                     'form': form,
+                    'type': request.POST['type'],
                     'user': request.user,
                     'form_response_complete': True,
                     'form_response': {},
@@ -550,6 +551,7 @@ def work_notes(request):
                 form = RTSForm()
                 context = {
                     'form': form,
+                    'type': request.POST['type'],
                     'user': request.user,
                     'form_response_complete': False,
                     'form_response': {},

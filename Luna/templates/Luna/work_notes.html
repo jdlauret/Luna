@@ -25,6 +25,13 @@
                             </tr>
                         {% endfor %}
                         <tr>
+                            <td>Removal/Reinstall: </td>
+                            <td><select name="type">
+                                <option value="removal">Removal</option>
+                                <option value="reinstall">Reinstall</option>
+                            </select></td>
+                        </tr>
+                        <tr>
                             <td style="float: right" colspan="2">
                                 <input style="display:inline-block;" type="submit" value="Submit"/>
                             </td>
@@ -46,6 +53,7 @@
                             <tr>
                                 <th>Service Number</th>
                                 <th>Name</th>
+                                <th>Phone</th>
                                 <th>Email</th>
                                 <th>Street Address</th>
                                 <th>City</th>
@@ -70,15 +78,36 @@
                 </table>
             {% endif %}
 
-        <div id="production_div">
+        <div id="production_div" style="display: inline-block; vertical-align: top;">
         {% csrf_token %}
             {% if form_response_complete == True %}
                 <form action="/calculators/work_order/pdf" method="POST">
                     <label>Insert Special Instructions: </label><br>
                     <textarea style="width: 500px;" name="instructions" ></textarea><br>
+                    <input type="hidden" name="type1" value="{{ type }}">
                     <input type="submit" value="Submit Print Friendly Page" formtarget="_blank"/>
                 </form>
-            {% endif %}
+        </div>
+    <div style="display:inline-block; padding-left:50px;">
+        <button id="copyButton" onclick="clickCopy()">Copy </button>
+        <div>
+<textarea style="width: 700px; height: 400px;" id="copyarea">
+Customer Name: {{ form_response.account_info.1 }}
+Phone Number: {{ form_response.account_info.2 }}
+Service number: {{ form_response.account_info.0 }}
+System Size:
+Total Number of Modules in system:
+
+Type of {{ type }}:
+Number of modules:
+Affected Roof Sections:
+Tilt:
+Azimuth:
+Inverter Provider:
+Racking System:
+Module Type:
+</textarea>
         </div>
     </div>
+    {% endif %}
 {% endblock %}
