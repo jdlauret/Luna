@@ -76,7 +76,7 @@ def notes_wizard (servicenum):
     # pulls the total solar roof information and turns the string into a integer
     tsr = int(roof_section_info[roof_section_columns.index('TOTAL_SOLAR_ROOFS')])
 
-    t1 = roof_section_info[roof_section_columns.index('NUM_MODULES')].split(',')
+    t1 = roof_section_info[roof_section_columns.index('NUM_MODULES_DESIGNED')].split(',')
     t2 = roof_section_info[roof_section_columns.index('ROOF_AZIMUTH')].split(',')
     t3 = roof_section_info[roof_section_columns.index('ROOF_TILT')].split(',')
 
