@@ -7,4 +7,7 @@ from django.shortcuts import render, redirect
 @login_required
 # @user_passes_test(email_check)
 def index(request):
+	# context = {
+	# 	# 'name' : name,
+	# }
 	return render(request, 'main.html')
