@@ -20,24 +20,12 @@
     </style>
 
     <div class="main">
-<<<<<<< Updated upstream
-
-        <h2>Customer Solutions Calculator</h2>
-        {#    ACCOUNT LOOKUP AND ACCOUNT INFORMATION HEADER ON CUSTOMER SOLUTIONS CALCULATOR ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-        <div style="width: 100%; display: inline-block;">
-            <div style="float: left; width: 30%">
-                <form action="/calculators/Customer_Solutions/" method="POST">
-=======
-=======
->>>>>>> Stashed changes
         <h2>Customer Solutions Calculator</h2>
 
         {#    ACCOUNT LOOKUP AND ACCOUNT INFORMATION HEADER ON CUSTOMER SOLUTIONS CALCULATOR ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
         <div style="width: 100%; display: inline-block;">
             <div style="float: left; width: 30%">
                 <form action="/calculators/Customer_Solutions/" method="post">
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
                     <table class="table table-borderless" style="border: white;">
                         <thead class="thead-dark">
                         <tr>
@@ -66,20 +54,6 @@
                     </table>
                 </form>
             </div>
-<<<<<<< Updated upstream
-
-            {% if form_response_complete == True %}
-                <div id="account_info" style="margin-left: 32%">
-                    {#            Table for Account Information #}
-                    <table class="table">
-                        <thead class="thead-dark">
-                        <tr>
-                            <th colspan="10">Account Information</th>
-                        </tr>
-                        </thead>
-=======
-=======
->>>>>>> Stashed changes
             <div id="account_info" style="margin-left: 32%">
                 {#            Table for Account Information #}
                 <table class="table">
@@ -89,8 +63,6 @@
                     </tr>
                     </thead>
                     {% if form_response_complete == True %}
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
                         <thead>
                         <tr>
                             <th>Service Number</th>
@@ -101,33 +73,16 @@
                             <th>State</th>
                             <th>Zip Code</th>
                         </tr>
-<<<<<<< Updated upstream
-                        </thead>
-                        {#                        Inputs the account information ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-                        <tr>
-=======
                         <tr>
                             {#                        Inputs the account information ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
->>>>>>> Stashed changes
                             {% for info in form_response.account_info %}
                                 <td>{{ info }}</td>
                             {% endfor %}
                         </tr>
-<<<<<<< Updated upstream
-                    </table>
-                </div>
-            {% endif %}
-        </div>
-
-=======
-=======
->>>>>>> Stashed changes
                     {% endif %}
                 </table>
             </div>
         </div>
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
         {% if form_response.error %}
             <table>
                 <tr>
@@ -135,36 +90,18 @@
                 </tr>
             </table>
         {% endif %}
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
         <div class="tabs">
             {% if form_response_complete == True %}
                 {#                      BUYOUT RATE CALCULATOR~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
                 <div class="tab">
                     <input type="radio" id="tab-1" name="tab-group-1" checked>
                     <label for="tab-1">Buyout Rate Calculator</label>
-<<<<<<< Updated upstream
-                    {% if form_response_complete == True %}
-                        <div class="content">
-                            <form action="/calculators/Customer_Solutions/buyout/pdf" method="POST">
-                                <input type="submit" value="Print Friendly Page" formtarget="_blank"/>
-                                <input type="hidden" name="service_number" value="{{ form_response.service_number }}">
-                            </form>
-                            <br><br>
-
-=======
-=======
->>>>>>> Stashed changes
 
                     <div class="content">
                         {% if form_response_complete == True %}
                             <form action="/calculators/Customer_Solutions/buyout/pdf">
                                 <input type="submit" value="Print Friendly Page" formtarget="_blank"/><br><br>
                             </form>
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
                             <table class="calc" style="width: 100%;">
                                 <tr class="calc">
                                     <th class="calc">Year</th>
@@ -183,130 +120,6 @@
                                     <td class="calc">${{ form_response.default_total }}</td>
                                 </tr>
                             </table>
-<<<<<<< Updated upstream
-                        </div>
-                    {% endif %}
-                </div>
-
-                {#              PREPAYMENT CALCULATOR ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-
-                <div class="tab">
-                <input type="radio" id="tab-2" name="tab-group-1">
-                <label for="tab-2">Prepayment Calculator</label>
-                {% if form_response_complete == True %}
-                    <div class="content">
-                    <form action="/calculators/Customer_Solutions/prepayment/pdf" method="POST">
-                        <input type="submit" value="Print Friendly Page" formtarget="_blank"/>
-                        <input type="hidden" name="service_number" value="{{ form_response.service_number }}">
-                    </form><br><br>
-
-                    <table style="display: inline-block; vertical-align: top;">
-                        <tr style="border: 1px solid black">
-                            <th style="width:300px;"></th>
-                            <th style="width:300px;"></th>
-                        </tr>
-                        <tr style="border: 1px solid black">
-                            <td style="padding: 5px;"><b>Service Number</b></td>
-                            <td>{{ form_response2.service_number }}</td>
-                        </tr>
-                        <tr style="border: 1px solid black">
-                            <td style="padding: 5px;"><b>Escalator</b></td>
-                            <td>{{ form_response2.escalator }}%</td>
-                        </tr>
-                        <tr style="border: 1px solid black">
-                            <td style="padding: 5px;"><b>System Size</b></td>
-                            <td>{{ form_response2.system_size }} kW</td>
-                        </tr>
-                        <tr style="border: 1px solid black">
-                            <td style="padding: 5px;"><b>Sun Hours</b></td>
-                            <td>{{ form_response2.sun_hours }}</td>
-                        </tr>
-                        <tr style="border: 1px solid black">
-                            <td style="padding: 5px;"><b>Rate Per KWH</b></td>
-                            <td>{{ form_response2.r_p_k }}</td>
-                        </tr>
-                        <tr style="border: 1px solid black">
-                            <td style="padding: 5px;"><b>Start Billing</b></td>
-                            <td>{{ form_response2.start_billing }}</td>
-                        </tr>
-                        <tr style="border: 1px solid black">
-                            <td style="padding: 5px;"><b>Record Type</b></td>
-                            <td>{{ form_response2.record_type }}</td>
-                        </tr>
-                        <tr style="border: 1px solid black">
-                            <td style="padding: 5px;"><b>Current Annual Usage</b></td>
-                            <td>{{ form_response2.current_annual_usage }}</td>
-                        </tr>
-                        <tr style="border: 1px solid black">
-                            <td style="padding: 5px;"><b>Remaining Contract</b></td>
-                            <td>{{ form_response2.remaining_contract }}</td>
-                        </tr>
-                        <tr style="border: 1px solid black">
-                            <td style="padding: 5px;"><b>Contract Version</b></td>
-                            <td>{{ form_response2.contract_version }}</td>
-                        </tr>
-                    </table>
-
-                    <table style="display: inline-block; padding: 5px 40px;">
-                        <tr>
-                            <th>System Details</th>
-                            <th></th>
-                        </tr>
-                        <tr>
-                            <td style="padding: 5px;">System Size</td>
-                            <td>{{ form_response2.system_size }} kW</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 5px;">Starting PPA Price ($/kWh)</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 5px;">Sun Hours from PV Designer(kWh/kW)</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 5px;">AR</td>
-                            <td>{{ form_response2.service_number }}</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 5px;">Current Contract Month</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 5px;">In Service</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 5px;">Calculation Date</td>
-                            <td>{{ date }}</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 5px;">Prepayment Month</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 5px;">Contract Type:</td>
-                            <td>{{ form_response2.record_type }}</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 5px;">Contract Version:</td>
-                            <td>{{ form_response2.contract_version }}</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 5px;">Annual Escalator</td>
-                            <td>{{ form_response2.escalator }}</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 5px;">Prepayment Price:</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 5px;">Current Payment Bucket</td>
-                        </tr>
-                    </table>
-                {% endif %}
-            </div>
-            {% endif %}
-            </div>
-        </div>
-    </div>
-=======
-=======
->>>>>>> Stashed changes
                         {% endif %}
                     </div>
                 </div>
@@ -359,6 +172,4 @@
                 </div>
                 </div>
             {% endif %}
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
 {% endblock %}
