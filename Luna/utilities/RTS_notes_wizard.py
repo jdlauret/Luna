@@ -23,7 +23,6 @@ def notes_wizard (servicenum):
         servicenum = servicenum.upper().replace('S-' , '')
 
     try:
-<<<<<<< HEAD
         DB.open_connection()
         DW = SnowflakeConsole(DB)
         with open(os.path.join(utilities_dir, 'RTS_notes_wizard.sql'), 'r') as file:
@@ -37,12 +36,10 @@ def notes_wizard (servicenum):
         else:
             install_notes['account_info'][7] = install_notes['account_info'][7].strftime('%B %#d, %Y')
 
-=======
         # first query results
         dw.query_results(sql[0], bindvars=bindvars)
         account_information = dw.results[0]
         install_notes['account_info'] = account_information
->>>>>>> Buyout_PrepayCalc
         # error message if service number is not valid
         if len(account_information) == 0:
             install_notes['error'] = '{} is not a valid service number.'.format(servicenum)
