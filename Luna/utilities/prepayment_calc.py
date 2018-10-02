@@ -72,9 +72,15 @@ def prepay_calc(servicenum):
         notes['contract_version'] = notes.pop(9)
     return notes
 
+=======
+>>>>>>> Stashed changes
     DW.execute_query(sql[0].format(service_number = str(servicenum)))
     query = DW.query_results[0]
 
 
+<<<<<<< Updated upstream
     return notes
 
+=======
+    return notes
+>>>>>>> Stashed changes

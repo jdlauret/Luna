@@ -560,6 +560,8 @@ def customer_solutions(request):
             else:
                 form = CSForm()
 =======
+=======
+>>>>>>> Stashed changes
             form = RTSForm(request.POST)
             if form.is_valid():
                 service_number = form.cleaned_data['service_number']
@@ -576,6 +578,7 @@ def customer_solutions(request):
                 return response
             else:
                 form = RTSForm()
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes
                 context = {
                     'form': form,
@@ -602,6 +605,8 @@ def customer_solutions(request):
             }
             return render(request, 'Luna/Customer_Solutions.html', context=context)
 =======
+=======
+>>>>>>> Stashed changes
             form = RTSForm()
             context = {
                 'form': form,
@@ -611,6 +616,7 @@ def customer_solutions(request):
                 'date': dt.today().strftime('%m/%d/%y')
             }
             return render(request, 'Luna/Customer_Solutions.html', context)
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes
     else:
         return HttpResponseRedirect('/Luna')
@@ -649,6 +655,8 @@ def buyout_print(request):
                 'legal_footer': print_page_legal_footer,
                 'date': dt.today().strftime('%m/%d/%y'),
 =======
+=======
+>>>>>>> Stashed changes
 def customer_solutions_buyout(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -683,6 +691,7 @@ def customer_solutions_buyout(request):
                 'form_response': {},
                 'legal_footer': print_page_legal_footer,
                 'date': dt.today().strftime('%m/%d/%y')
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes
             }
             return render(request, 'Luna/Customer_Solutions_buyout_pdf.html', context)
@@ -722,6 +731,8 @@ def prepayment_print(request):
             context = {
                 'user': request.user,
 =======
+=======
+>>>>>>> Stashed changes
 def customer_solutions_prepayment(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -752,6 +763,7 @@ def customer_solutions_prepayment(request):
             context = {
                 'user': request.user,
                 'form': form,
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes
                 'form_response_complete': False,
                 'form_response': {},

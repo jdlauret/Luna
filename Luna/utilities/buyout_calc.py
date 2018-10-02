@@ -75,12 +75,15 @@ def buyout_calc(servicenum):
             return notes
 
 =======
+=======
+>>>>>>> Stashed changes
     notes['account_info'] = account_information
 
     try:
         DW.execute_query(sql[1], format(service_number=str(servicenum)))
         query_results = DW.query_results[0]
 
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes
     except Exception as e:
         notes['error'] = e
@@ -91,10 +94,13 @@ def buyout_calc(servicenum):
 
 <<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
     if len(query_results) == 0:
         notes['error'] = '{} is not a valid service number.'.format(servicenum)
         return notes
 
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes
     for i, value in enumerate(query_results):
         notes[i] = value

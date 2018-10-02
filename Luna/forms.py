@@ -56,6 +56,8 @@ class CSForm(forms.Form):
 
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 class FullBenefitForm(forms.Form):
     month = previous_month_end().replace(
         month=previous_month_end().month % 12 + 1,
