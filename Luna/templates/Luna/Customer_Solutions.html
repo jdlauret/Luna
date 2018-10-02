@@ -20,13 +20,17 @@
     </style>
 
     <div class="main">
+<<<<<<< HEAD
 <<<<<<< Updated upstream
+=======
+>>>>>>> Buyout_PrepayCalc
 
         <h2>Customer Solutions Calculator</h2>
         {#    ACCOUNT LOOKUP AND ACCOUNT INFORMATION HEADER ON CUSTOMER SOLUTIONS CALCULATOR ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
         <div style="width: 100%; display: inline-block;">
             <div style="float: left; width: 30%">
                 <form action="/calculators/Customer_Solutions/" method="POST">
+<<<<<<< HEAD
 =======
         <h2>Customer Solutions Calculator</h2>
 
@@ -35,6 +39,8 @@
             <div style="float: left; width: 30%">
                 <form action="/calculators/Customer_Solutions/" method="post">
 >>>>>>> Stashed changes
+=======
+>>>>>>> Buyout_PrepayCalc
                     <table class="table table-borderless" style="border: white;">
                         <thead class="thead-dark">
                         <tr>
@@ -63,7 +69,10 @@
                     </table>
                 </form>
             </div>
+<<<<<<< HEAD
 <<<<<<< Updated upstream
+=======
+>>>>>>> Buyout_PrepayCalc
 
             {% if form_response_complete == True %}
                 <div id="account_info" style="margin-left: 32%">
@@ -74,6 +83,7 @@
                             <th colspan="10">Account Information</th>
                         </tr>
                         </thead>
+<<<<<<< HEAD
 =======
             <div id="account_info" style="margin-left: 32%">
                 {#            Table for Account Information #}
@@ -85,6 +95,8 @@
                     </thead>
                     {% if form_response_complete == True %}
 >>>>>>> Stashed changes
+=======
+>>>>>>> Buyout_PrepayCalc
                         <thead>
                         <tr>
                             <th>Service Number</th>
@@ -95,6 +107,7 @@
                             <th>State</th>
                             <th>Zip Code</th>
                         </tr>
+<<<<<<< HEAD
 <<<<<<< Updated upstream
                         </thead>
                         {#                        Inputs the account information ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
@@ -103,22 +116,33 @@
                         <tr>
                             {#                        Inputs the account information ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
 >>>>>>> Stashed changes
+=======
+                        </thead>
+                        {#                        Inputs the account information ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+                        <tr>
+>>>>>>> Buyout_PrepayCalc
                             {% for info in form_response.account_info %}
                                 <td>{{ info }}</td>
                             {% endfor %}
                         </tr>
+<<<<<<< HEAD
 <<<<<<< Updated upstream
+=======
+>>>>>>> Buyout_PrepayCalc
                     </table>
                 </div>
             {% endif %}
         </div>
 
+<<<<<<< HEAD
 =======
                     {% endif %}
                 </table>
             </div>
         </div>
 >>>>>>> Stashed changes
+=======
+>>>>>>> Buyout_PrepayCalc
         {% if form_response.error %}
             <table>
                 <tr>
@@ -126,17 +150,24 @@
                 </tr>
             </table>
         {% endif %}
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 
 =======
 >>>>>>> Stashed changes
+=======
+
+>>>>>>> Buyout_PrepayCalc
         <div class="tabs">
             {% if form_response_complete == True %}
                 {#                      BUYOUT RATE CALCULATOR~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
                 <div class="tab">
                     <input type="radio" id="tab-1" name="tab-group-1" checked>
                     <label for="tab-1">Buyout Rate Calculator</label>
+<<<<<<< HEAD
 <<<<<<< Updated upstream
+=======
+>>>>>>> Buyout_PrepayCalc
                     {% if form_response_complete == True %}
                         <div class="content">
                             <form action="/calculators/Customer_Solutions/buyout/pdf" method="POST">
@@ -145,6 +176,7 @@
                             </form>
                             <br><br>
 
+<<<<<<< HEAD
 =======
 
                     <div class="content">
@@ -153,6 +185,8 @@
                                 <input type="submit" value="Print Friendly Page" formtarget="_blank"/><br><br>
                             </form>
 >>>>>>> Stashed changes
+=======
+>>>>>>> Buyout_PrepayCalc
                             <table class="calc" style="width: 100%;">
                                 <tr class="calc">
                                     <th class="calc">Year</th>
@@ -171,7 +205,10 @@
                                     <td class="calc">${{ form_response.default_total }}</td>
                                 </tr>
                             </table>
+<<<<<<< HEAD
 <<<<<<< Updated upstream
+=======
+>>>>>>> Buyout_PrepayCalc
                         </div>
                     {% endif %}
                 </div>
@@ -292,6 +329,7 @@
             </div>
         </div>
     </div>
+<<<<<<< HEAD
 =======
                         {% endif %}
                     </div>
@@ -346,4 +384,6 @@
                 </div>
             {% endif %}
 >>>>>>> Stashed changes
+=======
+>>>>>>> Buyout_PrepayCalc
 {% endblock %}

@@ -23,6 +23,7 @@ def notes_wizard (servicenum):
         servicenum = servicenum.upper().replace('S-' , '')
 
     try:
+<<<<<<< HEAD
         DB.open_connection()
         DW = SnowflakeConsole(DB)
         with open(os.path.join(utilities_dir, 'RTS_notes_wizard.sql'), 'r') as file:
@@ -36,6 +37,12 @@ def notes_wizard (servicenum):
         else:
             install_notes['account_info'][7] = install_notes['account_info'][7].strftime('%B %#d, %Y')
 
+=======
+        # first query results
+        dw.query_results(sql[0], bindvars=bindvars)
+        account_information = dw.results[0]
+        install_notes['account_info'] = account_information
+>>>>>>> Buyout_PrepayCalc
         # error message if service number is not valid
         if len(account_information) == 0:
             install_notes['error'] = '{} is not a valid service number.'.format(servicenum)
@@ -69,9 +76,21 @@ def notes_wizard (servicenum):
     tsr = 0
 
     # install notes combine both account information and column information into one list
+<<<<<<< HEAD
     # combines roof_section info and column name together
     for j, value in enumerate(roof_section_info):
         install_notes['spec_info'][roof_section_columns[j]] = value
+=======
+    if install_notes['account_info'][7] == None:
+        pass
+    else:
+        install_notes['account_info'][7] = install_notes['account_info'][7].strftime('%B %#d, %Y')
+
+    # combines roof_section info and column name together
+    for j, value in enumerate(roof_section_info):
+        install_notes['spec_info'][roof_section_columns[j]] = value
+    install_notes['spec_column'] = roof_section_columns
+>>>>>>> Buyout_PrepayCalc
 
     # pulls the total solar roof information and turns the string into a integer
     tsr = int(roof_section_info[roof_section_columns.index('TOTAL_SOLAR_ROOFS')])
@@ -85,9 +104,15 @@ def notes_wizard (servicenum):
     for k in range(tsr):
         new_section = 'Roof Section ' + str(k + 1) + ':'
         install_notes['roof_sections'][new_section] = {
+<<<<<<< HEAD
             'Number of Modules': t1[k],
             'Azimuth': t2[k],
             'Tilt': t3[k],
+=======
+            'Number of Modules': roof_section_info[roof_section_columns.index('NUM_MODULES_DESIGNED')].split(',')[k],
+            'Azimuth': roof_section_info[roof_section_columns.index('ROOF_AZIMUTH_DESIGNED')].split(',')[k],
+            'Tilt': roof_section_info[roof_section_columns.index('ROOF_TILT')].split(',')[k],
+>>>>>>> Buyout_PrepayCalc
         }
 
     install_notes['form_response_complete'] = True

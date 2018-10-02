@@ -51,12 +51,17 @@ class SoftSavingsForm(forms.Form):
 class RTSForm(forms.Form):
     service_number = forms.CharField(label='Service Number:', max_length=20, required=True)
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 <<<<<<< dev_branch
 =======
 class CSForm(forms.Form):
     service_number = forms.CharField(label='Service Number:', max_length=20, required=True)
 >>>>>>> Update 2
+=======
+class CSForm(forms.Form):
+    service_number = forms.CharField(label='Service Number:', max_length=20, required=True)
+>>>>>>> Buyout_PrepayCalc
 
 =======
 >>>>>>> Stashed changes
