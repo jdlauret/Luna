@@ -53,10 +53,11 @@
                 <a href="{% url 'sharing:transaction_view' %}">Send Coin</a>
             </div>
         </div>
-
-
+{#        {% if perms. %}#}
+        <a href="/P_Tracker">Tracker</a>
+{#        {% endif %}#}
         <a href="/career_path">Career Path</a>
-{#        <a href="https://goo.gl/forms/xzCIQTfr5zBt3q6l2">Got Feedback?</a>#}
+        {#        <a href="https://goo.gl/forms/xzCIQTfr5zBt3q6l2">Got Feedback?</a>#}
         <hr>
         <div class="sidenav-bottom">
             <a style="width: 166px" href="/logout">Logout</a>
