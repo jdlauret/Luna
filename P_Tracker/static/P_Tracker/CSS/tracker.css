@@ -10,7 +10,7 @@ body {
 
 #top_pane{
     height: 380px;
-    padding: 20px 10px 10px 10px;
+    padding: 5px 10px 10px 10px;
 }
 
 .shift_body{
@@ -32,15 +32,28 @@ body {
     display: inline-block;
 }
 
-table{
+#pro_table table{
     border-collapse: collapse;
+    padding: 10px;
 }
 
-th, td{
+#pro_table th, #pro_table td{
     text-align: center;
     padding: 20px;
     border-bottom: 1px solid #ddd;
     border-right: 1px solid #ddd;
 }
 
-tr:hover {background-color:#f5f5f5;}
+#proj_table td{
+    text-align: center;
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+#pro_table tr:hover {background-color:#f5f5f5;}
+
+#menu{
+    padding: 10px;
+    background-color: #333;
+    color: white;
+}
