@@ -14,6 +14,7 @@ from .utilities.full_benefit_analysis import full_benefit_analysis
 from .utilities.system_performance_calc import system_performance
 from .utilities.page_notes import *
 from .utilities.RTS_notes_wizard import notes_wizard
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 <<<<<<< Updated upstream
 <<<<<<< dev_branch
@@ -28,6 +29,9 @@ from .utilities.buyout_calc import buyout_calc
 from .utilities.buyout_calc import buyout_calc
 from .utilities.prepayment_calc import prepay_calc
 >>>>>>> Buyout_PrepayCalc
+=======
+from .utilities.buyout_calc import buyout_calc
+>>>>>>> Stashed changes
 
 register = Library()
 
@@ -534,6 +538,7 @@ def RTS_notes (request):
             return render(request, 'Luna/RTS_notes_wizard.html', context)
     else:
         return HttpResponseRedirect('/Luna')
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 <<<<<<< Updated upstream
 <<<<<<< dev_branch
@@ -542,12 +547,15 @@ def RTS_notes (request):
 >>>>>>> Stashed changes
 =======
 >>>>>>> Buyout_PrepayCalc
+=======
+>>>>>>> Stashed changes
 
 @login_required
 @user_passes_test(email_check)
 def customer_solutions(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
@@ -579,6 +587,8 @@ def customer_solutions(request):
                 form = CSForm()
 <<<<<<< HEAD
 =======
+=======
+>>>>>>> Stashed changes
             form = RTSForm(request.POST)
             if form.is_valid():
                 service_number = form.cleaned_data['service_number']
@@ -595,14 +605,18 @@ def customer_solutions(request):
                 return response
             else:
                 form = RTSForm()
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes
 =======
 >>>>>>> Buyout_PrepayCalc
+=======
+>>>>>>> Stashed changes
                 context = {
                     'form': form,
                     'user': request.user,
                     'form_response_complete': False,
                     'form_response': {},
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 <<<<<<< Updated upstream
                     'legal_footer': print_page_legal_footer,
@@ -611,10 +625,13 @@ def customer_solutions(request):
 =======
                     'legal_footer': print_page_legal_footer,
 >>>>>>> Buyout_PrepayCalc
+=======
+>>>>>>> Stashed changes
                     'date': dt.today().strftime('%m/%d/%y')
                 }
                 return render(request, 'Luna/Customer_Solutions.html', context=context)
         else:
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
@@ -631,6 +648,8 @@ def customer_solutions(request):
             return render(request, 'Luna/Customer_Solutions.html', context=context)
 <<<<<<< HEAD
 =======
+=======
+>>>>>>> Stashed changes
             form = RTSForm()
             context = {
                 'form': form,
@@ -640,14 +659,18 @@ def customer_solutions(request):
                 'date': dt.today().strftime('%m/%d/%y')
             }
             return render(request, 'Luna/Customer_Solutions.html', context)
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes
 =======
 >>>>>>> Buyout_PrepayCalc
+=======
+>>>>>>> Stashed changes
     else:
         return HttpResponseRedirect('/Luna')
 
 @login_required
 @user_passes_test(email_check)
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
@@ -684,6 +707,8 @@ def buyout_print(request):
                 'date': dt.today().strftime('%m/%d/%y'),
 <<<<<<< HEAD
 =======
+=======
+>>>>>>> Stashed changes
 def customer_solutions_buyout(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -718,9 +743,12 @@ def customer_solutions_buyout(request):
                 'form_response': {},
                 'legal_footer': print_page_legal_footer,
                 'date': dt.today().strftime('%m/%d/%y')
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes
 =======
 >>>>>>> Buyout_PrepayCalc
+=======
+>>>>>>> Stashed changes
             }
             return render(request, 'Luna/Customer_Solutions_buyout_pdf.html', context)
     else:
@@ -728,6 +756,7 @@ def customer_solutions_buyout(request):
 
 @login_required
 @user_passes_test(email_check)
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
@@ -763,6 +792,8 @@ def prepayment_print(request):
                 'user': request.user,
 <<<<<<< HEAD
 =======
+=======
+>>>>>>> Stashed changes
 def customer_solutions_prepayment(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -793,9 +824,12 @@ def customer_solutions_prepayment(request):
             context = {
                 'user': request.user,
                 'form': form,
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes
 =======
 >>>>>>> Buyout_PrepayCalc
+=======
+>>>>>>> Stashed changes
                 'form_response_complete': False,
                 'form_response': {},
                 'legal_footer': print_page_legal_footer,
@@ -803,6 +837,7 @@ def customer_solutions_prepayment(request):
             }
             return render(request, 'Luna/Customer_Solutions_prepayment_pdf.html', context)
     else:
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 <<<<<<< Updated upstream
         return HttpResponseRedirect('/Luna')
@@ -813,3 +848,6 @@ def customer_solutions_prepayment(request):
 =======
         return HttpResponseRedirect('/Luna')
 >>>>>>> Buyout_PrepayCalc
+=======
+        return HttpResponseRedirect('/Luna')
+>>>>>>> Stashed changes

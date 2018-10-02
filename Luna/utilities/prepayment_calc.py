@@ -1,4 +1,5 @@
 import os
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 <<<<<<< Updated upstream
 from datetime import datetime as dt
@@ -10,6 +11,9 @@ from models import SnowflakeConsole, SnowFlakeDW
 from datetime import datetime as dt
 from models import SnowFlakeDW, SnowflakeConsole
 >>>>>>> Buyout_PrepayCalc
+=======
+from models import SnowflakeConsole, SnowFlakeDW
+>>>>>>> Stashed changes
 
 main_dir = os.getcwd()
 luna_dir = os.path.join(main_dir, 'Luna')
@@ -22,6 +26,7 @@ def prepay_calc(servicenum):
     notes = {}
 
     if 'S-' in servicenum.upper():
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 <<<<<<< Updated upstream
         servicenum = servicenum.upper().replace('S-','')
@@ -31,10 +36,14 @@ def prepay_calc(servicenum):
 =======
         servicenum = servicenum.upper().replace('S-','')
 >>>>>>> Buyout_PrepayCalc
+=======
+        servicenum = servicenum.upper().replace('S-', '')
+>>>>>>> Stashed changes
 
     try:
         DB.open_connection()
         DW = SnowflakeConsole(DB)
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
@@ -59,6 +68,11 @@ def prepay_calc(servicenum):
 >>>>>>> Stashed changes
 =======
 >>>>>>> Buyout_PrepayCalc
+=======
+        with open(os.path.join(utilities_dir, 'buyout_calc.sql'), 'r') as file:
+            sql = file.read()
+        sql = sql.split(';')
+>>>>>>> Stashed changes
     except Exception as e:
         notes['error'] = e
         return notes
@@ -66,6 +80,7 @@ def prepay_calc(servicenum):
     finally:
         DB.close_connection()
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
@@ -90,9 +105,15 @@ def prepay_calc(servicenum):
         notes['contract_version'] = notes.pop(9)
     return notes
 
+=======
+>>>>>>> Stashed changes
     DW.execute_query(sql[0].format(service_number = str(servicenum)))
     query = DW.query_results[0]
 
 
+<<<<<<< Updated upstream
     return notes
 
+=======
+    return notes
+>>>>>>> Stashed changes

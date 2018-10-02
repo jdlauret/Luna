@@ -1,5 +1,6 @@
 SELECT
     P.SERVICE_NUMBER,
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
@@ -36,6 +37,8 @@ WHERE P.SERVICE_NUMBER = '{service_number}'
 -- WHERE P.SERVICE_NUMBER = :serviceNum;
 <<<<<<< HEAD
 =======
+=======
+>>>>>>> Stashed changes
     C.ESCALATOR,
     CAD.SYSTEM_SIZE_ACTUAL_KW,
     CAD.SUN_HOURS_ACTUAL,
@@ -49,6 +52,9 @@ FROM VSLR.RPT.T_PROJECT AS P
 INNER JOIN VSLR.RPT.T_CONTRACT AS C ON P.PROJECT_ID = C.PROJECT_ID
 INNER JOIN VSLR.RPT.T_CAD AS CAD ON P.PROJECT_ID = CAD.PROJECT_ID
 WHERE P.SERVICE_NUMBER = '{service_number}'
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes
 =======
 >>>>>>> Buyout_PrepayCalc
+=======
+>>>>>>> Stashed changes
