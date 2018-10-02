@@ -1,6 +1,6 @@
 import os
-from datetime import date, timedelta
-from Luna.models import DataWarehouse
+# from datetime import date, timedelta
+# from Luna.models import DataWarehouse
 from models import SnowFlakeDW, SnowflakeConsole
 
 main_dir = os.getcwd()
@@ -59,7 +59,7 @@ def notes_wizard (servicenum):
             return install_notes
 
     except Exception as e:
-        install_notes['error'] = e
+        install_notes['error'] = 'CAD change was made recently, will not be available till tomorrow'
         return install_notes
 
     finally:

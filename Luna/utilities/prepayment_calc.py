@@ -1,6 +1,10 @@
 import os
+<<<<<<< Updated upstream
 from datetime import datetime as dt
 from models import SnowFlakeDW, SnowflakeConsole
+=======
+from models import SnowflakeConsole, SnowFlakeDW
+>>>>>>> Stashed changes
 
 main_dir = os.getcwd()
 luna_dir = os.path.join(main_dir, 'Luna')
@@ -13,11 +17,16 @@ def prepay_calc(servicenum):
     notes = {}
 
     if 'S-' in servicenum.upper():
+<<<<<<< Updated upstream
         servicenum = servicenum.upper().replace('S-','')
+=======
+        servicenum = servicenum.upper().replace('S-', '')
+>>>>>>> Stashed changes
 
     try:
         DB.open_connection()
         DW = SnowflakeConsole(DB)
+<<<<<<< Updated upstream
         with open(os.path.join(utilities_dir, 'prepayment_calc.sql'), 'r') as file:
             sql = file.read()
         sql = sql.split(';')
@@ -30,6 +39,11 @@ def prepay_calc(servicenum):
             notes['error'] = '{} is not a valid service number.'.format(servicenum)
             return notes
 
+=======
+        with open(os.path.join(utilities_dir, 'buyout_calc.sql'), 'r') as file:
+            sql = file.read()
+        sql = sql.split(';')
+>>>>>>> Stashed changes
     except Exception as e:
         notes['error'] = e
         return notes
@@ -37,6 +51,7 @@ def prepay_calc(servicenum):
     finally:
         DB.close_connection()
 
+<<<<<<< Updated upstream
     for i, value in enumerate(results):
         notes[i] = value
     notes['remaining_contract'] = notes.pop(8)
@@ -56,3 +71,10 @@ def prepay_calc(servicenum):
         notes['current_annual_usage'] = notes.pop(7)
         notes['contract_version'] = notes.pop(9)
     return notes
+=======
+    DW.execute_query(sql[0].format(service_number = str(servicenum)))
+    query = DW.query_results[0]
+
+
+    return notes
+>>>>>>> Stashed changes
