@@ -1,7 +1,12 @@
 import os
+<<<<<<< Updated upstream
 from Luna.models import DataWarehouse
 from Luna.models import buyout_calc_model
 from models import SnowFlakeDW, SnowflakeConsole
+=======
+from models import SnowflakeConsole, SnowFlakeDW
+from Luna.models import buyout_calc_model
+>>>>>>> Stashed changes
 
 main_dir = os.getcwd()
 luna_dir = os.path.join(main_dir, 'Luna')
@@ -15,7 +20,12 @@ def buyout_calc(servicenum):
         'account_info': {},
     }
 
+<<<<<<< Updated upstream
     servicenum = servicenum.upper().replace('S-', '')
+=======
+    if 'S-' in servicenum.upper():
+        servicenum = servicenum.upper().replace('S-', '')
+>>>>>>> Stashed changes
 
     try:
         DB.open_connection()
@@ -23,20 +33,28 @@ def buyout_calc(servicenum):
         with open(os.path.join(utilities_dir, 'buyout_calc.sql'), 'r') as file:
             sql = file.read()
         sql = sql.split(';')
+<<<<<<< Updated upstream
 
         query = sql[0].format(service_number=str(servicenum))
         DW.execute_query(sql[0],query)
 
+=======
+>>>>>>> Stashed changes
     except Exception as e:
         notes['error'] = e
         return notes
 
+<<<<<<< Updated upstream
+=======
+    DW.execute_query(sql[0].format(service_number=str(servicenum)))
+>>>>>>> Stashed changes
     account_information = DW.query_results[0]
 
     if len(account_information) == 0:
         notes['error'] = '{} is not a valid service number.'.format(servicenum)
         return notes
 
+<<<<<<< Updated upstream
         notes['account_info'] = account_information
         for h, value in enumerate(account_information):
             notes[h] = value
@@ -56,6 +74,14 @@ def buyout_calc(servicenum):
             notes['error'] = '{} is not a valid service number.'.format(servicenum)
             return notes
 
+=======
+    notes['account_info'] = account_information
+
+    try:
+        DW.execute_query(sql[1], format(service_number=str(servicenum)))
+        query_results = DW.query_results[0]
+
+>>>>>>> Stashed changes
     except Exception as e:
         notes['error'] = e
         return notes
@@ -63,14 +89,25 @@ def buyout_calc(servicenum):
     finally:
         DB.close_connection()
 
+<<<<<<< Updated upstream
+=======
+    if len(query_results) == 0:
+        notes['error'] = '{} is not a valid service number.'.format(servicenum)
+        return notes
+
+>>>>>>> Stashed changes
     for i, value in enumerate(query_results):
         notes[i] = value
 
     notes['service_number'] = notes.pop(0)
     notes['remaining_contract'] = notes.pop(2)
     notes['actual_system_size'] = notes.pop(1)
+<<<<<<< Updated upstream
 
     if notes['remaining_contract'] is None:
+=======
+    if notes['remaining_contract'] == None:
+>>>>>>> Stashed changes
         notes['error'] = 'Cannot Calculate, no remaining contract date found'
         return notes
     else:

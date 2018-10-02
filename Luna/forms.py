@@ -54,6 +54,8 @@ class RTSForm(forms.Form):
 class CSForm(forms.Form):
     service_number = forms.CharField(label='Service Number:', max_length=20, required=True)
 
+=======
+>>>>>>> Stashed changes
 class FullBenefitForm(forms.Form):
     month = previous_month_end().replace(
         month=previous_month_end().month % 12 + 1,
