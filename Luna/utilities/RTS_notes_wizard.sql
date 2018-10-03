@@ -81,4 +81,5 @@ SELECT T1.SERVICE_NUMBER
      , T1.ROOF_AZIMUTH
      , T1.NUM_MODULES_DESIGNED
 FROM T1
-WHERE T1.SERVICE_NUMBER = '{service_number}';
+--WHERE T1.SERVICE_NUMBER = '{service_number}';
+-- WHERE t1.service_number = '5975609'--'5938661'
