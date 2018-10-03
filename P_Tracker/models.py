@@ -37,21 +37,30 @@ class employee_tracker (models.Model) :
 	employee_id = models.ForeignKey(auth_employee, on_delete=models.CASCADE)
 	activity = models.DecimalField(max_digits=5, decimal_places=2)
 	project_time = models.DecimalField(max_digits=5, decimal_places=2)
+	created = models.DateTimeField()
 
-class project(models.Model):
+class record_project(models.Model):
 	name = models.CharField(max_length=200)
 	description = models.TextField
 	who_approved = models.CharField(max_length=200)
 	super_stamp = models.CharField(max_length=200)
-	start_date = models.DateTimeField(max_length=200)
-	end_date = models.DateTimeField()
+	start_time = models.DateTimeField(max_length=200)
+	end_time = models.DateTimeField()
+	created = models.DateTimeField()
 
-# Hours Worked
-# Breaks
-# Activity
-# Meeting
-# Huddle
-# Project Time
-# Productivity
-# Activity Count
+class create_project(models.Model):
+	name = models.CharField(max_length=200)
+	who_created = models.CharField(max_length=200)
+	remove = models.BooleanField(default=False)
+	created = models.DateTimeField()
+
+class meeting(models.Model):
+	name = models.CharField(max_length=200)
+	start_time = models.DateTimeField()
+	end_time = models.DateTimeField()
+
+class training(models.Model):
+	name = models.CharField(max_length=200)
+	start_time = models.DateTimeField()
+	end_time = models.DateTimeField()
 
