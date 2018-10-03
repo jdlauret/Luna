@@ -24,17 +24,12 @@ WITH CAD1  AS--All CAD Columns
           , c.CAD_DESIGN_COMPLETED
           , row_number() OVER (PARTITION BY C.PROJECT_ID ORDER BY C.CAD_DESIGN_COMPLETED DESC)AS rn
      FROM VSLR.RPT.T_CAD AS C)
-//
-//   , CAD2  AS--Filter Unique PROJECT_ID
-//    (SELECT * FROM CAD1 WHERE CAD1.rn = 1)
-//
    , CASE1 AS--All Case Columns
     (SELECT ca.*, row_number() OVER (PARTITION BY ca.PROJECT_ID ORDER BY ca.CREATED_DATE DESC)AS rn
      FROM VSLR.RPT.T_CASE AS CA
      WHERE Ca.RECORD_TYPE = 'Solar - Electrical Service Change'
          AND
            CA.STATUS != 'Closed')
-
    , CASE2 AS--Filtering unique Project_ID
     (SELECT * FROM CASE1 WHERE CASE1.rn = 1)
 
@@ -49,7 +44,6 @@ WITH CAD1  AS--All CAD Columns
    , ROOF1 AS (SELECT ROOF.ROOF_TILT, ROOF.ROOF_AZIMUTH, ROOF.NUM_MODULES_DESIGNED, Roof.CAD_id
                FROM VSLR.RPT.V_CAD_ROOF_CONFIGURATIONS ROOF
                ORDER BY ROOF.CAD_ID)
-
    , T1    AS--Main Query
     (SELECT P.SERVICE_NUMBER
           , TO_CHAR(NVL(ESC.ESC_SCHEDULED_FOR, ESC.UPGRADE_SCHEDULED_FOR),
