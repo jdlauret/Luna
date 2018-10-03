@@ -1,7 +1,7 @@
 {% extends 'Luna/base.html' %}
 {% block content %}
     <div class="main">
-        <h2>RTS Notes Wizard</h2>
+        <h2>Central Notes</h2>
         <div style="width: 100%; display: inline-block;">
             <div style="float: left; width: 30%">
                 <form action="/calculators/RTS_notes/" method="post">
@@ -86,7 +86,7 @@
 <textarea id="copyarea" style="width: 100%; height: 500px;">
 Service Number: {{ form_response.spec_info.SERVICE_NUMBER }}
 ESC Scheduled for Date: {{ form_response.spec_info.ESC_SCHEDULED_FOR }}
-Arrays: INSERT USING VISUAL CAD {# {{ form_response.spec_info.ARRAYS }}#}
+Arrays: {{ form_response.spec_info.ARRAYS }}
 System Size: {{ form_response.spec_info.SYSTEM_SIZE_DESIGNED_KW }} KW
 Total Modules: {{ form_response.spec_info.MODULE_QTY }}
 Roof Type: {{ form_response.spec_info.ROOF_TYPE }}
