@@ -51,8 +51,6 @@ def notes_wizard (servicenum):
         # Second query results
         roof_section_columns = DW.query_columns
         roof_section_info = DW.query_results[0]
-        print('roof column', roof_section_columns)
-        print('roof section', roof_section_info)
 
         # error message when no installation notes are pulled up
         if len(roof_section_info) == 0:
