@@ -74,7 +74,7 @@ def notes_wizard (servicenum):
         install_notes['spec_info'][roof_section_columns[j]] = value
 
     # pulls the total solar roof information and turns the string into a integer
-    tsr = int(roof_section_info[roof_section_columns.index('TOTAL_SOLAR_ROOFS')])
+    tsr = roof_section_info[roof_section_columns.index('TOTAL_SOLAR_ROOFS')]
 
     t1 = roof_section_info[roof_section_columns.index('NUM_MODULES_DESIGNED')].split(',')
     t2 = roof_section_info[roof_section_columns.index('ROOF_AZIMUTH')].split(',')
@@ -82,7 +82,7 @@ def notes_wizard (servicenum):
 
     # for loop for how many roof sections it should create and places the number of modules, azimuth and tilt into each section
 
-    for k in range(tsr):
+    for k in range(int(tsr)):
         new_section = 'Roof Section ' + str(k + 1) + ':'
         install_notes['roof_sections'][new_section] = {
             'Number of Modules': t1[k],
