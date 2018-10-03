@@ -40,3 +40,16 @@ def employee(request):
 	else:
 		return HttpResponseRedirect('/Luna')
 
+@login_required
+@user_passes_test(email_check)
+def create(request):
+	if request.user.is_authenticated:
+		email = request.user.email
+		badge = find_badge_id(email)
+		name = find_name(badge)
+		context={
+			'name': name,
+		}
+		return render(request, 'create.html', context)
+	else:
+		return HttpResponseRedirect('/Luna')

@@ -21,6 +21,7 @@
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="/P_Tracker">Main</a>
                             <a class="dropdown-item" href="employee">Employee</a>
+                            <a class="dropdown-item" href="create">Add/edit Page</a>
                         </div>
                     </div>
                     <div style="display:inline-block;">
@@ -36,7 +37,7 @@
                         <th>Breaks</th>
                         <th>Activity</th>
                         <th>Meeting</th>
-                        <th>Huddle</th>
+                        <th>Training</th>
                         <th>Project Time</th>
                         <th>Activity Count</th>
                     </tr>
@@ -46,7 +47,7 @@
                         <td>{{ breaks }}</td>
                         <td>{{ activity }}</td>
                         <td>{{ meeting }}</td>
-                        <td>{{ huddle }}</td>
+                        <td>{{ training }}</td>
                         <td>{{ p_time }}</td>
                         <td>{{ a_count }}</td>
                     </tr>
@@ -56,7 +57,7 @@
                         <td>{{ breaks }}</td>
                         <td>{{ activity }}</td>
                         <td>{{ meeting }}</td>
-                        <td>{{ huddle }}</td>
+                        <td>{{ training }}</td>
                         <td>{{ p_time }}</td>
                         <td>{{ a_count }}</td>
                     </tr>
@@ -64,57 +65,122 @@
             </div>
             <br>
         </div>
-        <div class="main_body">
-            {% csrf_token %}
-            <form action="/" method="POST">
-                <table style="width:50%; margin-left:auto; margin-right:auto;" id="proj_table">
-                    <tr>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <td>Project Name:</td>
-                        <td><input type="text" name="project_name"></td>
-                    </tr>
-                      <tr>
-                        <td>Description of Project:</td>
-                        <td><input type="text" name="project_name"></td>
-                    </tr>
-                    <tr>
-                        <td>Approved By:</td>
-                        <td>
-                            <select>
-                                <option value="0">Name</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Start Time:</td>
-                        <td>
-                            <button type="button" style="width:150px;"
-                                    onclick="document.getElementById('start_time').innerHTML = Date(); this.style.display = 'none'">
-                                Start Time
-                            </button>
-                            <p id="start_time"></p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>End Time:</td>
-                        <td>
-                            <button type="button" style="width:150px;"
-                                    onclick="document.getElementById('end_time').innerHTML = Date(); this.style.display = 'none'">
-                                End Time
-                            </button>
-                            <p id="end_time"></p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="border:none;"></td>
-                        <td style="border:none;"><input type="submit"></td>
-                    </tr>
-                </table>
-            </form>
 
+        <div class="main_body">
+            <div class="tab">
+                <input type="radio" id="tab-1" name="tab-group-1" checked>
+                <label for="tab-1">Project</label>
+
+                <div class="content">
+                    {% csrf_token %}
+                    <form action="/" method="POST">
+                        <table style="width:50%; margin-left:auto; margin-right:auto;" id="proj_table">
+                            <tr>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <td>Project Name:</td>
+                                <td><input type="text" name="project_name"></td>
+                            </tr>
+                            <tr>
+                                <td>Description of Project:</td>
+                                <td><input type="text" name="project_name"></td>
+                            </tr>
+                            <tr>
+                                <td>Approved By:</td>
+                                <td>
+                                    <select>
+                                        <option value="0">Name</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Start Time:</td>
+                                <td>
+                                    <button type="button" style="width:150px;"
+                                            onclick="document.getElementById('start_time').innerHTML = Date(); this.style.display = 'none'">
+                                        Start Time
+                                    </button>
+                                    <p id="start_time"></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>End Time:</td>
+                                <td>
+                                    <button type="button" style="width:150px;"
+                                            onclick="document.getElementById('end_time').innerHTML = Date(); this.style.display = 'none'">
+                                        End Time
+                                    </button>
+                                    <p id="end_time"></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;"></td>
+                                <td style="border:none;"><input type="submit"></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+
+            <div class="tab">
+                <input type="radio" id="tab-2" name="tab-group-1">
+                <label for="tab-2">Meeting</label>
+            </div>
+            <div class="content">
+                {% csrf_token %}
+                <form action="/" method="POST">
+                    <table style="width:50%; margin-left:auto; margin-right:auto;" id="proj_table">
+                        <tr>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td>Project Name:</td>
+                            <td><input type="text" name="project_name"></td>
+                        </tr>
+                        <tr>
+                            <td>Description of Project:</td>
+                            <td><input type="text" name="project_name"></td>
+                        </tr>
+                        <tr>
+                            <td>Approved By:</td>
+                            <td>
+                                <select>
+                                    <option value="0">Name</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Start Time:</td>
+                            <td>
+                                <button type="button" style="width:150px;"
+                                        onclick="document.getElementById('start_time').innerHTML = Date(); this.style.display = 'none'">
+                                    Start Time
+                                </button>
+                                <p id="start_time"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>End Time:</td>
+                            <td>
+                                <button type="button" style="width:150px;"
+                                        onclick="document.getElementById('end_time').innerHTML = Date(); this.style.display = 'none'">
+                                    End Time
+                                </button>
+                                <p id="end_time"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border:none;"></td>
+                            <td style="border:none;"><input type="submit"></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
         </div>
+    </div>
+    </div>
     </div>
 {% endblock %}
