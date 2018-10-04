@@ -3,6 +3,230 @@
     padding: 0px;
     margin: 0px;
 }
+/*-------------------------------*/
+/*           Side Bar Menu       */
+/*-------------------------------*/
+
+.nav .open > a,
+.nav .open > a:hover,
+.nav .open > a:focus {
+    background-color: transparent;
+}
+
+/*-------------------------------*/
+/*           Wrappers            */
+/*-------------------------------*/
+
+#sidebar-wrapper {
+    z-index: 1000;
+    left: 190px;
+    width: 190px;
+    height: 100%;
+    margin-left: -190px;
+    background: #1a1a1a;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#sidebar-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+#sidebar-wrapper {
+    width: 190px;
+}
+
+#page-content-wrapper {
+    margin-left: 190px;
+}
+
+#page-content-wrapper {
+    position: absolute;
+    margin-right: -190px;
+    width: 85%;
+}
+
+/*-------------------------------*/
+/*     Sidebar nav styles        */
+/*-------------------------------*/
+
+.sidebar-nav {
+    position: absolute;
+    width: 190px;
+    height: 100%;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    position: relative;
+    line-height: 20px;
+    display: inline-block;
+    width: 100%;
+}
+
+.sidebar-nav li:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    height: 100%;
+    width: 3px;
+    background-color: #1c1c1c;
+    -webkit-transition: width .2s ease-in;
+    -moz-transition: width .2s ease-in;
+    -ms-transition: width .2s ease-in;
+    transition: width .2s ease-in;
+
+}
+
+.sidebar-nav li:first-child a {
+    color: #fff;
+    background-color: #1a1a1a;
+}
+
+.sidebar-nav li:nth-child(2):before {
+    background-color: #ec1b5a;
+}
+
+.sidebar-nav li:nth-child(3):before {
+    background-color: #79aefe;
+}
+
+.sidebar-nav li:nth-child(4):before {
+    background-color: #314190;
+}
+
+.sidebar-nav li:nth-child(5):before {
+    background-color: #279636;
+}
+
+.sidebar-nav li:nth-child(6):before {
+    background-color: #7d5d81;
+}
+
+.sidebar-nav li:nth-child(7):before {
+    background-color: #ead24c;
+}
+
+.sidebar-nav li:nth-child(8):before {
+    background-color: #2d2366;
+}
+
+.sidebar-nav li:nth-child(9):before {
+    background-color: #35acdf;
+}
+.sidebar-nav li:nth-child(10):before {
+    background-color: #ec1b5a;
+}
+.sidebar-nav li:nth-child(11):before {
+    background-color: #79aefe;
+}
+.sidebar-nav li:nth-child(12):before {
+    background-color: #314190;
+}
+
+.sidebar-nav li:hover:before,
+.sidebar-nav li.open:hover:before {
+    width: 100%;
+    -webkit-transition: width .2s ease-in;
+    -moz-transition: width .2s ease-in;
+    -ms-transition: width .2s ease-in;
+    transition: width .2s ease-in;
+
+}
+
+.sidebar-nav li a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px 10px 30px;
+}
+
+.sidebar-nav li a:hover,
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus,
+.sidebar-nav li.open a:hover,
+.sidebar-nav li.open a:active,
+.sidebar-nav li.open a:focus {
+    color: white;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 20px;
+    line-height: 44px;
+}
+
+.sidebar-nav .dropdown-menu {
+    position: relative;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    border: none;
+    background-color: #555;
+    color:white;
+    box-shadow: none;
+}
+
+
+/*-------------------------------*/
+/*            Overlay            */
+/*-------------------------------*/
+
+.overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(117, 250, 67, 0.8);
+    z-index: 1;
+}
+
+a.logo {
+    padding: 10px;
+    text-decoration: none;
+    width: 160px;
+    height: 160px;
+    font-size: 25px;
+    color: white;
+    display: inline-block;
+    background-image: url("../static/resources/white_starless.png");
+    background-size: 160px auto;
+    background-repeat: no-repeat;
+    margin-left: 12px;
+    margin-top: 6px;
+}
+
+a.logo:hover {
+    background-image: url("../static/resources/white.png");
+    background-size: 160px auto;
+    background-repeat: no-repeat;
+    background-color: #303033;
+}
+
+img.logo {
+    float: left;
+    width: 160px;
+    height: 160px;
+    background-color: transparent;
+    z-index: 1;
+    padding-bottom: 10px;
+}
+
+#spacing_between {
+    height: 100px;
+}
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 @media print {
     body {
@@ -231,7 +455,7 @@ h5.sticky {
 }
 
 .sidenav a.logo {
-    padding: 6px 8px 6px 0;
+    padding: 10px;
     text-decoration: none;
     width: 160px;
     height: 160px;
@@ -321,7 +545,7 @@ input:checked ~ label > img {
 
 /* Style page content */
 .main {
-    margin-left: 190px; /* Same as the width of the sidebar */
+    /*margin-left: 190px; !* Same as the width of the sidebar *!*/
     margin-top: 0;
     padding: 10px 10px;
 }
