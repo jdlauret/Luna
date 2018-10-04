@@ -23,11 +23,14 @@ register = Library()
 def email_check(user):
     return user.email.endswith('@vivintsolar.com')
 
+
 def automation_access(user):
     return user.groups.filter(name='Automation Access').exists()
 
+
 def overlord_access(user):
     return user.groups.filter(name='Coin_Overlord').exists()
+
 
 def index(request):
     context = {
@@ -431,6 +434,7 @@ def soft_savings_calculator(request):
     else:
         return HttpResponseRedirect('/Luna')
 
+
 @login_required
 @user_passes_test(email_check)
 def soft_savings_print(request):
@@ -482,10 +486,11 @@ def soft_savings_print(request):
     else:
         return HttpResponseRedirect('/Luna')
 
+
 # Rework this code to fit RTS Wizard notes
 @login_required
 @user_passes_test(email_check)
-def RTS_notes (request):
+def RTS_notes(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
             form = RTSForm(request.POST)
@@ -523,12 +528,12 @@ def RTS_notes (request):
     else:
         return HttpResponseRedirect('/Luna')
 
+
 @login_required
 @user_passes_test(email_check)
 def customer_solutions(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
-<<<<<<< Updated upstream
             form = CSForm(request.POST)
             if form.is_valid():
                 service_number = form.cleaned_data['service_number']
@@ -554,9 +559,7 @@ def customer_solutions(request):
                 return response
             else:
                 form = CSForm()
-=======
-=======
->>>>>>> Stashed changes
+
             form = RTSForm(request.POST)
             if form.is_valid():
                 service_number = form.cleaned_data['service_number']
@@ -573,22 +576,17 @@ def customer_solutions(request):
                 return response
             else:
                 form = RTSForm()
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
+
                 context = {
                     'form': form,
                     'user': request.user,
                     'form_response_complete': False,
                     'form_response': {},
-<<<<<<< Updated upstream
                     'legal_footer': print_page_legal_footer,
-=======
->>>>>>> Stashed changes
                     'date': dt.today().strftime('%m/%d/%y')
                 }
                 return render(request, 'Luna/Customer_Solutions.html', context=context)
         else:
-<<<<<<< Updated upstream
             form = CSForm()
             context = {
                 'user': request.user,
@@ -599,9 +597,6 @@ def customer_solutions(request):
                 'date': dt.today().strftime('%m/%d/%y')
             }
             return render(request, 'Luna/Customer_Solutions.html', context=context)
-=======
-=======
->>>>>>> Stashed changes
             form = RTSForm()
             context = {
                 'form': form,
@@ -611,14 +606,12 @@ def customer_solutions(request):
                 'date': dt.today().strftime('%m/%d/%y')
             }
             return render(request, 'Luna/Customer_Solutions.html', context)
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
     else:
         return HttpResponseRedirect('/Luna')
 
+
 @login_required
 @user_passes_test(email_check)
-<<<<<<< Updated upstream
 def buyout_print(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -649,9 +642,12 @@ def buyout_print(request):
                 'form_response': {},
                 'legal_footer': print_page_legal_footer,
                 'date': dt.today().strftime('%m/%d/%y'),
-=======
-=======
->>>>>>> Stashed changes
+            }
+        return render(request, 'Luna/Customer_Solutions_buyout_pdf.html', context)
+    else:
+        return HttpResponseRedirect('/Luna')
+
+
 def customer_solutions_buyout(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -686,16 +682,15 @@ def customer_solutions_buyout(request):
                 'form_response': {},
                 'legal_footer': print_page_legal_footer,
                 'date': dt.today().strftime('%m/%d/%y')
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
+
             }
             return render(request, 'Luna/Customer_Solutions_buyout_pdf.html', context)
     else:
         return HttpResponseRedirect('/Luna')
 
+
 @login_required
 @user_passes_test(email_check)
-<<<<<<< Updated upstream
 def prepayment_print(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -723,11 +718,20 @@ def prepayment_print(request):
                                           RequestContext(request))
             return response
         else:
+            form = RTSForm(request.POST)
             context = {
                 'user': request.user,
-=======
-=======
->>>>>>> Stashed changes
+                'form': form,
+                'form_response_complete': False,
+                'form_response': {},
+                'legal_footer': print_page_legal_footer,
+                'date': dt.today().strftime('%m/%d/%y')
+            }
+            return render(request, 'Luna/Customer_Solutions_prepayment.html', context)
+    else:
+        return HttpResponseRedirect('/Luna')
+
+
 def customer_solutions_prepayment(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -758,8 +762,6 @@ def customer_solutions_prepayment(request):
             context = {
                 'user': request.user,
                 'form': form,
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
                 'form_response_complete': False,
                 'form_response': {},
                 'legal_footer': print_page_legal_footer,
@@ -767,5 +769,4 @@ def customer_solutions_prepayment(request):
             }
             return render(request, 'Luna/Customer_Solutions_prepayment_pdf.html', context)
     else:
-<<<<<<< Updated upstream
         return HttpResponseRedirect('/Luna')
