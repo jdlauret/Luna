@@ -49,6 +49,9 @@ def tracker_list(badge):
 			sql = file.read()
 		DW.execute_query(sql.format(badge=str(badge)))
 		results = DW.query_results
+		column = DW.query_columns
+		print(column)
+		print(results)
 
 		if len(results) == 0:
 			auth_list['error'] = 'Invalid Badge ID'
@@ -60,9 +63,15 @@ def tracker_list(badge):
 
 	finally:
 		DB.close_connection()
-
-	auth_list['test'] = results.pop(0)
-	print('test', auth_list['test'])
+	auth_list['badge'] = results[0][0]
+	auth_list['name'] = results[0][1]
+	auth_list['supervisor'] = results[0][2]
+	auth_list['min_worked'] = results[0][3]
+	auth_list['breaks'] = results[0][4]
+	auth_list['activity'] = results[0][5]
+	auth_list['training'] = results[0][6]
+	auth_list['meeting'] = results[0][7] + results[0][8]
+	auth_list['project'] = results[0][9]
 
 	return auth_list
 
