@@ -7,9 +7,7 @@
         {#        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>#}
         {#        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>#}
         <link rel="stylesheet" href="{% static 'P_Tracker/CSS/tracker.css' %}">
-        <script src="{% static 'P_Tracker/JS.tracker.js' %}"></script>
     </head>
-
     <div class="shift_body">
     <div id="top_pane">
         <div id="menu">
@@ -27,26 +25,38 @@
                     for {{ name }}</h3>
             </div>
         </div>
-        <h3>View Employee</h3>
+        <h3>Create/Edit</h3>
+        <br><br>
+        {% csrf_token %}
+        <form action="/P_Tracker/createProject" method="POST">
+            <label>Create New Project</label>
+            <table style="width:50%; margin-left:auto; margin-right:auto; border:none;" id="proj_table">
+                <tr>
+                    <td>Name of Project</td>
+                    <td><input type="number" name="badge_id"></td>
+                    <td><input type="submit"></td>
+                </tr>
+            </table>
+        </form>
 
         {% csrf_token %}
-        <form action="/P_Tracker/employee" method="POST" id="post-form">
-            <label>Select Employee: </label>
-            <select>
-                {% for key in employee_names %}
-                    <option value="{{ key.badge_id }}">{{ key.full_name }}</option>
+        <form action="/P_Tracker/createProject" method="POST">
+            <label>Edit Projects</label>
+            <table style="width:50%; margin-left:auto; margin-right:auto; border:none;" id="proj_table">
+                <tr>
+                    <th>Name of Projects</th>
+                    <th>Who Created</th>
+                    <th>Remove?</th>
+                </tr>
+                {% for key in project_name %}
+                    <tr>
+                        <td>{{ key.name }}</td>
+                        <td>{{ key.who_created }}</td>
+                        <td>{{ key.expired }}</td>
+                    </tr>
                 {% endfor %}
-            </select>
+            </table>
             <input type="submit">
         </form>
     </div>
-
-    <table style="width:100%;">
-        <tr>
-            <th></th>
-        </tr>
-        <tr>
-            <td></td>
-        </tr>
-    </table>
 {% endblock %}
