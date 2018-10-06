@@ -28,34 +28,35 @@
 
             <table style="width:100%;" id="pro_table">
                 <tr>
-                    <th></th>
+                    <th>Date</th>
                     <th>Hours Worked</th>
-                    <th>Breaks</th>
-                    <th>Activity</th>
-                    <th>Meeting</th>
-                    <th>Training</th>
-                    <th>Project Time</th>
-                    <th>Activity Count</th>
+                    <th>Breaks (Hr)</th>
+                    <th>Activity (Hr)</th>
+                    <th>Meeting (Hr)</th>
+                    <th>Training (Hr)</th>
+                    <th>Project Time (Hr)</th>
+{#                    <th>Activity Count</th>#}
                 </tr>
                 <tr>
                     <td>Weekly</td>
-                    <td>{{ hours }}</td>
-                    <td>{{ breaks }}</td>
-                    <td>{{ activity }}</td>
-                    <td>{{ meeting }}</td>
-                    <td>{{ training }}</td>
-                    <td>{{ p_time }}</td>
-                    <td>{{ a_count }}</td>
+                    <td>{{ weekly_list.date1 }}/{{ weekly_list.date1 }}</td>
+                    <td>{{ weekly_list.hrs_worked }}</td>
+                    <td>{{ weekly_list.breaks }}</td>
+                    <td>{{ weekly_list.activity }}</td>
+                    <td>{{ weekly_list.meeting }}</td>
+                    <td>{{ weekly_list.training }}</td>
+                    <td>{{ weekly_list.project }}</td>
+{#                    <td>{{ a_count }}</td>#}
                 </tr>
                 <tr>
                     <td>Daily</td>
-                    <td>{{ hours }}</td>
-                    <td>{{ breaks }}</td>
-                    <td>{{ activity }}</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
                     <td>{{ meeting }}</td>
                     <td>{{ training }}</td>
                     <td>{{ p_time }}</td>
-                    <td>{{ a_count }}</td>
+{#                    <td>{{ a_count }}</td>#}
                 </tr>
             </table>
         </div>

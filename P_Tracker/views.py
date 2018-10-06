@@ -6,6 +6,7 @@ from .models import Auth_Employee, Project_Name, Project_Time, Meeting_Time, Tra
 
 from P_Tracker.utilities.find_badge_id import find_badge_id
 from P_Tracker.utilities.find_name import find_name
+from P_Tracker.utilities.productivity_tracker import tracker_list
 
 
 def email_check(user):
@@ -22,11 +23,12 @@ def index(request):
         email = request.user.email
         badge = find_badge_id(email)
         name = find_name(badge)
+        weekly_tracking = tracker_list('205141')
         context = {
             'name': name,
             'approved_by': Auth_Employee.objects.all().exclude(business_title='employee'),
             'project_name': Project_Name.objects.all().exclude(expired=True),
-
+            'weekly_list': weekly_tracking,
         }
         return render(request, 'main.html', context)
     else:
