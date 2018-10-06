@@ -1,5 +1,6 @@
 import os
 from models import SnowflakeConsole, SnowFlakeDW
+import datetime as dt
 
 main_dir = os.getcwd()
 tracker_dir = os.path.join(main_dir, 'P_Tracker')
@@ -41,7 +42,6 @@ def tracker_list(badge):
 	try:
 		DW.execute_query(sql[2].format(badge=str(badge)))
 		results2 = DW.query_results
-
 
 	except Exception as e:
 		auth_list['error'] = e

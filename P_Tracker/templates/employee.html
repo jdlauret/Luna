@@ -10,43 +10,98 @@
         <script src="{% static 'P_Tracker/JS.tracker.js' %}"></script>
     </head>
 
-    <div class="shift_body">
-    <div id="top_pane">
-        <div id="menu">
-            <div class="dropdownMenu">
-                <button class="dropbtnMenu">Menu</button>
-                <div class="dropdownMenu-content">
-                    <a class="dropdown-item" href="/P_Tracker">Main</a>
-                    <a class="dropdown-item" href="employee">Employee</a>
-                    <a class="dropdown-item" href="createProject">Add/edit Projects</a>
-                    <a class="dropdown-item" href="createEmployee">Add/edit Employee</a>
-                </div>
-            </div>
-            <div style="display:inline-block;">
-                <h3 style="text-align: center; color:white; padding-left:30px;">Productivity Tracker
-                    for {{ name }}</h3>
+    <div class="menu">
+        <div class="dropdownMenu">
+            <button class="dropbtnMenu">Menu</button>
+            <div class="dropdownMenu-content">
+                <a class="dropdown-item" href="/P_Tracker">Main</a>
+                <a class="dropdown-item" href="employee">Employee</a>
+                <a class="dropdown-item" href="createProject">Add/edit Projects</a>
+                <a class="dropdown-item" href="createEmployee">Add/edit Employee</a>
             </div>
         </div>
-        <h3>View Employee</h3>
+        <div style="display:inline-block;">
+            <h3 style="text-align: center; color:white; padding-left:30px;">Productivity Tracker
+                for {{ name }}</h3>
+        </div>
+    </div>
+    <h3>View Employee</h3>
 
-        {% csrf_token %}
-        <form action="/P_Tracker/employee" method="POST" id="post-form">
-            <label>Select Employee: </label>
-            <select>
-                {% for key in employee_names %}
-                    <option value="{{ key.badge_id }}">{{ key.full_name }}</option>
-                {% endfor %}
-            </select>
-            <input type="submit">
-        </form>
+    {% csrf_token %}
+    <form action="/P_Tracker/employee" method="POST" id="post-form">
+        <label>Select Employee: </label>
+        <select name="employee_badge">
+            {% for key in employee_names %}
+                <option value="{{ key.badge_id }}">{{ key.full_name }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit">
+    </form>
+    <div class="error_message">
+
+    </div>
+    {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`#}
+    {#    TAB ONE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`~#}
+    {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+
+    <div class="tab">
+        <input type="radio" id="tab-1" name="tab-group-1" checked>
+        <label for="tab-1">Employee Stats</label>
+
+        <div class="employ_content">
+
+            <label>Employee Info</label>
+            <table style="width:100%;" class="proj_table">
+                <tr>
+                    <th>Badge</th>
+                    <th>Name</th>
+                    <th>Supervisor</th>
+                </tr>
+                <tr>
+                    <td>{{ employee_weekly.badge }}</td>
+                    <td>{{ employee_weekly.name }}</td>
+                    <td>{{ employee_weekly.supervisor }}</td>
+                </tr>
+            </table>
+
+            <label>Employee Stats</label>
+            <table style="width:100%;" class="proj_table">
+                <tr>
+                    <th></th>
+                    <th>Hours Worked</th>
+                    <th>Breaks</th>
+                    <th>Activity</th>
+                    <th>Training</th>
+                    <th>Meeting</th>
+                    <th>Project</th>
+                </tr>
+                <tr>
+                    <td>Weekly</td>
+                    <td>{{ employee_weekly.hrs_worked }}</td>
+                    <td>{{ employee_weekly.breaks }}</td>
+                    <td>{{ employee_weekly.activity }}</td>
+                    <td>{{ employee_weekly.training }}</td>
+                    <td>{{ employee_weekly.meeting }}</td>
+                    <td>{{ employee_weekly.project }}</td>
+                </tr>
+                <tr>
+                    <td>Daily</td>
+                </tr>
+            </table>
+        </div>
     </div>
 
-    <table style="width:100%;">
-        <tr>
-            <th></th>
-        </tr>
-        <tr>
-            <td></td>
-        </tr>
-    </table>
+    {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`#}
+    {#    tab two ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+    {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+
+    <div class="tab">
+        <input type="radio" id="tab-2" name="tab-group-1" checked>
+        <label for="tab-2">Employee Stats</label>
+
+        <div class="employ_content">
+            TEST
+        </div>
+    </div>
+
 {% endblock %}
