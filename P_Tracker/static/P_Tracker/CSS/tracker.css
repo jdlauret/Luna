@@ -13,6 +13,20 @@ body {
     padding: 5px 10px 10px 10px;
     overflow: auto;
 }
+.top_pane2 {
+    height: 150px;
+    padding: 10px;
+    overflow: auto;
+}
+
+.top_pane3{}
+#proj_body{
+    padding-left: 10px;
+}
+
+#edit_employee_body{
+    padding-left: 10px;
+}
 .error_message{
     padding: 10px;
     margin: 10px;
@@ -44,7 +58,13 @@ body {
     border-right: 1px solid #ddd;
 }
 
-.proj_table td {
+.proj_table th, .proj_table td {
+    text-align: center;
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.create_proj_table th, .create_proj_table td {
     text-align: center;
     padding: 20px;
     border-bottom: 1px solid #ddd;
@@ -104,7 +124,7 @@ body {
     bottom: auto;
     padding: 20px;
     border: 1px solid #ccc;
-    top: 262px;
+    top: 330px;
     height: 550px;
     width: auto;
 }

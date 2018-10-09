@@ -8,16 +8,14 @@
         {#        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>#}
         <link rel="stylesheet" href="{% static 'P_Tracker/CSS/tracker.css' %}">
     </head>
-    <div class="shift_body">
-    <div class="top_pane">
+    <div class="top_pane3">
         <div class="menu">
             <div class="dropdownMenu">
                 <button class="dropbtnMenu">Menu</button>
                 <div class="dropdownMenu-content">
                     <a class="dropdown-item" href="/P_Tracker">Main</a>
                     <a class="dropdown-item" href="employee">Employee</a>
-                    <a class="dropdown-item" href="createProject">Add/edit Projects</a>
-                    <a class="dropdown-item" href="createEmployee">Add/edit Employee</a>
+                    <a class="dropdown-item" href="create_project">Add/edit Projects</a>
                 </div>
             </div>
             <div style="display:inline-block;">
@@ -25,38 +23,45 @@
                     for {{ name }}</h3>
             </div>
         </div>
-        <h3>Create/Edit</h3>
-        <br><br>
+        <h3 style="padding-left: 10px;">Create/Edit</h3>
+        <div class="error_message">
+
+        </div>
         {% csrf_token %}
-        <form action="/P_Tracker/createProject" method="POST">
-            <label>Create New Project</label>
+        <form action="submit_project" method="POST">
+            <label style="padding-left:15px;">Create New Project</label>
             <table style="width:50%; margin-left:auto; margin-right:auto; border:none;" id="proj_table">
                 <tr>
                     <td>Name of Project</td>
-                    <td><input type="number" name="badge_id"></td>
-                    <td><input type="submit"></td>
+                    <td><input type="text" name="create_project_name" minlength=2 required></td>
+                    {#                    <input type="hidden" name="badge_id" value="{{ badge_id }}">#}
+                    <td><input type="submit" style="padding:10px;"></td>
                 </tr>
             </table>
         </form>
-
+    </div>
+    <br><br>
+    <div id="proj_body">
         {% csrf_token %}
-        <form action="/P_Tracker/createProject" method="POST">
-            <label>Edit Projects</label>
-            <table style="width:50%; margin-left:auto; margin-right:auto; border:none;" id="proj_table">
+        <form action="update_project" method="POST">
+            <label style="padding-left:15px;">Edit Projects</label>
+            <table style="width:50%; margin-left:auto; margin-right:auto; border:none;" class="create_proj_table">
                 <tr>
                     <th>Name of Projects</th>
-                    <th>Who Created</th>
+                    <th>Creator</th>
                     <th>Remove?</th>
                 </tr>
                 {% for key in project_name %}
                     <tr>
                         <td>{{ key.name }}</td>
-                        <td>{{ key.who_created }}</td>
-                        <td>{{ key.expired }}</td>
+                        <td>{{ key.full_name }}</td>
+                        <td><input type="checkbox" name="{{ key.id }}" value="True" {% if key.expired %}
+                                   checked {% endif %}></td>
                     </tr>
                 {% endfor %}
             </table>
-            <input type="submit">
+        <br>
+            <div style="padding-left:70%;"><input type="submit" style="padding:10px;"></div>
         </form>
     </div>
 {% endblock %}

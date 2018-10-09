@@ -16,8 +16,7 @@
                     <div class="dropdownMenu-content">
                         <a class="dropdown-item" href="/P_Tracker">Main</a>
                         <a class="dropdown-item" href="employee">Employee</a>
-                        <a class="dropdown-item" href="createProject">Add/edit Projects</a>
-                        <a class="dropdown-item" href="createEmployee">Add/edit Employee</a>
+                        <a class="dropdown-item" href="create_project">Add/edit Projects</a>
                     </div>
                 </div>
                 <div style="display:inline-block;">
@@ -39,7 +38,7 @@
                     {#                    <th>Activity Count</th>#}
                 </tr>
                 <tr>
-                    <td>Weekly</td>
+                    <td>Last Week</td>
                     <td>{{ weekly_list.date1 }} to {{ weekly_list.date2 }}</td>
                     <td>{{ weekly_list.hrs_worked }}</td>
                     <td>{{ weekly_list.breaks }}</td>
@@ -75,8 +74,8 @@
 
         <div class="content">
             {% csrf_token %}
-            <form action="/" method="POST">
-                <table style="width:50%; margin-left:auto; margin-right:auto;" id="proj_table">
+            <form action="/P_Tracker/input_project_time" method="POST">
+                <table style="width:50%; margin-left:auto; margin-right:auto;" class="proj_table">
                     <tr>
                         <th></th>
                         <th></th>
@@ -93,7 +92,7 @@
                     </tr>
                     <tr>
                         <td>Description of Project:</td>
-                        <td><input type="text" name="project_name" required></td>
+                        <td><input type="text" name="description" required></td>
                     </tr>
                     <tr>
                         <td>Approved By:</td>
@@ -108,25 +107,29 @@
                     <tr>
                         <td>Start Time:</td>
                         <td>
-                            <button type="button" style="width:150px;"
-                                    onclick="document.getElementById('start_time').innerHTML = Date(); this.style.display = 'none'" >
+                            <button type="button" style="width:150px;" name="start_time"
+                                    onclick="document.getElementById('start_time').innerHTML = Date(); this.style.display = 'none'">
                                 Start Time
                             </button>
                             <p id="start_time"></p>
+                            <input type="time" name="start">
                         </td>
                     </tr>
                     <tr>
                         <td>End Time:</td>
                         <td>
-                            <button type="button" style="width:150px;"
+                            <button type="button" style="width:150px;" name="end_time"
                                     onclick="document.getElementById('end_time').innerHTML = Date(); this.style.display = 'none'">
                                 End Time
+
                             </button>
                             <p id="end_time"></p>
                         </td>
                     </tr>
                     <tr>
                         <td style="border:none;"></td>
+                        {#                        <input type="hidden" name="start_time" value="{{ start_time }}">#}
+                        {#                        <input type="hidden" name="end_time" value="{{ end_time }}">#}
                         <td style="border:none;"><input type="submit"></td>
                     </tr>
                 </table>
