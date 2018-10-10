@@ -17,9 +17,9 @@ def prepay_calc(servicenum):
     try:
         DB.open_connection()
         DW = SnowflakeConsole(DB)
-        with open(os.path.join(utilities_dir, 'buyout_calc.sql'), 'r') as file:
+        with open(os.path.join(utilities_dir, 'prepayment_calc.sql'), 'r') as file:
             sql = file.read()
-        sql = sql.split(';')
+        # sql = sql.split(';')
     except Exception as e:
         notes['error'] = e
         return notes
@@ -27,8 +27,8 @@ def prepay_calc(servicenum):
     finally:
         DB.close_connection()
 
-    DW.execute_query(sql[0].format(service_number = str(servicenum)))
-    query = DW.query_results[0]
+    DW.execute_query(sql.format(service_number = str(servicenum)))
+    query = DW.query_results
 
 
     return notes
