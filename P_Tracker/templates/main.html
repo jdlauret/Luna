@@ -63,7 +63,7 @@
         </div>
     </div>
     <div class="error_message">
-        <label style="color:red;">* Please submit one at a time</label>
+        <label style="color:red;"></label>
     </div>
     {#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
     {# Project Info~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
@@ -73,67 +73,117 @@
         <label for="tab-1">Project</label>
 
         <div class="content">
-            {% csrf_token %}
-            <form action="/P_Tracker/input_project_time" method="POST">
-                <table style="width:50%; margin-left:auto; margin-right:auto;" class="proj_table">
+
+            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+            {#        Current Projects~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+
+            <table class="proj_table" style="width:100%;">
+                <label>Projects in Progress </label>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Approved By</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                </tr>
+                {% for progress in project_progress %}
                     <tr>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <td>Project Name:</td>
-                        <td>
-                            <select name="project_name" required>
-                                {% for key in project_name %}
-                                    <option value="{{ key.pk }}">{{ key.name }}</option>
-                                {% endfor %}
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Description of Project:</td>
-                        <td><input type="text" name="description" required></td>
-                    </tr>
-                    <tr>
-                        <td>Approved By:</td>
-                        <td>
-                            <select name="approved_by" required>
-                                {% for key in approved_by %}
-                                    <option value="{{ key.badge_id }}">{{ key.full_name }}</option>
-                                {% endfor %}
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Start Time:</td>
-                        <td>
-                            <button type="button" style="width:150px;" name="start_time"
-                                    onclick="document.getElementById('start_time').innerHTML = Date(); this.style.display = 'none'">
-                                Start Time
-                            </button>
-                            <p id="start_time"></p>
-                            <input type="time" name="start">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>End Time:</td>
-                        <td>
-                            <button type="button" style="width:150px;" name="end_time"
+                    <td>{{ progress.name }}</td>
+                    <td>{{ progress.description }}</td>
+                    <td>{{ progress.who_approved_name }}</td>
+                    <td>{{ progress.start_time }}</td>
+                    <td>
+                        <form action="/P_Tracker/end_project_time" method="POST">
+                            <button type="submit" style="width:150px;"
                                     onclick="document.getElementById('end_time').innerHTML = Date(); this.style.display = 'none'">
                                 End Time
-
                             </button>
                             <p id="end_time"></p>
-                        </td>
-                    </tr>
+                            <input type="hidden" name="id" value="{{ progress.id }}">
+                        </form>
+                    </td>
+                {% endfor %}
+                </tr>
+            </table>
+            <br>
+
+            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+            {#        completed Projects~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+
+            <table class="proj_table" style="width:100%;">
+                <label>Completed Projects </label>
+                <tr>
+                    <th>Project Name</th>
+                    <th>Description</th>
+                    <th>Approved By</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                </tr>
+                {% for completed in project_completed %}
                     <tr>
-                        <td style="border:none;"></td>
-                        {#                        <input type="hidden" name="start_time" value="{{ start_time }}">#}
-                        {#                        <input type="hidden" name="end_time" value="{{ end_time }}">#}
-                        <td style="border:none;"><input type="submit"></td>
+                        <td>{{ completed.name }}</td>
+                        <td>{{ completed.description }}</td>
+                        <td>{{ completed.who_approved_name }}</td>
+                        <td>{{ completed.start_time }}</td>
+                        <td>{{ completed.end_time }}</td>
                     </tr>
-                </table>
-            </form>
+                {% endfor %}
+            </table>
+
+            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+            {#        Add Project~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+
+            <br><br>
+            {% if hide_view == True %}
+                <label>Add Project</label>
+                {% csrf_token %}
+                <form action="/P_Tracker/input_project_time" method="POST">
+                    <table style="width:50%; margin-left:auto; margin-right:auto;" class="proj_table">
+                        <tr>
+                            <th style="border:none;"></th>
+                            <th style="border:none;"></th>
+                        </tr>
+                        <tr>
+                            <td>Project Name</td>
+                            <td>
+                                <select name="project_name" required>
+                                    {% for key in project_name %}
+                                        <option value="{{ key.pk }}">{{ key.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Description of Project</td>
+                            <td><input type="text" name="description" required></td>
+                        </tr>
+                        <tr>
+                            <td>Approved By</td>
+                            <td>
+                                <select name="approved_by" required>
+                                    {% for key in approved_by %}
+                                        <option value="{{ key.badge_id }}">{{ key.full_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border:none;">Start Time</td>
+                            <td style="border:none;">
+                                <button type="submit" style="width:150px;"
+                                        onclick="document.getElementById('start_time').innerHTML = Date(); this.style.display = 'none'">
+                                    Start Time
+                                </button>
+                                <input type="hidden" name="start_time" value="{{ start_time }}">
+                                <p id="start_time"></p>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            {% endif %}
         </div>
     </div>
 
@@ -145,90 +195,175 @@
         <label for="tab-2">Meeting</label>
 
         <div class="content">
-            {% csrf_token %}
-            <form action="/" method="POST">
-                <table style="width:50%; margin-left:auto; margin-right:auto;" class="proj_table">
+
+            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+            {#     Meetings in Progress~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+
+            <label>Meetings in Progress</label>
+            <table class="proj_table" style="width:100%;">
+                <tr>
+                    <th>Name</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                </tr>
+                {% for meet_pro in meeting_progress %}
                     <tr>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <td>Name of Meeting:</td>
-                        <td><input type="text" name="meeting_name" required></td>
-                    </tr>
-                    <tr>
-                        <td>Start Time:</td>
+                        <td>{{ meet_pro.name }}</td>
+                        <td>{{ meet_pro.start_time }}</td>
                         <td>
-                            <button type="button" style="width:150px;"
-                                    onclick="document.getElementById('start_meeting_time').innerHTML = Date(); this.style.display = 'none'">
-                                Start Time
-                            </button>
-                            <p id="start_meeting_time"></p>
+                            <form action="/P_Tracker/end_meeting" method="POST">
+                                <button type="submit" style="width:150px;"
+                                        onclick="document.getElementById('end_time').innerHTML = Date(); this.style.display = 'none'">
+                                    End Time
+                                </button>
+                                <p id="end_time"></p>
+                                <input type="hidden" name="id" value="{{ meet_pro.id }}">
+                            </form>
                         </td>
                     </tr>
+                {% endfor %}
+            </table>
+            <br>
+            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+            {#        completed meetings~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+
+            <table class="proj_table" style="width:100%;">
+                <label>Completed Meetings</label>
+                <tr>
+                    <th>Name</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                </tr>
+                {% for meet_com in meeting_completed %}
                     <tr>
-                        <td>End Time:</td>
-                        <td>
-                            <button type="button" style="width:150px;"
-                                    onclick="document.getElementById('end_meeting_time').innerHTML = Date(); this.style.display = 'none'">
-                                End Time
-                            </button>
-                            <p id="end_meeting_time"></p>
-                        </td>
+                        <td>{{ meet_com.name }}</td>
+                        <td>{{ meet_com.start_time }}</td>
+                        <td>{{ meet_com.end_time }}</td>
                     </tr>
-                    <tr>
-                        <td style="border:none;"></td>
-                        <td style="border:none;"><input type="submit"></td>
-                    </tr>
-                </table>
-            </form>
+                {% endfor %}
+            </table>
+            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+            {#        Add Meetings~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+
+            <br><br>
+            {% if hide_view == True %}
+                {% csrf_token %}
+                <form action="/P_Tracker/input_meeting" method="POST">
+                    <table style="width:50%; margin-left:auto; margin-right:auto;" class="proj_table">
+                        <tr>
+                            <th style="border:none;"></th>
+                            <th style="border:none;"></th>
+                        </tr>
+                        <tr>
+                            <td>Name of Meeting</td>
+                            <td><input type="text" name="meeting_name" required></td>
+                        </tr>
+                        <tr>
+                            <td style="border:none;">Start Time</td>
+                            <td style="border:none;">
+                                <button type="submit" style="width:150px;"
+                                        onclick="document.getElementById('start_meeting_time').innerHTML = Date(); this.style.display = 'none'">
+                                    Start Time
+                                </button>
+                                <p id="start_meeting_time"></p>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            {% endif %}
         </div>
     </div>
 
     {#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
     {# Training Info~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
     {#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+
     <div class="tab">
         <input type="radio" id="tab-3" name="tab-group-1">
         <label for="tab-3">Training</label>
+
         <div class="content">
-            {% csrf_token %}
-            <form action="/" method="POST">
-                <table style="width:50%; margin-left:auto; margin-right:auto;" class="proj_table">
+            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+            {#     Trainings in Progress~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+
+            <label>Trainings in Progress</label>
+            <table class="proj_table" style="width:100%;">
+                <tr>
+                    <th>Name</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                </tr>
+                {% for train_pro in training_progress %}
                     <tr>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <td>Name of Training:</td>
-                        <td><input type="text" name="training_name" required></td>
-                    </tr>
-                    <tr>
-                        <td>Start Time:</td>
+                        <td>{{ train_pro.name }}</td>
+                        <td>{{ train_pro.start_time }}</td>
                         <td>
-                            <button type="button" style="width:150px;"
-                                    onclick="document.getElementById('start_training_time').innerHTML = Date(); this.style.display = 'none'">
-                                Start Time
-                            </button>
-                            <p id="start_training_time"></p>
+                            <form action="/P_Tracker/end_training" method="POST">
+                                <button type="submit" style="width:150px;"
+                                        onclick="document.getElementById('end_time').innerHTML = Date(); this.style.display = 'none'">
+                                    End Time
+                                </button>
+                                <p id="end_time"></p>
+                                <input type="hidden" name="id" value="{{ train_pro.id }}">
+                            </form>
                         </td>
                     </tr>
+                {% endfor %}
+            </table>
+            <br>
+            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+            {#        completed training~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+
+            <table class="proj_table" style="width:100%;">
+                <label>Completed Trainings</label>
+                <tr>
+                    <th>Name</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                </tr>
+                {% for train_com in training_completed %}
                     <tr>
-                        <td>End Time:</td>
-                        <td>
-                            <button type="button" style="width:150px;"
-                                    onclick="document.getElementById('end_training_time').innerHTML = Date(); this.style.display = 'none'">
-                                End Time
-                            </button>
-                            <p id="end_training_time"></p>
-                        </td>
+                        <td>{{ train_com.name }}</td>
+                        <td>{{ train_com.start_time }}</td>
+                        <td>{{ train_com.end_time }}</td>
                     </tr>
-                    <tr>
-                        <td style="border:none;"></td>
-                        <td style="border:none;"><input type="submit"></td>
-                    </tr>
-                </table>
-            </form>
+                {% endfor %}
+            </table>
+            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+            {#        Add Training~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+
+            <br><br>
+            {% if hide_view == True %}
+                {% csrf_token %}
+                <form action="/P_Tracker/input_training" method="POST">
+                    <table style="width:50%; margin-left:auto; margin-right:auto;" class="proj_table">
+                        <tr>
+                            <th style="border:none;"></th>
+                            <th style="border:none;"></th>
+                        </tr>
+                        <tr>
+                            <td>Name of Training</td>
+                            <td><input type="text" name="training_name" required></td>
+                        </tr>
+                        <tr>
+                            <td style="border:none;">Start Time</td>
+                            <td style="border:none;">
+                                <button type="submit" style="width:150px;"
+                                        onclick="document.getElementById('start_training_time').innerHTML = Date(); this.style.display = 'none'">
+                                    Start Time
+                                </button>
+                                <p id="start_training_time"></p>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
