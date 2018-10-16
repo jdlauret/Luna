@@ -9,10 +9,11 @@ def find_badge_id(email):
         DB.open_connection()
         DW = SnowflakeConsole(DB)
 
-        DW.execute_query('''
-        SELECT BADGE_ID
-        FROM VSLR.HR.T_EMPLOYEE
-        WHERE LOWER(WORK_EMAIL_ADDRESS) = LOWER(%s)''', bindvars=[email])
+        DW.execute_query('''SELECT BADGE_ID
+                                FROM VSLR.HR.T_EMPLOYEE
+                                WHERE LOWER(WORK_EMAIL_ADDRESS) = LOWER(%s)
+                                AND NOT TERMINATED''',
+                         bindvars=[email])
         results = DW.query_results[0][0]
     finally:
         DB.close_connection()

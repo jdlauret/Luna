@@ -1,31 +1,22 @@
 {% extends 'Luna/base.html' %}
-{% load static %}
+{% load staticfiles %}
 {% block content %}
-    <!DOCTYPE html>
-    <html lang="en">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <head>
-        <meta charset="UTF-8">
-        <title>Transaction Window</title>
-
-        {#        JAVASCRIPT#}
-        <script type="text/javascript" src="{% static 'coin/JS/coin_style.js' %}"></script>
-        <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-
-        {#        CSS#}
-        <link rel="stylesheet" href="{% static 'coin/CSS/coin_style.css' %}">
-        <link rel="stylesheet" href="{% static 'CSS/emoji.css' %}">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
-              integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
-              crossorigin="anonymous">
-        {#        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">#}
-
-    </head>
-    <body>
+<!DOCTYPE html>
+<html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{% static 'coin/CSS/coin_style.css' %}">
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="{% static 'coin/JS/coin_style.js' %}"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Transaction Window</title>
+</head>
+<body>
 
     {#    TITLE/TOP PANEL OF OVERLORD CONTROL PAGE#}
     <div class="main_body">
-        <div class="top_pane2" style="height:88px; background: #656569">
+        <div class="top_pane3">
             <img id="picture" src="{% static 'coin/Pictures/black_and_white_light.jpg' %}"></img>
             <div id="overlord_title">
                 <h7 style="color: white;;">THE</h7>
@@ -143,11 +134,6 @@
             </table>
             <input type="submit" style="width: 200px;">
         </form>
-
     </div>
-    <script src="{% static 'coin/JS/config.js' %}"></script>
-    <script src="{% static 'coin/JS/util.js' %}"></script>
-    <script src="{% static 'coin/JS/jquery.emojiarea.js' %}"></script>
-    <script src="{% static 'coin/JS/emoji-picker.js' %}"></script>
     </body>
 {% endblock %}
