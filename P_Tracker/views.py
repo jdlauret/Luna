@@ -202,9 +202,7 @@ def employee(request):
         if access.business_title != 'employee':
             for key, value in request.POST.items():
                 try:
-                    print('value', value)
                     weekly_tracking = tracker_list(int(value))
-                    print('weekly', weekly_tracking)
                     single_employee = Auth_Employee.objects.get(badge_id=int(value))
                     need_approval = Project_Time.objects.filter(who_approved_id='104550',  # badge,
                                                                 auth_employee_id=single_employee,
@@ -311,6 +309,28 @@ def employee(request):
         return HttpResponseRedirect('/Luna')
 
 
+@login_required
+@user_passes_test(email_check)
+def create_new_user(request):
+    if request.user.is_authenticated:
+        email = request.user.email
+        badge = find_badge_id(email)
+        name = find_name(badge)
+        access = Auth_Employee.objects.get(badge_id=badge)
+        if access.business_title != 'employee':
+            return render(request, 'create_user.html')
+        else:
+            return redirect('/P_Tracker')
+    else:
+        return HttpResponseRedirect('/Luna')
+
+
+def creation_of_user(request):
+    Auth_Employee.objects.creation_of_new_user(request.POST)
+    messages.success(request, 'Successfully Created a New User')
+    return redirect('/P_Tracker/create_user')
+
+
 def stamp_approval(request):
     results = Project_Time.objects.stamp_approval(request.POST)
     if type(results) == list:
@@ -390,6 +410,32 @@ def filter(request):
         return HttpResponseRedirect('/Luna')
 
 
+def reject_project(request):
+    email = request.user.email
+    badge = find_badge_id(email)
+    for key, value in request.POST.items():
+        project = Project_Time.objects.get(id=value)
+        project.reject = True
+        project.edited_at = dt.datetime.now(pytz.timezone('US/Mountain'))
+        project.who_edited = int(badge)
+        project.save()
+    return redirect('/P_Tracker/employee')
+
+
+def reject_meeting(request):
+    email = request.user.email
+    badge = find_badge_id(email)
+    print(request.POST)
+    return redirect('/P_Tracker/employee')
+
+
+def reject_training(request):
+    email = request.user.email
+    badge = find_badge_id(email)
+    print(request.POST)
+    return redirect('/P_Tracker/employee')
+
+
 @login_required
 @user_passes_test(email_check)
 def create_project(request):
@@ -430,24 +476,3 @@ def update_project(request):
         project.save()
     return redirect('/P_Tracker/create_project')
 
-
-@login_required
-@user_passes_test(email_check)
-def create_new_user(request):
-    if request.user.is_authenticated:
-        email = request.user.email
-        badge = find_badge_id(email)
-        name = find_name(badge)
-        access = Auth_Employee.objects.get(badge_id=badge)
-        if access.business_title != 'employee':
-            return render(request, 'create_user.html')
-        else:
-            return redirect('/P_Tracker')
-    else:
-        return HttpResponseRedirect('/Luna')
-
-
-def creation_of_user(request):
-    Auth_Employee.objects.creation_of_new_user(request.POST)
-    messages.success(request, 'Successfully Created a New User')
-    return redirect('/P_Tracker/create_user')

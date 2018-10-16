@@ -28,7 +28,7 @@
     <div class="top_pane2">
         <h3 style="padding-left:5px;">Create New Employee</h3>
         {% csrf_token %}
-        <form action="/P_Tracker/create_user" method="POST">
+        <form action="/P_Tracker/employee/create_user" method="POST">
             <div style="padding-left: 80px;"><input type="submit" value="Create New User" style="padding:5px;"></div>
         </form>
         <br>
@@ -124,7 +124,7 @@
 
             <div class="employ_content">
                 {% csrf_token %}
-                <form action="/P_Tracker/stamp_approval" method="POST">
+                <form action="/P_Tracker/employee/stamp_approval" method="POST">
                     <label>Need to Approve</label>
                     <table class="proj_table" style="width:100%;">
                         <tr>
@@ -186,7 +186,7 @@
 
             <div class="employ_content">
                 {% csrf_token %}
-                <form action="/P_Tracker/filter" method="POST">
+                <form action="/P_Tracker/employee/filter" method="POST">
                     <label>Filter</label>
                     <br><br>
                     <div style="text-align: center;">
@@ -227,7 +227,7 @@
         {#            <div class="employ_content">#}
         {##}
         {#                {% csrf_token %}#}
-        {#                <form action="/P_Tracker/filter_meeting" method="POST">#}
+        {#                <form action="/P_Tracker/employee/filter_meeting" method="POST">#}
         {#                    <label>Filter by Date</label>#}
         {#                    <div style="">#}
         {#                        <div style="padding:10px;">#}
@@ -269,7 +269,7 @@
         {#            <div class="employ_content">#}
         {##}
         {#                {% csrf_token %}#}
-        {#                <form action="/P_Tracker/filter_training" method="POST">#}
+        {#                <form action="/P_Tracker/employee/filter_training" method="POST">#}
         {#                    <label>Filter by Date</label>#}
         {#                    <div style="">#}
         {#                        <div style="padding:10px;">#}
@@ -285,7 +285,7 @@
         {#                <br><br>#}
         {##}
         {#                {% csrf_token %}#}
-        {#                <form action="/P_Tracker/edit_employee" method="POST">#}
+        {#                <form action="/P_Tracker/employee/edit_employee" method="POST">#}
         {#                    <table style="width:100%; margin-left:auto; margin-right:auto;" class="proj_table">#}
         {#                        <tr>#}
         {#                            <th>Name</th>#}
@@ -309,7 +309,7 @@
 
             <div class="employ_content">
                 {% csrf_token %}
-                <form action="/P_Tracker/edit_employee" method="POST">
+                <form action="/P_Tracker/employee/edit_employee" method="POST">
                     <table style="width:50%; margin-left:auto; margin-right:auto;" class="proj_table">
                         <tr>
                             <th></th>

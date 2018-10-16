@@ -44,8 +44,7 @@
             {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
             {#        Project - given time given~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
             {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-
-            <form action="create" method="POST">
+            <form action="/P_Tracker/employee/filter/reject_project" method="POST">
                 {% if project_info == True %}
                     <table style="width:100%; margin-left:auto; margin-right:auto;" class="proj_table">
                         <tr>
@@ -67,9 +66,8 @@
                                 <td>{{ list.super_stamp }}</td>
                                 <td>
                                     <div class="form-check">
-                                        <input type="hidden" name="id" value="{{ list.id }}">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1"
-                                               name="reject">
+                                        <input type="checkbox" class="form-check-input" id="exampleCheck1" name="reject"
+                                               value="{{ list.id }}">
                                     </div>
                                 </td>
                             </tr>
@@ -77,11 +75,11 @@
                     </table>
                     <br><input type="submit" style="float:right; padding:2px;">
                 {% endif %}
-
-                {#            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-                {#            MEETING INFO - TIME GIVEN~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-                {#            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-
+            </form>
+            {#            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+            {#            MEETING INFO - TIME GIVEN~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+            {#            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+            <form action="/P_Tracker/employee/filter/reject_meeting" method="POST">
                 {% if meeting_info == True %}
                     <table style="width:100%; margin-left:auto; margin-right:auto;" class="proj_table">
                         <tr>
@@ -110,12 +108,13 @@
                         {% endfor %}
                     </table>
                 {% endif %}
+            </form>
 
-                {#            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-                {#            TRAINING INFO - TIME GIVEN~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-                {#            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+            {#            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+            {#            TRAINING INFO - TIME GIVEN~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+            {#            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
 
-
+            <form action="/P_Tracker/employee/filter/reject_training" method="POST">
                 {% if training_info == True %}
                     <table style="width:100%; margin-left:auto; margin-right:auto;" class="proj_table">
                         <tr>
@@ -144,7 +143,6 @@
                         {% endfor %}
                     </table>
                 {% endif %}
-
             </form>
         </div>
     </div>
