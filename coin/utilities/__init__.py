@@ -10,7 +10,8 @@ def find_badge_id(email):
 
         DW.execute_query('''SELECT BADGE_ID
                                 FROM VSLR.HR.T_EMPLOYEE
-                                WHERE LOWER(WORK_EMAIL_ADDRESS) = LOWER(%s)''',
+                                WHERE LOWER(WORK_EMAIL_ADDRESS) = LOWER(%s)
+                                AND NOT TERMINATED''',
                          bindvars=[email])
         results = DW.query_results[0][0]
     finally:
