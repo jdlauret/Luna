@@ -18,5 +18,11 @@ urlpatterns = [
     url(r'^end_training$', views.end_training, name='end_training'),                            #INPUT END OF TRAINING TIME
 
     url(r'^employee$', views.employee, name="employee"),                                        #EMPLOYEE EDIT PAGE
+    url(r'^stamp_approval$', views.stamp_approval, name="stamp"),
+    url(r'^edit_employee$', views.edit_employee, name="edit_employee"),
+    url(r'^filter$', views.filter, name="filter"),
+
+    url(r'^create_user$', views.create_new_user, name="create_user"),
+    url(r'^create$', views.creation_of_user, name="create"),
 ]
 # (?P<badge>\d+)

@@ -10,11 +10,11 @@ body {
 
 .top_pane {
     height: auto;
-    padding: 5px 10px 10px 10px;
+    padding: 0px 10px 10px 0px;
     overflow: auto;
 }
 .top_pane2 {
-    height: 150px;
+    height: 260px;
     padding: 10px;
     overflow: auto;
 }
@@ -125,7 +125,7 @@ body {
     bottom: auto;
     padding: 20px;
     border: 1px solid #ccc;
-    top: 330px;
+    top: auto;
     height: 550px;
     width: auto;
 }

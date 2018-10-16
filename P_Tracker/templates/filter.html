@@ -1,0 +1,151 @@
+{% extends 'Luna/base.html' %}
+{% block content %}
+    <head>
+        <title>Productivity Tracker</title>
+        {% load staticfiles %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        {#        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>#}
+        {#        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>#}
+        <link rel="stylesheet" href="{% static 'P_Tracker/CSS/tracker.css' %}">
+    </head>
+    <div class="top_pane3">
+        <div class="menu">
+            <div class="dropdownMenu">
+                <button class="dropbtnMenu">Menu</button>
+                <div class="dropdownMenu-content">
+                    <a class="dropdown-item" href="/P_Tracker">Main</a>
+                    <a class="dropdown-item" href="employee">Employee</a>
+                    <a class="dropdown-item" href="create_project">Add/edit Projects</a>
+                </div>
+            </div>
+            <div style="display:inline-block;">
+                <h3 style="text-align: center; color:white; padding-left:30px;">Productivity Tracker
+                    for {{ name }}</h3>
+            </div>
+        </div>
+
+        <form action="employee">
+            <button style="background-color:yellow;">Return to Employee Page</button>
+        </form>
+
+        <h3 style="padding-left: 10px;">Filtered by {{ filtered_by_name }}</h3>
+        <div class="error_message">
+            {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                        <p><span>{{ message }}</span></p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        {% csrf_token %}
+        <div class="main_body">
+
+            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+            {#        Project - given time given~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+
+            <form action="create" method="POST">
+                {% if project_info == True %}
+                    <table style="width:100%; margin-left:auto; margin-right:auto;" class="proj_table">
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Approved By</th>
+                            <th>Stamped</th>
+                            <th>Reject?</th>
+                        </tr>
+                        {% for list in time_given %}
+                            <tr>
+                                <td>{{ list.name }}</td>
+                                <td>{{ list.description }}</td>
+                                <td>{{ list.start_time }}</td>
+                                <td>{{ list.end_time }}</td>
+                                <td>{{ list.who_approved_name }}</td>
+                                <td>{{ list.super_stamp }}</td>
+                                <td>
+                                    <div class="form-check">
+                                        <input type="hidden" name="id" value="{{ list.id }}">
+                                        <input type="checkbox" class="form-check-input" id="exampleCheck1"
+                                               name="reject">
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                    <br><input type="submit" style="float:right; padding:2px;">
+                {% endif %}
+
+                {#            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+                {#            MEETING INFO - TIME GIVEN~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+                {#            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+
+                {% if meeting_info == True %}
+                    <table style="width:100%; margin-left:auto; margin-right:auto;" class="proj_table">
+                        <tr>
+                            <th>Name</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Approved By</th>
+                            <th>Reject?</th>
+                        </tr>
+                        {% for list in time_given %}
+                            <tr>
+                                <td>{{ list.name }}</td>
+                                <td>{{ list.description }}</td>
+                                <td>{{ list.start_time }}</td>
+                                <td>{{ list.end_time }}</td>
+                                <td>{{ list.who_approved_name }}</td>
+                                <td>{{ list.super_stamp }}</td>
+                                <td>
+                                    <div class="form-check">
+                                        <input type="hidden" name="id" value="{{ list.id }}">
+                                        <input type="checkbox" class="form-check-input" id="exampleCheck1"
+                                               name="reject">
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% endif %}
+
+                {#            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+                {#            TRAINING INFO - TIME GIVEN~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+                {#            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+
+
+                {% if training_info == True %}
+                    <table style="width:100%; margin-left:auto; margin-right:auto;" class="proj_table">
+                        <tr>
+                            <th>Name</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Approved By</th>
+                            <th>Reject?</th>
+                        </tr>
+                        {% for list in time_given %}
+                            <tr>
+                                <td>{{ list.name }}</td>
+                                <td>{{ list.description }}</td>
+                                <td>{{ list.start_time }}</td>
+                                <td>{{ list.end_time }}</td>
+                                <td>{{ list.who_approved_name }}</td>
+                                <td>{{ list.super_stamp }}</td>
+                                <td>
+                                    <div class="form-check">
+                                        <input type="hidden" name="id" value="{{ list.id }}">
+                                        <input type="checkbox" class="form-check-input" id="exampleCheck1"
+                                               name="reject">
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% endif %}
+
+            </form>
+        </div>
+    </div>
+{% endblock %}

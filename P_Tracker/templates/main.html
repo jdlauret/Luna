@@ -35,7 +35,6 @@
                     <th>Meeting (Hr)</th>
                     <th>Training (Hr)</th>
                     <th>Project Time (Hr)</th>
-                    {#                    <th>Activity Count</th>#}
                 </tr>
                 <tr>
                     <td>Last Week</td>
@@ -46,7 +45,6 @@
                     <td>{{ weekly_list.meeting }}</td>
                     <td>{{ weekly_list.training }}</td>
                     <td>{{ weekly_list.project }}</td>
-                    {#                    <td>{{ a_count }}</td>#}
                 </tr>
                 <tr>
                     <td>Daily</td>
@@ -54,17 +52,23 @@
                     <td>-</td>
                     <td>-</td>
                     <td>-</td>
-                    <td>{{ meeting }}</td>
-                    <td>{{ training }}</td>
-                    <td>{{ p_time }}</td>
-                    {#                    <td>{{ a_count }}</td>#}
+                    <td>{{ stat_meeting }}</td>
+                    <td>{{ stat_training }}</td>
+                    <td>{{ stat_projects }}</td>
                 </tr>
             </table>
         </div>
     </div>
-    <div class="error_message">
-        <label style="color:red;"></label>
+    <div class="error_message" style="color:red;">
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <p><span>{{ message }}</span></p>
+                {% endfor %}
+            </div>
+        {% endif %}
     </div>
+
     {#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
     {# Project Info~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
     {#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
@@ -95,8 +99,7 @@
                     <td>{{ progress.start_time }}</td>
                     <td>
                         <form action="/P_Tracker/end_project_time" method="POST">
-                            <button type="submit" style="width:150px;"
-                                    onclick="document.getElementById('end_time').innerHTML = Date(); this.style.display = 'none'">
+                            <button type="submit" style="width:150px;">
                                 End Time
                             </button>
                             <p id="end_time"></p>
@@ -173,8 +176,7 @@
                         <tr>
                             <td style="border:none;">Start Time</td>
                             <td style="border:none;">
-                                <button type="submit" style="width:150px;"
-                                        onclick="document.getElementById('start_time').innerHTML = Date(); this.style.display = 'none'">
+                                <button type="submit" style="width:150px;">
                                     Start Time
                                 </button>
                                 <input type="hidden" name="start_time" value="{{ start_time }}">
@@ -213,8 +215,7 @@
                         <td>{{ meet_pro.start_time }}</td>
                         <td>
                             <form action="/P_Tracker/end_meeting" method="POST">
-                                <button type="submit" style="width:150px;"
-                                        onclick="document.getElementById('end_time').innerHTML = Date(); this.style.display = 'none'">
+                                <button type="submit" style="width:150px;">
                                     End Time
                                 </button>
                                 <p id="end_time"></p>
@@ -253,6 +254,7 @@
                 {% csrf_token %}
                 <form action="/P_Tracker/input_meeting" method="POST">
                     <table style="width:50%; margin-left:auto; margin-right:auto;" class="proj_table">
+                        <label>Add Meeting</label>
                         <tr>
                             <th style="border:none;"></th>
                             <th style="border:none;"></th>
@@ -264,8 +266,7 @@
                         <tr>
                             <td style="border:none;">Start Time</td>
                             <td style="border:none;">
-                                <button type="submit" style="width:150px;"
-                                        onclick="document.getElementById('start_meeting_time').innerHTML = Date(); this.style.display = 'none'">
+                                <button type="submit" style="width:150px;">
                                     Start Time
                                 </button>
                                 <p id="start_meeting_time"></p>
@@ -303,8 +304,7 @@
                         <td>{{ train_pro.start_time }}</td>
                         <td>
                             <form action="/P_Tracker/end_training" method="POST">
-                                <button type="submit" style="width:150px;"
-                                        onclick="document.getElementById('end_time').innerHTML = Date(); this.style.display = 'none'">
+                                <button type="submit" style="width:150px;">
                                     End Time
                                 </button>
                                 <p id="end_time"></p>
@@ -343,6 +343,7 @@
                 {% csrf_token %}
                 <form action="/P_Tracker/input_training" method="POST">
                     <table style="width:50%; margin-left:auto; margin-right:auto;" class="proj_table">
+                        <label>Add Training</label>
                         <tr>
                             <th style="border:none;"></th>
                             <th style="border:none;"></th>
@@ -354,8 +355,7 @@
                         <tr>
                             <td style="border:none;">Start Time</td>
                             <td style="border:none;">
-                                <button type="submit" style="width:150px;"
-                                        onclick="document.getElementById('start_training_time').innerHTML = Date(); this.style.display = 'none'">
+                                <button type="submit" style="width:150px;">
                                     Start Time
                                 </button>
                                 <p id="start_training_time"></p>
