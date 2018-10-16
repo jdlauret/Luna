@@ -1,1 +1,1 @@
-cd C:\Luna_Dev\venv\Scripts & activate & cd C:\Luna_Dev & python manage.py runserver 0:8000
+cd C:\Luna_Dev\venv\Scripts & activate & cd C:\Luna_Dev & python-by-name.bat Luna_Dev_Server manage.py runserver 0:8000
