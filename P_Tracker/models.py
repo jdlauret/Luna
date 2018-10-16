@@ -132,6 +132,38 @@ class trackerManager(models.Manager):
             info['badge'] = post_data['badge_id']
             return info
 
+    @classmethod
+    def manual_input(self, post_data):
+        errors = []
+        if len(post_data['start_time']) == 0 or len(post_data['end_time']) == 0:
+            errors.append('No information was selected')
+            return errors
+        else:
+            # TODO NEED TO WORK ON TIME
+            end = post_data['end_time']
+            start = post_data['start_time']
+            end = dt.strptime(end, '%Y-%m-%d %H:%M:%S.%f')
+            print('start', start, type(start))
+            print('end', end, type(end))
+            total = end-start
+
+            temp = Project_Time(
+                name=Project_Time.objects.get(id=int(post_data['project_name'])),
+                description=post_data['description'],
+                who_approved_id=post_data['approved_by'],
+                who_approved_name=Auth_Employee.objects.get(badge_id=post_data['approved_by']),
+                start_time=start,
+                end_time=end,
+                total=total,
+                completed=True,
+                created_at=dt.now(pytz.timezone('US/Mountain')),
+                auth_employee_id=post_data['badge_id'],
+                edited_at=post_data['super_badge'],
+                who_edited=dt.now(pytz.timezone('US/Mountain')),
+            )
+            print(temp)
+            # temp.save()
+
 # THIS ALLOWS PEOPLE ACcESS TO THE PRODUCTIVITY TRACKER
 class Auth_Employee(models.Model):
     # FUNCTION CODE

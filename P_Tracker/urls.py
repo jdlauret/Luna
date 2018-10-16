@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^employee$', views.employee, name="employee"),                                        #EMPLOYEE EDIT PAGE
     url(r'^employee/stamp_approval$', views.stamp_approval, name="stamp"),
     url(r'^employee/edit_employee$', views.edit_employee, name="edit_employee"),
+    url(r'^employee/manually_input_project_time', views.manually_input_project_time, name="manual_input"),
 
     url(r'^employee/filter$', views.filter, name="filter"),
     url(r'^employee/filter/reject_project$', views.reject_project, name="reject_project"),
