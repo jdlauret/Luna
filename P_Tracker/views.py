@@ -19,16 +19,32 @@ from P_Tracker.utilities.productivity_tracker import tracker_list
 
 # todo prevent access to tracker from those who do not have access
 # todo allow admin to access page but not show up as supervisor
+# todo keep tab open
+
 # todo end project time, if agent forgets to end time, input 10 hours automatically, after 10 hours have passed
 # todo make supervisors aware of a project that is longer than 4 hrs
+
+# MAIN
 # todo if not approved, does not count in daily numbers
 # todo edit project and input new project, create new tab
 # todo see who edits the projects
+# todo accept or reject on project
+# todo accept or reject training
+# todo accept or reject meeting
+
 # todo move need to approve to outside and set the filter to the person logged in
+# todo add meetings view
+# todo add trainings view
+# todo add input training and meetings
+
+# ADD AND EDIT PAGE
+# todo project can't be expired if project is ongoing
 
 def email_check(user):
     return user.email.endswith('@vivintsolar.com')
 
+def test(request):
+    return render(request, 'test.html')
 
 @login_required
 @user_passes_test(email_check)
@@ -45,14 +61,14 @@ def index(request):
         # Shows Daily Tracker
         stat_projects = Project_Time.objects.filter(auth_employee_id=badge, completed=True, end_time__year=today.year,
                                                     end_time__month=today.month, end_time__day=today.day,
-                                                    super_stamp=None, reject=False).aggregate(Sum('total_time'))[
-            'total_time__sum']
+                                                    super_stamp=None, accept=True).aggregate(Sum('total_time'))[
+                                                    'total_time__sum']
         stat_meeting = Meeting_Time.objects.filter(auth_employee_id=badge, completed=True, end_time__year=today.year,
-                                                   end_time__month=today.month, end_time__day=today.day,
-                                                   reject=False).aggregate(Sum('total_time'))['total_time__sum']
+                                                   end_time__month=today.month, end_time__day=today.day, ).aggregate(
+                                                    Sum('total_time'))['total_time__sum']
         stat_training = Training_Time.objects.filter(auth_employee_id=badge, completed=True, end_time__year=today.year,
-                                                     end_time__month=today.month, end_time__day=today.day,
-                                                     reject=False).aggregate(Sum('total_time'))['total_time__sum']
+                                                     end_time__month=today.month, end_time__day=today.day, ).aggregate(
+                                                    Sum('total_time'))['total_time__sum']
 
         # Filters the Project tab
         completed_projects = Project_Time.objects.filter(auth_employee_id=badge, completed=True,

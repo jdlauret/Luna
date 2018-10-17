@@ -133,9 +133,9 @@
                             <th>Start Time</th>
                             <th>End Time</th>
                             <th>Approved By</th>
-                            <th>Check to approve</th>
                             <th>Edited</th>
                             <th>When Edited</th>
+                            <th>Check to approve</th>
                         </tr>
                         {% for value in need_approval %}
                             <tr>
@@ -165,9 +165,9 @@
                         <th>Start Time</th>
                         <th>End Time</th>
                         <th>Approved By</th>
-                        <th>Need to be approved</th>
                         <th>Edited</th>
                         <th>When Edited</th>
+                        <th>Approved By</th>
                     </tr>
                     {% for pl in project_list %}
                         <tr>
@@ -176,9 +176,9 @@
                             <td>{{ pl.start_time }}</td>
                             <td>{{ pl.end_time }}</td>
                             <td>{{ pl.who_approved_name }}</td>
-                            <td>{{ pl.super_stamp }}</td>
                             <td>{{ pl.who_edited }}</td>
                             <td>{{ pl.edited_at }}</td>
+                            <td>{{ pl.super_stamp }}</td>
                         </tr>
                     {% endfor %}
                 </table>

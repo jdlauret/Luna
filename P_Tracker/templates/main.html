@@ -98,7 +98,7 @@
                     <td>{{ progress.who_approved_name }}</td>
                     <td>{{ progress.start_time }}</td>
                     <td>
-                        <form action="/P_Tracker/employee/end_project_time" method="POST">
+                        <form action="/P_Tracker/end_project_time" method="POST">
                             <button type="submit" style="width:150px;">
                                 End Time
                             </button>
@@ -143,7 +143,7 @@
             {% if hide_view == True %}
                 <label>Add Project</label>
                 {% csrf_token %}
-                <form action="/P_Tracker/employee/input_project_time" method="POST">
+                <form action="/P_Tracker/input_project_time" method="POST">
                     <table style="width:50%; margin-left:auto; margin-right:auto;" class="proj_table">
                         <tr>
                             <th style="border:none;"></th>
@@ -214,7 +214,7 @@
                         <td>{{ meet_pro.name }}</td>
                         <td>{{ meet_pro.start_time }}</td>
                         <td>
-                            <form action="/P_Tracker/employee/end_meeting" method="POST">
+                            <form action="/P_Tracker/end_meeting" method="POST">
                                 <button type="submit" style="width:150px;">
                                     End Time
                                 </button>
@@ -252,7 +252,7 @@
             <br><br>
             {% if hide_view == True %}
                 {% csrf_token %}
-                <form action="/P_Tracker/employee/input_meeting" method="POST">
+                <form action="/P_Tracker/input_meeting" method="POST">
                     <table style="width:50%; margin-left:auto; margin-right:auto;" class="proj_table">
                         <label>Add Meeting</label>
                         <tr>
@@ -303,7 +303,7 @@
                         <td>{{ train_pro.name }}</td>
                         <td>{{ train_pro.start_time }}</td>
                         <td>
-                            <form action="/P_Tracker/employee/end_training" method="POST">
+                            <form action="/P_Tracker/end_training" method="POST">
                                 <button type="submit" style="width:150px;">
                                     End Time
                                 </button>
@@ -341,7 +341,7 @@
             <br><br>
             {% if hide_view == True %}
                 {% csrf_token %}
-                <form action="/P_Tracker/employee/input_training" method="POST">
+                <form action="/P_Tracker/input_training" method="POST">
                     <table style="width:50%; margin-left:auto; margin-right:auto;" class="proj_table">
                         <label>Add Training</label>
                         <tr>

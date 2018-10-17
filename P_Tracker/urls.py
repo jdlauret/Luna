@@ -31,5 +31,7 @@ urlpatterns = [
 
     url(r'^employee/create_user$', views.create_new_user, name="create_user"),
     url(r'^employee/create$', views.creation_of_user, name="create"),
+
+    url(r'^test', views.test, name='test'),
 ]
 # (?P<badge>\d+)

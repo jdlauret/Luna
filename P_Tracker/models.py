@@ -4,8 +4,6 @@ import pytz
 from django.db import models
 
 
-# pytz.timezone('US/Mountain'
-
 class trackerManager(models.Manager):
     @classmethod
     def proj_time_input(self, post_data, badge_id):
@@ -94,6 +92,7 @@ class trackerManager(models.Manager):
         else:
             project = Project_Time.objects.get(id=post_data['id'])
             project.super_stamp = post_data['stamp']
+            project.accept = True
         project.save()
 
     @classmethod
@@ -222,6 +221,7 @@ class Project_Time(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
     who_edited = models.IntegerField(null=True)
     edited_at = models.DateTimeField(null=True)
+    accept = models.BooleanField(default=False)
     reject = models.BooleanField(default=False)
     objects = trackerManager()
 
@@ -236,6 +236,7 @@ class Meeting_Time(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
     who_edited = models.IntegerField(null=True)
     edited_at = models.DateTimeField(null=True)
+    accept = models.BooleanField(default=False)
     reject = models.BooleanField(default=False)
     objects = trackerManager()
 
@@ -250,5 +251,6 @@ class Training_Time(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
     who_edited = models.IntegerField(null=True)
     edited_at = models.DateTimeField(null=True)
+    accept = models.BooleanField(default=False)
     reject = models.BooleanField(default=False)
     objects = trackerManager()
