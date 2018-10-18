@@ -16,18 +16,13 @@ from P_Tracker.utilities.find_badge_id import find_badge_id
 from P_Tracker.utilities.find_name import find_name
 from P_Tracker.utilities.productivity_tracker import tracker_list
 
-
 # todo prevent access to tracker from those who do not have access
 # todo allow admin to access page but not show up as supervisor
-# todo keep tab open
 
 # todo end project time, if agent forgets to end time, input 10 hours automatically, after 10 hours have passed
 # todo make supervisors aware of a project that is longer than 4 hrs
 
-# MAIN
-# todo if not approved, does not count in daily numbers
-# todo edit project and input new project, create new tab
-# todo see who edits the projects
+# todo edit project and input new project
 # todo accept or reject on project
 # todo accept or reject training
 # todo accept or reject meeting
@@ -43,8 +38,6 @@ from P_Tracker.utilities.productivity_tracker import tracker_list
 def email_check(user):
     return user.email.endswith('@vivintsolar.com')
 
-def test(request):
-    return render(request, 'test.html')
 
 @login_required
 @user_passes_test(email_check)
@@ -62,13 +55,13 @@ def index(request):
         stat_projects = Project_Time.objects.filter(auth_employee_id=badge, completed=True, end_time__year=today.year,
                                                     end_time__month=today.month, end_time__day=today.day,
                                                     super_stamp=None, accept=True).aggregate(Sum('total_time'))[
-                                                    'total_time__sum']
+            'total_time__sum']
         stat_meeting = Meeting_Time.objects.filter(auth_employee_id=badge, completed=True, end_time__year=today.year,
                                                    end_time__month=today.month, end_time__day=today.day, ).aggregate(
-                                                    Sum('total_time'))['total_time__sum']
+            Sum('total_time'))['total_time__sum']
         stat_training = Training_Time.objects.filter(auth_employee_id=badge, completed=True, end_time__year=today.year,
                                                      end_time__month=today.month, end_time__day=today.day, ).aggregate(
-                                                    Sum('total_time'))['total_time__sum']
+            Sum('total_time'))['total_time__sum']
 
         # Filters the Project tab
         completed_projects = Project_Time.objects.filter(auth_employee_id=badge, completed=True,
@@ -166,7 +159,7 @@ def input_meeting(request):
     email = request.user.email
     badge = find_badge_id(email)
     Meeting_Time.objects.meeting_input(request.POST, badge)
-    return redirect('/P_Tracker')
+    return redirect('/P_Tracker/#meeting')
 
 
 def end_meeting(request):
@@ -180,14 +173,14 @@ def end_meeting(request):
         meeting_time.total_time = total
 
         meeting_time.save()
-    return redirect('/P_Tracker')
+    return redirect('/P_Tracker/#meeting')
 
 
 def input_training(request):
     email = request.user.email
     badge = find_badge_id(email)
     Training_Time.objects.training_input(request.POST, badge)
-    return redirect('/P_Tracker')
+    return redirect('/P_Tracker/#training')
 
 
 def end_training(request):
@@ -201,7 +194,7 @@ def end_training(request):
         training_time.total_time = total
 
         training_time.save()
-    return redirect('/P_Tracker')
+    return redirect('/P_Tracker/#training')
 
 
 @login_required
@@ -218,9 +211,15 @@ def employee(request):
                 try:
                     weekly_tracking = tracker_list(int(value))
                     single_employee = Auth_Employee.objects.get(badge_id=int(value))
-                    need_approval = Project_Time.objects.filter(who_approved_id='104550',  # badge,
+                    need_approval = Project_Time.objects.filter(#who_approved_id='104550',  # badge,
                                                                 auth_employee_id=single_employee,
                                                                 super_stamp='').order_by('created_at')
+                    # todo filter needs to select either approved or reject
+                    meeting_approval = Meeting_Time.objects.filter(auth_employee_id=single_employee).order_by(
+                        'created_at')
+                    training_approval = Training_Time.objects.filter(auth_employee_id=single_employee).order_by(
+                        'created_at')
+
                     if len(value) > 0:
                         # Shows Daily Tracker
                         stat_projects = \
@@ -245,6 +244,14 @@ def employee(request):
                                                                    end_time__year=today.year,
                                                                    end_time__month=today.month,
                                                                    end_time__day=today.day).order_by('created_at')
+                        meeting_list = Meeting_Time.objects.filter(auth_employee_id=single_employee,
+                                                                   end_time__year=today.year,
+                                                                   end_time__month=today.month,
+                                                                   end_time__day=today.day).order_by('created_at')
+                        training_list = Training_Time.objects.filter(auth_employee_id=single_employee,
+                                                                     end_time__year=today.year,
+                                                                     end_time__month=today.month,
+                                                                     end_time__day=today.day).order_by('created_at')
                         s_employee = Auth_Employee.objects.get(badge_id=single_employee.supervisor)
                         context = {
                             'name': name,
@@ -260,7 +267,11 @@ def employee(request):
                             'stat_meeting': stat_meeting,
                             'stat_training': stat_training,
                             'need_approval': reversed(need_approval),
+                            'meeting_approval': reversed(meeting_approval),
+                            'training_approval': reversed(training_approval),
                             'project_list': reversed(project_list),
+                            'meeting_list': reversed(meeting_list),
+                            'training_list': reversed(training_list),
                             # 'super_stamp': False,
                             'super_badge': badge,
                             'list_super': Auth_Employee.objects.all().exclude(business_title='employee'),
@@ -290,6 +301,14 @@ def employee(request):
                                                                    end_time__year=today.year,
                                                                    end_time__month=today.month,
                                                                    end_time__day=today.day).order_by('created_at')
+                        meeting_list = Meeting_Time.objects.filter(auth_employee_id=single_employee,
+                                                                   end_time__year=today.year,
+                                                                   end_time__month=today.month,
+                                                                   end_time__day=today.day).order_by('created_at')
+                        training_list = Training_Time.objects.filter(auth_employee_id=single_employee,
+                                                                     end_time__year=today.year,
+                                                                     end_time__month=today.month,
+                                                                     end_time__day=today.day).order_by('created_at')
 
                         context = {
                             'name': name,
@@ -303,7 +322,11 @@ def employee(request):
                             'stat_meeting': stat_meeting,
                             'stat_training': stat_training,
                             'need_approval': reversed(need_approval),
+                            'meeting_approval': reversed(meeting_approval),
+                            'training_approval': reversed(training_approval),
                             'project_list': reversed(project_list),
+                            'meeting_list': reversed(meeting_list),
+                            'training_list': reversed(training_list),
                             # 'super_stamp': True,
                             'super_badge': badge,
                             'list_super': Auth_Employee.objects.all().exclude(business_title='employee'),

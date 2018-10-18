@@ -3,11 +3,10 @@
     <head>
         <title>Productivity Tracker</title>
         {% load staticfiles %}
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        {#        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>#}
-        {#        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>#}
         <link rel="stylesheet" href="{% static 'P_Tracker/CSS/tracker.css' %}">
-        <script src="{% static 'P_Tracker/JS.tracker.js' %}"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
 
     <div class="menu">
@@ -45,6 +44,10 @@
             <input type="submit" style="padding:5px;">
         </form>
     </div>
+
+    {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`#}
+    {#    ERROR MESSAGE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`~#}
+    {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
     <div class="error_message">
         {% if messages %}
             <div class="messages">
@@ -59,105 +62,78 @@
     {#    TAB - EMPLOYEE STATS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`~#}
     {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
     {% if table == True %}
-        <div class="tab">
-            <input type="radio" id="tab-e_stat" name="tab-group-1" checked>
-            <label for="tab-e_stat">Employee Stats</label>
+        <div class="employ_content">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#employee_stats">Employee Stats</a></li>
+            <li><a data-toggle="tab" href="#employee_projects">Employee Projects</a></li>
+            <li><a data-toggle="tab" href="#employee_meeting">Employee Meeting</a></li>
+            <li><a data-toggle="tab" href="#employee_training">Employee Training</a></li>
+            <li><a data-toggle="tab" href="#filter_date">Filter By Date</a></li>
+            <li><a data-toggle="tab" href="#edit_employee">Edit Employee</a></li>
+            <li><a data-toggle="tab" href="#input_assignment">Input New Assignment</a></li>
+        </ul>
 
-            <div class="employ_content">
+        <div class="tab-content">
+        <div id="employee_stats" class="tab-pane fade in active">
+            <br>
+            <h4>Employee Info</h4>
+            {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`#}
+            {#    TAB - EMPLOYEE INFO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`~#}
+            {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
 
-                <label>Employee Info</label>
-                <table style="width:100%;" class="proj_table">
-                    <tr>
-                        <th>Badge</th>
-                        <th>Name</th>
-                        <th>Supervisor</th>
-                        <th>Role</th>
-                    </tr>
-                    <tr>
-                        <td>{{ employee_names.badge_id }}</td>
-                        <td>{{ employee_names.full_name }}</td>
-                        <td>{{ supervisor.full_name }}</td>
-                        <td>{{ employee_names.business_title }}</td>
-                    </tr>
-                </table>
-                <br>
-                <label>Employee Stats</label>
-                <table style="width:100%;" class="proj_table">
-                    <tr>
-                        <th></th>
-                        <th>Hours Worked</th>
-                        <th>Breaks</th>
-                        <th>Activity</th>
-                        <th>Training</th>
-                        <th>Meeting</th>
-                        <th>Project</th>
-                    </tr>
-                    <tr>
-                        <td>Weekly</td>
-                        <td>{{ employee_weekly.hrs_worked }}</td>
-                        <td>{{ employee_weekly.breaks }}</td>
-                        <td>{{ employee_weekly.activity }}</td>
-                        <td>{{ employee_weekly.training }}</td>
-                        <td>{{ employee_weekly.meeting }}</td>
-                        <td>{{ employee_weekly.project }}</td>
-                    </tr>
-                    <tr>
-                        <td>Daily</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>{{ stat_training }}</td>
-                        <td>{{ stat_meeting }}</td>
-                        <td>{{ stat_projects }}</td>
-                    </tr>
-                </table>
-            </div>
+            <table style="width:100%;" class="proj_table">
+                <tr>
+                    <th>Badge</th>
+                    <th>Name</th>
+                    <th>Supervisor</th>
+                    <th>Role</th>
+                </tr>
+                <tr>
+                    <td>{{ employee_names.badge_id }}</td>
+                    <td>{{ employee_names.full_name }}</td>
+                    <td>{{ supervisor.full_name }}</td>
+                    <td>{{ employee_names.business_title }}</td>
+                </tr>
+            </table>
+            <br>
+            <h4>Employee Stats</h4>
+            <table style="width:100%;" class="proj_table">
+                <tr>
+                    <th></th>
+                    <th>Hours Worked</th>
+                    <th>Breaks</th>
+                    <th>Activity</th>
+                    <th>Training</th>
+                    <th>Meeting</th>
+                    <th>Project</th>
+                </tr>
+                <tr>
+                    <td>Weekly</td>
+                    <td>{{ employee_weekly.hrs_worked }}</td>
+                    <td>{{ employee_weekly.breaks }}</td>
+                    <td>{{ employee_weekly.activity }}</td>
+                    <td>{{ employee_weekly.training }}</td>
+                    <td>{{ employee_weekly.meeting }}</td>
+                    <td>{{ employee_weekly.project }}</td>
+                </tr>
+                <tr>
+                    <td>Daily</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>{{ stat_training }}</td>
+                    <td>{{ stat_meeting }}</td>
+                    <td>{{ stat_projects }}</td>
+                </tr>
+            </table>
         </div>
-
         {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`#}
         {#    TAB EMPLOYEE PROJECTS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
         {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-
-        <div class="tab">
-            <input type="radio" id="tab-e_proj" name="tab-group-1">
-            <label for="tab-e_proj">Employee Projects</label>
-
-            <div class="employ_content">
-                {% csrf_token %}
-                <form action="/P_Tracker/employee/stamp_approval" method="POST">
-                    <label>Need to Approve</label>
-                    <table class="proj_table" style="width:100%;">
-                        <tr>
-                            <th>Name of Project</th>
-                            <th>Description</th>
-                            <th>Start Time</th>
-                            <th>End Time</th>
-                            <th>Approved By</th>
-                            <th>Edited</th>
-                            <th>When Edited</th>
-                            <th>Check to approve</th>
-                        </tr>
-                        {% for value in need_approval %}
-                            <tr>
-                                <td>{{ value.name }}</td>
-                                <td>{{ value.description }}</td>
-                                <td>{{ value.start_time }}</td>
-                                <td>{{ value.end_time }}</td>
-                                <td>{{ value.who_approved_name }}</td>
-                                <td>{{ value.who_edited }}</td>
-                                <td>{{ value.edited_at }}</td>
-                                <td>
-                                    <input type="checkbox" name="stamp" value="{{ super_badge }}">
-                                </td>
-                            </tr>
-                            <input type="hidden" name="id" value="{{ value.id }}">
-                        {% endfor %}
-                    </table>
-                    <br>
-                    <div style="float:right;"><input type="submit" style="padding:5px;"></div>
-                </form>
-                <br>
-                <label>Daily Completed Projects</label>
+        <div id="employee_projects" class="tab-pane fade">
+            <br><h4>Need to Approve</h4>
+            {% csrf_token %}
+            <form action="/P_Tracker/employee/stamp_approval" method="POST">
                 <table class="proj_table" style="width:100%;">
                     <tr>
                         <th>Name of Project</th>
@@ -167,221 +143,381 @@
                         <th>Approved By</th>
                         <th>Edited</th>
                         <th>When Edited</th>
-                        <th>Approved By</th>
+                        <th>Accept or Reject</th>
                     </tr>
-                    {% for pl in project_list %}
+                    {% for value in need_approval %}
                         <tr>
-                            <td>{{ pl.name }}</td>
-                            <td>{{ pl.description }}</td>
-                            <td>{{ pl.start_time }}</td>
-                            <td>{{ pl.end_time }}</td>
-                            <td>{{ pl.who_approved_name }}</td>
-                            <td>{{ pl.who_edited }}</td>
-                            <td>{{ pl.edited_at }}</td>
-                            <td>{{ pl.super_stamp }}</td>
+                            <td>{{ value.name }}</td>
+                            <td>{{ value.description }}</td>
+                            <td>{{ value.start_time }}</td>
+                            <td>{{ value.end_time }}</td>
+                            <td>{{ value.who_approved_name }}</td>
+                            <td>{{ value.who_edited }}</td>
+                            <td>{{ value.edited_at }}</td>
+                            <td>
+                                <select name="accept_reject">
+                                    <option name="{{ value.id }}" value="accept">Accept</option>
+                                    <option name="{{ value.id }}" value="reject">Reject</option>
+                                </select>
+                            </td>
                         </tr>
+                        <input type="hidden" name="id" value="{{ value.id }}">
                     {% endfor %}
                 </table>
-            </div>
+                <br>
+                <div style="float:right;"><input type="submit" style="padding:5px;"></div>
+            </form>
+            <br>
+            <h4>Daily Completed Projects</h4>
+            <table class="proj_table" style="width:100%;">
+                <tr>
+                    <th>Name of Project</th>
+                    <th>Description</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Approved By</th>
+                    <th>Edited</th>
+                    <th>When Edited</th>
+                    <th>Accept or Rejected</th>
+                </tr>
+                {% for pl in project_list %}
+                    <tr>
+                        <td>{{ pl.name }}</td>
+                        <td>{{ pl.description }}</td>
+                        <td>{{ pl.start_time }}</td>
+                        <td>{{ pl.end_time }}</td>
+                        <td>{{ pl.who_approved_name }}</td>
+                        <td>{{ pl.who_edited }}</td>
+                        <td>{{ pl.edited_at }}</td>
+                            <td>Accepted</td>
+                    </tr>
+                {% endfor %}
+            </table>
         </div>
+        {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`#}
+        {#    TAB EMPLOYEE PROJECTS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+        {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+        <div id="employee_meeting" class="tab-pane fade">
+            <br><h4>Need to Approve</h4>
+            {% csrf_token %}
+            <form action="/P_Tracker/employee/stamp_approval" method="POST">
+                <table class="proj_table" style="width:100%;">
+                    <tr>
+                        <th>Name of Project</th>
+                        <th>Description</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                        <th>Approved By</th>
+                        <th>Edited</th>
+                        <th>When Edited</th>
+                        <th>Check to approve</th>
+                        <th>Check to reject</th>
+                    </tr>
+                    {% for value in need_approval %}
+                        <tr>
+                            <td>{{ value.name }}</td>
+                            <td>{{ value.description }}</td>
+                            <td>{{ value.start_time }}</td>
+                            <td>{{ value.end_time }}</td>
+                            <td>{{ value.who_approved_name }}</td>
+                            <td>{{ value.who_edited }}</td>
+                            <td>{{ value.edited_at }}</td>
+                            <td>
+                                <input type="checkbox" name="stamp" value="{{ super_badge }}">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="stamp" value="reject">
+                            </td>
+                        </tr>
+                        <input type="hidden" name="id" value="{{ value.id }}">
+                    {% endfor %}
+                </table>
+                <br>
+                <div style="float:right;"><input type="submit" style="padding:5px;"></div>
+            </form>
+            <br>
+            <h4>Daily Completed Projects</h4>
+            <table class="proj_table" style="width:100%;">
+                <tr>
+                    <th>Name</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Edited</th>
+                    <th>When Edited</th>
+                    <th>Approved By</th>
+                    <th>Rejected By</th>
+                </tr>
+                {% for ml in meeting_list %}
+                    <tr>
+                        <td>{{ ml.name }}</td>
+                        <td>{{ ml.start_time }}</td>
+                        <td>{{ ml.end_time }}</td>
+                        <td>{{ ml.who_edited }}</td>
+                        <td>{{ ml.edited_at }}</td>
+                        <td>{{ ml.accept }}</td>
+                        <td>{{ ml.reject }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`#}
+        {#    TAB EMPLOYEE TRAINING~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+        {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+        <div id="employee_training" class="tab-pane fade">
+            <br><h4>Need to Approve</h4>
+            {% csrf_token %}
+            <form action="/P_Tracker/employee/stamp_approval" method="POST">
+                <table class="proj_table" style="width:100%;">
+                    <tr>
+                        <th>Name of Project</th>
+                        <th>Description</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                        <th>Approved By</th>
+                        <th>Edited</th>
+                        <th>When Edited</th>
+                        <th>Check to approve</th>
+                        <th>Check to reject</th>
+                    </tr>
+                    {% for value in need_approval %}
+                        <tr>
+                            <td>{{ value.name }}</td>
+                            <td>{{ value.description }}</td>
+                            <td>{{ value.start_time }}</td>
+                            <td>{{ value.end_time }}</td>
+                            <td>{{ value.who_approved_name }}</td>
+                            <td>{{ value.who_edited }}</td>
+                            <td>{{ value.edited_at }}</td>
+                            <td>
+                                <input type="checkbox" name="stamp" value="{{ super_badge }}">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="stamp" value="reject">
+                            </td>
+                        </tr>
+                        <input type="hidden" name="id" value="{{ value.id }}">
+                    {% endfor %}
+                </table>
+                <br>
+                <div style="float:right;"><input type="submit" style="padding:5px;"></div>
+            </form>
+            <br>
+            <h4>Daily Completed Training</h4>
+            <table class="proj_table" style="width:100%;">
+                <tr>
+                    <th>Name</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Edited</th>
+                    <th>When Edited</th>
+                    <th>Approved By</th>
+                    <th>Rejected By</th>
+                </tr>
+                {% for tl in training_list %}
+                    <tr>
+                        <td>{{ tl.name }}</td>
+                        <td>{{ tl.start_time }}</td>
+                        <td>{{ tl.end_time }}</td>
+                        <td>{{ tl.who_edited }}</td>
+                        <td>{{ tl.edited_at }}</td>
+                        <td>{{ tl.accept }}</td>
+                        <td>{{ tl.reject }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
         {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`#}
         {#   TAB - FILTER PROJECTS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
         {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+        <div id="filter_date" class="tab-pane fade">
+            <br><h4>Filter</h4>
 
-        <div class="tab">
-            <input type="radio" id="tab-filter" name="tab-group-1">
-            <label for="tab-filter">Filter by Date</label>
-
-            <div class="employ_content">
-                {% csrf_token %}
-                <form action="/P_Tracker/employee/filter" method="POST">
-                    <label>Filter</label>
-                    <br><br>
-                    <div style="text-align: center;">
-                        <div class="input-group" style="padding-left:10px; padding-left:35%;">
-                            Select &nbsp
-                            <select class="custom-select" id="inputGroupSelect01"
-                                    style="display:inline-block; padding:5px;" name="what_to_filter">
-                                <option value="Project">Project</option>
-                                <option value="Meeting">Meeting</option>
-                                <option value="Training">Training</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <div style="padding:10px; display:inline-block;">
-                                Start &nbsp <input type="date" class="form-control" name="start"
-                                                   style="width:160px; display: inline-block;" required>
-                                &nbsp End &nbsp <input type="date" id="date1" class="form-control" name="end"
-                                                       style="width:160px;  display: inline-block;"/>
-                            </div>
-                            <input type="hidden" name="badge_id" value="{{ single_employee.badge_id }}">
-                            <div style="display:inline-block;"><input type="submit" style="padding:5px;"></div>
-                        </div>
+            {% csrf_token %}
+            <form action="/P_Tracker/employee/filter" method="POST">
+                <div style="text-align: center;">
+                    <div class="input-group" style="padding-left:10px; padding-left:35%;">
+                        Select &nbsp
+                        <select class="custom-select" id="inputGroupSelect01"
+                                style="display:inline-block; padding:5px;" name="what_to_filter">
+                            <option value="Project">Project</option>
+                            <option value="Meeting">Meeting</option>
+                            <option value="Training">Training</option>
+                        </select>
                     </div>
-                </form>
-                <br>
-            </div>
+
+                    <div>
+                        <div style="padding:10px; display:inline-block;">
+                            Start &nbsp <input type="date" class="form-control" name="start"
+                                               style="width:160px; display: inline-block;" required>
+                            &nbsp End &nbsp <input type="date" id="date1" class="form-control" name="end"
+                                                   style="width:160px;  display: inline-block;"/>
+                        </div>
+                        <input type="hidden" name="badge_id" value="{{ single_employee.badge_id }}">
+                        <div style="display:inline-block;"><input type="submit" style="padding:5px;"></div>
+                    </div>
+                </div>
+            </form>
+            <br>
         </div>
 
         {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`#}
         {#    TAB - EDIT EMPLOYEE ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
         {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-
-        <div class="tab">
-            <input type="radio" id="tab-e_employ" name="tab-group-1">
-            <label for="tab-e_employ">Edit Employee</label>
-
-            <div class="employ_content">
-                {% csrf_token %}
-                <form action="/P_Tracker/employee/edit_employee" method="POST">
-                    <table style="width:50%; margin-left:auto; margin-right:auto;" class="proj_table">
-                        <tr>
-                            <th></th>
-                            <th>Current</th>
-                            <th>Change</th>
-                        </tr>
-                        <tr>
-                            <td>Badge ID:</td>
-                            <td>{{ employee_names.badge_id }}</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Full Name:</td>
-                            <td>{{ employee_names.full_name }}</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Supervisor:</td>
-                            <td>{{ supervisor.full_name }}</td>
-                            <td>
-                                <select name="supervisor" class="form-control">
-                                    <option value="null">Select Supervisor</option>
-                                    {% for key in list_super %}
-                                        <option value="{{ key.badge_id }}">{{ key.full_name }}</option>
-                                    {% endfor %}
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Status:</td>
-                            <td>{{ employee_names.business_title }}</td>
-                            <td>
-                                <select name="business_title" class="form-control">
-                                    <option value="null">Select Title</option>
-                                    <option value="employee">Employee</option>
-                                    <option value="tl">Team Lead</option>
-                                    <option value="super">Supervisor</option>
-                                    <option value="manager">Manager</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Terminated?</td>
-                            <td>No</td>
-                            <td><input type="checkbox" name="terminated" value="True"></td>
-                        </tr>
-                        <tr>
-                            <td style="border:none;"></td>
-                        </tr>
-                        <tr>
-                            <td style="border:none;"></td>
-                            <td style="border:none;"><input type="submit" style="padding:5px;"></td>
-                        </tr>
-                    </table>
-                    <input type="hidden" name="badge_id" value="{{ employee_names.badge_id }}">
-                </form>
-            </div>
+        <div id="edit_employee" class="tab-pane fade">
+            <br><h4>Edit Employee</h4>
+            <br><br>
+            {% csrf_token %}
+            <form action="/P_Tracker/employee/edit_employee" method="POST">
+                <table style="width:50%; margin-left:auto; margin-right:auto;" class="proj_table">
+                    <tr>
+                        <th></th>
+                        <th>Current</th>
+                        <th>Change</th>
+                    </tr>
+                    <tr>
+                        <td>Badge ID:</td>
+                        <td>{{ employee_names.badge_id }}</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Full Name:</td>
+                        <td>{{ employee_names.full_name }}</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Supervisor:</td>
+                        <td>{{ supervisor.full_name }}</td>
+                        <td>
+                            <select name="supervisor" class="form-control">
+                                <option value="null">Select Supervisor</option>
+                                {% for key in list_super %}
+                                    <option value="{{ key.badge_id }}">{{ key.full_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Status:</td>
+                        <td>{{ employee_names.business_title }}</td>
+                        <td>
+                            <select name="business_title" class="form-control">
+                                <option value="null">Select Title</option>
+                                <option value="employee">Employee</option>
+                                <option value="tl">Team Lead</option>
+                                <option value="super">Supervisor</option>
+                                <option value="manager">Manager</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Terminated?</td>
+                        <td>No</td>
+                        <td><input type="checkbox" name="terminated" value="True"></td>
+                    </tr>
+                    <tr>
+                        <td style="border:none;"></td>
+                    </tr>
+                    <tr>
+                        <td style="border:none;"></td>
+                        <td style="border:none;"><input type="submit" style="padding:5px;"></td>
+                    </tr>
+                </table>
+                <input type="hidden" name="badge_id" value="{{ employee_names.badge_id }}">
+            </form>
         </div>
 
         {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`#}
         {#    TAB - INPUT NEW ASSIGNMENT~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
         {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
 
-        <div class="tab">
-            <input type="radio" id="tab-input" name="tab-group-1">
-            <label for="tab-input">Input New Assignment</label>
-
-            <div class="employ_content">
-                {% csrf_token %}
-                <form action="/P_Tracker/employee/manually_input_project_time" method="POST">
-                    <input type="hidden" name="badge_id" value="{{ employee_names.badge_id }}">
-                    <input type="hidden" name="super_badge" value="{{ super_badge }}">
-                    <table style="width:50%; margin-left:auto; margin-right:auto;" class="proj_table">
-                        <tr>
-                            <th style="border:none;"></th>
-                            <th style="border:none;"></th>
-                        </tr>
-                        <tr>
-                            <td>Project Name</td>
-                            <td>
-                                <select name="project_name" class="form-control" required>
-                                    {% for key in project_name %}
-                                        <option value="{{ key.pk }}">{{ key.name }}</option>
-                                    {% endfor %}
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Description of Project</td>
-                            <td><input type="text" name="description" class="form-control" required></td>
-                        </tr>
-                        <tr>
-                            <td>Approved By</td>
-                            <td>
-                                <select name="approved_by" class="form-control" required>
-                                    {% for key in approved_by %}
-                                        <option value="{{ key.badge_id }}">{{ key.full_name }}</option>
-                                    {% endfor %}
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Start Time</td>
-                            <td><input type="datetime-local" name="start_time" class="form-control"></td>
-                        </tr>
-                        <tr>
-                            <td style="border:none">End Time</td>
-                            <td style="border:none;"><input type="datetime-local" name="end_time" class="form-control">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="border:none"></td>
-                            <td style="border:none">
-                                <input type="submit" style="padding:5px;">
-                            </td>
-                        </tr>
-                    </table>
-            </div>
+        <div id="input_assignment" class="tab-pane fade">
+            <br><h4>Input New Assignment</h4>
+            <br><br>
+            {% csrf_token %}
+            <form action="/P_Tracker/employee/manually_input_project_time" method="POST">
+                <input type="hidden" name="badge_id" value="{{ employee_names.badge_id }}">
+                <input type="hidden" name="super_badge" value="{{ super_badge }}">
+                <table style="width:50%; margin-left:auto; margin-right:auto;" class="proj_table">
+                    <tr>
+                        <th style="border:none;"></th>
+                        <th style="border:none;"></th>
+                    </tr>
+                    <tr>
+                        <td>Project Name</td>
+                        <td>
+                            <select name="project_name" class="form-control" required>
+                                {% for key in project_name %}
+                                    <option value="{{ key.pk }}">{{ key.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Description of Project</td>
+                        <td><input type="text" name="description" class="form-control" required></td>
+                    </tr>
+                    <tr>
+                        <td>Approved By</td>
+                        <td>
+                            <select name="approved_by" class="form-control" required>
+                                {% for key in approved_by %}
+                                    <option value="{{ key.badge_id }}">{{ key.full_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Start Time</td>
+                        <td><input type="datetime-local" name="start_time" class="form-control"></td>
+                    </tr>
+                    <tr>
+                        <td style="border:none">End Time</td>
+                        <td style="border:none;"><input type="datetime-local" name="end_time" class="form-control">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border:none"></td>
+                        <td style="border:none">
+                            <input type="submit" style="padding:5px;">
+                        </td>
+                    </tr>
+                </table>
         </div>
 
         {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
         {#        SCRIPT~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
         {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
 
-        <script>
-            function setInputDate(_id) {
-                var _dat = document.querySelector(_id);
-                var hoy = new Date(),
-                    d = hoy.getDate(),
-                    m = hoy.getMonth() + 1,
-                    y = hoy.getFullYear(),
-                    data;
-                if (d < 10) {
-                    d = "0" + d;
-                }
-                ;
-                if (m < 10) {
-                    m = "0" + m;
-                }
-                ;
-                data = y + "-" + m + "-" + d;
-                console.log(data);
-                _dat.value = data;
-            };
-            setInputDate("#date1");
-            setInputDate("#date2");
-            setInputDate("#date3");
-        </script>
     {% endif %}
+    <script type="text/javascript">
+        if (location.hash) {
+            $('a[href=\'' + location.hash + '\']').tab('show');
+        }
+        var activeTab = localStorage.getItem('activeTab');
+        if (activeTab) {
+            $('a[href="' + activeTab + '"]').tab('show');
+        }
+
+        $('body').on('click', 'a[data-toggle=\'tab\']', function (e) {
+            e.preventDefault()
+            var tab_name = this.getAttribute('href')
+            if (history.pushState) {
+                history.pushState(null, null, tab_name)
+            }
+            else {
+                location.hash = tab_name
+            }
+            localStorage.setItem('activeTab', tab_name)
+
+            $(this).tab('show');
+            return false;
+        });
+        $(window).on('popstate', function () {
+            var anchor = location.hash ||
+                $('a[data-toggle=\'tab\']').first().attr('href');
+            $('a[href=\'' + anchor + '\']').tab('show');
+        });
+    </script>
 {% endblock %}

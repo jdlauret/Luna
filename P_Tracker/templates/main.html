@@ -5,8 +5,8 @@
         {% load staticfiles %}
         <link rel="stylesheet" href="{% static 'P_Tracker/CSS/tracker.css' %}">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        {#        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>#}
-        {#        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>#}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <div class="top_pane">
         <div id="week">
@@ -59,6 +59,10 @@
             </table>
         </div>
     </div>
+
+    {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`#}
+    {#    ERROR MESSAGE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`~#}
+    {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
     <div class="error_message" style="color:red;">
         {% if messages %}
             <div class="messages">
@@ -70,300 +74,314 @@
     </div>
 
     {#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-    {# Project Info~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+    {# TAB INFO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
     {#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-    <div class="tab">
-        <input type="radio" id="tab-1" name="tab-group-1" checked>
-        <label for="tab-1">Project</label>
+    <div class="content">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#project">Project</a></li>
+            <li><a data-toggle="tab" href="#meeting">Meeting</a></li>
+            <li><a data-toggle="tab" href="#training">Training</a></li>
+        </ul>
 
-        <div class="content">
+        <div class="tab-content">
+            <div id="project" class="tab-pane fade in active">
+                <br><h4>Projects in Progress</h4>
+                {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+                {#        Current Projects~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+                {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
 
-            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-            {#        Current Projects~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-
-            <table class="proj_table" style="width:100%;">
-                <label>Projects in Progress </label>
-                <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Approved By</th>
-                    <th>Start Time</th>
-                    <th>End Time</th>
-                </tr>
-                {% for progress in project_progress %}
+                <table class="proj_table" style="width:100%;">
                     <tr>
-                    <td>{{ progress.name }}</td>
-                    <td>{{ progress.description }}</td>
-                    <td>{{ progress.who_approved_name }}</td>
-                    <td>{{ progress.start_time }}</td>
-                    <td>
-                        <form action="/P_Tracker/end_project_time" method="POST">
-                            <button type="submit" style="width:150px;">
-                                End Time
-                            </button>
-                            <p id="end_time"></p>
-                            <input type="hidden" name="id" value="{{ progress.id }}">
-                        </form>
-                    </td>
-                {% endfor %}
-                </tr>
-            </table>
-            <br>
-
-            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-            {#        completed Projects~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-
-            <table class="proj_table" style="width:100%;">
-                <label>Completed Projects </label>
-                <tr>
-                    <th>Project Name</th>
-                    <th>Description</th>
-                    <th>Approved By</th>
-                    <th>Start Time</th>
-                    <th>End Time</th>
-                </tr>
-                {% for completed in project_completed %}
-                    <tr>
-                        <td>{{ completed.name }}</td>
-                        <td>{{ completed.description }}</td>
-                        <td>{{ completed.who_approved_name }}</td>
-                        <td>{{ completed.start_time }}</td>
-                        <td>{{ completed.end_time }}</td>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Approved By</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
                     </tr>
-                {% endfor %}
-            </table>
-
-            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-            {#        Add Project~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-
-            <br><br>
-            {% if hide_view == True %}
-                <label>Add Project</label>
-                {% csrf_token %}
-                <form action="/P_Tracker/input_project_time" method="POST">
-                    <table style="width:50%; margin-left:auto; margin-right:auto;" class="proj_table">
+                    {% for progress in project_progress %}
                         <tr>
-                            <th style="border:none;"></th>
-                            <th style="border:none;"></th>
-                        </tr>
-                        <tr>
-                            <td>Project Name</td>
-                            <td>
-                                <select name="project_name" required>
-                                    {% for key in project_name %}
-                                        <option value="{{ key.pk }}">{{ key.name }}</option>
-                                    {% endfor %}
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Description of Project</td>
-                            <td><input type="text" name="description" required></td>
-                        </tr>
-                        <tr>
-                            <td>Approved By</td>
-                            <td>
-                                <select name="approved_by" required>
-                                    {% for key in approved_by %}
-                                        <option value="{{ key.badge_id }}">{{ key.full_name }}</option>
-                                    {% endfor %}
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="border:none;">Start Time</td>
-                            <td style="border:none;">
-                                <button type="submit" style="width:150px;">
-                                    Start Time
-                                </button>
-                                <input type="hidden" name="start_time" value="{{ start_time }}">
-                                <p id="start_time"></p>
-                            </td>
-                        </tr>
-                    </table>
-                </form>
-            {% endif %}
-        </div>
-    </div>
-
-    {#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-    {# Meeting Info~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-    {#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-    <div class="tab">
-        <input type="radio" id="tab-2" name="tab-group-1">
-        <label for="tab-2">Meeting</label>
-
-        <div class="content">
-
-            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-            {#     Meetings in Progress~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-
-            <label>Meetings in Progress</label>
-            <table class="proj_table" style="width:100%;">
-                <tr>
-                    <th>Name</th>
-                    <th>Start Time</th>
-                    <th>End Time</th>
-                </tr>
-                {% for meet_pro in meeting_progress %}
-                    <tr>
-                        <td>{{ meet_pro.name }}</td>
-                        <td>{{ meet_pro.start_time }}</td>
+                        <td>{{ progress.name }}</td>
+                        <td>{{ progress.description }}</td>
+                        <td>{{ progress.who_approved_name }}</td>
+                        <td>{{ progress.start_time }}</td>
                         <td>
-                            <form action="/P_Tracker/end_meeting" method="POST">
+                            <form action="/P_Tracker/end_project_time" method="POST">
                                 <button type="submit" style="width:150px;">
                                     End Time
                                 </button>
                                 <p id="end_time"></p>
-                                <input type="hidden" name="id" value="{{ meet_pro.id }}">
+                                <input type="hidden" name="id" value="{{ progress.id }}">
                             </form>
                         </td>
+                    {% endfor %}
                     </tr>
-                {% endfor %}
-            </table>
-            <br>
-            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-            {#        completed meetings~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+                </table>
+                {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+                {#        completed Projects~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+                {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
 
-            <table class="proj_table" style="width:100%;">
-                <label>Completed Meetings</label>
-                <tr>
-                    <th>Name</th>
-                    <th>Start Time</th>
-                    <th>End Time</th>
-                </tr>
-                {% for meet_com in meeting_completed %}
+                <table class="proj_table" style="width:100%;">
+                    <br><br><h4>Completed Projects </h4>
                     <tr>
-                        <td>{{ meet_com.name }}</td>
-                        <td>{{ meet_com.start_time }}</td>
-                        <td>{{ meet_com.end_time }}</td>
+                        <th>Project Name</th>
+                        <th>Description</th>
+                        <th>Approved By</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
                     </tr>
-                {% endfor %}
-            </table>
-            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-            {#        Add Meetings~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+                    {% for completed in project_completed %}
+                        <tr>
+                            <td>{{ completed.name }}</td>
+                            <td>{{ completed.description }}</td>
+                            <td>{{ completed.who_approved_name }}</td>
+                            <td>{{ completed.start_time }}</td>
+                            <td>{{ completed.end_time }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
 
-            <br><br>
-            {% if hide_view == True %}
-                {% csrf_token %}
-                <form action="/P_Tracker/input_meeting" method="POST">
-                    <table style="width:50%; margin-left:auto; margin-right:auto;" class="proj_table">
-                        <label>Add Meeting</label>
+                {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+                {#        Add Project~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+                {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+
+                <br><br>
+                {% if hide_view == True %}
+                    <br><br><h4>Add Project</h4>
+                    {% csrf_token %}
+                    <form action="/P_Tracker/input_project_time" method="POST">
+                        <table style="width:50%; margin-left:auto; margin-right:auto;" class="proj_table">
+                            <tr>
+                                <th style="border:none;"></th>
+                                <th style="border:none;"></th>
+                            </tr>
+                            <tr>
+                                <td>Project Name</td>
+                                <td>
+                                    <select name="project_name" required>
+                                        {% for key in project_name %}
+                                            <option value="{{ key.pk }}">{{ key.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Description of Project</td>
+                                <td><input type="text" name="description" required></td>
+                            </tr>
+                            <tr>
+                                <td>Approved By</td>
+                                <td>
+                                    <select name="approved_by" required>
+                                        {% for key in approved_by %}
+                                            <option value="{{ key.badge_id }}">{{ key.full_name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;">Start Time</td>
+                                <td style="border:none;">
+                                    <button type="submit" style="width:150px;">
+                                        Start Time
+                                    </button>
+                                    <input type="hidden" name="start_time" value="{{ start_time }}">
+                                    <p id="start_time"></p>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                {% endif %}
+            </div>
+            <div id="meeting" class="tab-pane fade">
+
+                {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+                {#     Meetings in Progress~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+                {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+
+                <br><h4>Meetings in Progress</h4>
+                <table class="proj_table" style="width:100%;">
+                    <tr>
+                        <th>Name</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                    </tr>
+                    {% for meet_pro in meeting_progress %}
                         <tr>
-                            <th style="border:none;"></th>
-                            <th style="border:none;"></th>
-                        </tr>
-                        <tr>
-                            <td>Name of Meeting</td>
-                            <td><input type="text" name="meeting_name" required></td>
-                        </tr>
-                        <tr>
-                            <td style="border:none;">Start Time</td>
-                            <td style="border:none;">
-                                <button type="submit" style="width:150px;">
-                                    Start Time
-                                </button>
-                                <p id="start_meeting_time"></p>
+                            <td>{{ meet_pro.name }}</td>
+                            <td>{{ meet_pro.start_time }}</td>
+                            <td>
+                                <form action="/P_Tracker/end_meeting" method="POST">
+                                    <button type="submit" style="width:150px;">
+                                        End Time
+                                    </button>
+                                    <p id="end_time"></p>
+                                    <input type="hidden" name="id" value="{{ meet_pro.id }}">
+                                </form>
                             </td>
                         </tr>
-                    </table>
-                </form>
-            {% endif %}
+                    {% endfor %}
+                </table>
+                {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+                {#        completed meetings~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+                {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+
+                <table class="proj_table" style="width:100%;">
+                    <br><br><h4>Completed Meetings</h4>
+                    <tr>
+                        <th>Name</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                    </tr>
+                    {% for meet_com in meeting_completed %}
+                        <tr>
+                            <td>{{ meet_com.name }}</td>
+                            <td>{{ meet_com.start_time }}</td>
+                            <td>{{ meet_com.end_time }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+                {#        Add Meetings~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+                {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+
+                <br><br>
+                {% if hide_view == True %}
+                    {% csrf_token %}
+                    <form action="/P_Tracker/input_meeting" method="POST">
+                        <table style="width:50%; margin-left:auto; margin-right:auto;" class="proj_table">
+                            <br><br><h4>Add Meeting</h4>
+                            <tr>
+                                <th style="border:none;"></th>
+                                <th style="border:none;"></th>
+                            </tr>
+                            <tr>
+                                <td>Name of Meeting</td>
+                                <td><input type="text" name="meeting_name" required></td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;">Start Time</td>
+                                <td style="border:none;">
+                                    <button type="submit" style="width:150px;">
+                                        Start Time
+                                    </button>
+                                    <p id="start_meeting_time"></p>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                {% endif %}
+            </div>
+            <div id="training" class="tab-pane fade">
+                <br><h4>Trainings in Progress</h4>
+                {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+                {#     Trainings in Progress~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+                {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+
+                <table class="proj_table" style="width:100%;">
+                    <tr>
+                        <th>Name</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                    </tr>
+                    {% for train_pro in training_progress %}
+                        <tr>
+                            <td>{{ train_pro.name }}</td>
+                            <td>{{ train_pro.start_time }}</td>
+                            <td>
+                                <form action="/P_Tracker/end_training" method="POST">
+                                    <button type="submit" style="width:150px;">
+                                        End Time
+                                    </button>
+                                    <p id="end_time"></p>
+                                    <input type="hidden" name="id" value="{{ train_pro.id }}">
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+
+                {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+                {#        completed training~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+                {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+
+                <table class="proj_table" style="width:100%;">
+                    <br><br><h4>Completed Trainings</h4>
+                    <tr>
+                        <th>Name</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                    </tr>
+                    {% for train_com in training_completed %}
+                        <tr>
+                            <td>{{ train_com.name }}</td>
+                            <td>{{ train_com.start_time }}</td>
+                            <td>{{ train_com.end_time }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+                {#        Add Training~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+                {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+
+                <br><br>
+                {% if hide_view == True %}
+                    {% csrf_token %}
+                    <form action="/P_Tracker/input_training" method="POST">
+                        <table style="width:50%; margin-left:auto; margin-right:auto;" class="proj_table">
+                            <br><br>
+                            <h3>Add Training</h3>
+                            <tr>
+                                <th style="border:none;"></th>
+                                <th style="border:none;"></th>
+                            </tr>
+                            <tr>
+                                <td>Name of Training</td>
+                                <td><input type="text" name="training_name" required></td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;">Start Time</td>
+                                <td style="border:none;">
+                                    <button type="submit" style="width:150px;">
+                                        Start Time
+                                    </button>
+                                    <p id="start_training_time"></p>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                {% endif %}
+            </div>
         </div>
     </div>
 
-    {#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-    {# Training Info~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-    {#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
 
-    <div class="tab">
-        <input type="radio" id="tab-3" name="tab-group-1">
-        <label for="tab-3">Training</label>
+    <script type="text/javascript">
+        if (location.hash) {
+            $('a[href=\'' + location.hash + '\']').tab('show');
+        }
+        var activeTab = localStorage.getItem('activeTab');
+        if (activeTab) {
+            $('a[href="' + activeTab + '"]').tab('show');
+        }
 
-        <div class="content">
-            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-            {#     Trainings in Progress~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+        $('body').on('click', 'a[data-toggle=\'tab\']', function (e) {
+            e.preventDefault()
+            var tab_name = this.getAttribute('href')
+            if (history.pushState) {
+                history.pushState(null, null, tab_name)
+            }
+            else {
+                location.hash = tab_name
+            }
+            localStorage.setItem('activeTab', tab_name)
 
-            <label>Trainings in Progress</label>
-            <table class="proj_table" style="width:100%;">
-                <tr>
-                    <th>Name</th>
-                    <th>Start Time</th>
-                    <th>End Time</th>
-                </tr>
-                {% for train_pro in training_progress %}
-                    <tr>
-                        <td>{{ train_pro.name }}</td>
-                        <td>{{ train_pro.start_time }}</td>
-                        <td>
-                            <form action="/P_Tracker/end_training" method="POST">
-                                <button type="submit" style="width:150px;">
-                                    End Time
-                                </button>
-                                <p id="end_time"></p>
-                                <input type="hidden" name="id" value="{{ train_pro.id }}">
-                            </form>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </table>
-            <br>
-            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-            {#        completed training~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-
-            <table class="proj_table" style="width:100%;">
-                <label>Completed Trainings</label>
-                <tr>
-                    <th>Name</th>
-                    <th>Start Time</th>
-                    <th>End Time</th>
-                </tr>
-                {% for train_com in training_completed %}
-                    <tr>
-                        <td>{{ train_com.name }}</td>
-                        <td>{{ train_com.start_time }}</td>
-                        <td>{{ train_com.end_time }}</td>
-                    </tr>
-                {% endfor %}
-            </table>
-            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-            {#        Add Training~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-
-            <br><br>
-            {% if hide_view == True %}
-                {% csrf_token %}
-                <form action="/P_Tracker/input_training" method="POST">
-                    <table style="width:50%; margin-left:auto; margin-right:auto;" class="proj_table">
-                        <label>Add Training</label>
-                        <tr>
-                            <th style="border:none;"></th>
-                            <th style="border:none;"></th>
-                        </tr>
-                        <tr>
-                            <td>Name of Training</td>
-                            <td><input type="text" name="training_name" required></td>
-                        </tr>
-                        <tr>
-                            <td style="border:none;">Start Time</td>
-                            <td style="border:none;">
-                                <button type="submit" style="width:150px;">
-                                    Start Time
-                                </button>
-                                <p id="start_training_time"></p>
-                            </td>
-                        </tr>
-                    </table>
-                </form>
-            {% endif %}
-        </div>
-    </div>
+            $(this).tab('show');
+            return false;
+        });
+        $(window).on('popstate', function () {
+            var anchor = location.hash ||
+                $('a[data-toggle=\'tab\']').first().attr('href');
+            $('a[href=\'' + anchor + '\']').tab('show');
+        });
+    </script>
 {% endblock %}

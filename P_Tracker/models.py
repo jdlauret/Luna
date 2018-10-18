@@ -1,7 +1,8 @@
 from __future__ import unicode_literals
-from datetime import datetime as dt
+from datetime import datetime as dt, timedelta
 import pytz
 from django.db import models
+from dateutil import parser
 
 
 class trackerManager(models.Manager):
@@ -84,16 +85,23 @@ class trackerManager(models.Manager):
             temp.save()
 
     @classmethod
+    # todo how to add a accept and reject on current projects
     def stamp_approval(self, post_data):
         errors = []
-        if len(post_data['stamp']) == 0 or len(post_data['id']) == 0 or len(post_data) == 0:
+        if len(post_data['id']) == 0:
             errors.append('No information was checked')
             return errors
         else:
-            project = Project_Time.objects.get(id=post_data['id'])
-            project.super_stamp = post_data['stamp']
-            project.accept = True
-        project.save()
+            print(post_data)
+        #     if post_data['stamp'] == 'reject':
+        #         project = Project_Time.objects.get(id=post_data['id'])
+        #         project.super_stamp = post_data['stamp']
+        #         project.accept = False
+        #     else:
+        #         project = Project_Time.objects.get(id=post_data['id'])
+        #         project.super_stamp = post_data['stamp']
+        #         project.accept = True
+        # project.save()
 
     @classmethod
     def edit_status(self, post_data):
@@ -140,28 +148,34 @@ class trackerManager(models.Manager):
         else:
             # TODO NEED TO WORK ON TIME
             end = post_data['end_time']
+            end = parser.parse(end)
+            end = end.replace(tzinfo=pytz.timezone('US/Mountain'))
             start = post_data['start_time']
-            end = dt.strptime(end, '%Y-%m-%d %H:%M:%S.%f')
-            print('start', start, type(start))
-            print('end', end, type(end))
+            start = parser.parse(start)
+            start = start.replace(tzinfo=pytz.timezone('US/Mountain'))
             total = end-start
+            total = total / timedelta(hours=1)
+            pn = int(post_data['project_name'])
+            name = Project_Name.objects.get(id=pn)
+            who_approved = Auth_Employee.objects.get(badge_id=int(post_data['approved_by']))
 
             temp = Project_Time(
-                name=Project_Time.objects.get(id=int(post_data['project_name'])),
+                name=name.name,
                 description=post_data['description'],
                 who_approved_id=post_data['approved_by'],
-                who_approved_name=Auth_Employee.objects.get(badge_id=post_data['approved_by']),
+                who_approved_name=who_approved.full_name,
                 start_time=start,
                 end_time=end,
-                total=total,
+                total_time=total,
                 completed=True,
                 created_at=dt.now(pytz.timezone('US/Mountain')),
                 auth_employee_id=post_data['badge_id'],
-                edited_at=post_data['super_badge'],
-                who_edited=dt.now(pytz.timezone('US/Mountain')),
+                edited_at=dt.now(pytz.timezone('US/Mountain')),
+                who_edited=post_data['super_badge'],
+                accept=True,
+                super_stamp=post_data['super_badge'],
             )
-            print(temp)
-            # temp.save()
+            temp.save()
 
 # THIS ALLOWS PEOPLE ACcESS TO THE PRODUCTIVITY TRACKER
 class Auth_Employee(models.Model):
