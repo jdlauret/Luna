@@ -1,6 +1,13 @@
 {% extends 'Luna/base.html' %}
 {% block content %}
     <div class="main">
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <p><span style="color:red; font-size:20px;"><b>{{ message }}</b></span></p>
+            {% endfor %}
+        </div>
+    {% endif %}
     <h2>Work Order Notes</h2>
     <div style="width: 100%; display: inline-block;">
         <div style="float: left; width: 30%">
@@ -27,15 +34,16 @@
                     <tr>
                         <td><label for="type">Removal/Reinstall:</label></td>
                         <td><select name="type" class="form-control" required>
-                            <option value="removal">Removal</option>
-                            <option value="reinstall">Reinstall</option>
+                            <option value="Removal">Removal</option>
+                            <option value="Reinstall">Reinstall</option>
                         </select></td>
                     </tr>
                     <tr>
                         <td><label for="roof_section"> CAD Roof Section</label></td>
                         <td>
                             <div class="form-group">
-                                <select multiple class="form-control" name="roof_section" style="height:190px;" required>
+                                <select multiple class="form-control" name="roof_section" style="height:190px;"
+                                        required>
                                     <option value="All Roof Sections">All</option>
                                     <option value="Roof Section 1">1</option>
                                     <option value="Roof Section 2">2</option>
@@ -55,6 +63,9 @@
                     <tr>
                         <td style="float: right" colspan="2">
                             <input style="display:inline-block;" type="submit" value="Submit"/>
+                        </td>
+                        <td>
+                            <a href="/calculators/work_order">Reset</a>
                         </td>
                     </tr>
                     </tbody>
@@ -91,6 +102,7 @@
             </table>
         </div>
     </div>
+
     {% if form_response.error %}
         <table>
             <tr>
@@ -132,6 +144,15 @@
                             </option>
                         </select></td>
                     </tr>
+                {% else %}
+                    <table class="table table-borderless">
+                    <tr>
+                        <td><label for="part_or_complete_removal">Partial or Complete Reinstall?</label></td>
+                        <td><select name="part_or_complete_removal" class="form-control">
+                            <option value="Partial">Partial</option>
+                            <option value="Complete">Complete</option>
+                        </select></td>
+                    </tr>
                 {% endif %}
                 <tr>
                     <td><label>Insert Special Instructions: </label><br></td>
@@ -142,8 +163,10 @@
                         <input type="hidden" name="roof_section" value="{{ roof_section }}">
                     </td>
                 </tr>
+                <input type="hidden" name="type_removal" value="">
+                <input type="hidden" name="racking_removal" value="">
+                </table>
             </form>
-            </table>
             </div>
             <div style="display:inline-block; padding-left:50px;">
                 <button id="copyButton" onclick="clickCopy()">Copy</button>
@@ -159,8 +182,9 @@ Number of modules: {{ form_response.total_modules }}
 Affected Roof Sections: {{ roof_section }}
 Tilt: {{ form_response.tilt }}
 Azimuth: {{ form_response.azimuth }}
-Inverter Provider: {{ form_response.inverter }}
-Racking System: {{ form_response.racking_type }}
+Inverter Provider: {{ form_response.inverter }}{% if form_response.racking_type == None %}
+Racking System: Fill this in from Visual Cad {% else %}
+Racking System: {{ form_response.racking_type }}{% endif %}
 Module Type: {{ form_response.module_manufacturer }} {{ form_response.module_model }}
 </textarea>
                 </div>
