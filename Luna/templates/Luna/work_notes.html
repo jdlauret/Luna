@@ -114,7 +114,7 @@
         {% csrf_token %}
         {% if form_response_complete == True %}
             <form action="/calculators/work_order/pdf" method="POST">
-                {% if type == "removal" %}
+                {% if type == "Removal" %}
                     <table class="table table-borderless">
                     <tr>
                         <td><label for="part_or_complete_removal">Partial or Complete Removal?</label></td>
@@ -144,7 +144,8 @@
                             </option>
                         </select></td>
                     </tr>
-                {% else %}
+                {% endif %}
+                {% if type == 'Reinstall' %}
                     <table class="table table-borderless">
                     <tr>
                         <td><label for="part_or_complete_removal">Partial or Complete Reinstall?</label></td>
@@ -153,6 +154,8 @@
                             <option value="Complete">Complete</option>
                         </select></td>
                     </tr>
+                    <input type="hidden" name="type_removal" value="">
+                    <input type="hidden" name="racking_removal" value="">
                 {% endif %}
                 <tr>
                     <td><label>Insert Special Instructions: </label><br></td>
@@ -163,8 +166,6 @@
                         <input type="hidden" name="roof_section" value="{{ roof_section }}">
                     </td>
                 </tr>
-                <input type="hidden" name="type_removal" value="">
-                <input type="hidden" name="racking_removal" value="">
                 </table>
             </form>
             </div>
@@ -176,8 +177,9 @@ Customer Name: {{ form_response.account_info.1 }}
 Phone Number: {{ form_response.account_info.2 }}
 Service number: {{ form_response.account_info.0 }}
 
-System Size (KW): {{ form_response.system_size_actual_kw }}
-Type of {{ type }}: {{ form_response.partial_or_complete }}
+System Size (KW): {{ form_response.system_size_actual_kw }}{% if form_response.partial_or_complete == None %}
+Type of {{ type }}: Fill this in from Visual Cad {% else %}
+Type of {{ type }}: {{ form_response.partial_or_complete }}{% endif %}
 Number of modules: {{ form_response.total_modules }}
 Affected Roof Sections: {{ roof_section }}
 Tilt: {{ form_response.tilt }}
