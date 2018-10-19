@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, render_to_response
 from django.template import loader, Library, RequestContext
 from django.contrib.auth.models import Group
+from django.contrib import messages
 from datetime import datetime as dt
 
 from .models import CareerPath
@@ -528,38 +529,43 @@ def work_notes(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
             form = RTSForm(request.POST)
-            if form.is_valid() and request.POST['type']:
-                service_number = form.cleaned_data['service_number']
-                dict = request.POST
-                roof_section = dict.getlist('roof_section')
-                join_string = ', \n' + str(' ') * 38
-                roof_section = join_string.join(roof_section)
-                context = {
-                    'form': form,
-                    'type': request.POST['type'],
-                    'user': request.user,
-                    'form_response_complete': True,
-                    'form_response': {},
-                    'legal_footer': print_page_legal_footer,
-                    'roof_section': roof_section,
-                }
-                try:
-                    results = work_order(str(service_number))
-                    context['form_response'] = results
-                except Exception as e:
-                    context['form_response_complete'] = False
-                return render(request, 'Luna/work_notes.html', context)
-            else:
-                form = RTSForm()
-                context = {
-                    'form': form,
-                    'type': request.POST['type'],
-                    'user': request.user,
-                    'form_response_complete': False,
-                    'form_response': {},
-                    'legal_footer': print_page_legal_footer,
-                }
-                return render(request, 'Luna/work_notes.html', context)
+            try:
+                work_order(request.POST['service_number'])
+                if form.is_valid() and request.POST['type']:
+                    service_number = form.cleaned_data['service_number']
+                    dict = request.POST
+                    roof_section = dict.getlist('roof_section')
+                    join_string = ', \n' + str(' ') * 38
+                    roof_section = join_string.join(roof_section)
+                    context = {
+                        'form': form,
+                        'type': request.POST['type'],
+                        'user': request.user,
+                        'form_response_complete': True,
+                        'form_response': {},
+                        'legal_footer': print_page_legal_footer,
+                        'roof_section': roof_section,
+                    }
+                    try:
+                        results = work_order(str(service_number))
+                        context['form_response'] = results
+                    except Exception as e:
+                        context['form_response_complete'] = False
+                    return render(request, 'Luna/work_notes.html', context)
+                else:
+                    form = RTSForm()
+                    context = {
+                        'form': form,
+                        'type': request.POST['type'],
+                        'user': request.user,
+                        'form_response_complete': False,
+                        'form_response': {},
+                        'legal_footer': print_page_legal_footer,
+                    }
+                    return render(request, 'Luna/work_notes.html', context)
+            except Exception as e:
+                messages.error(request, 'Work order not found with Service Number')
+                return render(request, 'Luna/work_notes.html')
         else:
             form = RTSForm()
             context = {
@@ -581,6 +587,7 @@ def work_notes_print(request):
             form = RTSForm(request.POST)
             if form.is_valid():
                 service_number = form.cleaned_data['service_number']
+                print(request.POST)
                 context = {
                     'form': form,
                     'user': request.user,
