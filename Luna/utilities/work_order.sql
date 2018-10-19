@@ -13,27 +13,36 @@ INNER JOIN VSLR.RPT.T_CONTACT AS C
       WHERE T.SERVICE_NUMBER = '{service_number}';
 
 SELECT
-      --APPROVED BY NEED TO GET FROM HR
-      P.PTO_AWARDED, --IF DATE, IT'S POST PTO
-      CA.RECORD_TYPE,
-      P.SERVICE_NUMBER,
-      C.SYSTEM_SIZE_ACTUAL_KW,
-      C.TOTAL_MODULES_DESIGNED,
-      CA.REQUESTED_MODULES_TO_BE_REMOVED,
-      CA.PARTIAL_OR_COMPLETE,
-      I.TILT,
-      R.AZIMUTH,
-      I.INVERTER,
-      CA.RACKING_TYPE,
-      C.MODULE_MANUFACTURER,
-      C.MODULE_MODEL
-      --DATE APPROVED
-
-FROM VSLR.RPT.T_WORKORDER AS W
-INNER JOIN VSLR.RPT.T_PROJECT AS P ON W.PROJECT_ID = P.PROJECT_ID
-INNER JOIN VSLR.RPT.T_CAD AS C ON P.PROJECT_ID = C.PROJECT_ID
-INNER JOIN VSLR.RPT.T_IDM AS I ON I.PROJECT_ID = C.PROJECT_ID
-INNER JOIN VSLR.COBBLESTONE.V_PAY_LOAD_ROOF_SECTION AS R ON R.SERVICE = P.SERVICE_NUMBER
-INNER JOIN VSLR.RPT.T_CASE AS CA ON CA.PROJECT_ID = P.PROJECT_ID
-WHERE CA.RECORD_TYPE = 'Solar - Panel Removal';
-;
+    -- For now, Brescia is okay with just listing tilt and azimuth for all roof sections, comma-separated
+    -- Long-term, she'd like it to reflect the roof sections listed in the Roof Section(s) field of the Removal Case (currently missing from t_case)
+    -- Currently, that field is a mess. Brescia will work with Aubree to see if a Salesforce solution can help standardize that field.
+    -- If we ever do look at specific roof sections, we'll need access to a Roof Section table (e.g., a view to SF.SOLAR_ROOF__C)
+    -- Roof sections can be named or numbered. They display on the Primary CAD in alphabetical order (so section 3 would be the third section alphabetically)
+    --     If this ever happens, make sure SQL's alphabetization is matching Salesforce's (watch out that SQL alphabetizes all uppercase before all lowercase)
+       em.supervisory_org
+      , ca.case_number
+      , pr.roc_name
+      , pr.pto_awarded IS NOT NULL AS is_post_pto
+      , pr.service_number -- Might want service_name instead
+      , pr.service_name
+      , cad.system_size_actual_kw
+      , NVL(cad.total_modules_actual, cad.total_modules_designed) AS total_modules
+      , ca.requested_modules_to_be_removed
+      , ca.partial_or_complete
+      , rc.roof_tilt AS tilt
+      , rc.roof_azimuth AS azimuth
+      , NVL(cad.inverter_manufacturer, pr.backend_provider) AS inverter
+      , ca.racking_type
+      , cad.module_manufacturer
+      , cad.module_model
+FROM rpt.t_case ca
+INNER JOIN vslr.HR.t_employee em on ca.CREATED_BY_EMPLOYEE_ID = em.badge_id
+INNER JOIN rpt.t_project pr ON  ca.project_id = pr.project_id
+INNER JOIN rpt.t_cad cad
+    -- Brescia said to use Primary CAD if possible, and to fall back to Proposal CAD if Primary CAD is missing
+    -- The logic that populates T_PROJECT already takes care of this (PRIMARY_CAD is set to PROPOSAL_CAD if it is blank)
+ON  pr.primary_cad = cad.cad_id
+-- Left instead of INNER because some CADs don't have any roof sections listed
+LEFT OUTER JOIN rpt.v_cad_roof_configurations rc ON  pr.primary_cad = rc.cad_id
+WHERE ca.record_type = 'Solar - Panel Removal'
+AND PR.SERVICE_NUMBER = '{service_number}';

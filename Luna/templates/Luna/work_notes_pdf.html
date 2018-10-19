@@ -14,115 +14,131 @@
     <link rel="stylesheet" type="text/css" href="{% static 'luna_style.css' %}"/>
 </head>
 <style>
-    @page{
+    @page {
         size: auto;
         margin: 0;
+    }
+    #note td{
+        padding-top: 5px;
+        padding-bottom: 5px;
     }
 </style>
 <body>
 <button class="printPageButton" id="printPageButton" onclick="printPage()">Print</button>
 <div class="printPage" id="printPage" style="padding: 10px;">
-    <div style="padding-top: 150px;"></div>
-<div>
-    <table style="width:100%;">
-        <tr>
-            <th style="width: 300px;">
-               <img style="width: 250px;" src="{% static 'resources/vivintsolarlogo_orange_CMYK.png' %}">
-            </th>
-            <th style="vertical-align: top;">
-                <b style="color: grey; font-size: 12px;">Address</b><br>
-                <b style="color: darkgray; font-size: 14px;">1800 W. Ashton Blvd</b><br>
-                <b style="color: darkgray; font-size: 14px;">Lehi, UT 84043</b>
-            </th>
-            <th style="vertical-align: top;">
-                <b style="color: grey; font-size: 12px;">Phone</b><br>
-                <b style="color: darkgray; font-size: 14px;">877.404.4129</b>
-            </th>
-            <th style="vertical-align: top;">
-                <b style="color: grey; font-size: 12px;">Website</b><br>
-                <b style="color: darkgray; font-size: 14px;">vivintsolar.com</b>
-            </th>
-        </tr>
-    </table>
+    <div style="padding-top: 90px;"></div>
+    <div>
+        <table style="width:100%;">
+            <tr>
+                <th style="width: 300px;">
+                    <img style="width: 250px; margin-top:-30px;" src="{% static 'resources/vivintsolarlogo_orange_CMYK.png' %}">
+                </th>
+                <th style="vertical-align: top;">
+                    <b style="color: grey; font-size: 12px;">Address</b><br>
+                    <b style="color: darkgray; font-size: 14px;">1800 W. Ashton Blvd</b><br>
+                    <b style="color: darkgray; font-size: 14px;">Lehi, UT 84043</b>
+                </th>
+                <th style="vertical-align: top;">
+                    <b style="color: grey; font-size: 12px;">Phone</b><br>
+                    <b style="color: darkgray; font-size: 14px;">877.404.4129</b>
+                </th>
+                <th style="vertical-align: top;">
+                    <b style="color: grey; font-size: 12px;">Website</b><br>
+                    <b style="color: darkgray; font-size: 14px;">vivintsolar.com</b>
+                </th>
+            </tr>
+        </table>
 
-    <div style="display:inline-block;">
-        <div style="vertical-align: top; padding-left: 10px; padding-right: 10px;">
-            <div style="display: inline-block;">
+        <div style="display:inline-block;">
+            <div style="vertical-align: top; padding-left: 10px; padding-right: 10px;">
+                <div style="display: inline-block;">
 
-            </div>
-            <div style="display: inline-block; vertical-align: top; padding-left: 10px; padding-right: 10px;">
+                </div>
+                <div style="display: inline-block; vertical-align: top; padding-left: 10px; padding-right: 10px;">
 
-            </div>
-            <div style="display: inline-block; vertical-align: top; padding-left: 10px; padding-right: 10px;">
+                </div>
+                <div style="display: inline-block; vertical-align: top; padding-left: 10px; padding-right: 10px;">
 
+                </div>
             </div>
         </div>
-    </div>
 
         <div style="margin-left: 300px;">
             {{ date }}<br><br>
+            {{ form_response.roc_name }}<br>
+            Re: {{ form_response.service_name }}, {{ type_removal }} Panel {{ type1 }}<br><br>
 
-            <b style="color: orange; ">Dear {{ date }},</b><br><br>
+
+            <b style="color: orange; ">Dear {{ form_response.roc_name }},</b><br><br>
 
             <p>The above system has been approved for a temporary uninstall. Below is the
                 information regarding the tracking of materials and appointment:
             </p>
-            <table>
+            <table id="note">
                 <tr>
                     <th></th>
                     <th style="margin-left: 20px;"></th>
                 </tr>
                 <tr>
                     <td><b style="color: darkgrey;">Approved By:</b></td>
-                    <td style="padding-left: 20px;">TEST</td>
+                    <td style="padding-left: 20px;">{{ form_response.organization }}</td>
                 </tr>
                 <tr>
                     <td><b style="color: darkgrey;">PTO Status:</b></td>
-                    <td style="padding-left: 20px;">TEST</td>
+                    {% if form_response.is_post_pto == True %}
+                        <td style="padding-left: 20px;">Post-PTO</td>
+                    {% endif %}
+                    {% if form_response.is_post_pto == False %}
+                        <td style="padding-left: 20px;">Pre-PTO</td>
+                    {% endif %}
                 </tr>
                 <tr>
                     <td><b style="color: darkgrey;">Type of {{ type1 }}:</b></td>
-                    <td style="padding-left: 20px;">TEST</td>
+                    <td style="padding-left: 20px;">{{ type_removal }}, {{ part_or_complete_removal }} {{ type1 }}</td>
                 </tr>
                 <tr>
                     <td><b style="color: darkgrey;">Service Number:</b></td>
-                    <td style="padding-left: 20px;">TEST</td>
+                    <td style="padding-left: 20px;">{{ form_response.service_name }}</td>
                 </tr>
                 <tr>
                     <td><b style="color: darkgrey;">System Size:</b></td>
-                    <td style="padding-left: 20px;">TEST</td>
+                    <td style="padding-left: 20px;">{{ form_response.system_size_actual_kw }} kW</td>
                 </tr>
                 <tr>
                     <td><b style="color: darkgrey;">Total Number of Modules:</b></td>
-                    <td style="padding-left: 20px;">TEST</td>
+                    <td style="padding-left: 20px;">{{ form_response.total_modules }}</td>
                 </tr>
                 <tr>
                     <td><b style="color: darkgrey;">Number of Modules to be {{ type1 }}:</b></td>
-                    <td style="padding-left: 20px;">TEST</td>
+                    <td style="padding-left: 20px;">{{ form_response.requested_modules_to_be_removed }}</td>
                 </tr>
                 <tr>
                     <td><b style="color: darkgrey;">Affected Roof Sections:</b></td>
-                    <td style="padding-left: 20px;">TEST</td>
+                    <td style="padding-left: 20px;">{{ roof_section }}</td>
                 </tr>
                 <tr>
                     <td><b style="color: darkgrey;">Tilt:</b></td>
-                    <td style="padding-left: 20px;">TEST</td>
+                    <td style="padding-left: 20px;">{{ form_response.tilt }}</td>
                 </tr>
                 <tr>
                     <td><b style="color: darkgrey;">Azimuth:</b></td>
-                    <td style="padding-left: 20px;">TEST</td>
+                    <td style="padding-left: 20px;">{{ form_response.azimuth }}</td>
                 </tr>
                 <tr>
                     <td><b style="color: darkgrey;">Inverter Provider:</b></td>
-                    <td style="padding-left: 20px;">TEST</td>
+                    <td style="padding-left: 20px;">{{ form_response.inverter }}</td>
                 </tr>
                 <tr>
                     <td><b style="color: darkgrey;">Racking System:</b></td>
-                    <td style="padding-left: 20px;">TEST</td>
+                    <td style="padding-left: 20px;">{{ form_response.racking_type }}</td>
                 </tr>
+            <tr>
+                <td style="padding-left: 20px;"></td>
+                <td style="padding-left: 20px;">* {{ racking_removal }}</td>
+            </tr>
                 <tr>
                     <td><b style="color: darkgrey;">Module Type:</b></td>
-                    <td style="padding-left: 20px;">TEST</td>
+                    <td style="padding-left: 20px;">{{ form_response.module_manufacturer }} {{ form_response.module_model }}</td>
                 </tr>
                 <tr>
                     <td><b style="color: darkgrey;">Special Instructions:</b></td>
@@ -130,7 +146,7 @@
                 </tr>
                 <tr>
                     <td><b style="color: darkgrey;">Date Approved:</b></td>
-                    <td style="padding-left: 20px;">TEST</td>
+                    <td style="padding-left: 20px;">{{ date }}</td>
                 </tr>
             </table>
         </div>

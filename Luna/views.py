@@ -530,6 +530,10 @@ def work_notes(request):
             form = RTSForm(request.POST)
             if form.is_valid() and request.POST['type']:
                 service_number = form.cleaned_data['service_number']
+                dict = request.POST
+                roof_section = dict.getlist('roof_section')
+                join_string = ', \n' + str(' ') * 38
+                roof_section = join_string.join(roof_section)
                 context = {
                     'form': form,
                     'type': request.POST['type'],
@@ -537,16 +541,14 @@ def work_notes(request):
                     'form_response_complete': True,
                     'form_response': {},
                     'legal_footer': print_page_legal_footer,
+                    'roof_section': roof_section,
                 }
                 try:
                     results = work_order(str(service_number))
                     context['form_response'] = results
                 except Exception as e:
                     context['form_response_complete'] = False
-
-                response = render(request, 'Luna/work_notes.html', context=context)
-
-                return response
+                return render(request, 'Luna/work_notes.html', context)
             else:
                 form = RTSForm()
                 context = {
@@ -557,7 +559,7 @@ def work_notes(request):
                     'form_response': {},
                     'legal_footer': print_page_legal_footer,
                 }
-                return render(request, 'Luna/work_notes.html', context=context)
+                return render(request, 'Luna/work_notes.html', context)
         else:
             form = RTSForm()
             context = {
@@ -585,19 +587,20 @@ def work_notes_print(request):
                     'form_response_complete': True,
                     'form_response': {},
                     'legal_footer': print_page_legal_footer,
-                    'date': dt.today().strftime('%m/%d/%y'),
+                    'type1': request.POST['type1'],
+                    'type_removal': request.POST['type_removal'],
+                    'part_or_complete_removal': request.POST['part_or_complete_removal'],
+                    'roof_section': request.POST['roof_section'],
+                    'racking_removal': request.POST['racking_removal'],
                     'instructions': request.POST['instructions'],
+                    'date': dt.today().date(),
                 }
-                print(context)
                 try:
                     results = work_order(str(service_number))
                     context['form_response'] = results
                 except Exception as e:
                     context['form_response_complete'] = False
-
-                response = render(request, 'Luna/work_notes_pdf.html', context=context)
-
-                return response
+                return render(request, 'Luna/work_notes_pdf.html', context)
             else:
                 form = RTSForm()
                 context = {
@@ -609,7 +612,7 @@ def work_notes_print(request):
                     'date': dt.today().strftime('%m/%d/%y'),
                     'instructions': request.POST['instructions'],
                 }
-                return render(request, 'Luna/work_notes_pdf.html', context=context)
+                return render(request, 'Luna/work_notes.html', context)
         else:
             form = RTSForm()
             context = {
@@ -621,6 +624,6 @@ def work_notes_print(request):
                 'date': dt.today().strftime('%m/%d/%y'),
                 'instructions': request.POST['instructions'],
             }
-            return render(request, 'Luna/work_notes_pdf.html', context)
+            return render(request, 'Luna/work_notes.html', context)
     else:
         return HttpResponseRedirect('/Luna')
