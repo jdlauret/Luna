@@ -562,6 +562,7 @@ def work_notes(request):
                         'form_response': {},
                         'legal_footer': print_page_legal_footer,
                     }
+                    messages.error(request, 'Not valid Service Number')
                     return render(request, 'Luna/work_notes.html', context)
             except Exception as e:
                 messages.error(request, 'Work order not found with Service Number')
@@ -575,6 +576,7 @@ def work_notes(request):
                 'form_response': {},
                 'legal_footer': print_page_legal_footer,
             }
+            messages.error(request, 'Not valid Service Number')
             return render(request, 'Luna/work_notes.html', context)
     else:
         return HttpResponseRedirect('/Luna')
