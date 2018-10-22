@@ -235,8 +235,7 @@ class Project_Time(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
     who_edited = models.IntegerField(null=True)
     edited_at = models.DateTimeField(null=True)
-    accept = models.BooleanField(default=False)
-    reject = models.BooleanField(default=False)
+    accept = models.CharField(max_length=5, default=False)
     objects = trackerManager()
 
 
@@ -250,8 +249,7 @@ class Meeting_Time(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
     who_edited = models.IntegerField(null=True)
     edited_at = models.DateTimeField(null=True)
-    accept = models.BooleanField(default=False)
-    reject = models.BooleanField(default=False)
+    accept = models.CharField(max_length=5, default=False)
     objects = trackerManager()
 
 
@@ -265,6 +263,5 @@ class Training_Time(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
     who_edited = models.IntegerField(null=True)
     edited_at = models.DateTimeField(null=True)
-    accept = models.BooleanField(default=False)
-    reject = models.BooleanField(default=False)
+    accept = models.CharField(max_length=5, default=False)
     objects = trackerManager()

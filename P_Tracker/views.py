@@ -211,10 +211,9 @@ def employee(request):
                 try:
                     weekly_tracking = tracker_list(int(value))
                     single_employee = Auth_Employee.objects.get(badge_id=int(value))
-                    need_approval = Project_Time.objects.filter(#who_approved_id='104550',  # badge,
+                    need_approval = Project_Time.objects.filter(who_approved_id='104550',  # badge,
                                                                 auth_employee_id=single_employee,
                                                                 super_stamp='').order_by('created_at')
-                    # todo filter needs to select either approved or reject
                     meeting_approval = Meeting_Time.objects.filter(auth_employee_id=single_employee).order_by(
                         'created_at')
                     training_approval = Training_Time.objects.filter(auth_employee_id=single_employee).order_by(
