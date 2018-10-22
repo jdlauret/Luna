@@ -3,11 +3,14 @@
     <div class="main">
     {% if messages %}
         <div class="messages">
-            {% for message in messages %}
-                <p><span style="color:red; font-size:20px;"><b>{{ message }}</b></span></p>
-            {% endfor %}
+        {% for message in messages %}
+            <p><span style="color:red; font-size:20px;"><b>{{ message }}</b></span></p>
+        {% endfor %}
+        {% endif %}
+        {% if form_response.error %}
+            <p><span style="color:red; font-size:20px;"><b>{{ form_response.error }}</b></span></p>
+        {% endif %}
         </div>
-    {% endif %}
     <h2>Work Order Notes</h2>
     <div style="width: 100%; display: inline-block;">
         <div style="float: left; width: 30%">
@@ -103,75 +106,69 @@
         </div>
     </div>
 
-    {% if form_response.error %}
-        <table>
-            <tr>
-                <td colspan="5">{{ form_response.error }}</td>
-            </tr>
-        </table>
-    {% endif %}
-    <div id="production_div" style="display: inline-block; vertical-align: top;">
-        {% csrf_token %}
-        {% if form_response_complete == True %}
-            <form action="/calculators/work_order/pdf" method="POST">
-                {% if type == "Removal" %}
-                    <table class="table table-borderless">
+    {% if form_response_complete == True %}
+        <div id="production_div" style="display: inline-block; vertical-align: top;">
+            {% csrf_token %}
+            {% if form_response_complete == True %}
+                <form action="/calculators/work_order/pdf" method="POST">
+                    {% if type == "Removal" %}
+                        <table class="table table-borderless">
+                        <tr>
+                            <td><label for="part_or_complete_removal">Partial or Complete Removal?</label></td>
+                            <td><select name="part_or_complete_removal" class="form-control">
+                                <option value="Partial">Partial</option>
+                                <option value="Complete">Complete</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td><label for="type_removal">Removal Type?</label></td>
+                            <td><select name="type_removal" class="form-control">
+                                <option value="Temporary">Temporary</option>
+                                <option value="Permanent">Permanent</option>
+                                <option value="System Site Relocation">System Site Relocation</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td><label for="racking_removal">Racking/Mount Removal</label></td>
+                            <td><select name="racking_removal" class="form-control">
+                                <option value="Remove Racking but leave mounts">Remove Racking but leave mounts</option>
+                                <option value="Remove all racking and mounting equipment and ensure the roof is watertight.">
+                                    Remove all racking and mounting equipment and ensure the roof is watertight.
+                                </option>
+                                <option value="Remove all racking, mounting, and electrical equipment and ensure the roof is watertight.">
+                                    Remove all racking, mounting, and electrical equipment and ensure the roof is
+                                    watertight.
+                                </option>
+                            </select></td>
+                        </tr>
+                    {% endif %}
+                    {% if type == 'Reinstall' %}
+                        <table class="table table-borderless">
+                        <tr>
+                            <td><label for="part_or_complete_removal">Partial or Complete Reinstall?</label></td>
+                            <td><select name="part_or_complete_removal" class="form-control">
+                                <option value="Partial">Partial</option>
+                                <option value="Complete">Complete</option>
+                            </select></td>
+                        </tr>
+                        <input type="hidden" name="type_removal" value="">
+                        <input type="hidden" name="racking_removal" value="">
+                    {% endif %}
                     <tr>
-                        <td><label for="part_or_complete_removal">Partial or Complete Removal?</label></td>
-                        <td><select name="part_or_complete_removal" class="form-control">
-                            <option value="Partial">Partial</option>
-                            <option value="Complete">Complete</option>
-                        </select></td>
+                        <td><label>Insert Special Instructions: </label><br></td>
+                        <td><textarea style="width: 600px;" name="instructions" class="form-control"></textarea><br>
+                            <input type="hidden" name="type1" value="{{ type }}">
+                            <input type="submit" value="Print Friendly Page" formtarget="_blank"/>
+                            <input type="hidden" name="service_number" value="{{ form_response.account_info.0 }}">
+                            <input type="hidden" name="roof_section" value="{{ roof_section }}">
+                        </td>
                     </tr>
-                    <tr>
-                        <td><label for="type_removal">Removal Type?</label></td>
-                        <td><select name="type_removal" class="form-control">
-                            <option value="Temporary">Temporary</option>
-                            <option value="Permanent">Permanent</option>
-                            <option value="System Site Relocation">System Site Relocation</option>
-                        </select></td>
-                    </tr>
-                    <tr>
-                        <td><label for="racking_removal">Racking/Mount Removal</label></td>
-                        <td><select name="racking_removal" class="form-control">
-                            <option value="Remove Racking but leave mounts">Remove Racking but leave mounts</option>
-                            <option value="Remove all racking and mounting equipment and ensure the roof is watertight.">
-                                Remove all racking and mounting equipment and ensure the roof is watertight.
-                            </option>
-                            <option value="Remove all racking, mounting, and electrical equipment and ensure the roof is watertight.">
-                                Remove all racking, mounting, and electrical equipment and ensure the roof is
-                                watertight.
-                            </option>
-                        </select></td>
-                    </tr>
-                {% endif %}
-                {% if type == 'Reinstall' %}
-                    <table class="table table-borderless">
-                    <tr>
-                        <td><label for="part_or_complete_removal">Partial or Complete Reinstall?</label></td>
-                        <td><select name="part_or_complete_removal" class="form-control">
-                            <option value="Partial">Partial</option>
-                            <option value="Complete">Complete</option>
-                        </select></td>
-                    </tr>
-                    <input type="hidden" name="type_removal" value="">
-                    <input type="hidden" name="racking_removal" value="">
-                {% endif %}
-                <tr>
-                    <td><label>Insert Special Instructions: </label><br></td>
-                    <td><textarea style="width: 600px;" name="instructions" class="form-control"></textarea><br>
-                        <input type="hidden" name="type1" value="{{ type }}">
-                        <input type="submit" value="Print Friendly Page" formtarget="_blank"/>
-                        <input type="hidden" name="service_number" value="{{ form_response.account_info.0 }}">
-                        <input type="hidden" name="roof_section" value="{{ roof_section }}">
-                    </td>
-                </tr>
-                </table>
-            </form>
-            </div>
-            <div style="display:inline-block; padding-left:50px;">
-                <button id="copyButton" onclick="clickCopy()">Copy</button>
-                <div>
+                    </table>
+                </form>
+                </div>
+                <div style="display:inline-block; padding-left:50px;">
+                    <button id="copyButton" onclick="clickCopy()">Copy</button>
+                    <div>
 <textarea style="width: 700px; height: 400px;" id="copyarea" class="form-control">
 Customer Name: {{ form_response.account_info.1 }}
 Phone Number: {{ form_response.account_info.2 }}
@@ -189,7 +186,8 @@ Racking System: Fill this in from Visual Cad {% else %}
 Racking System: {{ form_response.racking_type }}{% endif %}
 Module Type: {{ form_response.module_manufacturer }} {{ form_response.module_model }}
 </textarea>
+                    </div>
                 </div>
-            </div>
         {% endif %}
+{% endif %}
 {% endblock %}

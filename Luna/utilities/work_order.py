@@ -31,7 +31,7 @@ def work_order(servicenum):
             return install_notes
 
     except Exception as e:
-        install_notes['error'] = e
+        install_notes['error'] = 'Invalid Service Number'
         return install_notes
 
     try:
