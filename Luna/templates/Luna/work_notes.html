@@ -6,12 +6,12 @@
         {% for message in messages %}
             <p><span style="color:red; font-size:20px;"><b>{{ message }}</b></span></p>
         {% endfor %}
-        {% endif %}
-        {% if form_response.error %}
-            <p><span style="color:red; font-size:20px;"><b>{{ form_response.error }}</b></span></p>
-        {% endif %}
-        </div>
-    <h2>Work Order Notes</h2>
+    {% endif %}
+{% if form_response.error %}
+    <p><span style="color:red; font-size:20px;"><b>{{ form_response.error }}</b></span></p>
+{% endif %}
+</div>
+    <h2>Removal/Reinstall Notes</h2>
     <div style="width: 100%; display: inline-block;">
         <div style="float: left; width: 30%">
             <form action="" method="POST">
@@ -68,7 +68,7 @@
                             <input style="display:inline-block;" type="submit" value="Submit"/>
                         </td>
                         <td>
-                            <input type="button" onclick="location.href='/calculators/work_order'" value="Reset">
+                            <input type="button" onclick="location.href='/calculators/removal_reinstall'" value="Reset">
                         </td>
                     </tr>
                     </tbody>
@@ -110,7 +110,7 @@
         <div id="production_div" style="display: inline-block; vertical-align: top;">
             {% csrf_token %}
             {% if form_response_complete == True %}
-                <form action="/calculators/work_order/pdf" method="POST">
+                <form action="/calculators/removal_reinstall/pdf" method="POST">
                     {% if type == "Removal" %}
                         <table class="table table-borderless">
                         <tr>
@@ -121,7 +121,7 @@
                             </select></td>
                         </tr>
                         <tr>
-                            <td><label for="type_removal">Removal Type?</label></td>
+                            <td><label for="type_removal">Removal Type</label></td>
                             <td><select name="type_removal" class="form-control">
                                 <option value="Temporary">Temporary</option>
                                 <option value="Permanent">Permanent</option>
@@ -154,6 +154,19 @@
                         <input type="hidden" name="type_removal" value="">
                         <input type="hidden" name="racking_removal" value="">
                     {% endif %}
+                    {% if form_response.requested_modules_to_be_removed == None %}
+                        <tr>
+                            <td><label>Number of Modules - {{ type }}</label></td>
+                            <td><input type="text" name="num_mod" class="form-control"></td>
+                        </tr>
+                    {% endif %}
+                    {% if form_response.racking_type == None %}
+                        <tr>
+                            <td><label>Racking System</label></td>
+                            <td><input type="text" name="racking" class="form-control"></td>
+                        </tr>
+                    {% endif %}
+{#                todo number of modules to be removed: #}
                     <tr>
                         <td><label>Insert Special Instructions: </label><br></td>
                         <td><textarea style="width: 600px;" name="instructions" class="form-control"></textarea><br>
@@ -175,19 +188,19 @@ Phone Number: {{ form_response.account_info.2 }}
 Service number: {{ form_response.account_info.0 }}
 
 System Size (KW): {{ form_response.system_size_actual_kw }}{% if form_response.partial_or_complete == None %}
-Type of {{ type }}: Fill this in from Visual Cad {% else %}
+Type of {{ type }}: [Fill this in from visual Cad] {% else %}
 Type of {{ type }}: {{ form_response.partial_or_complete }}{% endif %}
 Number of modules: {{ form_response.total_modules }}
 Affected Roof Sections: {{ roof_section }}
 Tilt: {{ form_response.tilt }}
 Azimuth: {{ form_response.azimuth }}
 Inverter Provider: {{ form_response.inverter }}{% if form_response.racking_type == None %}
-Racking System: Fill this in from Visual Cad {% else %}
+Racking System: [Fill this in from visual Cad also input into field on the left] {% else %}
 Racking System: {{ form_response.racking_type }}{% endif %}
 Module Type: {{ form_response.module_manufacturer }} {{ form_response.module_model }}
 </textarea>
                     </div>
                 </div>
-        {% endif %}
-{% endif %}
+            {% endif %}
+    {% endif %}
 {% endblock %}
