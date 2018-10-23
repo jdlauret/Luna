@@ -18,7 +18,8 @@
         size: auto;
         margin: 0;
     }
-    #note td{
+
+    #note td {
         padding-top: 5px;
         padding-bottom: 5px;
     }
@@ -31,7 +32,8 @@
         <table style="width:100%;">
             <tr>
                 <th style="width: 300px;">
-                    <img style="width: 250px; margin-top:-30px;" src="{% static 'resources/vivintsolarlogo_orange_CMYK.png' %}">
+                    <img style="width: 250px; margin-top:-30px;"
+                         src="{% static 'resources/vivintsolarlogo_orange_CMYK.png' %}">
                 </th>
                 <th style="vertical-align: top;">
                     <b style="color: grey; font-size: 12px;">Address</b><br>
@@ -109,8 +111,12 @@
                     <td style="padding-left: 20px;">{{ form_response.total_modules }}</td>
                 </tr>
                 <tr>
-                    <td><b style="color: darkgrey;">Number of Modules to be {{ type1 }}:</b></td>
-                    <td style="padding-left: 20px;">{{ form_response.requested_modules_to_be_removed }}</td>
+                    <td><b style="color: darkgrey;">Number of Modules - {{ type1 }}:</b></td>
+                    {% if form_response.requested_modules_to_be_removed == None %}
+                        <td style="padding-left: 20px;">{{ num_mod }}</td>
+                    {% else %}
+                        <td style="padding-left: 20px;">{{ form_response.requested_modules_to_be_removed }}</td>
+                    {% endif %}
                 </tr>
                 <tr>
                     <td><b style="color: darkgrey;">Affected Roof Sections:</b></td>
@@ -130,12 +136,16 @@
                 </tr>
                 <tr>
                     <td><b style="color: darkgrey;">Racking System:</b></td>
-                    <td style="padding-left: 20px;">{{ form_response.racking_type }}</td>
+                    {% if form_response.racking_type == None %}
+                        <td style="padding-left: 20px;">{{ racking }}</td>
+                    {% else %}
+                        <td style="padding-left: 20px;">{{ form_response.racking_type }}</td>
+                    {% endif %}
                 </tr>
-            <tr>
-                <td style="padding-left: 20px;"></td>
-                <td style="padding-left: 20px;">* {{ racking_removal }}</td>
-            </tr>
+                <tr>
+                    <td style="padding-left: 20px;"></td>
+                    <td style="padding-left: 20px;">{{ racking_removal }}</td>
+                </tr>
                 <tr>
                     <td><b style="color: darkgrey;">Module Type:</b></td>
                     <td style="padding-left: 20px;">{{ form_response.module_manufacturer }} {{ form_response.module_model }}</td>

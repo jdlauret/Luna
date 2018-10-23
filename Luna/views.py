@@ -525,7 +525,7 @@ def RTS_notes (request):
 
 @login_required
 @user_passes_test(email_check)
-def work_notes(request):
+def removal_reinstall(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
             form = RTSForm(request.POST)
@@ -562,7 +562,6 @@ def work_notes(request):
                         'form_response': {},
                         'legal_footer': print_page_legal_footer,
                     }
-                    messages.error(request, 'Not valid Service Number')
                     return render(request, 'Luna/work_notes.html', context)
             except Exception as e:
                 messages.error(request, 'Work order not found with Service Number')
@@ -576,14 +575,14 @@ def work_notes(request):
                 'form_response': {},
                 'legal_footer': print_page_legal_footer,
             }
-            messages.error(request, 'Not valid Service Number')
             return render(request, 'Luna/work_notes.html', context)
     else:
         return HttpResponseRedirect('/Luna')
 
 @login_required
 @user_passes_test(email_check)
-def work_notes_print(request):
+def removal_reinstall_print(request):
+    print(request.POST)
     if request.user.is_authenticated:
         if request.method == 'POST':
             form = RTSForm(request.POST)
@@ -603,6 +602,8 @@ def work_notes_print(request):
                     'racking_removal': request.POST['racking_removal'],
                     'instructions': request.POST['instructions'],
                     'date': dt.today().date(),
+                    'num_mod': request.POST['num_mod'],
+                    'racking': request.POST['racking'],
                 }
                 try:
                     results = work_order(str(service_number))
