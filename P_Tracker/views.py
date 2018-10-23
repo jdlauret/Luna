@@ -119,6 +119,7 @@ def index(request):
                 'hide_view': True,
             }
             uncompleted_projects = Project_Time.objects.filter(completed=True, end_time=None)
+            print(type(uncompleted_projects.start_time))
             # todo figure out how to get uncompleted projects to end time after 10 hours
             return render(request, 'main.html', context)
     else:
