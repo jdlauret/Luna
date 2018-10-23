@@ -85,23 +85,44 @@ class trackerManager(models.Manager):
             temp.save()
 
     @classmethod
-    # todo how to add a accept and reject on current projects
     def stamp_approval(self, post_data):
         errors = []
         if len(post_data['id']) == 0:
             errors.append('No information was checked')
             return errors
         else:
-            print(post_data)
-        #     if post_data['stamp'] == 'reject':
-        #         project = Project_Time.objects.get(id=post_data['id'])
-        #         project.super_stamp = post_data['stamp']
-        #         project.accept = False
-        #     else:
-        #         project = Project_Time.objects.get(id=post_data['id'])
-        #         project.super_stamp = post_data['stamp']
-        #         project.accept = True
-        # project.save()
+            accept_reject = post_data.getlist('accept_reject')
+            accept_id = post_data.getlist('id')
+            if post_data['type'] == 'project':
+                for x in range(len(accept_id)):
+                    project = Project_Time.objects.get(id=accept_id[x])
+                    project.super_stamp = post_data['stamp']
+                    if accept_reject[x] == 'reject':
+                        project.accept = False
+                        project.save()
+                    else:
+                        project.accept = True
+                        project.save()
+            elif post_data['type'] == 'meeting':
+                for y in range(len(accept_id)):
+                    meeting = Meeting_Time.objects.get(id=accept_id[y])
+                    meeting.super_stamp = post_data['stamp']
+                    if accept_reject[y] == 'reject':
+                        meeting.accept = False
+                        meeting.save()
+                    else:
+                        meeting.accept = True
+                        meeting.save()
+            else:
+                for z in range(len(accept_id)):
+                    training = Training_Time.objects.get(id=accept_id[z])
+                    training.super_stamp = post_data['stamp']
+                    if accept_reject[z] == 'reject':
+                        training.accept = False
+                        training.save()
+                    else:
+                        training.accept = True
+                        training.save()
 
     @classmethod
     def edit_status(self, post_data):
@@ -146,36 +167,81 @@ class trackerManager(models.Manager):
             errors.append('No information was selected')
             return errors
         else:
-            # TODO NEED TO WORK ON TIME
-            end = post_data['end_time']
-            end = parser.parse(end)
-            end = end.replace(tzinfo=pytz.timezone('US/Mountain'))
-            start = post_data['start_time']
-            start = parser.parse(start)
-            start = start.replace(tzinfo=pytz.timezone('US/Mountain'))
-            total = end-start
-            total = total / timedelta(hours=1)
-            pn = int(post_data['project_name'])
-            name = Project_Name.objects.get(id=pn)
-            who_approved = Auth_Employee.objects.get(badge_id=int(post_data['approved_by']))
+            if post_data['type'] == 'project':
+                end = post_data['end_time']
+                end = parser.parse(end)
+                end = end.replace(tzinfo=pytz.utc)
+                start = post_data['start_time']
+                start = parser.parse(start)
+                start = start.replace(tzinfo=pytz.utc)
+                total = end-start
+                total = total / timedelta(hours=1)
+                pn = int(post_data['project_name'])
+                name = Project_Name.objects.get(id=pn)
+                who_approved = Auth_Employee.objects.get(badge_id=int(post_data['approved_by']))
 
-            temp = Project_Time(
-                name=name.name,
-                description=post_data['description'],
-                who_approved_id=post_data['approved_by'],
-                who_approved_name=who_approved.full_name,
-                start_time=start,
-                end_time=end,
-                total_time=total,
-                completed=True,
-                created_at=dt.now(pytz.timezone('US/Mountain')),
-                auth_employee_id=post_data['badge_id'],
-                edited_at=dt.now(pytz.timezone('US/Mountain')),
-                who_edited=post_data['super_badge'],
-                accept=True,
-                super_stamp=post_data['super_badge'],
-            )
-            temp.save()
+                temp = Project_Time(
+                    name=name.name,
+                    description=post_data['description'],
+                    who_approved_id=post_data['approved_by'],
+                    who_approved_name=who_approved.full_name,
+                    start_time=start,
+                    end_time=end,
+                    total_time=total,
+                    completed=True,
+                    auth_employee_id=post_data['badge_id'],
+                    edited_at=dt.now(pytz.timezone('US/Mountain')),
+                    who_edited=post_data['super_badge'],
+                    accept=True,
+                    super_stamp=post_data['super_badge'],
+                )
+                temp.save()
+            elif post_data['type'] == 'meeting':
+                end = post_data['end_time']
+                end = parser.parse(end)
+                end = end.replace(tzinfo=pytz.utc)
+                start = post_data['start_time']
+                start = parser.parse(start)
+                start = start.replace(tzinfo=pytz.utc)
+                total = end - start
+                total = total / timedelta(hours=1)
+
+                temp_m = Meeting_Time(
+                    name=post_data['name'],
+                    start_time=start,
+                    end_time=end,
+                    total_time=total,
+                    completed=True,
+                    auth_employee_id=post_data['badge_id'],
+                    edited_at=dt.now(pytz.timezone('US/Mountain')),
+                    who_edited=post_data['super_badge'],
+                    accept=True,
+                    super_stamp=post_data['super_badge']
+                )
+                temp_m.save()
+            else:
+                end = post_data['end_time']
+                end = parser.parse(end)
+                end = end.replace(tzinfo=pytz.utc)
+                start = post_data['start_time']
+                start = parser.parse(start)
+                start = start.replace(tzinfo=pytz.utc)
+                total = end - start
+                total = total / timedelta(hours=1)
+
+                temp_t = Training_Time(
+                    name=post_data['name'],
+                    start_time=start,
+                    end_time=end,
+                    total_time=total,
+                    completed=True,
+                    auth_employee_id=post_data['badge_id'],
+                    edited_at=dt.now(pytz.timezone('US/Mountain')),
+                    who_edited=post_data['super_badge'],
+                    accept=True,
+                    super_stamp=post_data['super_badge']
+                )
+                temp_t.save()
 
 # THIS ALLOWS PEOPLE ACcESS TO THE PRODUCTIVITY TRACKER
 class Auth_Employee(models.Model):
@@ -235,7 +301,7 @@ class Project_Time(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
     who_edited = models.IntegerField(null=True)
     edited_at = models.DateTimeField(null=True)
-    accept = models.CharField(max_length=5, default=False)
+    accept = models.BooleanField(default=False)
     objects = trackerManager()
 
 
@@ -249,7 +315,8 @@ class Meeting_Time(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
     who_edited = models.IntegerField(null=True)
     edited_at = models.DateTimeField(null=True)
-    accept = models.CharField(max_length=5, default=False)
+    accept = models.BooleanField(default=False)
+    super_stamp = models.CharField(max_length=200, null=True)
     objects = trackerManager()
 
 
@@ -263,5 +330,6 @@ class Training_Time(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
     who_edited = models.IntegerField(null=True)
     edited_at = models.DateTimeField(null=True)
-    accept = models.CharField(max_length=5, default=False)
+    accept = models.BooleanField(default=False)
+    super_stamp = models.CharField(max_length=200, null=True)
     objects = trackerManager()
