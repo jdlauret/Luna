@@ -1,0 +1,206 @@
+{% extends 'Luna/base.html' %}
+{% block content %}
+    <div class="main">
+    {% if messages %}
+        <div class="messages">
+        {% for message in messages %}
+            <p><span style="color:red; font-size:20px;"><b>{{ message }}</b></span></p>
+        {% endfor %}
+    {% endif %}
+{% if form_response.error %}
+    <p><span style="color:red; font-size:20px;"><b>{{ form_response.error }}</b></span></p>
+{% endif %}
+</div>
+    <h2>Removal/Reinstall Notes</h2>
+    <div style="width: 100%; display: inline-block;">
+        <div style="float: left; width: 30%">
+            <form action="" method="POST">
+                <table class="table table-borderless">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th colspan="3">Account Lookup</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>{{ form.non_field_errors }}</td>
+                    </tr>
+                    {% for field in form %}
+                        <tr>
+                            {% if field.errors %}
+                                <td>{{ field.errors }}</td>
+                            {% endif %}
+                            <td><label for="{{ field.id_for_label }}">{{ field.label }} </label></td>
+                            <td colspan="2">{{ field }}</td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <td><label for="type">Removal/Reinstall:</label></td>
+                        <td><select name="type" class="form-control" required>
+                            <option value="Removal">Removal</option>
+                            <option value="Reinstall">Reinstall</option>
+                        </select></td>
+                    </tr>
+                    <tr>
+                        <td><label for="roof_section"> CAD Roof Section</label></td>
+                        <td>
+                            <div class="form-group">
+                                <select multiple class="form-control" name="roof_section" style="height:190px;"
+                                        required>
+                                    <option value="All Roof Sections">All</option>
+                                    <option value="Roof Section 1">1</option>
+                                    <option value="Roof Section 2">2</option>
+                                    <option value="Roof Section 3">3</option>
+                                    <option value="Roof Section 4">4</option>
+                                    <option value="Roof Section 5">5</option>
+                                    <option value="Roof Section 6">6</option>
+                                    <option value="Roof Section 7">7</option>
+                                    <option value="Roof Section 8">8</option>
+                                    <option value="Roof Section 9">9</option>
+                                    <option value="Roof Section 10">10</option>
+                                </select>
+                                <label style="color:red; font-size:10px;">*Ctrl to select multiple</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="float: right" colspan="2">
+                            <input style="display:inline-block;" type="submit" value="Submit"/>
+                        </td>
+                        <td>
+                            <input type="button" onclick="location.href='/calculators/removal_reinstall'" value="Reset">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        <div id="account_info" style="margin-left: 32%">
+            {#            Table for Account Information #}
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th colspan="10">Account Information</th>
+                </tr>
+                </thead>
+                {% if form_response_complete == True %}
+                    <thead>
+                    <tr>
+                        <th>Service Number</th>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Street Address</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Zip Code</th>
+                    </tr>
+                    <tr>
+                        {#                        Inputs the account information#}
+                        {% for info in form_response.account_info %}
+                            <td>{{ info }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endif %}
+            </table>
+        </div>
+    </div>
+
+    {% if form_response_complete == True %}
+        <div id="production_div" style="display: inline-block; vertical-align: top;">
+            {% csrf_token %}
+            {% if form_response_complete == True %}
+                <form action="/calculators/removal_reinstall/pdf" method="POST">
+                    {% if type == "Removal" %}
+                        <table class="table table-borderless">
+                        <tr>
+                            <td><label for="part_or_complete_removal">Partial or Complete Removal?</label></td>
+                            <td><select name="part_or_complete_removal" class="form-control">
+                                <option value="Partial">Partial</option>
+                                <option value="Complete">Complete</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td><label for="type_removal">Removal Type</label></td>
+                            <td><select name="type_removal" class="form-control">
+                                <option value="Temporary">Temporary</option>
+                                <option value="Permanent">Permanent</option>
+                                <option value="System Site Relocation">System Site Relocation</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td><label for="racking_removal">Racking/Mount Removal</label></td>
+                            <td><select name="racking_removal" class="form-control">
+                                <option value="Remove Racking but leave mounts">Remove Racking but leave mounts</option>
+                                <option value="Remove all racking and mounting equipment and ensure the roof is watertight.">
+                                    Remove all racking and mounting equipment and ensure the roof is watertight.
+                                </option>
+                                <option value="Remove all racking, mounting, and electrical equipment and ensure the roof is watertight.">
+                                    Remove all racking, mounting, and electrical equipment and ensure the roof is
+                                    watertight.
+                                </option>
+                            </select></td>
+                        </tr>
+                    {% endif %}
+                    {% if type == 'Reinstall' %}
+                        <table class="table table-borderless">
+                        <tr>
+                            <td><label for="part_or_complete_removal">Partial or Complete Reinstall?</label></td>
+                            <td><select name="part_or_complete_removal" class="form-control">
+                                <option value="Partial">Partial</option>
+                                <option value="Complete">Complete</option>
+                            </select></td>
+                        </tr>
+                        <input type="hidden" name="type_removal" value="">
+                        <input type="hidden" name="racking_removal" value="">
+                    {% endif %}
+                    {% if form_response.requested_modules_to_be_removed == None %}
+                        <tr>
+                            <td><label>Number of Modules - {{ type }}</label></td>
+                            <td><input type="text" name="num_mod" class="form-control"></td>
+                        </tr>
+                    {% endif %}
+                    {% if form_response.racking_type == None %}
+                        <tr>
+                            <td><label>Racking System</label></td>
+                            <td><input type="text" name="racking" class="form-control"></td>
+                        </tr>
+                    {% endif %}
+{#                todo number of modules to be removed: #}
+                    <tr>
+                        <td><label>Insert Special Instructions: </label><br></td>
+                        <td><textarea style="width: 600px;" name="instructions" class="form-control"></textarea><br>
+                            <input type="hidden" name="type1" value="{{ type }}">
+                            <input type="submit" value="Print Friendly Page" formtarget="_blank"/>
+                            <input type="hidden" name="service_number" value="{{ form_response.account_info.0 }}">
+                            <input type="hidden" name="roof_section" value="{{ roof_section }}">
+                        </td>
+                    </tr>
+                    </table>
+                </form>
+                </div>
+                <div style="display:inline-block; padding-left:50px;">
+                    <button id="copyButton" onclick="clickCopy()">Copy</button>
+                    <div>
+<textarea style="width: 700px; height: 400px;" id="copyarea" class="form-control">
+Customer Name: {{ form_response.account_info.1 }}
+Phone Number: {{ form_response.account_info.2 }}
+Service number: {{ form_response.account_info.0 }}
+
+System Size (KW): {{ form_response.system_size_actual_kw }}{% if form_response.partial_or_complete == None %}
+Type of {{ type }}: [Fill this in from visual Cad] {% else %}
+Type of {{ type }}: {{ form_response.partial_or_complete }}{% endif %}
+Number of modules: {{ form_response.total_modules }}
+Affected Roof Sections: {{ roof_section }}
+Tilt: {{ form_response.tilt }}
+Azimuth: {{ form_response.azimuth }}
+Inverter Provider: {{ form_response.inverter }}{% if form_response.racking_type == None %}
+Racking System: [Fill this in from visual Cad also input into field on the left] {% else %}
+Racking System: {{ form_response.racking_type }}{% endif %}
+Module Type: {{ form_response.module_manufacturer }} {{ form_response.module_model }}
+</textarea>
+                    </div>
+                </div>
+            {% endif %}
+    {% endif %}
+{% endblock %}

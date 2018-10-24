@@ -4,6 +4,8 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, render_to_response
 from django.template import loader, Library, RequestContext
 from django.contrib.auth.models import Group
+from django.contrib import messages
+from datetime import datetime as dt
 
 from .models import CareerPath
 from Luna.utilities.template_updates import JsonHandler
@@ -13,9 +15,9 @@ from .utilities.full_benefit_analysis import full_benefit_analysis
 from .utilities.system_performance_calc import system_performance
 from .utilities.page_notes import *
 from .utilities.RTS_notes_wizard import notes_wizard
+from .utilities.work_order import work_order
 
 register = Library()
-
 
 def email_check(user):
     return user.email.endswith('@vivintsolar.com')
@@ -518,5 +520,120 @@ def RTS_notes (request):
                 'form_response': {},
             }
             return render(request, 'Luna/RTS_notes_wizard.html', context)
+    else:
+        return HttpResponseRedirect('/Luna')
+
+@login_required
+@user_passes_test(email_check)
+def removal_reinstall(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = RTSForm(request.POST)
+            try:
+                work_order(request.POST['service_number'])
+                if form.is_valid() and request.POST['type']:
+                    service_number = form.cleaned_data['service_number']
+                    dict = request.POST
+                    roof_section = dict.getlist('roof_section')
+                    join_string = ', \n' + str(' ') * 38
+                    roof_section = join_string.join(roof_section)
+                    context = {
+                        'form': form,
+                        'type': request.POST['type'],
+                        'user': request.user,
+                        'form_response_complete': True,
+                        'form_response': {},
+                        'legal_footer': print_page_legal_footer,
+                        'roof_section': roof_section,
+                    }
+                    try:
+                        results = work_order(str(service_number))
+                        context['form_response'] = results
+                    except Exception as e:
+                        context['form_response_complete'] = False
+                    return render(request, 'Luna/work_notes.html', context)
+                else:
+                    form = RTSForm()
+                    context = {
+                        'form': form,
+                        'type': request.POST['type'],
+                        'user': request.user,
+                        'form_response_complete': False,
+                        'form_response': {},
+                        'legal_footer': print_page_legal_footer,
+                    }
+                    return render(request, 'Luna/work_notes.html', context)
+            except Exception as e:
+                messages.error(request, 'Work order not found with Service Number')
+                return render(request, 'Luna/work_notes.html')
+        else:
+            form = RTSForm()
+            context = {
+                'user': request.user,
+                'form': form,
+                'form_response_complete': False,
+                'form_response': {},
+                'legal_footer': print_page_legal_footer,
+            }
+            return render(request, 'Luna/work_notes.html', context)
+    else:
+        return HttpResponseRedirect('/Luna')
+
+@login_required
+@user_passes_test(email_check)
+def removal_reinstall_print(request):
+    print(request.POST)
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = RTSForm(request.POST)
+            if form.is_valid():
+                service_number = form.cleaned_data['service_number']
+                print(request.POST)
+                context = {
+                    'form': form,
+                    'user': request.user,
+                    'form_response_complete': True,
+                    'form_response': {},
+                    'legal_footer': print_page_legal_footer,
+                    'type1': request.POST['type1'],
+                    'type_removal': request.POST['type_removal'],
+                    'part_or_complete_removal': request.POST['part_or_complete_removal'],
+                    'roof_section': request.POST['roof_section'],
+                    'racking_removal': request.POST['racking_removal'],
+                    'instructions': request.POST['instructions'],
+                    'date': dt.today().date(),
+                    'num_mod': request.POST['num_mod'],
+                    'racking': request.POST['racking'],
+                }
+                try:
+                    results = work_order(str(service_number))
+                    context['form_response'] = results
+                except Exception as e:
+                    context['form_response_complete'] = False
+                return render(request, 'Luna/work_notes_pdf.html', context)
+            else:
+                form = RTSForm()
+                context = {
+                    'form': form,
+                    'user': request.user,
+                    'form_response_complete': False,
+                    'form_response': {},
+                    'legal_footer': print_page_legal_footer,
+                    'date': dt.today().strftime('%m/%d/%y'),
+                    'instructions': request.POST['instructions'],
+                }
+                return render(request, 'Luna/work_notes.html', context)
+        else:
+            form = RTSForm()
+            context = {
+                'user': request.user,
+                'form': form,
+                'form_response_complete': False,
+                'form_response': {},
+                'legal_footer': print_page_legal_footer,
+                'date': dt.today().strftime('%m/%d/%y'),
+                'instructions': request.POST['instructions'],
+            }
+            return render(request, 'Luna/work_notes.html', context)
     else:
         return HttpResponseRedirect('/Luna')
