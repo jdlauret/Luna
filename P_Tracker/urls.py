@@ -25,9 +25,9 @@ urlpatterns = [
     url(r'^employee/manually_input_time', views.manually_input_time, name="manual_input"),
 
     url(r'^employee/filter$', views.filter, name="filter"),
-    url(r'^employee/filter/reject_project$', views.reject_project, name="reject_project"),
-    url(r'^employee/filter/reject_meeting$', views.reject_meeting, name="reject_meeting"),
-    url(r'^employee/filter/reject_training$', views.reject_training, name="reject_training"),
+    url(r'^employee/filter/edit_project$', views.edit_project, name="reject_project"),
+    url(r'^employee/filter/edit_meeting$', views.edit_meeting, name="reject_meeting"),
+    url(r'^employee/filter/edit_training$', views.edit_training, name="reject_training"),
 
     url(r'^employee/create_user$', views.create_new_user, name="create_user"),
     url(r'^employee/create$', views.creation_of_user, name="create"),

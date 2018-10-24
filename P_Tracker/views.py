@@ -24,6 +24,7 @@ from P_Tracker.utilities.productivity_tracker import tracker_list
 # todo make supervisors aware of a project that is longer than 4 hrs
 
 # todo need to set the select name to current name
+# todo edit project time, meeting time, and training time
 
 def email_check(user):
     return user.email.endswith('@vivintsolar.com')
@@ -59,7 +60,6 @@ def index(request):
                                                          start_time__day=today.day)
         progress_projects = Project_Time.objects.filter(auth_employee_id=badge, completed=False)
         find_completed_projects = Project_Time.objects.all().filter(completed=False)
-        print(find_completed_projects)
 
         # Filters the Meeting Tab
         completed_meeting = Meeting_Time.objects.filter(auth_employee_id=badge, completed=True,
@@ -75,12 +75,20 @@ def index(request):
         progress_training = Training_Time.objects.filter(auth_employee_id=badge, completed=False)
         find_completed_training = Training_Time.objects.all().filter(completed=False)
 
-        uncompleted_projects = Project_Time.objects.filter(completed=True, end_time=None)
+        # todo figure out how to add 10 hours
+        #
+        # now = dt.datetime.now()
+        # earlier = now - dt.timedelta(hours=10)
+        # uncompleted_projects = Project_Time.objects.value_list('id', 'start_time').filter(start_time__range=(earlier, now), end_time=None)
+        # print(uncompleted_projects)
+        # if uncompleted_projects.start_time >= now:
+        #     print('TEST')
 
         if len(find_completed_projects) > 0 or len(find_completed_meetings) > 0 or len(find_completed_training) > 0:
             context = {
                 'name': name,
-                'approved_by': Auth_Employee.objects.all().exclude(business_title='employee', terminated=False),
+                'approved_by': Auth_Employee.objects.all().filter(business_title='employee').filter(
+                    business_title='admin', terminated=False),
                 'project_name': Project_Name.objects.all().exclude(expired=True),
                 'weekly_list': weekly_tracking,
                 'today_date': date,
@@ -118,9 +126,6 @@ def index(request):
                 'stat_training': stat_training,
                 'hide_view': True,
             }
-            uncompleted_projects = Project_Time.objects.filter(completed=True, end_time=None)
-            print(type(uncompleted_projects.start_time))
-            # todo figure out how to get uncompleted projects to end time after 10 hours
             return render(request, 'main.html', context)
     else:
         return HttpResponseRedirect('/Luna')
@@ -419,6 +424,10 @@ def filter(request):
                     'filtered_by_name': results['name'],
                     'project_info': True,
                     'time_given': proj_time_given,
+                    'project_names': Project_Name.objects.all(),
+                    'super_list': Auth_Employee.objects.all().exclude(business_title='employee').exclude(
+                        business_title='admin', terminated=False),
+                    'stamp': badge,
                 }
                 return render(request, 'filter.html', context)
             if results['name'] == 'Meeting':
@@ -443,19 +452,50 @@ def filter(request):
         return HttpResponseRedirect('/Luna')
 
 
-def reject_project(request):
+def edit_project(request):
     email = request.user.email
     badge = find_badge_id(email)
-    for key, value in request.POST.items():
-        project = Project_Time.objects.get(id=value)
-        project.reject = True
-        project.edited_at = dt.datetime.now(pytz.timezone('US/Mountain'))
-        project.who_edited = int(badge)
+    start_time = request.POST['start_time']
+    start_time = parser.parse(start_time)
+    start_time = start_time.replace(tzinfo=pytz.timezone('US/Mountain'))
+    end_time = request.POST['end_time']
+    end_time = parser.parse(end_time)
+    end_time = end_time.replace(tzinfo=pytz.timezone('US/Mountain'))
+    project = Project_Time.objects.get(id=int(request.POST['id']))
+    reject = request.POST['reject']
+    print(request.POST)
+    if reject == 'True':
+        project.name = request.POST['project_name']
+        project.description = request.POST['description']
+        project.who_approved_id = request.POST['who_approved_by']
+        project.who_approved_name = Auth_Employee.objects.get(badge_id=request.POST['who_approved_by'])
+        project.super_stamp = request.POST['super_stamp']
+        project.start_time = start_time
+        project.end_time = end_time
+        project.total_time = end_time - start_time
+        project.completed = True
+        project.edited_at = dt.datetime.now()
+        project.who_edited = badge
+        project.accept = True
+        project.save()
+    else:
+        project.name = request.POST['project_name']
+        project.description = request.POST['description']
+        project.who_approved_id = request.POST['who_approved_by']
+        project.who_approved_name = Auth_Employee.objects.get(badge_id=int(request.POST['who_approved_by']))
+        project.super_stamp = request.POST['super_stamp']
+        project.start_time = start_time
+        project.end_time = end_time
+        project.total_time = end_time - start_time
+        project.completed = True
+        project.edited_at = dt.datetime.now()
+        project.who_edited = badge
+        project.accept = False
         project.save()
     return redirect('/P_Tracker/employee')
 
 
-def reject_meeting(request):
+def edit_meeting(request):
     email = request.user.email
     badge = find_badge_id(email)
     for key, value in request.POST.items():
@@ -467,7 +507,7 @@ def reject_meeting(request):
     return redirect('/P_Tracker/employee')
 
 
-def reject_training(request):
+def edit_training(request):
     email = request.user.email
     badge = find_badge_id(email)
     for key, value in request.POST.items():

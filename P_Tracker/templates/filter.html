@@ -28,7 +28,7 @@
             <button style="background-color:yellow;">Return to Employee Page</button>
         </form>
 
-        <h3 style="padding-left: 10px;">Filtered by {{ filtered_by_name }}</h3>
+        <h3 style="padding-left: 10px;">Filtered by {{ filtered_by_name }} and Edit</h3>
         <div class="error_message">
             {% if messages %}
                 <div class="messages">
@@ -44,38 +44,65 @@
             {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
             {#        Project - given time given~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
             {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-            <form action="/P_Tracker/employee/filter/reject_project" method="POST">
-                {% if project_info == True %}
-                    <table style="width:100%; margin-left:auto; margin-right:auto;" class="proj_table">
-                        <tr>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Start Time</th>
-                            <th>End Time</th>
-                            <th>Approved By</th>
-                            <th>Stamped</th>
-                            <th>Reject?</th>
-                        </tr>
-                        {% for list in time_given %}
+            {% if project_info == True %}
+                <table style="width:100%; margin-left:auto; margin-right:auto;" class="proj_table">
+                    <tr>
+                        <th><label>Name</label></th>
+                        <th><label>Description</label></th>
+                        <th><label>Start Time</label></th>
+                        <th><label>End Time</label></th>
+                        <th><label>Approved By</label></th>
+                        <th><label>Stamped</label></th>
+                        <th><label>Reject</label></th>
+                        <td><label>Submit</label></td>
+                    </tr>
+                    {% for list in time_given %}
+                        <form action="/P_Tracker/employee/filter/edit_project" method="POST">
                             <tr>
-                                <td>{{ list.name }}</td>
-                                <td>{{ list.description }}</td>
-                                <td>{{ list.start_time }}</td>
-                                <td>{{ list.end_time }}</td>
-                                <td>{{ list.who_approved_name }}</td>
-                                <td>{{ list.super_stamp }}</td>
+                                <td>
+                                    <select name="project_name" class="form-control">
+                                        <option value="{{ list.name }}">{{ list.name }}</option>
+                                        {% for x in project_names %}
+                                            <option value="{{ x.name }}">{{ x.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </td>
+                                <td><input type="text" name="description" class="form-control"
+                                           value="{{ list.description }}" required></td>
+                                <td>
+                                    <input type="text" name="start_time" class="form-control"
+                                           value="{{ list.start_time }}" required></td>
+                                <td>
+                                    <input type="text" name="end_time" class="form-control" value="{{ list.end_time }}"
+                                           required></td>
+                                <td>
+                                    <select name="who_approved_by" class="form-control">
+                                        <option value="{{ list.who_approved_id }}">{{ list.who_approved_name }}</option>
+                                        {% for y in super_list %}
+                                            <option value="{{ y.badge_id }}">{{ y.full_name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </td>
+                                <td><input type="number" name="super_stamp" class="form-control"
+                                           value="{{ list.super_stamp }}" required></td>
                                 <td>
                                     <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1" name="reject"
-                                               value="{{ list.id }}">
+                                        <select name="reject" class="form-control">
+                                            <option value="False">No</option>
+                                            <option value="True">Yes</option>
+                                        </select>
                                     </div>
                                 </td>
+                                <td>
+                                    <input type="hidden" name="id" value="{{ list.id }}">
+                                    <br><input type="submit" style="float:right; padding:2px;">
+                                </td>
                             </tr>
-                        {% endfor %}
-                    </table>
-                    <br><input type="submit" style="float:right; padding:2px;">
-                {% endif %}
-            </form>
+                        </form>
+                    {% endfor %}
+                </table>
+            {% endif %}
+
             {#            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
             {#            MEETING INFO - TIME GIVEN~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
             {#            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}

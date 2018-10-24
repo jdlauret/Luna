@@ -69,9 +69,10 @@
             <li><a data-toggle="tab" href="#employee_projects">Employee Projects</a></li>
             <li><a data-toggle="tab" href="#employee_meeting">Employee Meeting</a></li>
             <li><a data-toggle="tab" href="#employee_training">Employee Training</a></li>
-            <li><a data-toggle="tab" href="#filter_date">Filter By Date</a></li>
+            <li><a data-toggle="tab" href="#filter_date">Filter By Date/Edit</a></li>
             <li><a data-toggle="tab" href="#input_project">Input New Project</a></li>
             <li><a data-toggle="tab" href="#input_meeting">Input New Meeting</a></li>
+            <li><a data-toggle="tab" href="#input_training">Input New Training</a></li>
             <li><a data-toggle="tab" href="#input_training">Input New Training</a></li>
             <li><a data-toggle="tab" href="#edit_employee">Edit Employee</a></li>
         </ul>
@@ -350,7 +351,7 @@
                             &nbsp End &nbsp <input type="date" id="date1" class="form-control" name="end"
                                                    style="width:160px;  display: inline-block;"/>
                         </div>
-                        <input type="hidden" name="badge_id" value="{{ single_employee.badge_id }}">
+                        <input type="hidden" name="badge_id" value="{{ selected_employee.badge_id }}">
                         <div style="display:inline-block;"><input type="submit" style="padding:5px;"></div>
                     </div>
                 </div>
@@ -624,5 +625,7 @@
     setInputDate("#date1");
     setInputDate("#date2");
     setInputDate("#date3");
+
+
 </script>
 {% endblock %}
