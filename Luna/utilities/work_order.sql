@@ -30,7 +30,7 @@ SELECT
       , ca.requested_modules_to_be_removed
       , ca.partial_or_complete
       , rc.roof_tilt AS tilt
-      , REGEXP_REPLACE(REGEXP_REPLACE(REGEXP_REPLACE(REGEXP_REPLACE(rc.roof_azimuth, ',([^ ])', '\\1'), '(\\d)[^\\d\\.,]', '\\1'), '[^\\d\\. ](\\d)', '\\1'), '(\\d+\\.?\\d{0,2})[^,]*', '\\1') AS azimuth
+      , REGEXP_REPLACE(REGEXP_REPLACE(REGEXP_REPLACE(REGEXP_REPLACE(rc.roof_azimuth, ',([^ ])', '\\1'), '(\\d)[^\\d\\.,]*', '\\1'), '[^\\d\\. ]*(\\d)', '\\1'), '(\\d+\\.?\\d{0,2})[^,]*', '\\1')  AS azimuth
       , NVL(cad.inverter_manufacturer, pr.backend_provider) AS inverter
       , ca.racking_type
       , cad.module_manufacturer
