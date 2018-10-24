@@ -18,7 +18,6 @@ from P_Tracker.utilities.productivity_tracker import tracker_list
 
 
 # todo prevent access to tracker from those who do not have access
-# todo allow admin to access page but not show up as supervisor
 
 # todo end project time, if agent forgets to end time, input 10 hours automatically, after 10 hours have passed
 # todo make supervisors aware of a project that is longer than 4 hrs
@@ -459,16 +458,20 @@ def edit_project(request):
     start_time = parser.parse(start_time)
     start_time = start_time.replace(tzinfo=pytz.timezone('US/Mountain'))
     end_time = request.POST['end_time']
+    print(end_time, type(end_time))
     end_time = parser.parse(end_time)
+    print(end_time, type(end_time))
     end_time = end_time.replace(tzinfo=pytz.timezone('US/Mountain'))
+    print(end_time, type(end_time))
     project = Project_Time.objects.get(id=int(request.POST['id']))
     reject = request.POST['reject']
+    who_approved_name = Auth_Employee.objects.get(badge_id=request.POST['who_approved_by'])
     print(request.POST)
     if reject == 'True':
         project.name = request.POST['project_name']
         project.description = request.POST['description']
         project.who_approved_id = request.POST['who_approved_by']
-        project.who_approved_name = Auth_Employee.objects.get(badge_id=request.POST['who_approved_by'])
+        project.who_approved_name = who_approved_name.full_name
         project.super_stamp = request.POST['super_stamp']
         project.start_time = start_time
         project.end_time = end_time
@@ -482,7 +485,7 @@ def edit_project(request):
         project.name = request.POST['project_name']
         project.description = request.POST['description']
         project.who_approved_id = request.POST['who_approved_by']
-        project.who_approved_name = Auth_Employee.objects.get(badge_id=int(request.POST['who_approved_by']))
+        project.who_approved_name = who_approved_name.full_name
         project.super_stamp = request.POST['super_stamp']
         project.start_time = start_time
         project.end_time = end_time
