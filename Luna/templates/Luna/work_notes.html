@@ -157,16 +157,15 @@
                     {% if form_response.requested_modules_to_be_removed == None %}
                         <tr>
                             <td><label>Number of Modules - {{ type }}</label></td>
-                            <td><input type="text" name="num_mod" class="form-control"></td>
+                            <td><input type="number" name="num_mod" class="form-control" required></td>
                         </tr>
                     {% endif %}
                     {% if form_response.racking_type == None %}
                         <tr>
                             <td><label>Racking System</label></td>
-                            <td><input type="text" name="racking" class="form-control"></td>
+                            <td><input type="text" name="racking" class="form-control" required></td>
                         </tr>
                     {% endif %}
-{#                todo number of modules to be removed: #}
                     <tr>
                         <td><label>Insert Special Instructions: </label><br></td>
                         <td><textarea style="width: 600px;" name="instructions" class="form-control"></textarea><br>
@@ -187,9 +186,10 @@ Customer Name: {{ form_response.account_info.1 }}
 Phone Number: {{ form_response.account_info.2 }}
 Service number: {{ form_response.account_info.0 }}
 
-System Size (KW): {{ form_response.system_size_actual_kw }}{% if form_response.partial_or_complete == None %}
-Type of {{ type }}: [Fill this in from visual Cad] {% else %}
-Type of {{ type }}: {{ form_response.partial_or_complete }}{% endif %}
+System Size (KW): {{ form_response.system_size_actual_kw }}{% if type == 'Removal' %}{% if form_response.partial_or_complete == None %}
+Type of {{ type }}: [Fill this in from visual Cad]{% else %}
+Type of {{ type }}: {{ form_response.partial_or_complete }}{% endif %}{% endif %}{% if type == 'Reinstall' %}
+Type of Reinstall:{% endif %}
 Number of modules: {{ form_response.total_modules }}
 Affected Roof Sections: {{ roof_section }}
 Tilt: {{ form_response.tilt }}
