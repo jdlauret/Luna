@@ -1,0 +1,227 @@
+{% extends 'Luna/base.html' %}
+{% block content %}
+    <head>
+        <title>Productivity Tracker</title>
+        {% load staticfiles %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        {#        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>#}
+        {#        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>#}
+        <link rel="stylesheet" href="{% static 'P_Tracker/CSS/tracker.css' %}">
+    </head>
+    <div class="top_pane3">
+        <div class="menu">
+            <div class="dropdownMenu">
+                <button class="dropbtnMenu">Menu</button>
+                <div class="dropdownMenu-content">
+                    <a class="dropdown-item" href="/P_Tracker">Main</a>
+                    <a class="dropdown-item" href="employee">Employee</a>
+                    <a class="dropdown-item" href="create_project">Add/edit Projects</a>
+                </div>
+            </div>
+            <div style="display:inline-block;">
+                <h3 style="text-align: center; color:white; padding-left:30px;">Productivity Tracker
+                    for {{ name }}</h3>
+            </div>
+        </div>
+
+        <form action="/P_Tracker/employee">
+            <button style="background-color:yellow;">Return to Employee Page</button>
+        </form>
+
+        <h3 style="padding-left: 10px;">Filtered by {{ filtered_by_name }} and Edit</h3>
+        <div class="error_message">
+            {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                        <p><span>{{ message }}</span></p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        {% csrf_token %}
+        <div class="main_body">
+
+            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+            {#        Project - given time given~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+            {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+            {% if project_info == True %}
+                <table style="width:100%; margin-left:auto; margin-right:auto;" class="proj_table">
+                    <tr>
+                        <th><label>Name</label></th>
+                        <th><label>Description</label></th>
+                        <th><label>Start Time</label></th>
+                        <th><label>End Time</label></th>
+                        <th><label>Approved By</label></th>
+                        <th><label>Accept</label></th>
+                        <td><label>Submit</label></td>
+                    </tr>
+                    {% for list in time_given %}
+                        <form action="/P_Tracker/employee/filter/edit_project" method="POST">
+                            <tr>
+                                <td>
+                                    <select name="project_name" class="form-control">
+                                        <option value="{{ list.name }}">{{ list.name }}</option>
+                                        {% for x in project_names %}
+                                            <option value="{{ x.name }}">{{ x.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </td>
+                                <td><input type="text" name="description" class="form-control"
+                                           value="{{ list.description }}" required></td>
+                                <td>
+                                    <input type="text" name="start_time" class="form-control"
+                                           value="{{ list.start_time }}" required>
+                                </td>
+                                <td>
+                                    <input type="text" name="end_time" class="form-control" value="{{ list.end_time }}"
+                                           required>
+                                </td>
+                                <td>
+                                    <select name="who_approved_by" class="form-control">
+                                        <option value="{{ list.who_approved_id }}">{{ list.who_approved_name }}</option>
+                                        {% for y in super_list %}
+                                            <option value="{{ y.badge_id }}">{{ y.full_name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </td>
+                                <td>
+                                    {% if list.accept == True %}
+                                        <div class="form-check">
+                                            <select name="accept" class="form-control">
+                                                <option value="True">Yes</option>
+                                                <option value="False">No</option>
+                                            </select>
+                                        </div>
+                                    {% endif %}
+                                    {% if list.accept == False %}
+                                        <div class="form-check">
+                                            <select name="accept" class="form-control">
+                                                <option value="False">No</option>
+                                                <option value="True">Yes</option>
+                                            </select>
+                                        </div>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <input type="hidden" name="id" value="{{ list.id }}">
+                                    <br><input type="submit" style="float:right; padding:2px;">
+                                </td>
+                            </tr>
+                        </form>
+                    {% endfor %}
+                </table>
+            {% endif %}
+
+            {#            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+            {#            MEETING INFO - TIME GIVEN~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+            {#            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+
+            {% if meeting_info == True %}
+                <table style="width:100%; margin-left:auto; margin-right:auto;" class="proj_table">
+                    <tr>
+                        <th><label>Name</label></th>
+                        <th><label>Start Time</label></th>
+                        <th><label>End Time</label></th>
+                        <th><label>Accept</label></th>
+                        <td><label>Submit</label></td>
+                    </tr>
+                    {% for list in time_given %}
+                        <form action="/P_Tracker/employee/filter/edit_meeting" method="POST">
+                            <tr>
+                                <td>
+                                    <input type="text" name="name" class="form-control" value="{{ list.name }}">
+                                </td>
+                                <td>
+                                    <input type="text" name="start_time" class="form-control"
+                                           value="{{ list.start_time }}" required>
+                                </td>
+                                <td>
+                                    <input type="text" name="end_time" class="form-control" value="{{ list.end_time }}"
+                                           required>
+                                </td>
+                                <td>
+                                    {% if list.accept == True %}
+                                        <div class="form-check">
+                                            <select name="accept" class="form-control">
+                                                <option value="True">Yes</option>
+                                                <option value="False">No</option>
+                                            </select>
+                                        </div>
+                                    {% endif %}
+                                    {% if list.accept == False %}
+                                        <div class="form-check">
+                                            <select name="accept" class="form-control">
+                                                <option value="False">No</option>
+                                                <option value="True">Yes</option>
+                                            </select>
+                                        </div>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <input type="hidden" name="id" value="{{ list.id }}">
+                                    <br><input type="submit" style="float:right; padding:2px;">
+                                </td>
+                            </tr>
+                        </form>
+                    {% endfor %}
+                </table>
+            {% endif %}
+
+            {#            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+            {#            TRAINING INFO - TIME GIVEN~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+            {#            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+
+            {% if training_info == True %}
+                <table style="width:100%; margin-left:auto; margin-right:auto;" class="proj_table">
+                    <tr>
+                        <th><label>Name</label></th>
+                        <th><label>Start Time</label></th>
+                        <th><label>End Time</label></th>
+                        <th><label>Accept</label></th>
+                        <td><label>Submit</label></td>
+                    </tr>
+                    {% for list in time_given %}
+                        <form action="/P_Tracker/employee/filter/edit_training" method="POST">
+                            <tr>
+                                <td>
+                                    <input type="text" name="name" class="form-control" value="{{ list.name }}">
+                                </td>
+                                <td>
+                                    <input type="text" name="start_time" class="form-control"
+                                           value="{{ list.start_time }}" required>
+                                </td>
+                                <td>
+                                    <input type="text" name="end_time" class="form-control" value="{{ list.end_time }}"
+                                           required>
+                                </td>
+                                <td>
+                                    {% if list.accept == True %}
+                                        <div class="form-check">
+                                            <select name="accept" class="form-control">
+                                                <option value="True">Yes</option>
+                                                <option value="False">No</option>
+                                            </select>
+                                        </div>
+                                    {% endif %}
+                                    {% if list.accept == False %}
+                                        <div class="form-check">
+                                            <select name="accept" class="form-control">
+                                                <option value="False">No</option>
+                                                <option value="True">Yes</option>
+                                            </select>
+                                        </div>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <input type="hidden" name="id" value="{{ list.id }}">
+                                    <br><input type="submit" style="float:right; padding:2px;">
+                                </td>
+                            </tr>
+                        </form>
+                    {% endfor %}
+                </table>
+            {% endif %}
+
+        </div>
+    </div>
+{% endblock %}

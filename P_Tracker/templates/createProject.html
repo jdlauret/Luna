@@ -1,0 +1,79 @@
+{% extends 'Luna/base.html' %}
+{% block content %}
+    <head>
+        <title>Productivity Tracker</title>
+        {% load staticfiles %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        {#        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>#}
+        {#        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>#}
+        <link rel="stylesheet" href="{% static 'P_Tracker/CSS/tracker.css' %}">
+    </head>
+    <div class="top_pane3">
+        <div class="menu">
+            <div class="dropdownMenu">
+                <button class="dropbtnMenu">Menu</button>
+                <div class="dropdownMenu-content">
+                    <a class="dropdown-item" href="/P_Tracker">Main</a>
+                    <a class="dropdown-item" href="employee">Employee</a>
+                    <a class="dropdown-item" href="create_project">Add/edit Projects</a>
+                </div>
+            </div>
+            <div style="display:inline-block;">
+                <h3 style="text-align: center; color:white; padding-left:30px;">Productivity Tracker
+                    for {{ name }}</h3>
+            </div>
+        </div>
+        <h3 style="padding-left: 10px;">Create/Edit Projects</h3>
+        {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+        {#    Error Message~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+        {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+        <div class="error_message">
+            {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                        <p><span>{{ message }}</span></p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+        {#    Create/Edit~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+        {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+        {% csrf_token %}
+        <form action="/P_Tracker/create_project/submit_project" method="POST">
+            <h4 style="padding-left:15px;">Create New Project</h4>
+            <table style="width:50%; margin-left:auto; margin-right:auto; border:none;" id="proj_table">
+                <tr>
+                    <td>Name of Project</td>
+                    <td><input type="text" name="create_project_name" minlength=2 required></td>
+                    {#                    <input type="hidden" name="badge_id" value="{{ badge_id }}">#}
+                    <td><input type="submit" style="padding:10px;"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <br><br>
+    <div id="proj_body">
+        {% csrf_token %}
+        <form action="/P_Tracker/create_project/update_project" method="POST">
+            <br><br><h4 style="padding-left:15px;">Edit Projects</h4>
+            <table style="width:50%; margin-left:auto; margin-right:auto; border:none;" class="create_proj_table">
+                <tr>
+                    <th>Name of Projects</th>
+                    <th>Creator</th>
+                    <th>Remove?</th>
+                </tr>
+                {% for key in project_name %}
+                    <tr>
+                        <td>{{ key.name }}</td>
+                        <td>{{ key.full_name }}</td>
+                        <td><input type="checkbox" name="{{ key.id }}" value="True" {% if key.expired %}
+                                   checked {% endif %}></td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <br>
+            <div style="padding-left:70%;"><input type="submit" style="padding:10px;"></div>
+        </form>
+    </div>
+{% endblock %}

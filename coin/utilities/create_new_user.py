@@ -1,7 +1,5 @@
 import os
-# import json
 import datetime as dt
-from Luna.models import DataWarehouse
 from models import SnowFlakeDW, SnowflakeConsole
 from coin.models import employee_id
 #
@@ -14,6 +12,7 @@ utilities_dir = os.path.join(coin_dir, 'utilities')
 
 DB = SnowFlakeDW()
 DB.set_user('MACK_DAMAVANDI')
+
 
 def new_user():
     # log_file_path = os.path.join(CREATED_DIR, 'created_id.json')
