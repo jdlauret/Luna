@@ -17,13 +17,11 @@ from P_Tracker.utilities.find_name import find_name
 from P_Tracker.utilities.productivity_tracker import tracker_list
 
 
-# todo prevent access to tracker from those who do not have access
+# todo prevent access to tracker from those who do not have access?
 
-# todo end project time, if agent forgets to end time, input 10 hours automatically, after 10 hours have passed
+# TRACKER VERSION 2:
 # todo make supervisors aware of a project that is longer than 4 hrs
-
 # todo need to set the select name to current name
-# todo edit project time, meeting time, and training time
 
 def email_check(user):
     return user.email.endswith('@vivintsolar.com')
@@ -74,14 +72,41 @@ def index(request):
         progress_training = Training_Time.objects.filter(auth_employee_id=badge, completed=False)
         find_completed_training = Training_Time.objects.all().filter(completed=False)
 
-        # todo figure out how to add 10 hours
-        #
-        # now = dt.datetime.now()
-        # earlier = now - dt.timedelta(hours=10)
-        # uncompleted_projects = Project_Time.objects.value_list('id', 'start_time').filter(start_time__range=(earlier, now), end_time=None)
-        # print(uncompleted_projects)
-        # if uncompleted_projects.start_time >= now:
-        #     print('TEST')
+        uncompleted_projects = Project_Time.objects.all().filter(completed=False)
+        # UNCOMPLETED PROJECTS
+        for x in uncompleted_projects:
+            check = int((dt.datetime.now(pytz.timezone('US/Mountain')) - x.start_time).seconds / 60 / 60)
+            if check <= 10:
+                x.end_time = x.start_time + timedelta(hours=10)
+                total = x.end_time - x.start_time
+                total = total / timedelta(hours=1)
+                x.total_time = total
+                x.completed = True
+                x.save()
+
+        uncompleted_meeting = Meeting_Time.objects.all().filter(completed=False)
+        # UNCOMPLETED MEETING
+        for y in uncompleted_meeting:
+            check = int((dt.datetime.now(pytz.timezone('US/Mountain')) - y.start_time).seconds / 60 / 60)
+            if check <= 10:
+                y.end_time = y.start_time + timedelta(hours=10)
+                total = y.end_time - y.start_time
+                total = total / timedelta(hours=1)
+                y.total_time = total
+                y.completed = True
+                y.save()
+
+        uncompleted_training = Training_Time.objects.all().filter(completed=False)
+        # UNCOMPLETED TRAINING
+        for z in uncompleted_training:
+            check = int((dt.datetime.now(pytz.timezone('US/Mountain')) - z.start_time).seconds / 60 / 60)
+            if check <= 10:
+                z.end_time = z.start_time + timedelta(hours=10)
+                total = z.end_time - z.start_time
+                total = total / timedelta(hours=1)
+                z.total_time = total
+                z.completed = True
+                z.save()
 
         if len(find_completed_projects) > 0 or len(find_completed_meetings) > 0 or len(find_completed_training) > 0:
             context = {
@@ -91,8 +116,8 @@ def index(request):
                 'project_name': Project_Name.objects.all().exclude(expired=True),
                 'weekly_list': weekly_tracking,
                 'today_date': date,
-                'start_time': dt.datetime.now(),
-                'end_time': dt.datetime.now(),
+                'start_time': dt.datetime.now(pytz.timezone('US/Mountain')),
+                'end_time': dt.datetime.now(pytz.timezone('US/Mountain')),
                 'project_completed': completed_projects,
                 'project_progress': progress_projects,
                 'meeting_completed': completed_meeting,
@@ -112,8 +137,8 @@ def index(request):
                 'project_name': Project_Name.objects.all().exclude(expired=True),
                 'weekly_list': weekly_tracking,
                 'today_date': date,
-                'start_time': dt.datetime.now(),
-                'end_time': dt.datetime.now(),
+                'start_time': dt.datetime.now(pytz.timezone('US/Mountain')),
+                'end_time': dt.datetime.now(pytz.timezone('US/Mountain')),
                 'project_completed': reversed(completed_projects),
                 'project_progress': progress_projects,
                 'meeting_completed': reversed(completed_meeting),
@@ -211,13 +236,14 @@ def employee(request):
                 try:
                     weekly_tracking = tracker_list(int(value))
                     selected_employee = Auth_Employee.objects.get(badge_id=int(value))
-                    need_approval = Project_Time.objects.filter(who_approved_id=badge,
-                                                                auth_employee_id=selected_employee.badge_id,
-                                                                super_stamp=None).order_by('created_at')
+                    need_approval = Project_Time.objects.all().filter(super_stamp='',
+                                                                      auth_employee_id=selected_employee.badge_id,
+                                                                      who_approved_id=badge)
+
                     need_approval_meeting = Meeting_Time.objects.filter(
-                        auth_employee=selected_employee, super_stamp=None).order_by('created_at')
+                        auth_employee=selected_employee, super_stamp=None)
                     need_approval_training = Training_Time.objects.filter(
-                        auth_employee=selected_employee, super_stamp=None).order_by('created_at')
+                        auth_employee=selected_employee, super_stamp=None)
                     if len(value) > 0:
                         # Shows Daily Tracker
                         stat_projects = \
@@ -255,7 +281,8 @@ def employee(request):
                         context = {
                             'name': name,
                             'badge': badge,
-                            'approved_by': Auth_Employee.objects.all().exclude(business_title='employee'),
+                            'approved_by': Auth_Employee.objects.all().exclude(business_title='employee').exclude(
+                                business_title='admin'),
                             'project_name': Project_Name.objects.all().exclude(expired=True),
                             'all_names': Auth_Employee.objects.all(),
                             'employee_names': selected_employee,
@@ -289,10 +316,10 @@ def employee(request):
                 except Exception as e:
                     messages.error(request, e)
                     return redirect('/P_Tracker/employee')
-
+            # todo add exclude(business title)
             context = {
                 'name': name,
-                'all_names': Auth_Employee.objects.all(),
+                'all_names': Auth_Employee.objects.all()  # .exclude(business_title='admin'),
             }
             return render(request, 'employee.html', context)
         else:
@@ -458,26 +485,23 @@ def edit_project(request):
     start_time = parser.parse(start_time)
     start_time = start_time.replace(tzinfo=pytz.timezone('US/Mountain'))
     end_time = request.POST['end_time']
-    print(end_time, type(end_time))
     end_time = parser.parse(end_time)
-    print(end_time, type(end_time))
     end_time = end_time.replace(tzinfo=pytz.timezone('US/Mountain'))
-    print(end_time, type(end_time))
-    project = Project_Time.objects.get(id=int(request.POST['id']))
-    reject = request.POST['reject']
+    project = Project_Time.objects.get(id=int(request.POST['id'])).order_by('created_at')
+    accept = request.POST['accept']
     who_approved_name = Auth_Employee.objects.get(badge_id=request.POST['who_approved_by'])
-    print(request.POST)
-    if reject == 'True':
+    total = end_time - start_time
+    total = total / timedelta(hours=1)
+    if accept == 'True':
         project.name = request.POST['project_name']
         project.description = request.POST['description']
         project.who_approved_id = request.POST['who_approved_by']
         project.who_approved_name = who_approved_name.full_name
-        project.super_stamp = request.POST['super_stamp']
         project.start_time = start_time
         project.end_time = end_time
-        project.total_time = end_time - start_time
+        project.total_time = total
         project.completed = True
-        project.edited_at = dt.datetime.now()
+        project.edited_at = dt.datetime.now(pytz.timezone('US/Mountain'))
         project.who_edited = badge
         project.accept = True
         project.save()
@@ -486,12 +510,11 @@ def edit_project(request):
         project.description = request.POST['description']
         project.who_approved_id = request.POST['who_approved_by']
         project.who_approved_name = who_approved_name.full_name
-        project.super_stamp = request.POST['super_stamp']
         project.start_time = start_time
         project.end_time = end_time
-        project.total_time = end_time - start_time
+        project.total_time = total
         project.completed = True
-        project.edited_at = dt.datetime.now()
+        project.edited_at = dt.datetime.now(pytz.timezone('US/Mountain'))
         project.who_edited = badge
         project.accept = False
         project.save()
@@ -501,11 +524,33 @@ def edit_project(request):
 def edit_meeting(request):
     email = request.user.email
     badge = find_badge_id(email)
-    for key, value in request.POST.items():
-        meeting = Meeting_Time.objects.get(id=value)
-        meeting.reject = True
+    start_time = request.POST['start_time']
+    start_time = parser.parse(start_time)
+    start_time = start_time.replace(tzinfo=pytz.timezone('US/Mountain'))
+    end_time = request.POST['end_time']
+    end_time = parser.parse(end_time)
+    end_time = end_time.replace(tzinfo=pytz.timezone('US/Mountain'))
+    total = end_time - start_time
+    total = total / timedelta(hours=1)
+    meeting = Meeting_Time.objects.get(id=int(request.POST['id']))
+    accept = request.POST['accept']
+    if accept == 'True':
+        meeting.name = request.POST['name']
+        meeting.start_time = start_time
+        meeting.end_time = end_time
+        meeting.total_time = total
         meeting.edited_at = dt.datetime.now(pytz.timezone('US/Mountain'))
-        meeting.who_edited = int(badge)
+        meeting.who_edited = badge
+        meeting.accept = True
+        meeting.save()
+    else:
+        meeting.name = request.POST['name']
+        meeting.start_time = start_time
+        meeting.end_time = end_time
+        meeting.total_time = total
+        meeting.edited_at = dt.datetime.now(pytz.timezone('US/Mountain'))
+        meeting.who_edited = badge
+        meeting.accept = False
         meeting.save()
     return redirect('/P_Tracker/employee')
 
@@ -513,11 +558,33 @@ def edit_meeting(request):
 def edit_training(request):
     email = request.user.email
     badge = find_badge_id(email)
-    for key, value in request.POST.items():
-        training = Training_Time.objects.get(id=value)
-        training.reject = True
+    start_time = request.POST['start_time']
+    start_time = parser.parse(start_time)
+    start_time = start_time.replace(tzinfo=pytz.timezone('US/Mountain'))
+    end_time = request.POST['end_time']
+    end_time = parser.parse(end_time)
+    end_time = end_time.replace(tzinfo=pytz.timezone('US/Mountain'))
+    total = end_time - start_time
+    total = total / timedelta(hours=1)
+    training = Training_Time.objects.get(id=int(request.POST['id']))
+    accept = request.POST['accept']
+    if accept == 'True':
+        training.name = request.POST['name']
+        training.start_time = start_time
+        training.end_time = end_time
+        training.total_time = total
         training.edited_at = dt.datetime.now(pytz.timezone('US/Mountain'))
-        training.who_edited = int(badge)
+        training.who_edited = badge
+        training.accept = True
+        training.save()
+    else:
+        training.name = request.POST['name']
+        training.start_time = start_time
+        training.end_time = end_time
+        training.total_time = total
+        training.edited_at = dt.datetime.now(pytz.timezone('US/Mountain'))
+        training.who_edited = badge
+        training.accept = False
         training.save()
     return redirect('/P_Tracker/employee')
 

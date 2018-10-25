@@ -5,14 +5,32 @@
 
 body {
     font-family: "Lato", sans-serif;
-    color: color: #656569;
+    color: #656569;
 }
 
-#top_pane {
-    height: 300px;
-    padding: 5px 10px 10px 10px;
+.top_pane {
+    height: auto;
+    padding: 0px 10px 10px 0px;
+    overflow: auto;
+}
+.top_pane2 {
+    height: 260px;
+    padding: 10px;
+    overflow: auto;
 }
 
+.top_pane3{}
+#proj_body{
+    padding-left: 10px;
+}
+
+#edit_employee_body{
+    padding-left: 10px;
+}
+.error_message{
+    padding: 10px;
+    margin: 10px;
+}
 .main_body {
     width: 100%;
     padding: 20px;
@@ -40,17 +58,23 @@ body {
     border-right: 1px solid #ddd;
 }
 
-#proj_table td {
+.proj_table th, .proj_table td {
     text-align: center;
     padding: 20px;
     border-bottom: 1px solid #ddd;
 }
 
-#pro_table tr:hover {
+.create_proj_table th, .create_proj_table td {
+    text-align: center;
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.pro_table tr:hover {
     background-color: #f5f5f5;
 }
 
-#menu {
+.menu {
     padding: 10px;
     background-color: #333;
     color: white;
@@ -74,6 +98,7 @@ body {
     margin-left: -1px;
     position: relative;
     left: 1px;
+    margin-bottom: -1px;
 }
 
 .tab [type=radio] {
@@ -82,15 +107,27 @@ body {
 
 .content {
     position: absolute;
-    top: 43px;
     left: 0;
     background: white;
     right: 0;
     bottom: auto;
     padding: 20px;
-    border: 1px solid #ccc;
-    top: 340px;
-    height: 500px;
+    /*border: 1px solid #ccc;*/
+    top: auto;
+    /*height: 1200px;*/
+    width: auto;
+}
+.employ_content {
+    position: absolute;
+    left: 0;
+    background: white;
+    right: 0;
+    bottom: auto;
+    padding: 20px;
+    /*border: 1px solid #ccc;*/
+    top: auto;
+    /*height: 550px;*/
+    width: auto;
 }
 
 [type=radio]:checked ~ label {
@@ -101,4 +138,46 @@ body {
 
 [type=radio]:checked ~ label ~ .content {
     z-index: 1;
+}
+[type=radio]:checked ~ label ~ .employ_content {
+    z-index: 1;
+}
+.dropbtnMenu {
+    background-color: #5a5a5a;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdownMenu {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdownMenu-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdownMenu-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdownMenu-content a:hover {background-color: #f1f1f1}
+
+.dropdownMenu:hover .dropdownMenu-content {
+    display: block;
+}
+
+.dropdownMenu:hover .dropbtnMenu {
+    background-color: #8d8d8d;
 }
