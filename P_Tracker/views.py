@@ -316,10 +316,9 @@ def employee(request):
                 except Exception as e:
                     messages.error(request, e)
                     return redirect('/P_Tracker/employee')
-            # todo add exclude(business title)
             context = {
                 'name': name,
-                'all_names': Auth_Employee.objects.all()  # .exclude(business_title='admin'),
+                'all_names': Auth_Employee.objects.all().exclude(business_title='admin'),
             }
             return render(request, 'employee.html', context)
         else:
