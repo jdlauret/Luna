@@ -36,7 +36,8 @@
         <form action="/P_Tracker/employee" method="POST" id="post-form">
             <label>Select Employee: </label>
             <select name="employee_badge">
-                <option value="0">Select Name</option>
+            <option value="{{ selected_employee.badge_id }}">{{ selected_employee.full_name }}</option>
+{#                <option value="0">Select Name</option>#}
                 {% for key in all_names %}
                     <option value="{{ key.badge_id }}">{{ key.full_name }}</option>
                 {% endfor %}
@@ -71,7 +72,6 @@
             <li><a data-toggle="tab" href="#filter_date">Filter By Date/Edit</a></li>
             <li><a data-toggle="tab" href="#input_project">Input New Project</a></li>
             <li><a data-toggle="tab" href="#input_meeting">Input New Meeting</a></li>
-            <li><a data-toggle="tab" href="#input_training">Input New Training</a></li>
             <li><a data-toggle="tab" href="#input_training">Input New Training</a></li>
             <li><a data-toggle="tab" href="#edit_employee">Edit Employee</a></li>
         </ul>
