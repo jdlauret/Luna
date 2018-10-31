@@ -11,37 +11,21 @@ DB.set_user('MACK_DAMAVANDI')
 
 def tracker_list(badge):
 	auth_list = {}
-	#   SQL ZERO SECTION
+	badge = str(badge)
+
 	try:
 		DB.open_connection()
 		DW = SnowflakeConsole(DB)
 		with open(os.path.join(utilities_dir, 'productivity_tracker.sql'), 'r') as file:
 			sql = file.read()
-		sql = sql.split(';')
-		DW.execute_query(sql[0].format(badge=str(badge)))
+		# sql = sql.split(';')
+		DW.execute_query(sql.format(badge=str(badge)))
+						 #% {'badge': str(badge)})
 		results = DW.query_results
 
 		if len(results) == 0:
-			auth_list['error'] = 'Invalid Badge ID'
+			auth_list['error'] = 'Information not found'
 			return auth_list
-
-	except Exception as e:
-		auth_list['error'] = e
-		return auth_list
-
-	#   SQL ONE SECTION
-	try:
-		DW.execute_query(sql[1].format(badge=str(badge)))
-		results1 = DW.query_results
-
-	except Exception as e:
-		auth_list['error'] = e
-		return auth_list
-
-	#   SQL TWO SECTION
-	try:
-		DW.execute_query(sql[2].format(badge=str(badge)))
-		results2 = DW.query_results
 
 	except Exception as e:
 		auth_list['error'] = e
@@ -59,7 +43,8 @@ def tracker_list(badge):
 	auth_list['training'] = round((int(results[0][6])/60), 2)
 	auth_list['meeting'] = round((int(results[0][7] + results[0][8])/60), 2)
 	auth_list['project'] = round((int(results[0][9])/60), 2)
-	auth_list['date1'] = results1[0][0]
-	auth_list['date2'] = results2[0][0]
+	auth_list['date1'] = results[0][10]
+	auth_list['date2'] = results[0][11]
+
 	return auth_list
 

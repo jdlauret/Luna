@@ -8,24 +8,20 @@ from dateutil import parser
 class trackerManager(models.Manager):
     @classmethod
     def proj_time_input(self, post_data, badge_id):
-        errors = []
         project = int(post_data['project_name'])
         project = Project_Name.objects.get(pk=project)
         approved_by_id = int(post_data['approved_by'])
         approved_id = Auth_Employee.objects.get(badge_id=approved_by_id)
-        if int(badge_id) == approved_by_id:
-            errors.append('Need to be approved by someone other than yourself')
-            return errors
-        else:
-            temp = Project_Time(
-                name=project.name,
-                description=post_data['description'],
-                who_approved_id=approved_by_id,
-                who_approved_name=approved_id.full_name,
-                start_time=dt.now(pytz.timezone('US/Mountain')),
-                auth_employee_id=badge_id,
-            )
-            temp.save()
+
+        temp = Project_Time(
+            name=project.name,
+            description=post_data['description'],
+            who_approved_id=approved_by_id,
+            who_approved_name=approved_id.full_name,
+            start_time=dt.now(pytz.timezone('US/Mountain')),
+            auth_employee_id=badge_id,
+        )
+        temp.save()
 
     @classmethod
     def proj_name_input(self, post_data, badge, full_name):

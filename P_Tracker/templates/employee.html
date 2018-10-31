@@ -5,17 +5,17 @@
         {% load staticfiles %}
         <link rel="stylesheet" href="{% static 'P_Tracker/CSS/tracker.css' %}">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-{#        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>#}
-{#        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>#}
+        {#        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>#}
+        {#        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>#}
     </head>
 
     <div class="menu">
         <div class="dropdownMenu">
             <button class="dropbtnMenu">Menu</button>
             <div class="dropdownMenu-content">
-                    <a class="dropdown-item" href="/P_Tracker">Main</a>
-                    <a class="dropdown-item" href="/P_Tracker/employee">Employee</a>
-                    <a class="dropdown-item" href="/P_Tracker/create_project">Add/edit Projects</a>
+                <a class="dropdown-item" href="/P_Tracker">Main</a>
+                <a class="dropdown-item" href="/P_Tracker/employee">Employee</a>
+                <a class="dropdown-item" href="/P_Tracker/create_project">Add/edit Projects</a>
             </div>
         </div>
         <div style="display:inline-block;">
@@ -35,13 +35,14 @@
         {% csrf_token %}
         <form action="/P_Tracker/employee" method="POST" id="post-form">
             <label>Select Employee: </label>
-            <select name="employee_badge">
-                <option value="0">Select Name</option>
+            <select name="employee_badge" class="form-control" style="width:200px; display:inline-block;">
+                <option value="{{ selected_employee.badge_id }}">{{ selected_employee.full_name }}</option>
+                {#                <option value="0">Select Name</option>#}
                 {% for key in all_names %}
                     <option value="{{ key.badge_id }}">{{ key.full_name }}</option>
                 {% endfor %}
             </select>
-            <input type="submit" style="padding:5px;">
+            <input type="submit" style="padding:5px; display:inline-block;">
         </form>
     </div>
 
@@ -72,7 +73,6 @@
             <li><a data-toggle="tab" href="#input_project">Input New Project</a></li>
             <li><a data-toggle="tab" href="#input_meeting">Input New Meeting</a></li>
             <li><a data-toggle="tab" href="#input_training">Input New Training</a></li>
-            <li><a data-toggle="tab" href="#input_training">Input New Training</a></li>
             <li><a data-toggle="tab" href="#edit_employee">Edit Employee</a></li>
         </ul>
 
@@ -95,7 +95,21 @@
                     <td>{{ employee_names.badge_id }}</td>
                     <td>{{ employee_names.full_name }}</td>
                     <td>{{ supervisor.full_name }}</td>
-                    <td>{{ employee_names.business_title }}</td>
+                    {% if employee_names.business_title == 'employee' %}
+                        <td>Employee</td>
+                    {% endif %}
+                    {% if employee_names.business_title == 'tl' %}
+                        <td>Team Lead</td>
+                    {% endif %}
+                    {% if employee_names.business_title == 'super' %}
+                        <td>Supervisor</td>
+                    {% endif %}
+                    {% if employee_names.business_title == 'manager' %}
+                        <td>Manager</td>
+                    {% endif %}
+                    {% if employee_names.business_title == 'admin' %}
+                        <td>Admin</td>
+                    {% endif %}
                 </tr>
             </table>
             <br>
@@ -111,7 +125,7 @@
                     <th>Project</th>
                 </tr>
                 <tr>
-                    <td>Weekly</td>
+                    <td><label>Weekly</label></td>
                     <td>{{ employee_weekly.hrs_worked }}</td>
                     <td>{{ employee_weekly.breaks }}</td>
                     <td>{{ employee_weekly.activity }}</td>
@@ -120,7 +134,7 @@
                     <td>{{ employee_weekly.project }}</td>
                 </tr>
                 <tr>
-                    <td>Daily</td>
+                    <td><label>Daily</label></td>
                     <td>-</td>
                     <td>-</td>
                     <td>-</td>
@@ -324,7 +338,7 @@
         </div>
 
         {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`#}
-        {#   TAB - FILTER PROJECTS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+        {#   TAB - FILTER BY DATE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
         {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
         <div id="filter_date" class="tab-pane fade">
             <br><h4>Filter</h4>
@@ -333,9 +347,10 @@
             <form action="/P_Tracker/employee/filter" method="POST">
                 <div style="text-align: center;">
                     <div class="input-group" style="padding-left:10px; padding-left:35%;">
-                        Select &nbsp
-                        <select class="custom-select" id="inputGroupSelect01"
-                                style="display:inline-block; padding:5px;" name="what_to_filter">
+                        <label style="display: inline-block;">Select</label>
+                        <select id="inputGroupSelect01" style="display:inline-block; padding:5px;"
+                                name="what_to_filter"
+                                class="form-control">
                             <option value="Project">Project</option>
                             <option value="Meeting">Meeting</option>
                             <option value="Training">Training</option>
@@ -344,10 +359,10 @@
 
                     <div>
                         <div style="padding:10px; display:inline-block;">
-                            Start &nbsp <input type="date" class="form-control" name="start"
-                                               style="width:160px; display: inline-block;" required>
-                            &nbsp End &nbsp <input type="date" id="date1" class="form-control" name="end"
-                                                   style="width:160px;  display: inline-block;"/>
+                            <label>Start &nbsp</label> <input type="date" class="form-control" name="start"
+                                                              style="width:160px; display: inline-block;" required />
+                            <label>&nbsp End &nbsp</label> <input type="date" id="date1" class="form-control" name="end"
+                                                                  style="width:160px; display: inline-block;" required />
                         </div>
                         <input type="hidden" name="badge_id" value="{{ selected_employee.badge_id }}">
                         <div style="display:inline-block;"><input type="submit" style="padding:5px;"></div>
@@ -375,7 +390,7 @@
                         <th style="border:none;"></th>
                     </tr>
                     <tr>
-                        <td>Project Name</td>
+                        <td><label>Project Name</label></td>
                         <td>
                             <select name="project_name" class="form-control" required>
                                 {% for key in project_name %}
@@ -385,11 +400,11 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Description of Project</td>
+                        <td><label>Description of Project</label></td>
                         <td><input type="text" name="description" class="form-control" required></td>
                     </tr>
                     <tr>
-                        <td>Approved By</td>
+                        <td><label>Approved By</label></td>
                         <td>
                             <select name="approved_by" class="form-control" required>
                                 {% for key in approved_by %}
@@ -399,11 +414,11 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Start Time</td>
+                        <td><label>Start Time</label></td>
                         <td><input type="datetime-local" name="start_time" class="form-control" required></td>
                     </tr>
                     <tr>
-                        <td style="border:none">End Time</td>
+                        <td style="border:none"><label>End Time</label></td>
                         <td style="border:none;">
                             <input type="datetime-local" name="end_time" class="form-control" required>
                         </td>
@@ -436,15 +451,15 @@
                         <th style="border:none;"></th>
                     </tr>
                     <tr>
-                        <td>Name</td>
-                        <td><input type="text" name="name" required></td>
+                        <td><label>Name</label></td>
+                        <td><input type="text" name="name" class="form-control" required></td>
                     </tr>
                     <tr>
-                        <td>Start Time</td>
+                        <td><label>Start Time</label></td>
                         <td><input type="datetime-local" name="start_time" class="form-control" required></td>
                     </tr>
                     <tr>
-                        <td style="border:none">End Time</td>
+                        <td style="border:none"><label>End Time</label></td>
                         <td style="border:none;">
                             <input type="datetime-local" name="end_time" class="form-control" required>
                         </td>
@@ -477,15 +492,15 @@
                         <th style="border:none;"></th>
                     </tr>
                     <tr>
-                        <td>Name</td>
-                        <td><input type="text" name="name" required></td>
+                        <td><label>Name</label></td>
+                        <td><input type="text" name="name" class="form-control" required></td>
                     </tr>
                     <tr>
-                        <td>Start Time</td>
+                        <td><label>Start Time</label></td>
                         <td><input type="datetime-local" name="start_time" class="form-control" required></td>
                     </tr>
                     <tr>
-                        <td style="border:none">End Time</td>
+                        <td style="border:none"><label>End Time</label></td>
                         <td style="border:none;">
                             <input type="datetime-local" name="end_time" class="form-control" required>
                         </td>
@@ -516,17 +531,17 @@
                         <th>Change</th>
                     </tr>
                     <tr>
-                        <td>Badge ID:</td>
+                        <td><label>Badge ID:</label></td>
                         <td>{{ employee_names.badge_id }}</td>
                         <td></td>
                     </tr>
                     <tr>
-                        <td>Full Name:</td>
+                        <td><label>Full Name:</label></td>
                         <td>{{ employee_names.full_name }}</td>
                         <td></td>
                     </tr>
                     <tr>
-                        <td>Supervisor:</td>
+                        <td><label>Supervisor:</label></td>
                         <td>{{ supervisor.full_name }}</td>
                         <td>
                             <select name="supervisor" class="form-control">
@@ -538,8 +553,22 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Status:</td>
-                        <td>{{ employee_names.business_title }}</td>
+                        <td><label>Status:</label></td>
+                        {% if employee_names.business_title == 'employee' %}
+                            <td>Employee</td>
+                        {% endif %}
+                        {% if employee_names.business_title == 'tl' %}
+                            <td>Team Lead</td>
+                        {% endif %}
+                        {% if employee_names.business_title == 'super' %}
+                            <td>Supervisor</td>
+                        {% endif %}
+                        {% if employee_names.business_title == 'manager' %}
+                            <td>Manager</td>
+                        {% endif %}
+                        {% if employee_names.business_title == 'admin' %}
+                            <td>Admin</td>
+                        {% endif %}
                         <td>
                             <select name="business_title" class="form-control">
                                 <option value="null">Select Title</option>
@@ -551,7 +580,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Terminated?</td>
+                        <td><label>Terminated?</label></td>
                         <td>No</td>
                         <td><input type="checkbox" name="terminated" value="True"></td>
                     </tr>
@@ -572,58 +601,20 @@
         {#        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
     {% endif %}
 
-<script type="text/javascript">
-    if (location.hash) {
-        $('a[href=\'' + location.hash + '\']').tab('show');
-    }
-    var activeTab = localStorage.getItem('activeTab');
-    if (activeTab) {
-        $('a[href="' + activeTab + '"]').tab('show');
-    }
-
-    $('body').on('click', 'a[data-toggle=\'tab\']', function (e) {
-        e.preventDefault()
-        var tab_name = this.getAttribute('href')
-        if (history.pushState) {
-            history.pushState(null, null, tab_name)
+    <script type="text/javascript">
+        if (location.hash) {
+            $('a[href=\'' + location.hash + '\']').tab('show');
         }
-        else {
-            location.hash = tab_name
+        var activeTab = localStorage.getItem('activeTab');
+        if (activeTab) {
+            $('a[href="' + activeTab + '"]').tab('show');
         }
-        localStorage.setItem('activeTab', tab_name)
 
-        $(this).tab('show');
-        return false;
-    });
-    $(window).on('popstate', function () {
-        var anchor = location.hash ||
-            $('a[data-toggle=\'tab\']').first().attr('href');
-        $('a[href=\'' + anchor + '\']').tab('show');
-    });
+        $(document).ready(function () {
+            var now = new Date();
+            var today = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
+            $('#date1').val(today);
+        });
 
-    function setInputDate(_id) {
-        var _dat = document.querySelector(_id);
-        var hoy = new Date(),
-            d = hoy.getDate(),
-            m = hoy.getMonth() + 1,
-            y = hoy.getFullYear(),
-            data;
-        if (d < 10) {
-            d = "0" + d;
-        }
-        ;
-        if (m < 10) {
-            m = "0" + m;
-        }
-        ;
-        data = y + "-" + m + "-" + d;
-        console.log(data);
-        _dat.value = data;
-    };
-    setInputDate("#date1");
-    setInputDate("#date2");
-    setInputDate("#date3");
-
-
-</script>
+    </script>
 {% endblock %}
