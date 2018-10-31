@@ -34,16 +34,15 @@ def index(request):
         email = request.user.email
         badge = find_badge_id(email)
         name = find_name(badge)
-
         weekly_tracking = tracker_list(badge)
+        # if weekly_tracking == 'error':
         date = dt.datetime.today().strftime('%m/%d/%y')
         today = dt.datetime.today()
 
         # Shows Daily Tracker
         stat_projects = Project_Time.objects.filter(auth_employee_id=badge, completed=True, end_time__year=today.year,
                                                     end_time__month=today.month, end_time__day=today.day,
-                                                    accept=True).aggregate(Sum('total_time'))[
-            'total_time__sum']
+                                                    accept=True).aggregate(Sum('total_time'))['total_time__sum']
         stat_meeting = Meeting_Time.objects.filter(auth_employee_id=badge, completed=True, end_time__year=today.year,
                                                    end_time__month=today.month, end_time__day=today.day,
                                                    accept=True).aggregate(Sum('total_time'))['total_time__sum']
@@ -56,51 +55,51 @@ def index(request):
                                                          start_time__year=today.year, start_time__month=today.month,
                                                          start_time__day=today.day)
         progress_projects = Project_Time.objects.filter(auth_employee_id=badge, completed=False)
-        find_completed_projects = Project_Time.objects.all().filter(completed=False)
+        find_completed_projects = Project_Time.objects.filter(completed=False)
 
         # Filters the Meeting Tab
         completed_meeting = Meeting_Time.objects.filter(auth_employee_id=badge, completed=True,
                                                         start_time__year=today.year, start_time__month=today.month,
                                                         start_time__day=today.day)
         progress_meeting = Meeting_Time.objects.filter(auth_employee_id=badge, completed=False)
-        find_completed_meetings = Meeting_Time.objects.all().filter(completed=False)
+        find_completed_meetings = Meeting_Time.objects.filter(completed=False)
 
         # Filters the Training Tab
         completed_training = Training_Time.objects.filter(auth_employee_id=badge, completed=True,
                                                           start_time__year=today.year, start_time__month=today.month,
                                                           start_time__day=today.day)
         progress_training = Training_Time.objects.filter(auth_employee_id=badge, completed=False)
-        find_completed_training = Training_Time.objects.all().filter(completed=False)
+        find_completed_training = Training_Time.objects.filter(completed=False)
+        uncompleted_projects = Project_Time.objects.filter(completed=False)
 
-        uncompleted_projects = Project_Time.objects.all().filter(completed=False)
         # UNCOMPLETED PROJECTS
         for x in uncompleted_projects:
             check = int((dt.datetime.now(pytz.timezone('US/Mountain')) - x.start_time).seconds / 60 / 60)
-            if check <= 10:
+            if check >= 10:
                 x.end_time = x.start_time + timedelta(hours=10)
                 total = x.end_time - x.start_time
                 total = total / timedelta(hours=1)
                 x.total_time = total
                 x.completed = True
                 x.save()
-
         uncompleted_meeting = Meeting_Time.objects.all().filter(completed=False)
+
         # UNCOMPLETED MEETING
         for y in uncompleted_meeting:
             check = int((dt.datetime.now(pytz.timezone('US/Mountain')) - y.start_time).seconds / 60 / 60)
-            if check <= 10:
+            if check >= 10:
                 y.end_time = y.start_time + timedelta(hours=10)
                 total = y.end_time - y.start_time
                 total = total / timedelta(hours=1)
                 y.total_time = total
                 y.completed = True
                 y.save()
-
         uncompleted_training = Training_Time.objects.all().filter(completed=False)
+
         # UNCOMPLETED TRAINING
         for z in uncompleted_training:
             check = int((dt.datetime.now(pytz.timezone('US/Mountain')) - z.start_time).seconds / 60 / 60)
-            if check <= 10:
+            if check >= 10:
                 z.end_time = z.start_time + timedelta(hours=10)
                 total = z.end_time - z.start_time
                 total = total / timedelta(hours=1)
@@ -111,8 +110,8 @@ def index(request):
         if len(find_completed_projects) > 0 or len(find_completed_meetings) > 0 or len(find_completed_training) > 0:
             context = {
                 'name': name,
-                'approved_by': Auth_Employee.objects.all().filter(business_title='employee').filter(
-                    business_title='admin', terminated=False),
+                'approved_by': Auth_Employee.objects.exclude(business_title='employee', terminated=False).exclude(
+                    business_title='admin').exclude(badge_id=badge),
                 'project_name': Project_Name.objects.all().exclude(expired=True),
                 'weekly_list': weekly_tracking,
                 'today_date': date,
@@ -130,10 +129,12 @@ def index(request):
                 'hide_view': False,
             }
             return render(request, 'main.html', context)
+
         else:
             context = {
                 'name': name,
-                'approved_by': Auth_Employee.objects.all().exclude(business_title='employee', terminated=False),
+                'approved_by': Auth_Employee.objects.all().exclude(business_title='employee', terminated=False).exclude(
+                    business_title='admin').exclude(badge_id=badge),
                 'project_name': Project_Name.objects.all().exclude(expired=True),
                 'weekly_list': weekly_tracking,
                 'today_date': date,
@@ -233,17 +234,12 @@ def employee(request):
         access = Auth_Employee.objects.get(badge_id=badge)
         if access.business_title != 'employee':
             try:
-                print('request: ', request.POST)
-                print('employee ', request.POST['employee_badge'], type(request.POST['employee_badge']))
                 employee_badge = int(request.POST['employee_badge'])
-                print('employee_badge: ', employee_badge, type(employee_badge))
                 weekly_tracking = tracker_list(employee_badge)
-                print('weekly_tracking: ', weekly_tracking)
                 selected_employee = Auth_Employee.objects.get(badge_id=employee_badge)
-                print('selected employee: ', selected_employee)
-                need_approval = Project_Time.objects.all().filter(super_stamp='',
-                                                                  auth_employee_id=selected_employee.badge_id,
-                                                                  who_approved_id=badge)
+                need_approval = Project_Time.objects.filter(super_stamp='',
+                                                            auth_employee_id=selected_employee.badge_id,
+                                                            who_approved_id=badge)
                 need_approval_meeting = Meeting_Time.objects.filter(
                     auth_employee=selected_employee, super_stamp=None)
                 need_approval_training = Training_Time.objects.filter(
@@ -287,9 +283,10 @@ def employee(request):
                         'name': name,
                         'badge': badge,
                         'approved_by': Auth_Employee.objects.all().exclude(business_title='employee').exclude(
-                            business_title='admin'),
-                        'project_name': Project_Name.objects.all().exclude(expired=True),
-                        'all_names': Auth_Employee.objects.all().exclude(business_title='admin'),
+                            business_title='admin', terminated=True),
+                        'project_name': Project_Name.objects.all().exclude(expired=False),
+                        'all_names': Auth_Employee.objects.all().exclude(business_title='admin').exclude(
+                            business_title='manager', terminated=True),
                         'employee_names': selected_employee,
                         'employee_weekly': weekly_tracking,
                         'supervisor': s_employee,
@@ -310,23 +307,22 @@ def employee(request):
 
                         'super_stamp': False,
                         'super_badge': badge,
-                        'list_super': Auth_Employee.objects.all().exclude(business_title='employee'),
+                        'list_super': Auth_Employee.objects.all().exclude(business_title='employee').exclude(
+                            business_title='admin', terminated=True),
                         'table': True,
                         'today': today,
                     }
                     return render(request, 'employee.html', context)
                 else:
-                    messages.error(request)
                     return redirect('/P_Tracker/employee')
 
             except Exception as e:
-                messages.error(request, e)
-                # return redirect('/P_Tracker/employee')
                 context = {
                     'name': name,
-                    'all_names': Auth_Employee.objects.all().exclude(business_title='admin'),
+                    'all_names': Auth_Employee.objects.all().exclude(business_title='admin').exclude(
+                        business_title='manager', terminated=True),
                 }
-            return render(request, 'employee.html', context)
+                return render(request, 'employee.html', context)
         else:
             return redirect('/P_Tracker')
     else:
@@ -339,7 +335,6 @@ def create_new_user(request):
     if request.user.is_authenticated:
         email = request.user.email
         badge = find_badge_id(email)
-        name = find_name(badge)
         access = Auth_Employee.objects.get(badge_id=badge)
         if access.business_title != 'employee':
             return render(request, 'create_user.html')
@@ -424,12 +419,14 @@ def manually_input_time(request):
 
 @login_required
 @user_passes_test(email_check)
-def filter(request):
+def filter_name(request):
     if request.user.is_authenticated:
         email = request.user.email
         badge = find_badge_id(email)
         name = find_name(badge)
         access = Auth_Employee.objects.get(badge_id=badge)
+        # todo
+        print(request.POST)
         if access.business_title != 'employee':
             results = Project_Time.objects.pull_filter_info(request.POST)
             start = parser.parse(results['start'])
@@ -439,7 +436,7 @@ def filter(request):
 
             # FILTER BETWEEN TWO TIMES, START AND END
             proj_time_given = Project_Time.objects.filter(start_time__gte=start, end_time__lte=end,
-                                                          auth_employee_id=results['badge'])
+                                                          auth_employee_id=int(results['badge']))
             meeting_time_given = Meeting_Time.objects.filter(start_time__gte=start, end_time__lte=end,
                                                              auth_employee_id=results['badge'])
             training_time_given = Training_Time.objects.filter(start_time__gte=start, end_time__lte=end,
