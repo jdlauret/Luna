@@ -55,21 +55,21 @@ def index(request):
                                                          start_time__year=today.year, start_time__month=today.month,
                                                          start_time__day=today.day)
         progress_projects = Project_Time.objects.filter(auth_employee_id=badge, completed=False)
-        find_completed_projects = Project_Time.objects.filter(completed=False)
+        find_completed_projects = Project_Time.objects.filter(completed=False, auth_employee=badge)
 
         # Filters the Meeting Tab
         completed_meeting = Meeting_Time.objects.filter(auth_employee_id=badge, completed=True,
                                                         start_time__year=today.year, start_time__month=today.month,
                                                         start_time__day=today.day)
         progress_meeting = Meeting_Time.objects.filter(auth_employee_id=badge, completed=False)
-        find_completed_meetings = Meeting_Time.objects.filter(completed=False)
+        find_completed_meetings = Meeting_Time.objects.filter(completed=False, auth_employee=badge)
 
         # Filters the Training Tab
         completed_training = Training_Time.objects.filter(auth_employee_id=badge, completed=True,
                                                           start_time__year=today.year, start_time__month=today.month,
                                                           start_time__day=today.day)
         progress_training = Training_Time.objects.filter(auth_employee_id=badge, completed=False)
-        find_completed_training = Training_Time.objects.filter(completed=False)
+        find_completed_training = Training_Time.objects.filter(completed=False, auth_employee=badge)
         uncompleted_projects = Project_Time.objects.filter(completed=False)
 
         # UNCOMPLETED PROJECTS
