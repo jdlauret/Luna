@@ -21,10 +21,13 @@ def net_present_value(future_values, rate_of_return, number_periods):
     total = 0
     counter = 0
     while counter < number_periods:
-        total += future_values[counter] / Decimal((1 + rate_of_return) ** counter)
+        total += future_values[counter] / Decimal((1 + rate_of_return) ** (counter + 1))
         counter += 1
 
     return total
+
+# def prepay_calc(service_num):
+#     pass
 
 class PrepayCalc:
     def __init__(self, servicenum):
@@ -33,15 +36,31 @@ class PrepayCalc:
         :param servicenum: the account number of the customer for whom the calculation is being performed
         """
         self.servicenum = servicenum.upper()
-        self.eligible = True
+        self.contract_type_eligible = True
+        self.contract_version_eligible = True
+        self.calc_error = None
         self.prepayment_inputs = None
+        self.yearly_estimated_prepayment_amounts = None
         self.pv_of_expected_invoice = 0
+        self.pv_of_expected_SRECs = 0
+        self.tax = 0
+        self.total_prepayment_price = 0
         self.expected_invoice = []
         self.unpacker = namedtuple(
             'inputs',
             'sales_tax taxable service_name project_number full_name service_address service_city service_state ' \
                 'service_zip_code escalator degradation discount_rate system_size install_date in_service_date ' \
-                'remaining_contract_term contract_type contract_version contract_rate monthly_estimates yearly_estimate'
+                'remaining_contract_term current_contract_month contract_type contract_version contract_rate ' \
+                'monthly_estimates yearly_estimate'
+        )
+        self.unpack_yearly_prepayment = namedtuple(
+            'prepayment_estimates',
+            'year1 year2 year3 year4 year5 year6 year7 year8 year9 year10 ' \
+            'year11 year12 year13 year14 year15 year16 year17 year18 year19 year20'
+        )
+        self.error_creator = namedtuple(
+            'error',
+            'error_flag error_note'
         )
 
     def _format_service_num(self):
@@ -49,41 +68,58 @@ class PrepayCalc:
                 self.servicenum = self.servicenum.replace('S-', '')
 
     def _unpack_results(self, query):
-        results = query[0][0:19]
-        results.append(query[0][19:31])
-        results.append(query[0][31])
+        results = query[0][0:20]
+        results.append(query[0][20:32])
+        results.append(query[0][32])
 
         self.prepayment_inputs = self.unpacker._make(results)
 
     def _get_query_results(self):
-        self._format_service_num()
-        try:
-            DB.open_connection()
-            DW = SnowflakeConsole(DB)
-            with open(os.path.join(utilities_dir, 'prepayment_calc.sql'), 'r') as file:
-                sql = file.read()
-            DW.execute_query(sql.format(service_number = str(self.servicenum)))
-            self._unpack_results(DW.query_results)
-        except Exception as e:
-            return e
-        finally:
-            DB.close_connection()
-
-    def _calculate_cost(self, contract=self.prepayment_inputs.contract_type):
-        if contract == 'Solar PPA':
-            self._calculate_for_PPA() #todo: write _calculate_for_PPA with logic below
-        else if contract == 'Solar Lease':
-            self._calculate_for_Lease() #todo: write _calculate_for_Lease
+        if not self.prepayment_inputs:
+            self._format_service_num()
+            try:
+                DB.open_connection()
+                DW = SnowflakeConsole(DB)
+                with open(os.path.join(utilities_dir, 'prepayment_calc.sql'), 'r') as file:
+                    sql = file.read()
+                DW.execute_query(sql.format(service_number = str(self.servicenum)))
+                self._unpack_results(DW.query_results)
+            except Exception as e:
+                return e
+            finally:
+                DB.close_connection()
         else:
-            self.eligible = False
+            pass
 
+    def _calculate_cost(self):
+        if self.pv_of_expected_invoice or \
+                self.pv_of_expected_SRECs or \
+                self.expected_invoice or \
+                self.total_prepayment_price or \
+                self.tax:
+            self.pv_of_expected_invoice = \
+                self.pv_of_expected_SRECs = \
+                self.total_prepayment_price = \
+                self.tax = 0
+            self.expected_invoice = []
+
+        if self.prepayment_inputs.contract_type == 'Solar PPA':
+            self._calculate_for_PPA()
+        elif self.prepayment_inputs.contract_type == 'Solar Lease':
+            self._calculate_for_Lease()
+        else:
+            self.contract_type_eligible = False
+
+        self._calculate_SREC()
+        self._calculate_total()
+
+    def _calculate_for_PPA(self):
         in_service = self.prepayment_inputs.in_service_date.replace(day=1)
         monthly_discount_rate = self.prepayment_inputs.discount_rate / 100 / 12
         degradation = self.prepayment_inputs.degradation / 100
         escalator = self.prepayment_inputs.escalator / 100
         today = date.today().replace(day=1)
         month = relativedelta(months=1)
-        expected_invoice = []
 
         counter = 0
         terms = 1
@@ -94,13 +130,11 @@ class PrepayCalc:
 
             production = self.prepayment_inputs.monthly_estimates[month_of_year] * \
                          (1 - degradation) ** years_pto
-            # expected_prod.append(production)
 
             rate = self.prepayment_inputs.contract_rate * (1 + escalator) ** years_pto
-            # contract_rate.append(rate)
 
             invoice = production * Decimal(rate)
-            expected_invoice.append(invoice)
+            self.expected_invoice.append(round(invoice, 2))
 
             if first_of_month > today:
                 self.pv_of_expected_invoice += present_value(invoice, monthly_discount_rate, terms)
@@ -108,133 +142,108 @@ class PrepayCalc:
 
             counter += 1
 
-    def run(self):
-        self._get_query_results()
-        self._calculate_cost()
-
-
-    def prepay_calc(self, servicenum):
-        # notes = {}
-        #
-        # if 'S-' in servicenum.upper():
-        #     servicenum = servicenum.upper().replace('S-', '')
-        #
-        # try:
-        #     DB.open_connection()
-        #     DW = SnowflakeConsole(DB)
-        #     with open(os.path.join(utilities_dir, 'prepayment_calc.sql'), 'r') as file:
-        #         sql = file.read()
-        #     # sql = sql.split(';')
-        # except Exception as e:
-        #     notes['error'] = e
-        #     return notes
-        #
-        # finally:
-        #     DB.close_connection()
-        #
-        # DW.execute_query(sql.format(service_number = str(servicenum)))
-        # query = DW.query_results
-        # header = DW.query_columns
-        # prepayment_inputs = {}
-        #
-        # i = 0
-        # while i < 19:
-        #     prepayment_inputs[header[i]] = query[0][i]
-        #     i += 1
-        #
-        # prepayment_inputs['DESIGN_PROD_BY_MONTH'] = []
-        #
-        # while i < 31:
-        #     prepayment_inputs['DESIGN_PROD_BY_MONTH'].append(query[0][i])
-        #     i += 1
-        #
-        # prepayment_inputs[header[i]] = query[0][i]
-        #
-        # pv_of_expected_invoice = 0
-        # expected_invoice = []
-        # # expected_prod = []
-        # # contract_rate = []
-
-        term_left = prepayment_inputs['REMAINING_CONTRACT_TERM']
-        term_passed = 240 - term_left
-        in_service = prepayment_inputs['IN_SERVICE_DATE'].date().replace(day=1)
-        monthly_discount_rate = prepayment_inputs['DISCOUNT_RATE']/100/12
-        degradation = prepayment_inputs['DEGRADATION'] / 100
-        escalator = prepayment_inputs['ESCALATOR'] / 100
+    def _calculate_for_Lease(self):
+        in_service = self.prepayment_inputs.in_service_date.replace(day=1)
+        monthly_discount_rate = self.prepayment_inputs.discount_rate / 100 / 12
+        production = self.prepayment_inputs.yearly_estimate
+        escalator = self.prepayment_inputs.escalator / 100
         today = date.today().replace(day=1)
         month = relativedelta(months=1)
 
         counter = 0
         terms = 1
         while counter < 240:
+
             first_of_month = in_service + month * counter
-            month_of_year = first_of_month.month - 1
             years_pto = ((in_service + month * counter) - in_service).days // 365
 
-            production = prepayment_inputs['DESIGN_PROD_BY_MONTH'][month_of_year] * \
-                         (1 - degradation) ** years_pto
-            # expected_prod.append(production)
+            rate = self.prepayment_inputs.contract_rate * (1 + escalator) ** years_pto
 
-            rate = prepayment_inputs['RATE_PER_KWH'] * (1 + escalator) ** years_pto
-            # contract_rate.append(rate)
-
-            invoice = production * Decimal(rate)
-            expected_invoice.append(invoice)
+            invoice = production * Decimal(rate) / 12
+            self.expected_invoice.append(round(invoice, 2))
 
             if first_of_month > today:
-                pv_of_expected_invoice += present_value(invoice, monthly_discount_rate, terms)
+                self.pv_of_expected_invoice += present_value(invoice, monthly_discount_rate, terms)
                 terms += 1
 
             counter += 1
 
-        # counter = 0
-        # while counter <= term_passed:
-        #     month_of_year = (in_service + month * counter).month - 1
+    def _calculate_SREC(self):
+        #todo: write SREC calculation function
+        pass
 
-
-        if 'N' != prepayment_inputs['TAXABLE']:
-            sales_tax = round(pv_of_expected_invoice * prepayment_inputs['SALES_TAX'], 2)
-            pv_of_expected_invoice = round(pv_of_expected_invoice, 2)
-            total_prepayment_value = pv_of_expected_invoice + sales_tax
+    def _calculate_tax(self):
+        if self.prepayment_inputs.taxable == 'Y':
+            self.tax = round((self.pv_of_expected_invoice + self.pv_of_expected_SRECs) * \
+                       (self.prepayment_inputs.sales_tax), 2)
         else:
-            sales_tax = 0
-            pv_of_expected_invoice = round(pv_of_expected_invoice, 2)
-            total_prepayment_value = pv_of_expected_invoice + sales_tax
+            pass
 
-        estimated_prepayment_price = []
+    def _calculate_total(self):
+        self._calculate_tax()
+        self.total_prepayment_price = round(self.pv_of_expected_SRECs + self.pv_of_expected_invoice + self.tax, 2)
+        self.pv_of_expected_invoice = round(self.pv_of_expected_invoice, 2)
 
-        estimated_prepayment_price.append(net_present_value(expected_invoice, monthly_discount_rate, len(expected_invoice)))
+    def _generate_beginning_year_estimates(self):
+        yearly_estimates = []
 
-        ((today.replace(day=1) + month * 13) - prepayment_inputs['IN_SERVICE_DATE'].date().replace(day=1))
+        i = 0
+        while i < 20:
+            yearly_estimates.append(
+                round(
+                    net_present_value(
+                    self.expected_invoice[i*12:240],
+                    self.prepayment_inputs.discount_rate/100/12,
+                    len(self.expected_invoice[i*12:240])
+                    ),
+                    2
+                )
+            )
+            i += 1
 
-        test = (today.replace(day=1) - prepayment_inputs['IN_SERVICE_DATE'].date().replace(day=1))
-        test1 = test.days // 365
-        test2 = ((today.replace(day=1) + month*13) - prepayment_inputs['IN_SERVICE_DATE'].date().replace(day=1))
-        test3 = test2.days // 365
+        self.yearly_estimated_prepayment_amounts = self.unpack_yearly_prepayment._make(yearly_estimates)
 
-        return notes
+    def _error_checking(self):
+        #todo: write this function to check for data errors from the SQL query
+        # pass
+        error = False
+        error_notes = None
+        if not self.prepayment_inputs:
+            error = True
+            error_notes = self.servicenum + ' is not a valid service number.'
+        elif not self.prepayment_inputs.in_service_date:
+            error = True
+            error_notes = 'This account has not been PTO\'d yet.'
 
+        self.calc_error = self.error_creator(error, error_notes)
 
+    def run(self):
+        self._get_query_results()
+        self._error_checking()
+        if self.calc_error.error_flag:
+            return
+        self._calculate_cost()
+        self._generate_beginning_year_estimates()
 
-# class Inputs(PrepayCalc.NamedTuple):
-#     sales_tax: float
-#     taxable: str
-#     service_name: str
-#     project_number: str
-#     full_name: str
-#     service_address: str
-#     service_city: str
-#     service_state: str
-#     service_zip_code: str
-#     escalator: float
-#     degradation: float
-#     discount_rate: float
-#     system_size: float
-#     install_date: datetime.date
-#     in_service_date: datetime.date
-#     remaining_contract_term: int
-#     contract_type: str
-#     contract_version: str
-#     contract_rate: float
-#     monthly_estimates: list
-#     yearly_estimate: float
+    # def prepay_calc(self, servicenum):
+    #     if 'N' != prepayment_inputs['TAXABLE']:
+    #         sales_tax = round(pv_of_expected_invoice * prepayment_inputs['SALES_TAX'], 2)
+    #         pv_of_expected_invoice = round(pv_of_expected_invoice, 2)
+    #         total_prepayment_value = pv_of_expected_invoice + sales_tax
+    #     else:
+    #         sales_tax = 0
+    #         pv_of_expected_invoice = round(pv_of_expected_invoice, 2)
+    #         total_prepayment_value = pv_of_expected_invoice + sales_tax
+    #
+    #     estimated_prepayment_price = []
+    #
+    #     estimated_prepayment_price.append(net_present_value(expected_invoice, monthly_discount_rate, len(expected_invoice)))
+    #
+    #     ((today.replace(day=1) + month * 13) - prepayment_inputs['IN_SERVICE_DATE'].date().replace(day=1))
+    #
+    #     test = (today.replace(day=1) - prepayment_inputs['IN_SERVICE_DATE'].date().replace(day=1))
+    #     test1 = test.days // 365
+    #     test2 = ((today.replace(day=1) + month*13) - prepayment_inputs['IN_SERVICE_DATE'].date().replace(day=1))
+    #     test3 = test2.days // 365
+    #
+    #     return notes

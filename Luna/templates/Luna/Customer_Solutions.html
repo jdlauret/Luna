@@ -46,6 +46,20 @@
                             </tr>
                         {% endfor %}
                         <tr>
+                            <td colspan="2">
+                                {% if form_response_complete == True %}
+                                    <input type="submit"
+                                           formaction="/calculators/Customer_Solutions_buyout/pdf"
+                                           value="Buyout Print Friendly Page" formtarget="_blank"/>
+                                {% endif %}
+                            </td>
+                            <td colspan="2">
+                                {% if form_response_complete == True %}
+                                    <input type="submit"
+                                           formaction="/calculators/Customer_Solutions_prepayment/pdf"
+                                           value="Prepayment Print Friendly Page" formtarget="_blank"/>
+                                {% endif %}
+                            </td>
                             <td style="float: right" colspan="2">
                                 <input style="display:inline-block;" type="submit" value="Submit"/>
                             </td>
@@ -100,9 +114,9 @@
 
                     <div class="content">
                         {% if form_response_complete == True %}
-                            <form action="/calculators/Customer_Solutions/buyout/pdf">
-                                <input type="submit" value="Print Friendly Page" formtarget="_blank"/><br><br>
-                            </form>
+{#                            <form action="/calculators/Customer_Solutions_buyout/pdf" method="post">#}
+{#                                <input type="submit" value="Print Friendly Page" formtarget="_blank"/><br><br>#}
+{#                            </form>#}
                             <table class="calc" style="width: 100%;">
                                 <tr class="calc">
                                     <th class="calc">Year</th>
@@ -113,12 +127,12 @@
                                     <th class="calc">Default Total</th>
                                 </tr>
                                 <tr class="calc">
-                                    <td class="calc" style="width:10%;">{{ form_response.contract_year }}</td>
-                                    <td class="calc" style="width:20%;">${{ form_response.transfer }}</td>
-                                    <td class="calc" style="width:20%;">${{ form_response.default }}</td>
-                                    <td class="calc" style="width:10%;">{{ form_response.watts }}</td>
-                                    <td class="calc">${{ form_response.transfer_total }}</td>
-                                    <td class="calc">${{ form_response.default_total }}</td>
+                                    <td class="calc" style="width:10%;">{{ form_response.results.contract_year }}</td>
+                                    <td class="calc" style="width:20%;">${{ form_response.results.transfer_buyout_price }}</td>
+                                    <td class="calc" style="width:20%;">${{ form_response.results.default_price }}</td>
+                                    <td class="calc" style="width:10%;">{{ form_response.results.watts }}</td>
+                                    <td class="calc">${{ form_response.results.transfer_total }}</td>
+                                    <td class="calc">${{ form_response.results.default_total }}</td>
                                 </tr>
                             </table>
                         {% endif %}
@@ -133,7 +147,7 @@
 
                 <div class="content">
                     {#                {% if form_response_complete == True %}#}
-                    <form action="/calculators/Customer_Solutions/prepayment/pdf">
+                    <form action="/calculators/Customer_Solutions/prepayment/pdf" method="post">
                         <input type="submit" value="Print Friendly Page" formtarget="_blank"/><br><br>
                     </form>
                     {#                {% endif %}#}
@@ -146,23 +160,23 @@
                     <table>
                         <tr>
                             <td><b>Service Number</b></td>
-                            <td></td>
+                            <td>{{ form_response2.prepayment_inputs.service_name }}</td>
                         </tr>
                         <tr>
                             <td><b>Project</b></td>
-                            <td></td>
+                            <td>{{ form_response2.prepayment_inputs.project_number }}</td>
                         </tr>
                         <tr>
                             <td><b>System Size</b></td>
-                            <td></td>
+                            <td>{{ form_response2.prepayment_inputs.system_size }} kW</td>
                         </tr>
                         <tr>
                             <td><b>Annual Escalator</b></td>
-                            <td></td>
+                            <td>{{ form_response2.prepayment_inputs.escalator }}%</td>
                         </tr>
                         <tr>
                             <td><b>Current Prepayment Value</b></td>
-                            <td></td>
+                            <td>${{ form_response2.total_prepayment_price }}</td>
                         </tr>
                         <tr>
                             <td><b>Payment Frequency</b></td>

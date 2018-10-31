@@ -26,7 +26,7 @@
                 </tr>
                 <tr>
                     <td>Service #:</td>
-                    <td>{{ form_response.service_number }}</td>
+                    <td> S-{{ form_response.account_info.0 }}</td>
                 </tr>
             </table>
         </div>
@@ -38,15 +38,15 @@
         <table>
             <tr>
                 <td>Service Number</td>
-                <td>{{ form_response.service_number }}</td>
+                <td>{{ form_response.account_info.0 }}</td>
             </tr>
             <tr>
                 <td>Customer Name</td>
-                <td>{{ form_response.name }}</td>
+                <td>{{ form_response.account_info.1 }}</td>
             </tr>
             <tr>
                 <td>System Address</td>
-                <td>{{ form_response.address }}</td>
+                <td>{{ form_response.account_info.3 }}, {{ form_response.account_info.4 }}, {{ form_response.account_info.6 }}, {{ form_response.account_info.7 }}</td>
             </tr>
         </table>
     </div>
@@ -63,9 +63,19 @@
                 <th style="background-color: #656569; color: white; font-size:20px; padding: 15px;">Amount</th>
             </tr>
             <tr>
-                <td>{{ form_response }}</td>
-                <td>{{ form_response }}</td>
-                <td>{{ form_response }}</td>
+                <td>{{ form_response.results.contract_type }} Buyout</td>
+                <td></td>
+                <td>${{ form_response.results.transfer_subtotal }}</td>
+            </tr>
+            <tr>
+                <td>Tax</td>
+                <td></td>
+                <td>${{ form_response.results.transfer_total_tax }}</td>
+            </tr>
+            <tr>
+                <td>Total</td>
+                <td></td>
+                <td>${{ form_response.results.transfer_total }}</td>
             </tr>
         </table>
     </div>

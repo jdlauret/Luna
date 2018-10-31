@@ -1,5 +1,6 @@
 import os
 from models import SnowflakeConsole, SnowFlakeDW
+from collections import namedtuple
 from Luna.models import buyout_calc_model
 
 main_dir = os.getcwd()
@@ -9,10 +10,15 @@ utilities_dir = os.path.join(luna_dir, 'utilities')
 DB = SnowFlakeDW()
 DB.set_user('MACK_DAMAVANDI')
 
+unpacker = namedtuple(
+    'results',
+    'contract_type tax_rate taxable remaining_contract_term contract_year ' \
+    'transfer_buyout_price default_price watts transfer_subtotal transfer_total_tax transfer_total default_subtotal ' \
+    'default_tax default_total'
+)
+
 def buyout_calc(servicenum):
-    notes = {
-        'account_info': {},
-    }
+    notes = {}
 
     if 'S-' in servicenum.upper():
         servicenum = servicenum.upper().replace('S-', '')
@@ -37,7 +43,7 @@ def buyout_calc(servicenum):
     notes['account_info'] = account_information
 
     try:
-        DW.execute_query(sql[1], format(service_number=str(servicenum)))
+        DW.execute_query(sql[1], bindvars=[str(servicenum)])
         query_results = DW.query_results[0]
 
     except Exception as e:
@@ -51,22 +57,5 @@ def buyout_calc(servicenum):
         notes['error'] = '{} is not a valid service number.'.format(servicenum)
         return notes
 
-    for i, value in enumerate(query_results):
-        notes[i] = value
-
-    notes['service_number'] = notes.pop(0)
-    notes['remaining_contract'] = notes.pop(2)
-    notes['actual_system_size'] = notes.pop(1)
-    if notes['remaining_contract'] == None:
-        notes['error'] = 'Cannot Calculate, no remaining contract date found'
-        return notes
-    else:
-        months = 240 - notes['remaining_contract']
-        notes['contract_year'] = int((months/12)+1)
-        calculator = buyout_calc_model.objects.get(id=notes['contract_year'])
-        notes['transfer'] = calculator.transfer_buyout
-        notes['default'] = calculator.default_price
-        notes['watts'] = int(notes['actual_system_size'] * 1000)
-        notes['transfer_total'] = int(notes['transfer']) * int(notes['watts'])
-        notes['default_total'] = int(notes['default']) * int(notes['watts'])
+    notes['results'] = unpacker._make(query_results)
     return notes

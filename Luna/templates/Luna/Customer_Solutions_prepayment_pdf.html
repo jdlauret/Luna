@@ -33,7 +33,7 @@
                 </tr>
                 <tr>
                     <td>Service Number:</td>
-                    <td style="padding: 0px 0px 0px 20px;">{{ form_response.service_number }}</td>
+                    <td style="padding: 0px 0px 0px 20px;">{{ form_response.prepayment_inputs.service_name}}</td>
                 </tr>
             </table>
         </div>
@@ -49,49 +49,56 @@
         </tr>
         <tr>
             <td>Current Month of Contract:</td>
-            <td>{{ form_response.current_contract }}</td>
+            <td>{{ form_response.prepayment_inputs.current_contract_month }}</td>
         </tr>
         <tr>
             <td>Remaining Months included in Prepayment Price:</td>
-            <td>{{ form_response.remaining_contract }}</td>
+            <td>{{ form_response.prepayment_inputs.remaining_contract_term }}</td>
         </tr>
         <tr style="background: skyblue;">
             <td>Current Prepayment Value:</td>
-            <td></td>
+            <td>${{ form_response.pv_of_expected_invoice }}</td>
+        </tr>
+        <tr style="background: skyblue;">
+            <td>Applicable Taxes:</td>
+            <td>${{ form_response.tax }}</td>
+        </tr>
+        <tr style="background: skyblue;">
+            <td>Current Prepayment Value:</td>
+            <td>${{ form_response.total_prepayment_price }}</td>
         </tr>
         <tr>
             <td>Service Number:</td>
-            <td>S-{{ form_response.service_number }}</td>
+            <td>{{ form_response.prepayment_inputs.service_name }}</td>
         </tr>
         <tr>
             <td>Customer Name:</td>
-            <td>{{ form_response2.name }}</td>
+            <td>{{ form_response.prepayment_inputs.full_name }}</td>
         </tr>
         <td>Property Address:</td>
-        <td>{{ form_response2.address }} {{ form_response2.city }} {{ form_response2.state }} {{ form_response2.zipcode }}</td>
+        <td>{{ form_response.prepayment_inputs.service_address }}, {{ form_response.prepayment_inputs.service_city }}, {{ form_response.prepayment_inputs.service_state }} {{ form_response.prepayment_inputs.service_zip_code }}</td>
         </tr>
         <tr>
             <td>System Size (kW):</td>
-            <td>{{ form_response.system_size }}</td>
+            <td>{{ form_response.prepayment_inputs.system_size }} kW</td>
         </tr>
         <tr>
             <td>Annual Escalator*:</td>
-            <td>{{ form_response.escalator }}</td>
+            <td>{{ form_response.prepayment_inputs.escalator }}%</td>
         </tr>
         <tr>
             <td>Payment Dates:</td>
-            <td>As set forth in the {{ form_response.record_type }}, Your monthly payment of the Energy Price is due
-                upon
-                Your reciept of the invoice.
+            <td>As set forth in the {{ form_response.prepayment_inputs.contract_type }}, Your monthly payment of the Energy Price is due
+                upon Your reciept of the invoice.
             </td>
         </tr>
         <tr>
             <td>Payment Frequency:</td>
-            <td></td>
+            <td>Monthly</td>
         </tr>
         <tr>
             <td>Number of Payments:</td>
-            <td>240 during initial Term of the {{ form_response.record_type }}</td>
+            <td>240 during initial Term of the {{ form_response.prepayment_inputs.contract_type }}</td>
         </tr>
         <tr>
             <td>Prepayment</td>
@@ -105,53 +112,63 @@
                     </tr>
                     <tr>
                         <td>1</td>
-                        <td></td>
+                        <td>${{ form_response.yearly_estimated_prepayment_amounts.year1 }}</td>
                         <td>11</td>
+                        <td>${{ form_response.yearly_estimated_prepayment_amounts.year11 }}</td>
                     </tr>
                     <tr>
                         <td>2</td>
-                        <td></td>
+                        <td>${{ form_response.yearly_estimated_prepayment_amounts.year2 }}</td>
                         <td>12</td>
+                        <td>${{ form_response.yearly_estimated_prepayment_amounts.year12 }}</td>
                     </tr>
                     <tr>
                         <td>3</td>
-                        <td></td>
+                        <td>${{ form_response.yearly_estimated_prepayment_amounts.year3 }}</td>
                         <td>13</td>
+                        <td>${{ form_response.yearly_estimated_prepayment_amounts.year13 }}</td>
                     </tr>
                     <tr>
                         <td>4</td>
-                        <td></td>
+                        <td>${{ form_response.yearly_estimated_prepayment_amounts.year4 }}</td>
                         <td>14</td>
+                        <td>${{ form_response.yearly_estimated_prepayment_amounts.year14 }}</td>
                     </tr>
                     <tr>
                         <td>5</td>
-                        <td></td>
+                        <td>${{ form_response.yearly_estimated_prepayment_amounts.year5 }}</td>
                         <td>15</td>
+                        <td>${{ form_response.yearly_estimated_prepayment_amounts.year15 }}</td>
                     </tr>
                     <tr>
                         <td>6</td>
-                        <td></td>
+                        <td>${{ form_response.yearly_estimated_prepayment_amounts.year6 }}</td>
                         <td>16</td>
+                        <td>${{ form_response.yearly_estimated_prepayment_amounts.year16 }}</td>
                     </tr>
                     <tr>
                         <td>7</td>
-                        <td></td>
+                        <td>${{ form_response.yearly_estimated_prepayment_amounts.year7 }}</td>
                         <td>17</td>
+                        <td>${{ form_response.yearly_estimated_prepayment_amounts.year17 }}</td>
                     </tr>
                     <tr>
                         <td>8</td>
-                        <td></td>
+                        <td>${{ form_response.yearly_estimated_prepayment_amounts.year8 }}</td>
                         <td>18</td>
+                        <td>${{ form_response.yearly_estimated_prepayment_amounts.year18 }}</td>
                     </tr>
                     <tr>
                         <td>9</td>
-                        <td></td>
+                        <td>${{ form_response.yearly_estimated_prepayment_amounts.year9 }}</td>
                         <td>19</td>
+                        <td>${{ form_response.yearly_estimated_prepayment_amounts.year19 }}</td>
                     </tr>
                     <tr>
                         <td>10</td>
-                        <td></td>
+                        <td>${{ form_response.yearly_estimated_prepayment_amounts.year10 }}</td>
                         <td>20</td>
+                        <td>${{ form_response.yearly_estimated_prepayment_amounts.year20 }}</td>
                     </tr>
                     As of In-Service Date
                     Estimated Prepayment Amount does not include: (i) monthly payments for partial
@@ -161,13 +178,13 @@
         </tr>
         <tr>
             <td>Late Charges and interest:</td>
-            <td>As set forth in the {{ form_response.record_type }}, late charges will only be imposed in the case
+            <td>As set forth in the {{ form_response.prepayment_inputs.contract_type }}, late charges will only be imposed in the case
                 of payments that are more than ten (10) days past due. Such late charges will be Fifteen Dollars ($15)
             </td>
         </tr>
         <tr>
             <td>Tax Obligations: </td>
-            <td>Taxes are based on Your state and local tax rates and are subject to change.</td>
+            <td>Taxes are based on Your state and local tax rates and are subject to change. As such, any taxes displayed are estimates only.</td>
         </tr>
     </table>
 {% endblock %}

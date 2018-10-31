@@ -30,14 +30,14 @@ WHERE T.SERVICE_NUMBER = '{service_number}';with seq as (select 4 year_1,
     ceil(year_18 * .95, 2) year_19,
     ceil(year_19 * .95, 2) year_20)
 
-SELECT distinct
+SELECT distinct s.opty_contract_type,
     case
-        when p.service_state = 'NY' and upper(s.opty_contract_type) = 'PPA' then nyp.total_sales_tax
-        when p.service_state = 'NY' and upper(s.opty_contract_type) = 'LEASE' then nyl.total_sales_tax
-        else tr.total_sales_tax
+        when p.service_state = 'NY' and upper(s.opty_contract_type) = 'PPA' then nvl(nyp.total_sales_tax, 0)
+        when p.service_state = 'NY' and upper(s.opty_contract_type) = 'LEASE' then nvl(nyl.total_sales_tax, 0)
+        else nvl(tr.total_sales_tax, 0)
     end sales_tax,
-    te.taxable,
-    (P.REMAINING_CONTRACT_TERM % 20) + 20 project_year,
+    te.taxable,p.remaining_contract_term,
+    21-ceil(-p.remaining_contract_term/12) project_year,
     case
         when project_year = 1 then seq.year_1
         when project_year = 2 then seq.year_2
@@ -63,10 +63,10 @@ SELECT distinct
     round(7 * pow(.95, project_year - 1), 2) default_price,
     round(C.SYSTEM_SIZE_ACTUAL_KW*1000, 0) watts,
     round(transfer_buyout_price * watts, 2) transfer_subtotal,
-    iff(te.taxable ilike 'y%', round(transfer_buyout_price * watts * sales_tax, 2), 0) transfer_total_tax,
+    iff(te.taxable ilike 'y%%', round(transfer_buyout_price * watts * sales_tax, 2), 0) transfer_total_tax,
     (transfer_subtotal + transfer_total_tax) transfer_total,
     round(default_price * watts, 2) default_subtotal,
-    iff(te.taxable ilike 'y%', round(default_price * watts * sales_tax, 2), 0) default_total_tax,
+    iff(te.taxable ilike 'y%%', round(default_price * watts * sales_tax, 2), 0) default_total_tax,
     (default_subtotal + default_total_tax) default_total
 FROM VSLR.RPT.T_PROJECT AS P
 left join rpt.t_service s
@@ -75,40 +75,23 @@ left JOIN VSLR.RPT.T_CAD AS C
   ON P.primary_cad = C.cad_ID
 left join fin.t_tax_eligibility te
     on p.service_state = te.state
-left join fin.t_sales_tax_rate tr
+left join (select * from fin.t_sales_tax_rate where end_date is null) tr
     on p.service_state = tr.state
-        and upper(p.service_city) = tr.city
+        and upper(p.service_city) = upper(tr.city)
         and split_part(upper(p.service_county), ' COUNTY', 1) = tr.county
         and substring(p.service_zip_code, 0, 5) = tr.zip_code
-left join fin.t_sales_tax_rate_ny_lease nyl
+left join (select * from fin.t_sales_tax_rate_ny_lease where end_date is null) nyl
     on p.service_state = nyl.state
-        and upper(p.service_city) = nyl.city
+        and upper(p.service_city) = upper(nyl.city)
         and split_part(upper(p.service_county), ' COUNTY', 1) = nyl.county
         and substring(p.service_zip_code, 0, 5) = nyl.zip_code
-left join fin.t_sales_tax_rate_ny_ppa nyp
+left join (select * from fin.t_sales_tax_rate_ny_ppa where end_date is null) nyp
     on p.service_state = nyp.state
-        and upper(p.service_city) = nyp.city
+        and upper(p.service_city) = upper(nyp.city)
         and split_part(upper(p.service_county), ' COUNTY', 1) = nyp.county
         and substring(p.service_zip_code, 0, 5) = nyp.zip_code
 cross join seq
-WHERE P.SERVICE_NUMBER = '{service_number}'
-    and te.trx_contract_type = 'Buyout'
+WHERE P.SERVICE_NUMBER = %s
+    and
+    te.trx_contract_type = 'Buyout'
     and te.buyer_type = 'Homeowner'
-    and (nvl(tr.end_date, current_timestamp) = (select max(nvl(r.end_date, current_timestamp))
-                                               from fin.t_sales_tax_rate r
-                                               where r.zip_code = tr.zip_code
-                                                and r.state = tr.state
-                                                and r.county = tr.county
-                                                and r.city = tr.city)
-         or nvl(nyl.end_date, current_timestamp) = (select max(nvl(r.end_date, current_timestamp))
-                                               from fin.t_sales_tax_rate_ny_lease r
-                                               where r.zip_code = nyl.zip_code
-                                                and r.state = nyl.state
-                                                and r.county = nyl.county
-                                                and r.city = nyl.city)
-         or nvl(nyp.end_date, current_timestamp) = (select max(nvl(r.end_date, current_timestamp))
-                                               from fin.t_sales_tax_rate_ny_ppa r
-                                               where r.zip_code = nyp.zip_code
-                                                and r.state = nyp.state
-                                                and r.county = nyp.county
-                                                and r.city = nyp.city))
