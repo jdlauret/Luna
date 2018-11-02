@@ -1,5 +1,6 @@
 import os
 from models import SnowflakeConsole, SnowFlakeDW
+# from BI.data_warehouse.connector import Snowflake
 from datetime import timedelta, date, datetime
 from dateutil.relativedelta import relativedelta
 from decimal import Decimal

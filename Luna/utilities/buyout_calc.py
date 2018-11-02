@@ -1,7 +1,8 @@
 import os
 from models import SnowflakeConsole, SnowFlakeDW
+# from BI.data_warehouse.connector import Snowflake
 from collections import namedtuple
-from Luna.models import buyout_calc_model
+# from Luna.models import buyout_calc_model
 
 main_dir = os.getcwd()
 luna_dir = os.path.join(main_dir, 'Luna')
