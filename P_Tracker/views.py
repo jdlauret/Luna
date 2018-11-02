@@ -44,6 +44,7 @@ def index(request):
         saturday = dt.datetime(day=7, month=today.month, year=today.year)
         first_date = sunday - relativedelta(days=int(num_todays_date))
         first_date = first_date.replace(hour=0, minute=0, second=0, tzinfo=pytz.timezone('US/Mountain'))
+        # todo work on date
         last_date = saturday - relativedelta(days=int(num_todays_date))
         last_date = last_date.replace(hour=23, minute=59, second=59, tzinfo=pytz.timezone('US/Mountain'))
 
@@ -119,7 +120,7 @@ def index(request):
             context = {
                 'name': name,
                 'approved_by': Auth_Employee.objects.exclude(business_title='employee', terminated=False).exclude(
-                    business_title='admin').exclude(badge_id=badge),
+                    business_title='admin').exclude(business_title='tl').exclude(badge_id=badge),
                 'project_name': Project_Name.objects.all().exclude(expired=True),
                 'weekly_list': weekly_tracking,
                 'today_date': date,
@@ -142,18 +143,19 @@ def index(request):
         else:
             context = {
                 'name': name,
-                'approved_by': Auth_Employee.objects.all().exclude(business_title='employee', terminated=False).exclude(
-                    business_title='admin').exclude(badge_id=badge),
+                'approved_by': Auth_Employee.objects.exclude(business_title='employee', terminated=False).exclude(
+                    business_title='admin').exclude(business_title='tl').exclude(badge_id=badge),
                 'project_name': Project_Name.objects.all().exclude(expired=True),
                 'weekly_list': weekly_tracking,
                 'today_date': date,
+                'first_date': first_date.strftime('%m/%d/%y'),
                 'start_time': dt.datetime.now(pytz.timezone('US/Mountain')),
                 'end_time': dt.datetime.now(pytz.timezone('US/Mountain')),
-                'project_completed': reversed(completed_projects),
+                'project_completed': completed_projects,
                 'project_progress': progress_projects,
-                'meeting_completed': reversed(completed_meeting),
+                'meeting_completed': completed_meeting,
                 'meeting_progress': progress_meeting,
-                'training_completed': reversed(completed_training),
+                'training_completed': completed_training,
                 'training_progress': progress_training,
                 'stat_projects': stat_projects,
                 'stat_meeting': stat_meeting,
@@ -294,7 +296,7 @@ def employee(request):
                             'name': name,
                             'badge': badge,
                             'approved_by': Auth_Employee.objects.all().exclude(business_title='employee').exclude(
-                                business_title='admin').exclude(terminated=True),
+                                business_title='admin').exclude(business_title='tl').exclude(terminated=True),
                             'project_name': Project_Name.objects.filter(expired=False),
                             'all_names': Auth_Employee.objects.all().exclude(business_title='admin').exclude(
                                 business_title='manager').exclude(terminated=True),
@@ -320,7 +322,7 @@ def employee(request):
                             'super_stamp': False,
                             'super_badge': badge,
                             'list_super': Auth_Employee.objects.all().exclude(business_title='employee').exclude(
-                                business_title='admin').exclude(terminated=True),
+                                business_title='admin').exclude(business_title='tl').exclude(terminated=True),
                             'table': True,
                             'today': today,
                         }
