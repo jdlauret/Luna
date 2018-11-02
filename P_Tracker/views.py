@@ -5,6 +5,7 @@ import numpy as np
 from django.utils import timezone
 from datetime import datetime, timedelta
 from dateutil import parser
+from dateutil.relativedelta import relativedelta
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, redirect
@@ -38,36 +39,43 @@ def index(request):
         # if weekly_tracking == 'error':
         date = dt.datetime.today().strftime('%m/%d/%y')
         today = dt.datetime.today()
+        num_todays_date = today.weekday()
+        sunday = dt.datetime(day=1, month=today.month, year=today.year)
+        saturday = dt.datetime(day=7, month=today.month, year=today.year)
+        first_date = sunday - relativedelta(days=int(num_todays_date))
+        first_date = first_date.replace(hour=0, minute=0, second=0, tzinfo=pytz.timezone('US/Mountain'))
+        last_date = saturday - relativedelta(days=int(num_todays_date))
+        last_date = last_date.replace(hour=23, minute=59, second=59, tzinfo=pytz.timezone('US/Mountain'))
 
         # Shows Daily Tracker
-        stat_projects = Project_Time.objects.filter(auth_employee_id=badge, completed=True, end_time__year=today.year,
-                                                    end_time__month=today.month, end_time__day=today.day,
-                                                    accept=True).aggregate(Sum('total_time'))['total_time__sum']
-        stat_meeting = Meeting_Time.objects.filter(auth_employee_id=badge, completed=True, end_time__year=today.year,
-                                                   end_time__month=today.month, end_time__day=today.day,
-                                                   accept=True).aggregate(Sum('total_time'))['total_time__sum']
-        stat_training = Training_Time.objects.filter(auth_employee_id=badge, completed=True, end_time__year=today.year,
-                                                     end_time__month=today.month, end_time__day=today.day,
-                                                     accept=True).aggregate(Sum('total_time'))['total_time__sum']
+        stat_projects = Project_Time.objects.filter(auth_employee_id=badge, completed=True, start_time__gte=first_date,
+                                                    end_time__lte=last_date, accept=True).aggregate(Sum('total_time'))[
+            'total_time__sum']
+        stat_meeting = Meeting_Time.objects.filter(auth_employee_id=badge, completed=True, start_time__gte=first_date,
+                                                   end_time__lte=last_date, accept=True).aggregate(Sum('total_time'))[
+            'total_time__sum']
+        stat_training = Training_Time.objects.filter(auth_employee_id=badge, completed=True, start_time__gte=first_date,
+                                                     end_time__lte=last_date, accept=True).aggregate(Sum('total_time'))[
+            'total_time__sum']
 
         # Filters the Project tab
-        completed_projects = Project_Time.objects.filter(auth_employee_id=badge, completed=True,
-                                                         start_time__year=today.year, start_time__month=today.month,
-                                                         start_time__day=today.day)
+        completed_projects = Project_Time.objects.reverse().filter(auth_employee_id=badge, completed=True,
+                                                                   start_time__gte=first_date,
+                                                                   end_time__lte=last_date).order_by('start_time')
         progress_projects = Project_Time.objects.filter(auth_employee_id=badge, completed=False)
         find_completed_projects = Project_Time.objects.filter(completed=False, auth_employee=badge)
 
         # Filters the Meeting Tab
         completed_meeting = Meeting_Time.objects.filter(auth_employee_id=badge, completed=True,
-                                                        start_time__year=today.year, start_time__month=today.month,
-                                                        start_time__day=today.day)
+                                                        start_time__gte=first_date, end_time__lte=last_date).order_by(
+            'start_time')
         progress_meeting = Meeting_Time.objects.filter(auth_employee_id=badge, completed=False)
         find_completed_meetings = Meeting_Time.objects.filter(completed=False, auth_employee=badge)
 
         # Filters the Training Tab
         completed_training = Training_Time.objects.filter(auth_employee_id=badge, completed=True,
-                                                          start_time__year=today.year, start_time__month=today.month,
-                                                          start_time__day=today.day)
+                                                          start_time__gte=first_date, end_time__lte=last_date).order_by(
+            'start_time')
         progress_training = Training_Time.objects.filter(auth_employee_id=badge, completed=False)
         find_completed_training = Training_Time.objects.filter(completed=False, auth_employee=badge)
         uncompleted_projects = Project_Time.objects.filter(completed=False)
@@ -115,6 +123,7 @@ def index(request):
                 'project_name': Project_Name.objects.all().exclude(expired=True),
                 'weekly_list': weekly_tracking,
                 'today_date': date,
+                'first_date': first_date.strftime('%m/%d/%y'),
                 'start_time': dt.datetime.now(pytz.timezone('US/Mountain')),
                 'end_time': dt.datetime.now(pytz.timezone('US/Mountain')),
                 'project_completed': completed_projects,
@@ -231,98 +240,103 @@ def employee(request):
         badge = find_badge_id(email)
         name = find_name(badge)
         today = dt.datetime.today()
+        num_todays_date = today.weekday()
+        sunday = dt.datetime(day=1, month=today.month, year=today.year)
+        saturday = dt.datetime(day=7, month=today.month, year=today.year)
+        first_date = sunday - relativedelta(days=int(num_todays_date))
+        first_date = first_date.replace(hour=0, minute=0, second=0, tzinfo=pytz.timezone('US/Mountain'))
+        last_date = saturday - relativedelta(days=int(num_todays_date))
+        last_date = last_date.replace(hour=23, minute=59, second=59, tzinfo=pytz.timezone('US/Mountain'))
         access = Auth_Employee.objects.get(badge_id=badge)
         if access.business_title != 'employee':
-            try:
-                employee_badge = int(request.POST['employee_badge'])
-                weekly_tracking = tracker_list(employee_badge)
-                selected_employee = Auth_Employee.objects.get(badge_id=employee_badge)
-                need_approval = Project_Time.objects.filter(super_stamp='',
-                                                            auth_employee_id=selected_employee.badge_id,
-                                                            who_approved_id=badge)
-                need_approval_meeting = Meeting_Time.objects.filter(
-                    auth_employee=selected_employee, super_stamp=None)
-                need_approval_training = Training_Time.objects.filter(
-                    auth_employee=selected_employee, super_stamp=None)
+            if access.business_title != 'tl':
+                try:
+                    employee_badge = int(request.POST['employee_badge'])
+                    weekly_tracking = tracker_list(employee_badge)
+                    selected_employee = Auth_Employee.objects.get(badge_id=employee_badge)
+                    need_approval = Project_Time.objects.reverse().filter(super_stamp='',
+                                                                auth_employee_id=selected_employee.badge_id,
+                                                                who_approved_id=badge)
+                    need_approval_meeting = Meeting_Time.objects.reverse().filter(
+                        auth_employee=selected_employee, super_stamp=None)
+                    need_approval_training = Training_Time.objects.reverse().filter(
+                        auth_employee=selected_employee, super_stamp=None)
 
-                if len(request.POST) > 0:
-                    # Shows Daily Tracker
-                    stat_projects = \
-                        Project_Time.objects.filter(auth_employee_id=badge, completed=True,
-                                                    end_time__year=today.year,
-                                                    end_time__month=today.month, end_time__day=today.day,
-                                                    accept=True).aggregate(Sum('total_time'))[
+                    if len(request.POST) > 0:
+                        # Shows Daily Tracker
+                        stat_projects = Project_Time.objects.filter(auth_employee_id=selected_employee, completed=True,
+                                                                    start_time__gte=first_date, end_time__lte=last_date,
+                                                                    accept=True).aggregate(Sum('total_time'))[
                             'total_time__sum']
-                    stat_meeting = \
-                        Meeting_Time.objects.filter(auth_employee_id=badge, completed=True,
-                                                    end_time__year=today.year,
-                                                    end_time__month=today.month, end_time__day=today.day,
-                                                    accept=True).aggregate(Sum('total_time'))['total_time__sum']
-                    stat_training = \
-                        Training_Time.objects.filter(auth_employee_id=badge, completed=True,
-                                                     end_time__year=today.year,
-                                                     end_time__month=today.month, end_time__day=today.day,
-                                                     accept=True).aggregate(Sum('total_time'))['total_time__sum']
+                        stat_meeting = Meeting_Time.objects.filter(auth_employee_id=selected_employee, completed=True,
+                                                                   start_time__gte=first_date, end_time__lte=last_date,
+                                                                   accept=True).aggregate(Sum('total_time'))[
+                            'total_time__sum']
+                        stat_training = Training_Time.objects.filter(auth_employee_id=selected_employee, completed=True,
+                                                                     start_time__gte=first_date, end_time__lte=last_date,
+                                                                     accept=True).aggregate(Sum('total_time'))[
+                            'total_time__sum']
 
-                    project_list = Project_Time.objects.filter(auth_employee_id=selected_employee,
-                                                               end_time__year=today.year,
-                                                               end_time__month=today.month,
-                                                               end_time__day=today.day).order_by('created_at')
-                    meeting_list = Meeting_Time.objects.filter(auth_employee_id=selected_employee,
-                                                               end_time__year=today.year,
-                                                               end_time__month=today.month,
-                                                               end_time__day=today.day).order_by('created_at')
-                    training_list = Training_Time.objects.filter(auth_employee_id=selected_employee,
-                                                                 end_time__year=today.year,
-                                                                 end_time__month=today.month,
-                                                                 end_time__day=today.day).order_by('created_at')
+                        project_list = Project_Time.objects.reverse().filter(auth_employee_id=selected_employee,
+                                                                             start_time__gte=first_date,
+                                                                             end_time__lte=last_date).order_by('created_at')
+                        meeting_list = Meeting_Time.objects.reverse().filter(auth_employee_id=selected_employee,
+                                                                             start_time__gte=first_date,
+                                                                             end_time__lte=last_date).order_by('created_at')
+                        training_list = Training_Time.objects.reverse().filter(auth_employee_id=selected_employee,
+                                                                               start_time__gte=first_date,
+                                                                               end_time__lte=last_date).order_by(
+                            'created_at')
 
-                    s_employee = Auth_Employee.objects.get(badge_id=selected_employee.supervisor)
+                        s_employee = Auth_Employee.objects.get(badge_id=selected_employee.supervisor)
 
+                        context = {
+                            'name': name,
+                            'badge': badge,
+                            'approved_by': Auth_Employee.objects.all().exclude(business_title='employee').exclude(
+                                business_title='admin').exclude(terminated=True),
+                            'project_name': Project_Name.objects.filter(expired=False),
+                            'all_names': Auth_Employee.objects.all().exclude(business_title='admin').exclude(
+                                business_title='manager').exclude(terminated=True),
+                            'employee_names': selected_employee,
+                            'employee_weekly': weekly_tracking,
+                            'supervisor': s_employee,
+                            'selected_employee': selected_employee,
+                            'selected_employee_supervisor': selected_employee.supervisor,
+                            'single_employee_super_name': Auth_Employee.objects.get(badge_id=s_employee.badge_id),
+
+                            'stat_projects': stat_projects,
+                            'stat_meeting': stat_meeting,
+                            'stat_training': stat_training,
+
+                            'need_approval': need_approval,
+                            'need_approval_meeting': need_approval_meeting,
+                            'need_approval_training': need_approval_training,
+
+                            'project_list': project_list,
+                            'meeting_list': meeting_list,
+                            'training_list': training_list,
+
+                            'super_stamp': False,
+                            'super_badge': badge,
+                            'list_super': Auth_Employee.objects.all().exclude(business_title='employee').exclude(
+                                business_title='admin').exclude(terminated=True),
+                            'table': True,
+                            'today': today,
+                        }
+                        return render(request, 'employee.html', context)
+                    else:
+                        return redirect('/P_Tracker/employee')
+
+                except Exception as e:
                     context = {
                         'name': name,
-                        'badge': badge,
-                        'approved_by': Auth_Employee.objects.all().exclude(business_title='employee').exclude(
-                            business_title='admin', terminated=True),
-                        'project_name': Project_Name.objects.all().exclude(expired=False),
                         'all_names': Auth_Employee.objects.all().exclude(business_title='admin').exclude(
-                            business_title='manager', terminated=True),
-                        'employee_names': selected_employee,
-                        'employee_weekly': weekly_tracking,
-                        'supervisor': s_employee,
-                        'selected_employee': selected_employee,
-                        'selected_employee_supervisor': selected_employee.supervisor,
-                        'single_employee_super_name': Auth_Employee.objects.get(badge_id=s_employee.badge_id),
-                        'stat_projects': stat_projects,
-                        'stat_meeting': stat_meeting,
-                        'stat_training': stat_training,
-
-                        'need_approval': reversed(need_approval),
-                        'need_approval_meeting': reversed(need_approval_meeting),
-                        'need_approval_training': reversed(need_approval_training),
-
-                        'project_list': reversed(project_list),
-                        'meeting_list': reversed(meeting_list),
-                        'training_list': reversed(training_list),
-
-                        'super_stamp': False,
-                        'super_badge': badge,
-                        'list_super': Auth_Employee.objects.all().exclude(business_title='employee').exclude(
-                            business_title='admin', terminated=True),
-                        'table': True,
-                        'today': today,
+                            business_title='manager').exclude(terminated=True),
                     }
                     return render(request, 'employee.html', context)
-                else:
-                    return redirect('/P_Tracker/employee')
-
-            except Exception as e:
-                context = {
-                    'name': name,
-                    'all_names': Auth_Employee.objects.all().exclude(business_title='admin').exclude(
-                        business_title='manager', terminated=True),
-                }
-                return render(request, 'employee.html', context)
+            else:
+                return redirect('/P_Tracker')
         else:
             return redirect('/P_Tracker')
     else:
@@ -337,7 +351,10 @@ def create_new_user(request):
         badge = find_badge_id(email)
         access = Auth_Employee.objects.get(badge_id=badge)
         if access.business_title != 'employee':
-            return render(request, 'create_user.html')
+            if access.business_title != 'tl':
+                return render(request, 'create_user.html')
+            else:
+                return redirect('/P_Tracker')
         else:
             return redirect('/P_Tracker')
     else:
@@ -425,55 +442,56 @@ def filter_name(request):
         badge = find_badge_id(email)
         name = find_name(badge)
         access = Auth_Employee.objects.get(badge_id=badge)
-        # todo
-        print(request.POST)
         if access.business_title != 'employee':
-            results = Project_Time.objects.pull_filter_info(request.POST)
-            start = parser.parse(results['start'])
-            start = start.replace(tzinfo=pytz.timezone('US/Mountain'))
-            end = parser.parse(results['end'])
-            end = end.replace(hour=23, minute=59, second=59, tzinfo=pytz.timezone('US/Mountain'))
+            if access.business_title != 'tl':
+                results = Project_Time.objects.pull_filter_info(request.POST)
+                start = parser.parse(results['start'])
+                start = start.replace(tzinfo=pytz.timezone('US/Mountain'))
+                end = parser.parse(results['end'])
+                end = end.replace(hour=23, minute=59, second=59, tzinfo=pytz.timezone('US/Mountain'))
 
-            # FILTER BETWEEN TWO TIMES, START AND END
-            proj_time_given = Project_Time.objects.filter(start_time__gte=start, end_time__lte=end,
-                                                          auth_employee_id=int(results['badge']))
-            meeting_time_given = Meeting_Time.objects.filter(start_time__gte=start, end_time__lte=end,
-                                                             auth_employee_id=results['badge'])
-            training_time_given = Training_Time.objects.filter(start_time__gte=start, end_time__lte=end,
-                                                               auth_employee_id=results['badge'])
-            if type(results) == list:
-                for err in results:
-                    messages.error(request, err)
-                    return redirect('/P_Tracker/employee')
+                # FILTER BETWEEN TWO TIMES, START AND END
+                proj_time_given = Project_Time.objects.filter(start_time__gte=start, end_time__lte=end,
+                                                              auth_employee_id=int(results['badge']))
+                meeting_time_given = Meeting_Time.objects.filter(start_time__gte=start, end_time__lte=end,
+                                                                 auth_employee_id=results['badge'])
+                training_time_given = Training_Time.objects.filter(start_time__gte=start, end_time__lte=end,
+                                                                   auth_employee_id=results['badge'])
+                if type(results) == list:
+                    for err in results:
+                        messages.error(request, err)
+                        return redirect('/P_Tracker/employee')
 
-            if results['name'] == 'Project':
-                context = {
-                    'name': name,
-                    'filtered_by_name': results['name'],
-                    'project_info': True,
-                    'time_given': proj_time_given,
-                    'project_names': Project_Name.objects.all(),
-                    'super_list': Auth_Employee.objects.all().exclude(business_title='employee').exclude(
-                        business_title='admin', terminated=False),
-                    'stamp': badge,
-                }
-                return render(request, 'filter.html', context)
-            if results['name'] == 'Meeting':
-                context = {
-                    'name': name,
-                    'filtered_by_name': results['name'],
-                    'meeting_info': True,
-                    'time_given': meeting_time_given,
-                }
-                return render(request, 'filter.html', context)
-            if results['name'] == 'Training':
-                context = {
-                    'name': name,
-                    'filtered_by_name': results['name'],
-                    'training_info': True,
-                    'time_given': training_time_given,
-                }
-                return render(request, 'filter.html', context)
+                if results['name'] == 'Project':
+                    context = {
+                        'name': name,
+                        'filtered_by_name': results['name'],
+                        'project_info': True,
+                        'time_given': proj_time_given,
+                        'project_names': Project_Name.objects.all(),
+                        'super_list': Auth_Employee.objects.all().exclude(business_title='employee').exclude(
+                            business_title='admin').exclude(terminated=True),
+                        'stamp': badge,
+                    }
+                    return render(request, 'filter.html', context)
+                if results['name'] == 'Meeting':
+                    context = {
+                        'name': name,
+                        'filtered_by_name': results['name'],
+                        'meeting_info': True,
+                        'time_given': meeting_time_given,
+                    }
+                    return render(request, 'filter.html', context)
+                if results['name'] == 'Training':
+                    context = {
+                        'name': name,
+                        'filtered_by_name': results['name'],
+                        'training_info': True,
+                        'time_given': training_time_given,
+                    }
+                    return render(request, 'filter.html', context)
+            else:
+                return redirect('/P_Tracker')
         else:
             return redirect('/P_Tracker')
     else:
@@ -494,6 +512,7 @@ def edit_project(request):
     who_approved_name = Auth_Employee.objects.get(badge_id=request.POST['who_approved_by'])
     total = end_time - start_time
     total = total / timedelta(hours=1)
+
     if accept == 'True':
         project.name = request.POST['project_name']
         project.description = request.POST['description']
@@ -621,9 +640,6 @@ def submit_project(request):
 
 
 def update_project(request):
-    email = request.user.email
-    badge = find_badge_id(email)
-    name = find_name(badge)
     for key, value in request.POST.items():
         project = Project_Name.objects.get(pk=key)
         project.expired = True

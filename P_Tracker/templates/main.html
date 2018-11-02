@@ -47,8 +47,8 @@
                     <td>{{ weekly_list.project }}</td>
                 </tr>
                 <tr>
-                    <td>Daily</td>
-                    <td>{{ today_date }}</td>
+                    <td>This Week</td>
+                    <td>{{ first_date }} to {{ today_date }}</td>
                     <td>-</td>
                     <td>-</td>
                     <td>-</td>
@@ -97,6 +97,7 @@
                         <th>Who assigned it</th>
                         <th>Start Time</th>
                         <th>End Time</th>
+                        <th>Accepted or Rejected</th>
                     </tr>
                     {% for progress in project_progress %}
                         <tr>
@@ -104,6 +105,7 @@
                         <td>{{ progress.description }}</td>
                         <td>{{ progress.who_approved_name }}</td>
                         <td>{{ progress.start_time }}</td>
+                        <td>{{ progress.end_time }}</td>
                         <td>
                             <form action="/P_Tracker/end_project_time" method="POST">
                                 <button type="submit" style="width:150px;">
@@ -125,9 +127,10 @@
                     <tr>
                         <th>Project Name</th>
                         <th>Description</th>
-                        <th>Approved By</th>
+                        <th>Who assigned it</th>
                         <th>Start Time</th>
                         <th>End Time</th>
+                        <th>Accepted or Rejected</th>
                     </tr>
                     {% for completed in project_completed %}
                         <tr>
@@ -136,6 +139,11 @@
                             <td>{{ completed.who_approved_name }}</td>
                             <td>{{ completed.start_time }}</td>
                             <td>{{ completed.end_time }}</td>
+                            {% if completed.accept == True %}
+                                <td>Accepted</td>
+                            {% else %}
+                                <td>Rejected</td>
+                            {% endif %}
                         </tr>
                     {% endfor %}
                 </table>
