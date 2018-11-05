@@ -3,6 +3,7 @@
     padding: 0px;
     margin: 0px;
 }
+
 /*-------------------------------*/
 /*           Side Bar Menu       */
 /*-------------------------------*/
@@ -121,12 +122,15 @@
 .sidebar-nav li:nth-child(9):before {
     background-color: #35acdf;
 }
+
 .sidebar-nav li:nth-child(10):before {
     background-color: #ec1b5a;
 }
+
 .sidebar-nav li:nth-child(11):before {
     background-color: #79aefe;
 }
+
 .sidebar-nav li:nth-child(12):before {
     background-color: #314190;
 }
@@ -173,9 +177,10 @@
     border-radius: 0;
     border: none;
     background-color: #555;
-    color:white;
+    color: white;
     box-shadow: none;
 }
+
 /*-------------------------------*/
 /*            Overlay            */
 /*-------------------------------*/
@@ -227,6 +232,7 @@ img.logo {
 #spacing_between {
     height: 100px;
 }
+
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 @media print {
@@ -341,16 +347,19 @@ h5.sticky {
     position: sticky;
     top: -16px;
 }
-.top_panel{
+
+.top_panel {
     background-color: #57C1E8;
     padding: 15px;
 }
-.name_box{
+
+.name_box {
     display: block;
     margin-left: 90%;
     font-weight: bold;
     color: white;
 }
+
 /* pattern styles */
 .careerpath_container {
     display: flex;
@@ -518,17 +527,20 @@ h5.sticky {
     cursor: pointer;
     display: inline-block;
 }
-#arrow{
+
+#arrow {
     height: 15px;
     width: 15px;
 }
-#coin-menu{
+
+#coin-menu {
     display: none;
 }
 
 input#menu {
     display: none;
 }
+
 input#coin-menu {
     display: none;
 }
@@ -536,6 +548,7 @@ input#coin-menu {
 input:checked ~ .menu-content {
     max-height: 100%;
 }
+
 input:checked ~ .coin-menu-content {
     max-height: 100%;
 }
@@ -596,7 +609,7 @@ input:checked ~ label > img {
     color: #656569;
 }
 
-#copyButton{
+#copyButton {
     display: inline-block;
     padding: 1px;
     margin: 5px;
@@ -712,8 +725,9 @@ div.job_req {
 .table-borderless > thead > tr > th {
     border: none;
 }
+
 tools for copy and paste feature on Luna
-#copyButton{
+#copyButton {
     display: inline-block;
     padding: 1px;
     margin: 5px;
@@ -725,12 +739,14 @@ tools for copy and paste feature on Luna
     text-align: center;
     cursor: pointer;
 }
-#copyButton:hover{
+
+#copyButton:hover {
     background-color: orange;
     color: black;
-    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
-.textarea{
+
+.textarea {
     border: none;
     overflow: auto;
     outline: none;
@@ -738,4 +754,74 @@ tools for copy and paste feature on Luna
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
+}
+
+.tabs {
+    position: relative;
+    min-height: 762px; /* This part sucks */
+    clear: both;
+    margin: 25px 0;
+}
+
+.tab {
+    float: left;
+}
+
+.tab label {
+    background: #eee;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-left: -1px;
+    position: relative;
+    left: 1px;
+}
+
+.tab [type=radio] {
+    display: none;
+}
+
+.content {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background: white;
+    right: 0;
+    bottom: 0;
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin-top: 200px;
+}
+#cs_content {
+    position: absolute;
+    top: 280px;
+    left: 0;
+    background: white;
+    right: 0;
+    bottom: 0;
+    padding: 20px;
+    margin-left: 10px;
+}
+
+[type=radio]:checked ~ label {
+    background: white;
+    border-bottom: 1px solid white;
+    z-index: 2;
+}
+
+[type=radio]:checked ~ label ~ .content {
+    z-index: 1;
+}
+
+.calc table, .calc td, .calc th {
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.calc table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.calc th {
+    height: 50px;
 }

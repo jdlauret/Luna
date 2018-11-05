@@ -14,6 +14,9 @@ calculator_patterns = [
     url(r'^RTS_notes/$', views.RTS_notes),
     url(r'^removal_reinstall/$', views.removal_reinstall),
     url(r'^removal_reinstall/pdf$', views.removal_reinstall_print, name='Work Order Notes'),
+    url(r'^Customer_Solutions/$', views.customer_solutions),
+    url(r'^Customer_Solutions_buyout/pdf$', views.customer_solutions_buyout, name='Customer Solutions buyout'),
+    url(r'^Customer_Solutions_prepayment/pdf$', views.customer_solutions_prepayment, name='Customer Solutions prepayment'),
 ]
 
 automation_patterns =[

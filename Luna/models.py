@@ -260,6 +260,9 @@ class Idea(models.Model):
     down_votes = models.IntegerField(default=0)
     submit_date = models.DateField(default=django.utils.timezone.now)
 
+class buyout_calc_model(models.Model):
+    transfer_buyout = models.DecimalField(max_digits=3, decimal_places=2)
+    default_price = models.DecimalField(max_digits=3, decimal_places=2)
 
 class DataWarehouse:
     """
