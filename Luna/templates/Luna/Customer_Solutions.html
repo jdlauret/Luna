@@ -2,6 +2,7 @@
 {% block content %}
     {% load staticfiles %}
     <link rel="stylesheet" href="{% static 'luna_style.css' %}">
+    {#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">#}
     <script src="{% static "js/scripts.js" %}"></script>
     <style>
         input {
@@ -98,7 +99,14 @@
             {% endif %}
         </div>
     </div>
-
+    {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+    {#    ERROR~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+    {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+    <div style="color:red; padding-left:20px;">
+        {% if form_response2.calc_error.error_flag == True %}
+            {{ form_response2.calc_error.error_note }}
+        {% endif %}
+    </div>
     {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
     {#    TAB CONTENT~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
     {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
@@ -150,27 +158,27 @@
             <table style="padding:10px;">
                 <tr>
                     <td style="padding:10px;"><b>Service Number</b></td>
-                    <td>{{ form_response2.prepayment_inputs.service_name }}</td>
+                    <td style="padding-left:20px;">{{ form_response2.prepayment_inputs.service_name }}</td>
                 </tr>
                 <tr>
                     <td style="padding:10px;"><b>Project</b></td>
-                    <td>{{ form_response2.prepayment_inputs.project_number }}</td>
+                    <td style="padding-left:20px;">{{ form_response2.prepayment_inputs.project_number }}</td>
                 </tr>
                 <tr>
                     <td style="padding:10px;"><b>System Size</b></td>
-                    <td>{{ form_response2.prepayment_inputs.system_size }} kW</td>
+                    <td style="padding-left:20px;">{{ form_response2.prepayment_inputs.system_size }} kW</td>
                 </tr>
                 <tr>
                     <td style="padding:10px;"><b>Annual Escalator</b></td>
-                    <td>{{ form_response2.prepayment_inputs.escalator }}%</td>
+                    <td style="padding-left:20px;">{{ form_response2.prepayment_inputs.escalator }}%</td>
                 </tr>
                 <tr>
                     <td style="padding:10px;"><b>Current Prepayment Value</b></td>
-                    <td>${{ form_response2.total_prepayment_price }}</td>
+                    <td style="padding-left:20px;">${{ form_response2.total_prepayment_price }}</td>
                 </tr>
                 <tr>
                     <td style="padding:10px;"><b>Payment Frequency</b></td>
-                    <td></td>
+                    <td style="padding-left:20px;">Monthly</td>
                 </tr>
             </table>
         {% endif %}
