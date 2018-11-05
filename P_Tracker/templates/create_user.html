@@ -1,0 +1,66 @@
+{% extends 'Luna/base.html' %}
+{% block content %}
+    <head>
+        <title>Productivity Tracker</title>
+        {% load staticfiles %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        {#        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>#}
+        {#        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>#}
+        <link rel="stylesheet" href="{% static 'P_Tracker/CSS/tracker.css' %}">
+    </head>
+    <div class="top_pane3">
+        <div class="menu">
+            <div class="dropdownMenu">
+                <button class="dropbtnMenu">Menu</button>
+                <div class="dropdownMenu-content">
+                    <a class="dropdown-item" href="/P_Tracker">Main</a>
+                    <a class="dropdown-item" href="/P_Tracker/employee">Employee</a>
+                    <a class="dropdown-item" href="/P_Tracker/create_project">Add/edit Projects</a>
+                </div>
+            </div>
+            <div style="display:inline-block;">
+                <h3 style="text-align: center; color:white; padding-left:30px;">Productivity Tracker
+                    for {{ name }}</h3>
+            </div>
+        </div>
+        <h3 style="padding-left: 10px;">Create User</h3>
+        <div class="error_message">
+            {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                        <p><span>{{ message }}</span></p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <p style="color:red;">*Please make sure that all info is the same as workday</p>
+        </div>
+        {% csrf_token %}
+        <div class="main_body">
+            <form action="create" method="POST">
+                <div class="form-group">
+                    <label for="badge">Badge ID</label>
+                    <input type="number" class="form-control" name="badge_id" placeholder="Badge ID" required>
+                </div>
+                <div class="form-group">
+                    <label for="full_name">Full Name</label>
+                    <input type="text" class="form-control" name="full_name" placeholder="Full Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="supervisor_id">Supervisor Badge ID</label>
+                    <input type="number" class="form-control" name="supervisor_id" placeholder="Supervisor Badge ID"
+                           required>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Business Title</label>
+                    <select class="form-control" name="business_title">
+                        <option value="employee">Employee</option>
+                        <option value="tl">Team Lead</option>
+                        <option value="super">Supervisor</option>
+                        <option value="manager">Manager</option>
+                    </select>
+                </div>
+                <div style="padding-left:50%;"><input type="submit" style="padding:10px;"></div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

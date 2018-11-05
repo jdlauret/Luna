@@ -66,7 +66,7 @@ class coinManager(models.Manager):
 
         # SAVES THE TRANSACTION THAT WAS CREATED BY OVERLORD
         temp = transaction(
-            benefactor_name = agent_info.name,
+            benefactor_name=agent_info.name,
             benefactor=post_data['id'],
             recipient=post_data['recipient'],
             recipient_name=rec_ID.name,
