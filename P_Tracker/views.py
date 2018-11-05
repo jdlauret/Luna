@@ -32,20 +32,16 @@ def email_check(user):
 @user_passes_test(email_check)
 def index(request):
     if request.user.is_authenticated:
+        tz = pytz.timezone('US/Mountain')
         email = request.user.email
         badge = find_badge_id(email)
         name = find_name(badge)
         weekly_tracking = tracker_list(badge)
         # if weekly_tracking == 'error':
         date = dt.datetime.today().strftime('%m/%d/%y')
-        today = dt.datetime.today()
-        num_todays_date = today.weekday()
-        sunday = dt.datetime(day=1, month=today.month, year=today.year)
-        saturday = dt.datetime(day=7, month=today.month, year=today.year)
-        first_date = sunday - relativedelta(days=int(num_todays_date))
-        first_date = first_date.replace(hour=0, minute=0, second=0, tzinfo=pytz.timezone('US/Mountain'))
-        # todo work on date
-        last_date = saturday - relativedelta(days=int(num_todays_date))
+        today = dt.datetime.now().replace(hour=0, minute=0, second=0, microsecond=0, tzinfo=tz)
+        first_date = today - timedelta(days=today.weekday())
+        last_date = first_date + timedelta(days=5)
         last_date = last_date.replace(hour=23, minute=59, second=59, tzinfo=pytz.timezone('US/Mountain'))
 
         # Shows Daily Tracker
@@ -241,13 +237,10 @@ def employee(request):
         email = request.user.email
         badge = find_badge_id(email)
         name = find_name(badge)
-        today = dt.datetime.today()
-        num_todays_date = today.weekday()
-        sunday = dt.datetime(day=1, month=today.month, year=today.year)
-        saturday = dt.datetime(day=7, month=today.month, year=today.year)
-        first_date = sunday - relativedelta(days=int(num_todays_date))
-        first_date = first_date.replace(hour=0, minute=0, second=0, tzinfo=pytz.timezone('US/Mountain'))
-        last_date = saturday - relativedelta(days=int(num_todays_date))
+        tz = pytz.timezone('US/Mountain')
+        today = dt.datetime.now().replace(hour=0, minute=0, second=0, microsecond=0, tzinfo=tz)
+        first_date = today - timedelta(days=today.weekday())
+        last_date = first_date + timedelta(days=5)
         last_date = last_date.replace(hour=23, minute=59, second=59, tzinfo=pytz.timezone('US/Mountain'))
         access = Auth_Employee.objects.get(badge_id=badge)
         if access.business_title != 'employee':
@@ -257,8 +250,8 @@ def employee(request):
                     weekly_tracking = tracker_list(employee_badge)
                     selected_employee = Auth_Employee.objects.get(badge_id=employee_badge)
                     need_approval = Project_Time.objects.reverse().filter(super_stamp='',
-                                                                auth_employee_id=selected_employee.badge_id,
-                                                                who_approved_id=badge)
+                                                                          auth_employee_id=selected_employee.badge_id,
+                                                                          who_approved_id=badge)
                     need_approval_meeting = Meeting_Time.objects.reverse().filter(
                         auth_employee=selected_employee, super_stamp=None)
                     need_approval_training = Training_Time.objects.reverse().filter(
@@ -275,16 +268,19 @@ def employee(request):
                                                                    accept=True).aggregate(Sum('total_time'))[
                             'total_time__sum']
                         stat_training = Training_Time.objects.filter(auth_employee_id=selected_employee, completed=True,
-                                                                     start_time__gte=first_date, end_time__lte=last_date,
+                                                                     start_time__gte=first_date,
+                                                                     end_time__lte=last_date,
                                                                      accept=True).aggregate(Sum('total_time'))[
                             'total_time__sum']
 
                         project_list = Project_Time.objects.reverse().filter(auth_employee_id=selected_employee,
                                                                              start_time__gte=first_date,
-                                                                             end_time__lte=last_date).order_by('created_at')
+                                                                             end_time__lte=last_date).order_by(
+                            'created_at')
                         meeting_list = Meeting_Time.objects.reverse().filter(auth_employee_id=selected_employee,
                                                                              start_time__gte=first_date,
-                                                                             end_time__lte=last_date).order_by('created_at')
+                                                                             end_time__lte=last_date).order_by(
+                            'created_at')
                         training_list = Training_Time.objects.reverse().filter(auth_employee_id=selected_employee,
                                                                                start_time__gte=first_date,
                                                                                end_time__lte=last_date).order_by(
