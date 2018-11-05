@@ -676,6 +676,8 @@ def customer_solutions(request):
                     results2.run()
                     context['form_response2'] = results2
                     response = render(request, 'Luna/Customer_Solutions.html', context)
+                    return response
+                response = render(request, 'Luna/Customer_Solutions.html', context)
                 return response
             else:
                 form = CSForm(request.POST)
