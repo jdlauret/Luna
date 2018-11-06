@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'Luna.apps.LunaConfig',
     'coin.apps.CoinAppConfig',
     'P_Tracker.apps.P_TrackerAppConfig',
+    'Soft_Skills.apps.Soft_SkillsAppConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -161,5 +162,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "coin", "static"),
     os.path.join(BASE_DIR, "Luna", "static"),
     os.path.join(BASE_DIR, "P_Tracker", "static"),
+    os.path.join(BASE_DIR, "Soft_Skills", "static"),
 ]
 
