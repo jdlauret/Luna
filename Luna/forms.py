@@ -35,18 +35,18 @@ class SystemPerformanceForm(forms.Form):
 
 class SoftSavingsForm(forms.Form):
     service_number = forms.CharField(label='Service Number:', max_length=20, required=True)
-    start_date = forms.DateField(label='Start Date:',
-                                 required=True,
-                                 widget=forms.TextInput(attrs={
-                                     'type': 'date'
-                                 }))
-    end_date = forms.DateField(label='End Date:',
-                               initial=previous_month_end(),
-                               required=True,
-                               widget=forms.TextInput(attrs={
-                                   'type': 'date',
-                                   'width': '100%',
-                               }))
+    # start_date = forms.DateField(label='Start Date:',
+    #                              required=True,
+    #                              widget=forms.TextInput(attrs={
+    #                                  'type': 'date'
+    #                              }))
+    # end_date = forms.DateField(label='End Date:',
+    #                            initial=previous_month_end(),
+    #                            required=True,
+    #                            widget=forms.TextInput(attrs={
+    #                                'type': 'date',
+    #                                'width': '100%',
+    #                            }))
 
 class RTSForm(forms.Form):
     service_number = forms.CharField(label='Service Number:', max_length=20, required=True)
