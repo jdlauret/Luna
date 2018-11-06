@@ -1,14 +1,14 @@
 import os
 import datetime as dt
 from datetime import date, timedelta
-from models import SnowFlakeDW, SnowflakeConsole
 from dateutil.relativedelta import relativedelta
+from BI.data_warehouse.connector import Snowflake
 
 main_dir = os.getcwd()
 luna_dir = os.path.join(main_dir, 'Luna')
 utilities_dir = os.path.join(luna_dir, 'utilities')
 
-DB = SnowFlakeDW()
+DB = Snowflake()
 DB.set_user('MACK_DAMAVANDI')
 
 
@@ -25,19 +25,18 @@ def soft_savings_analysis(servicenum, startdate, enddate):
 
     try:
         DB.open_connection()
-        DW = SnowflakeConsole(DB)
         with open(os.path.join(utilities_dir, 'soft_savings_analysis.sql'),'r') as file:
             sql = file.read()
         sql = sql.split(';')
 
         query = sql[0].format(service_number=str(servicenum))
-        DW.execute_query(query)
+        DB.execute_query(query)
 
     except Exception as e:
         results['error'] = e
         return results
 
-    results['account'] = DW.query_results[0]
+    results['account'] = DB.query_results[0]
 
     if len(results['account']) == 0:
         results['error'] = '{} is not a valid service number or the associated ' \
@@ -101,7 +100,7 @@ def soft_savings_analysis(servicenum, startdate, enddate):
     #              'endDate': enddatestring})
     query_2 = sql[1].format(service_number=str(servicenum), start_date=str(startdate), end_date=str(enddate))
     try:
-        DW.execute_query(query_2)
+        DB.execute_query(query_2)
 
     except Exception as e:
         results['error'] = e
@@ -110,7 +109,7 @@ def soft_savings_analysis(servicenum, startdate, enddate):
     finally:
         DB.close_connection()
 
-    results['savings'] = DW.query_results
+    results['savings'] = DB.query_results
 
     if len(results['savings']) == 0:
         results['error'] = 'There was no Actual production ' \
@@ -261,19 +260,18 @@ def silver_soft_savings_analysis(servicenum):
 
     try:
         DB.open_connection()
-        DW = SnowflakeConsole(DB)
         with open(os.path.join(utilities_dir, 'silver_soft_savings_analysis.sql'),'r') as file:
             sql = file.read()
         sql = sql.split(';')
 
         query = sql[0].format(service_number=str(servicenum))
-        DW.execute_query(query)
+        DB.execute_query(query)
 
     except Exception as e:
         results['error'] = e
         return results
 
-    results['account'] = DW.query_results[0][2:]
+    results['account'] = DB.query_results[0][2:]
 
     if len(results['account']) == 0:
         results['error'] = '{} is not a valid service number or the associated ' \
@@ -339,7 +337,7 @@ def silver_soft_savings_analysis(servicenum):
     #              'endDate': enddatestring})
     query_2 = sql[1].format(service_number=str(servicenum)) #, start_date=str(startdate), end_date=str(enddate))
     try:
-        DW.execute_query(query_2)
+        DB.execute_query(query_2)
 
     except Exception as e:
         results['error'] = e
@@ -348,7 +346,7 @@ def silver_soft_savings_analysis(servicenum):
     finally:
         DB.close_connection()
 
-    results['savings'] = DW.query_results
+    results['savings'] = DB.query_results
 
     if len(results['savings']) == 0:
         results['error'] = 'There was no Actual production ' \
