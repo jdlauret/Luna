@@ -35,10 +35,6 @@
     display: none;
 }
 
-#sidebar-wrapper {
-    width: 190px;
-}
-
 #page-content-wrapper {
     margin-left: 190px;
 }
@@ -58,7 +54,6 @@
     width: 190px;
     height: 100%;
     list-style: none;
-    color: white;
 }
 
 .sidebar-nav li {
@@ -66,11 +61,9 @@
     line-height: 20px;
     display: inline-block;
     width: 100%;
-    color: white;
 }
 
 .sidebar-nav li:before {
-    color: white;
     content: '';
     position: absolute;
     top: 0;
@@ -83,7 +76,6 @@
     -moz-transition: width .2s ease-in;
     -ms-transition: width .2s ease-in;
     transition: width .2s ease-in;
-
 }
 
 .sidebar-nav li:first-child a {
@@ -142,7 +134,6 @@
     -moz-transition: width .2s ease-in;
     -ms-transition: width .2s ease-in;
     transition: width .2s ease-in;
-
 }
 
 .sidebar-nav li a {
@@ -152,12 +143,7 @@
     padding: 10px 15px 10px 30px;
 }
 
-.sidebar-nav li a:hover,
-.sidebar-nav li a:active,
-.sidebar-nav li a:focus,
-.sidebar-nav li.open a:hover,
-.sidebar-nav li.open a:active,
-.sidebar-nav li.open a:focus {
+.sidebar-nav li a:hover, .sidebar-nav li a:active, .sidebar-nav li a:focus, .sidebar-nav li.open a:hover, .sidebar-nav li.open a:active, .sidebar-nav li.open a:focus {
     color: white;
     text-decoration: none;
     background-color: transparent;
@@ -176,9 +162,7 @@
     margin: 0;
     border-radius: 0;
     border: none;
-    background-color: #555;
-    color: white;
-    box-shadow: none;
+    background-color: #777;
 }
 
 /*-------------------------------*/
@@ -194,7 +178,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(117, 250, 67, 0.8);
+    background-color: transparent;
     z-index: 1;
 }
 
@@ -204,11 +188,10 @@ a.logo {
     width: 160px;
     height: 160px;
     font-size: 25px;
-    color: white;
     display: inline-block;
     background-image: url("../static/resources/white_starless.png");
     background-size: 160px auto;
-    background-repeat: no-repeat;
+    /*background-repeat: no-repeat;*/
     margin-left: 12px;
     margin-top: 6px;
 }
@@ -216,8 +199,8 @@ a.logo {
 a.logo:hover {
     background-image: url("../static/resources/white.png");
     background-size: 160px auto;
-    background-repeat: no-repeat;
-    background-color: #303033;
+    /*background-repeat: no-repeat;*/
+    /*background-color: #303033;*/
 }
 
 img.logo {
@@ -460,8 +443,7 @@ h5.sticky {
 
 /* When you mouse over the navigation links, change their color */
 .sidenav a:hover, a:active {
-    background-color: #616166;
-    color: #e3edfe;
+    background-color: transparent;
 }
 
 .sidenav a.logo {
@@ -482,8 +464,13 @@ h5.sticky {
 .sidenav a.logo:hover {
     background-image: url("../static/resources/white.png");
     background-size: 160px auto;
-    background-repeat: no-repeat;
-    background-color: #303033;
+    /*background-repeat: no-repeat;*/
+    /*background-color: #303033;*/
+}
+
+.sidenav a.logo:after {
+    background-color: transparent;
+    box-shadow: none;
 }
 
 .sidenav img.logo {

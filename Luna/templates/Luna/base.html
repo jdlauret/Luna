@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{#https://bootsnipp.com/snippets/featured/fancy-sidebar-navigation#}
 {% load staticfiles %}
 <html lang="en">
 <link rel="icon" href="{% static 'resources/textless_black_starless.png' %}">
@@ -20,7 +21,7 @@
 <!-- Sidebar -->
 <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
     <ul class="nav sidebar-nav">
-        <li class="sidebar-brand"><a class="logo" href="{% url 'index' %}"><span class="logo"></span></a></li>
+        <div class="sidebar-brand"><a class="logo" href="{% url 'index' %}"><span class="logo"></span></a></div>
         <div id="spacing_between"></div>
         <hr>
         {% if user.is_authenticated %}
