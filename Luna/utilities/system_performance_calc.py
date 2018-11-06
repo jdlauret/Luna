@@ -2,14 +2,13 @@ import os
 import datetime as dt
 from datetime import date, timedelta
 from decimal import *
-from Luna.models import DataWarehouse
-from models import SnowFlakeDW, SnowflakeConsole
+from BI.data_warehouse.connector import Snowflake
 
 main_dir = os.getcwd()
 luna_dir = os.path.join(main_dir, 'Luna')
 utilities_dir = os.path.join(luna_dir, 'utilities')
 
-DB = SnowFlakeDW()
+DB = Snowflake()
 DB.set_user('MACK_DAMAVANDI')
 
 
@@ -27,19 +26,18 @@ def system_performance(servicenum, startdate, enddate):
 
     try:
         DB.open_connection()
-        DW = SnowflakeConsole(DB)
         with open (os.path.join(utilities_dir, 'system_performance_calc.sql'), 'r') as file:
             sql = file.read()
         sql = sql.split(';')
 
         query = sql[0].format(service_number = str(servicenum))
-        DW.execute_query(query)
+        DB.execute_query(query)
 
     except Exception as e:
         results['error'] = e
         return results
 
-    results['account'] = DW.query_results[0]
+    results['account'] = DB.query_results[0]
 
     if len(results['account']) == 0:
         results['error'] = '{} is not a valid service number or the associated ' \
@@ -71,12 +69,12 @@ def system_performance(servicenum, startdate, enddate):
 
     query_2 = sql[1].format(service_number=str(servicenum), start_date=str(startdate), end_date=str(enddate))
     try:
-        DW.execute_query(query_2)
+        DB.execute_query(query_2)
     except Exception as e:
         results['error'] = e
         return results
 
-    results['production'] = DW.query_results
+    results['production'] = DB.query_results
 
     if len(results['production']) == 0:
         results['error'] = 'There were no CAD estimates or Actual production ' \

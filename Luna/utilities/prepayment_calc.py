@@ -1,6 +1,5 @@
 import os
-from models import SnowflakeConsole, SnowFlakeDW
-# from BI.data_warehouse.connector import Snowflake
+from BI.data_warehouse.connector import Snowflake
 from datetime import timedelta, date, datetime
 from dateutil.relativedelta import relativedelta
 from decimal import Decimal
@@ -10,7 +9,7 @@ main_dir = os.getcwd()
 luna_dir = os.path.join(main_dir, 'Luna')
 utilities_dir = os.path.join(luna_dir, 'utilities')
 
-DB = SnowFlakeDW()
+DB = Snowflake()
 DB.set_user('MACK_DAMAVANDI')
 
 def present_value(future_value, rate_of_return, number_periods):
@@ -80,11 +79,10 @@ class PrepayCalc:
             self._format_service_num()
             try:
                 DB.open_connection()
-                DW = SnowflakeConsole(DB)
                 with open(os.path.join(utilities_dir, 'prepayment_calc.sql'), 'r') as file:
                     sql = file.read()
-                DW.execute_query(sql.format(service_number = str(self.servicenum)))
-                self._unpack_results(DW.query_results)
+                DB.execute_query(sql.format(service_number = str(self.servicenum)))
+                self._unpack_results(DB.query_results)
             except Exception as e:
                 return e
             finally:

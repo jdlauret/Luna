@@ -1,13 +1,12 @@
 import os
-from datetime import date, timedelta
-from Luna.models import DataWarehouse
-from models import SnowFlakeDW, SnowflakeConsole
+from BI.data_warehouse.connector import Snowflake
 
 main_dir = os.getcwd()
 luna_dir = os.path.join(main_dir, 'Luna')
 utilities_dir = os.path.join(luna_dir, 'utilities')
 
-DB = SnowFlakeDW()
+DB = Snowflake()
+DB.set_user('MACK_DAMAVANDI')
 DB.set_user('MACK_DAMAVANDI')
 
 def notes_wizard (servicenum):
@@ -24,12 +23,11 @@ def notes_wizard (servicenum):
 
     try:
         DB.open_connection()
-        DW = SnowflakeConsole(DB)
         with open(os.path.join(utilities_dir, 'RTS_notes_wizard.sql'), 'r') as file:
             sql = file.read()
         sql = sql.split(';')
-        DW.execute_query(sql[0].format(service_number=str(servicenum)))
-        account_information = DW.query_results[0]
+        DB.execute_query(sql[0].format(service_number=str(servicenum)))
+        account_information = DB.query_results[0]
         install_notes['account_info'] = account_information
         if install_notes['account_info'][7] == None:
             pass
@@ -47,10 +45,10 @@ def notes_wizard (servicenum):
 
     try:
         # Execute second query results
-        DW.execute_query(sql[1].format(service_number=str(servicenum)))
+        DB.execute_query(sql[1].format(service_number=str(servicenum)))
         # Second query results
-        roof_section_columns = DW.query_columns
-        roof_section_info = DW.query_results[0]
+        roof_section_columns = DB.query_columns
+        roof_section_info = DB.query_results[0]
 
         # error message when no installation notes are pulled up
         if len(roof_section_info) == 0:

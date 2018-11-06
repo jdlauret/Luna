@@ -1,14 +1,12 @@
 import os
-from models import SnowflakeConsole, SnowFlakeDW
-# from BI.data_warehouse.connector import Snowflake
+from BI.data_warehouse.connector import Snowflake
 from collections import namedtuple
-# from Luna.models import buyout_calc_model
 
 main_dir = os.getcwd()
 luna_dir = os.path.join(main_dir, 'Luna')
 utilities_dir = os.path.join(luna_dir, 'utilities')
 
-DB = SnowFlakeDW()
+DB = Snowflake()
 DB.set_user('MACK_DAMAVANDI')
 
 unpacker = namedtuple(
@@ -26,7 +24,6 @@ def buyout_calc(servicenum):
 
     try:
         DB.open_connection()
-        DW = SnowflakeConsole(DB)
         with open(os.path.join(utilities_dir, 'buyout_calc.sql'), 'r') as file:
             sql = file.read()
         sql = sql.split(';')
@@ -34,8 +31,8 @@ def buyout_calc(servicenum):
         notes['error'] = e
         return notes
 
-    DW.execute_query(sql[0].format(service_number=str(servicenum)))
-    account_information = DW.query_results[0]
+    DB.execute_query(sql[0].format(service_number=str(servicenum)))
+    account_information = DB.query_results[0]
 
     if len(account_information) == 0:
         notes['error'] = '{} is not a valid service number.'.format(servicenum)
@@ -44,8 +41,8 @@ def buyout_calc(servicenum):
     notes['account_info'] = account_information
 
     try:
-        DW.execute_query(sql[1], bindvars=[str(servicenum)])
-        query_results = DW.query_results[0]
+        DB.execute_query(sql[1], bindvars=[str(servicenum)])
+        query_results = DB.query_results[0]
 
     except Exception as e:
         notes['error'] = e

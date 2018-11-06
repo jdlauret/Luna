@@ -1,11 +1,11 @@
 import os
-from models import SnowflakeConsole, SnowFlakeDW
+from BI.data_warehouse.connector import Snowflake
 
 main_dir = os.getcwd()
 tracker_dir = os.path.join(main_dir, 'P_Tracker')
 utilities_dir = os.path.join(tracker_dir, 'utilities')
 
-DB = SnowFlakeDW()
+DB = Snowflake()
 DB.set_user('MACK_DAMAVANDI')
 
 def auth():
@@ -13,11 +13,10 @@ def auth():
 
 	try:
 		DB.open_connection()
-		DW = SnowflakeConsole(DB)
 		with open(os.path.join(utilities_dir, 'auth_tracker.sql'), 'r') as file:
 			sql = file.read()
-		DW.execute_query(sql, bindvars=None)
-		results = DW.query_results
+		DB.execute_query(sql, bindvars=None)
+		results = DB.query_results
 
 		if len(results) == 0:
 			auth_list['error'] = 'Invalid Badge ID'

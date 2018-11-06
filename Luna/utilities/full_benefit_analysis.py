@@ -1,13 +1,12 @@
 import os
 from datetime import date, timedelta
-from Luna.models import DataWarehouse
-from models import SnowFlakeDW, SnowflakeConsole
+from BI.data_warehouse.connector import Snowflake
 
 main_dir = os.getcwd()
 luna_dir = os.path.join(main_dir, 'Luna')
 utilities_dir = os.path.join(luna_dir, 'utilities')
 
-DB = SnowFlakeDW()
+DB = Snowflake()
 DB.set_user('MACK_DAMAVANDI')
 
 # todo where is consumption, backfeed, and utility bill called?
@@ -20,19 +19,18 @@ def full_benefit_analysis(servicenum, consumption, backfeed, utilitybill):
 
     try:
         DB.open_connection()
-        DW = SnowflakeConsole(DB)
         with open (os.path.join(utilities_dir, 'full_benefit_analysis.sql'), 'r') as file:
             sql = file.read()
         sql = sql.split(';')
 
         query = sql[0].format(service_number=str(servicenum))
-        DW.execute_query(query)
+        DB.execute_query(query)
 
     except Exception as e:
         results['error'] = e
         return results
 
-    results['account'] = DW.query_results[0]
+    results['account'] = DB.query_results[0]
 
 
     if len(results['account']) == 0:
@@ -60,7 +58,7 @@ def full_benefit_analysis(servicenum, consumption, backfeed, utilitybill):
     # TODO query is calling start and enddate, but not called in here
     query_2 = sql[1].format(service_number=str(servicenum), start_date=str(startdate), end_date=str(enddate))
     try:
-        DW.execute_query(query_2)
+        DB.execute_query(query_2)
 
     except Exception as e:
         results['error'] = e
@@ -69,7 +67,7 @@ def full_benefit_analysis(servicenum, consumption, backfeed, utilitybill):
     finally:
         DB.close_connection()
 
-    results['production'] = DW.query_results
+    results['production'] = DB.query_results
 
     if len(results['production']) == 0:
         results['error'] = 'There was no Actual production ' \
