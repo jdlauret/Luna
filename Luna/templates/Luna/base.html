@@ -26,82 +26,82 @@
         <hr>
         {% if user.is_authenticated %}
             {% if perms.automator_task.can_add_automator_tasks %}
-                <li><a href="/automation">Automation</a></li>
+                <li><a href="/automation"><b>Automation</b></a></li>
             {% endif %}
                         {#                CENTRAL SCHEDULING~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Central Scheduling <span
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Central Scheduling</b><span
                         class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                     <li style="display:none"></li>
-                    <li><a href="/calculators/RTS_notes">Central Notes</a></li>
-                    <li><a href="/calculators/removal_reinstall">Removal/Reinstall Notes</a></li>
-                    <li><a href="/calculators/soft_savings_analysis">Soft Savings Analysis</a></li>
-                    <li><a href="/calculators/system_performance_calculator">System Performance</a></li>
+                    <li><a href="/calculators/RTS_notes"><b>Central Notes</b></a></li>
+                    <li><a href="/calculators/removal_reinstall"><b>Removal/Reinstall Notes</b></a></li>
+                    <li><a href="/calculators/soft_savings_analysis"><b>Soft Savings Analysis</b></a></li>
+                    <li><a href="/calculators/system_performance_calculator"><b>System Performance</b></a></li>
                     {#                        <li><a href="/calculators/full_benefit_analysis">Full Benefit Analysis</a></li>#}
                 </ul>
             </li>
             {#                RELATIONS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Customer Relations <span
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Customer Relations</b><span
                         class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                     <li style="display:none"></li>
-                    <li><a href="/calculators/soft_savings_analysis">Soft Savings Analysis</a></li>
-                    <li><a href="/calculators/system_performance_calculator">System Performance</a></li>
+                    <li><a href="/calculators/soft_savings_analysis"><b>Soft Savings Analysis</b></a></li>
+                    <li><a href="/calculators/system_performance_calculator"><b>System Performance</b></a></li>
                     {#                        <li><a href="/calculators/full_benefit_analysis">Full Benefit Analysis</a></li>#}
                 </ul>
             </li>
                         {#                CUSTOMER SERVICE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Customer Service <span
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Customer Service</b><span
                         class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                     <li style="display:none"></li>
-                    <li><a href="/calculators/soft_savings_analysis">Soft Savings Analysis</a></li>
-                    <li><a href="/calculators/system_performance_calculator">System Performance</a></li>
+                    <li><a href="/calculators/soft_savings_analysis"><b>Soft Savings Analysis</b></a></li>
+                    <li><a href="/calculators/system_performance_calculator"><b>System Performance</b></a></li>
                     {#                        <li><a href="/calculators/full_benefit_analysis">Full Benefit Analysis</a></li>#}
                 </ul>
             </li>
                         {#                CUSTOMER SOLUTIONS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Customer Solutions<span
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Customer Solutions</b><span
                         class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                     <li style="display:none"></li>
-                    <li><a href="/calculators/soft_savings_analysis">Soft Savings Analysis</a></li>
-                    <li><a href="/calculators/system_performance_calculator">System Performance</a></li>
-                    <li><a href="/calculators/Customer_Solutions">Buyout/Prepayment</a></li>
+                    <li><a href="/calculators/soft_savings_analysis"><b>Soft Savings Analysis</b></a></li>
+                    <li><a href="/calculators/system_performance_calculator"><b>System Performance</b></a></li>
+                    <li><a href="/calculators/Customer_Solutions"><b>Buyout/Prepayment</b></a></li>
                     {#                        <li><a href="/calculators/full_benefit_analysis">Full Benefit Analysis</a></li>#}
                 </ul>
             </li>
                                     {#                RECS & REBATES~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">RECs & Rebates<span
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>RECs & Rebates</b><span
                         class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                     <li style="display:none"></li>
-                    <li><a href="/P_Tracker">Productivity Tracker</a></li>
+                    <li><a href="/P_Tracker"><b>Productivity Tracker</b></a></li>
                 </ul>
             </li>
             {#              coin~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  #}
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Coin <span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Coin</b><span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                     <li style="display:none"></li>
                     {% if perms.Coin_Overlord %}
-                        <li><a href="{% url 'sharing:overlord' %}">The Overlord</a></li>
+                        <li><a href="{% url 'sharing:overlord' %}"><b>The Overlord</b></a></li>
                     {% endif %}
-                    <li><a href="{% url 'sharing:global' %}">Community View</a></li>
-                    <li><a href="{% url 'sharing:agent_view' %}">Personal View</a></li>
-                    <li><a href="{% url 'sharing:transaction_view' %}">Send Coin</a></li>
+                    <li><a href="{% url 'sharing:global' %}"><b>Community View</b></a></li>
+                    <li><a href="{% url 'sharing:agent_view' %}"><b>Personal View</b></a></li>
+                    <li><a href="{% url 'sharing:transaction_view' %}"><b>Send Coin</b></a></li>
                 </ul>
             </li>
 
-            <li><a href="/career_path">Career Path</a></li>
+            <li><a href="/career_path"><b>Career Path</b></a></li>
             {#                <li><a href="https://goo.gl/forms/xzCIQTfr5zBt3q6l2">Got Feedback?</a></li>#}
             <hr>
-            <li><a href="/logout">Logout</a></li>
+            <li><a href="/logout"><b>Logout</b></a></li>
         {% else %}
             <li><a href="{% url 'social:begin' 'google-oauth2' %}">Login</a></li>
         {% endif %}
