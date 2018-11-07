@@ -42,10 +42,6 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_AUTH_EXTRA_ARGUMENTS = {'hd': 'vivintsolar.com'}
 # Application definition
 
 INSTALLED_APPS = [
-    'Luna.apps.LunaConfig',
-    'coin.apps.CoinAppConfig',
-    'P_Tracker.apps.P_TrackerAppConfig',
-    'Soft_Skills.apps.Soft_SkillsAppConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -53,6 +49,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'social_django',
+    'Luna.apps.LunaConfig',
+    'coin.apps.CoinAppConfig',
+    'P_Tracker.apps.P_TrackerAppConfig',
+    'Soft_Skills.apps.SkillsAppConfig',
 ]
 
 MIDDLEWARE = [

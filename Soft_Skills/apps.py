@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class Soft_SkillsAppConfig(AppConfig):
+class SkillsAppConfig(AppConfig):
     name = 'Soft_Skills'

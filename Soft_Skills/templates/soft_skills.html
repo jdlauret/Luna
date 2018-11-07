@@ -1,0 +1,38 @@
+{% extends 'Luna/base.html' %}
+{% block content %}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        {% load staticfiles %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'Soft_Skills/CSS/soft_skills.css' %}">
+    </head>
+    <body>
+    <div class="top_pane"><h3 style="color: white;">Employee Soft Skills</h3></div>
+    <div class="main">
+        <div class="form-group" style="display:inline-block;">
+            <label for="supervisor_list">Supervisor</label>
+            <select multiple class="form-control" id="supervisor_list" style="height:200px; width:300px;">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+        </div>
+        <div class="form-group" style="display:inline-block; vertical-align: top;">
+            <label for="employee_list">Employee</label>
+            <select multiple class="form-control" id="employee_list" style="height:200px; width: 300px;">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+        </div>
+    </div>
+    </body>
+    </html>
+{% endblock %}

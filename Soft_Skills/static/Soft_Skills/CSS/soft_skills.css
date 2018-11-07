@@ -1,0 +1,15 @@
+* {
+    font-family: "Lato", sans-serif;
+    padding: 0px;
+    margin: 0px;
+}
+
+.top_pane {
+    padding: 10px;
+    background-color: #3a3a3a;
+    width: 100%;
+}
+
+.main {
+    padding-left:10px;
+}

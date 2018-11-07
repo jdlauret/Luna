@@ -5,4 +5,6 @@ from django.shortcuts import render, redirect
 
 
 def index(request):
-    return render(request, 'main.html')
+    context = {}
+    return render(request, 'soft_skills.html', context)
+
