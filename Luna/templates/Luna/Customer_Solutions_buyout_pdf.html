@@ -34,7 +34,9 @@
     <br><br><br><br>
     {#    Bill~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
     <div style="width:100%; display: inline-block;">
-        <div style="background-color: #656569; color: white; font-size:20px; padding: 15px; width: 100%;">Account Information</div>
+        <div style="background-color: #656569; color: white; font-size:20px; padding: 15px; width: 100%;">Account
+            Information
+        </div>
         <table>
             <tr>
                 <td style="padding:5px;">Service Number:</td>
@@ -50,12 +52,15 @@
             </tr>
         </table>
     </div>
-<br><br><br>
+    <br><br><br>
     <div>
         <table style="width: 100%;">
             <tr>
-                <th style="background-color: #656569; color: white; font-size:20px; padding: 15px; width:50%;">Description</th>
-                <th style="background-color: #656569; color: white; font-size:20px; padding: 15px; width:50%;">Amount</th>
+                <th style="background-color: #656569; color: white; font-size:20px; padding: 15px; width:50%;">
+                    Description
+                </th>
+                <th style="background-color: #656569; color: white; font-size:20px; padding: 15px; width:50%;">Amount
+                </th>
             </tr>
             <tr>
                 <td style="padding:5px;">{{ form_response.results.contract_type }} Buyout</td>
@@ -71,20 +76,24 @@
             </tr>
         </table>
     </div>
-<br><br>
-    <p>If you have any question about this fee, please contact Vivint Solar Customer Service at (801) 404-4129 ext:2 or by
-    email at feebilling@vivintsolar.com </p>
+    <br><br>
+
+    <p>This quote is only valid for 90 days. {{ form_response.results.contract_type }} Buyout is subject to change. If
+        you have any questions about
+        this fee, please contact Vivint
+        Solar Transfers at 877.404.4129 Opt. 7 or by
+        email at transfers@vivintsolar.com</p>
 
     <br>
     <br>
     <p>
-    Thank you,
+        Thank you,
     </p>
 
     <p>
-    Simply Brighter / Vivintsolar.com<br>
-    1800 W. Ashton Blvd.<br>
-    Lehi, Utah 84043
+        Simply Brighter / Vivintsolar.com<br>
+        1800 W. Ashton Blvd.<br>
+        Lehi, Utah 84043
     </p>
 
 {% endblock %}
