@@ -1,0 +1,90 @@
+{% extends "Luna/print_base.html" %}
+{% block content %}
+    <style>
+        * {
+            color: #656569;
+        }
+    </style>
+    {#    Header~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+    <div id="top_address_info">
+        <div id="address" style="display: inline-block; padding: 10px; width: 65%;">
+            <p style="font-size: 20px;">
+                Vivintsolar.com<br>
+                1800 W Ashton Blvd.<br>
+                Lehi, Utah 84043<br>
+            </p>
+        </div>
+
+        <div id="billing"
+             style="display: inline-block; padding: 10px; width: 35%; float:right;">
+            <p style="font-size: 30px; font-weight:bolder"><b>Buyout Bill: </b></p>
+            <hr>
+            <table>
+                <tr>
+                    <td style="padding:5px;">Date:</td>
+                    <td style="padding-left:20px;">{{ date }}</td>
+                </tr>
+                <tr>
+                    <td style="padding:5px;">Service Number:</td>
+                    <td style="padding-left:20px;"> S-{{ form_response.account_info.0 }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <br><br><br><br>
+    {#    Bill~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+    <div style="width:100%; display: inline-block;">
+        <div style="background-color: #656569; color: white; font-size:20px; padding: 15px; width: 100%;">Account Information</div>
+        <table>
+            <tr>
+                <td style="padding:5px;">Service Number:</td>
+                <td style="padding-left:20px;">{{ form_response.account_info.0 }}</td>
+            </tr>
+            <tr>
+                <td style="padding:5px;">Customer Name:</td>
+                <td style="padding-left:20px;">{{ form_response.account_info.1 }}</td>
+            </tr>
+            <tr>
+                <td style="padding:5px;">System Address:</td>
+                <td style="padding-left:20px;">{{ form_response.account_info.3 }}, {{ form_response.account_info.4 }}, {{ form_response.account_info.6 }}, {{ form_response.account_info.7 }}</td>
+            </tr>
+        </table>
+    </div>
+<br><br><br>
+    <div>
+        <table style="width: 100%;">
+            <tr>
+                <th style="background-color: #656569; color: white; font-size:20px; padding: 15px; width:50%;">Description</th>
+                <th style="background-color: #656569; color: white; font-size:20px; padding: 15px; width:50%;">Amount</th>
+            </tr>
+            <tr>
+                <td style="padding:5px;">{{ form_response.results.contract_type }} Buyout</td>
+                <td style="padding-left:20px;">${{ form_response.results.transfer_subtotal }}</td>
+            </tr>
+            <tr>
+                <td style="padding:5px;">Tax</td>
+                <td style="padding-left:20px;">${{ form_response.results.transfer_total_tax }}</td>
+            </tr>
+            <tr>
+                <td style="padding:5px;">Total</td>
+                <td style="padding-left:20px;">${{ form_response.results.transfer_total }}</td>
+            </tr>
+        </table>
+    </div>
+<br><br>
+    <p>If you have any question about this fee, please contact Vivint Solar Customer Service at (801) 404-4129 ext:2 or by
+    email at feebilling@vivintsolar.com </p>
+
+    <br>
+    <br>
+    <p>
+    Thank you,
+    </p>
+
+    <p>
+    Simply Brighter / Vivintsolar.com<br>
+    1800 W. Ashton Blvd.<br>
+    Lehi, Utah 84043
+    </p>
+
+{% endblock %}

@@ -68,7 +68,7 @@ class trackerManager(models.Manager):
     @classmethod
     def creation_of_new_user(self, post_data):
         errors = []
-        if len(post_data) < 0:
+        if len(post_data) <= 0:
             errors.append('No information was entered, please try again')
             return errors
         else:
@@ -77,6 +77,8 @@ class trackerManager(models.Manager):
                 full_name=post_data['full_name'],
                 business_title=post_data['business_title'],
                 supervisor=int(post_data['supervisor_id']),
+                created_at=dt.now(pytz.timezone('US/Mountain')),
+                edited_at=dt.now(pytz.timezone('US/Mountain')),
             )
             temp.save()
 

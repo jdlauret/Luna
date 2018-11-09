@@ -1,6 +1,6 @@
 import os
 import datetime as dt
-from models import SnowFlakeDW, SnowflakeConsole
+from BI.data_warehouse.connector import Snowflake
 from coin.models import employee_id
 #
 # MAIN_DIR = os.path.dirname(os.path.realpath(__file__))
@@ -10,7 +10,7 @@ main_dir = os.getcwd()
 coin_dir = os.path.join(main_dir, 'coin')
 utilities_dir = os.path.join(coin_dir, 'utilities')
 
-DB = SnowFlakeDW()
+DB = Snowflake()
 DB.set_user('MACK_DAMAVANDI')
 
 
@@ -24,12 +24,10 @@ def new_user():
 
     try:
         DB.open_connection()
-        DW = SnowflakeConsole(DB)
         with open(os.path.join(utilities_dir, 'create_new_user.sql'), 'r') as file:
             sql = file.read()
-        DW.execute_query(sql, bindvars=None)
-        result = DW.query_results
-        column = DW.column_names
+        DB.execute_query(sql, bindvars=None)
+        result = DB.query_results
 
         if len(result) == 0:
             agent_list['no_new_employees'] = 'No New Employees'

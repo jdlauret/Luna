@@ -1,11 +1,11 @@
 import os
-from models import SnowFlakeDW, SnowflakeConsole
+from BI.data_warehouse.connector import Snowflake
 
 main_dir = os.getcwd()
 luna_dir = os.path.join(main_dir, 'Luna')
 utilities_dir = os.path.join(luna_dir, 'utilities')
 
-DB = SnowFlakeDW()
+DB = Snowflake()
 DB.set_user('MACK_DAMAVANDI')
 
 
@@ -17,7 +17,6 @@ def work_order(servicenum):
 
     try:
         DB.open_connection()
-        DW = SnowflakeConsole(DB)
         with open(os.path.join(utilities_dir, 'work_order.sql'), 'r') as file:
             sql = file.read()
         sql = sql.split(';')
