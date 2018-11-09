@@ -7,12 +7,9 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from .models import employee_id, transaction
 from .utilities.user_list import user_list
 from coin.utilities import find_badge_id
-# from coin.utilities.create_new_user import new_user
-# from coin.utilities.scheduled_refresh import scheduled_refresh
-# from coin.utilities.change_status_termination import terminated_user
+from coin.utilities.create_new_user import new_user
 
 # TODO SEND EMAILS -> NOTIFICATION SYSTEM
-# TODO MOVE EVERYTHING TO MODEL FORM
 # TODO AUTOMATOR TO UPLOAD TRANSACTION HISTORY
 # TODO ONLY ACCESS CERTAIN PARTS OF THE SITE FOR CERTAIN PEOPLE
 # TODO SUBMIT PICTURES WHAT THEY WANT IN THE STORE
@@ -21,35 +18,47 @@ from coin.utilities import find_badge_id
 # votes?
 # TODO Community Like button
 
+
 def email_check(user):
     return user.email.endswith('@vivintsolar.com')
 
+
 def overlord_access(user):
     return user.groups.filter(name='Coin_Overlord').exists()
+
+
+def create_new_user_button(request):
+    result = new_user()
+    if type(result) == list:
+        for err in result:
+            messages.error(request, err)
+        return redirect('/coin/overlord_view')
+    messages.success(request, 'Created new users')
+    return redirect('/coin/overlord_view')
+
 
 # GLOBAL SECTION
 @login_required
 @user_passes_test(email_check)
 def index(request):
     if request.user.is_authenticated:
-        # new_user() #Creates New users
-        # scheduled_refresh() #Adds 250 every month, and refreshes coin every quarter
-        # terminated_user() # Changes the status of those who have been terminated daily
-        email = request.user.email
-        badge_id = find_badge_id(email)
-        # employee_id.objects.create_user(request.POST)
-        agent = employee_id.objects.get(badgeid=badge_id)
-        t1 = transaction.objects.all().order_by('created_at').reverse()
-        paginator = Paginator(t1, 15)
-
-        page= request.GET.get('page')
-        transaction_list = paginator.get_page(page)
-        # t1.reverse()[:12], -> Context next to transaction
-        context = {
-            'transaction': transaction_list,
-            'coin': agent.allotment,
-        }
-        return render(request, 'global.html', context)
+        try:
+            email = request.user.email
+            badge_id = find_badge_id(email)
+            agent = employee_id.objects.get(badgeid=badge_id)
+            t1 = transaction.objects.all().order_by('created_at').reverse()
+            paginator = Paginator(t1, 15)
+            page = request.GET.get('page')
+            transaction_list = paginator.get_page(page)
+            context = {
+                'transaction': transaction_list,
+                'coin': agent.allotment,
+            }
+            return render(request, 'global.html', context)
+        except Exception as e:
+            messages.error(request, 'Creating New User')
+            new_user()
+            return redirect('/coin/global')
     else:
         return HttpResponseRedirect('/Luna')
 
@@ -58,26 +67,28 @@ def index(request):
 @user_passes_test(email_check)
 def agent(request):
     if request.user.is_authenticated:
-        email = request.user.email
-        badge_id = find_badge_id(email)
-        agent = employee_id.objects.get(badgeid=badge_id)
-        a1 = transaction.objects.filter(benefactor=badge_id).order_by('created_at')
-        a2 = transaction.objects.filter(recipient=badge_id).order_by('created_at')
-        # print(transaction.objects.filter((benefactor=badge_id) or (recipient=badge_id)))
-        context = {
-            'allt1': a1.reverse()[:25],  # View All
-            'allt2': a2.reverse()[:25],  # View All
+        try:
+            email = request.user.email
+            badge_id = find_badge_id(email)
+            agent = employee_id.objects.get(badgeid=badge_id)
+            a1 = transaction.objects.filter(benefactor=badge_id).order_by('created_at')
+            a2 = transaction.objects.filter(recipient=badge_id).order_by('created_at')
+            # print(transaction.objects.filter((benefactor=badge_id) or (recipient=badge_id)))
+            context = {
+                'allt1': a1.reverse()[:25],  # View All
+                'allt2': a2.reverse()[:25],  # View All
 
-            'senttransaction': a2.reverse()[:50],  # View Sent
-            'fromtransaction': a1.reverse()[:50],  # View received
-            # 'need_to_accept': reversed(
-            #     transaction.objects.filter(recipient=badge_id).filter(need_to_accept=0).filter(rejected=0).order_by(
-            #         'created_at')[:50]), #View Accepted Coin
-            'employee_id': employee_id.objects.all,
-            'coin': agent.allotment,
-            'badge_id': badge_id,
-        }
-        return render(request, 'agent_view.html', context)
+                'senttransaction': a2.reverse()[:50],  # View Sent
+                'fromtransaction': a1.reverse()[:50],  # View received
+                'employee_id': employee_id.objects.all,
+                'coin': agent.allotment,
+                'badge_id': badge_id,
+            }
+            return render(request, 'agent_view.html', context)
+        except Exception as e:
+            messages.error(request, 'Creating New User')
+            new_user()
+            return redirect('/coin/agent')
     else:
         return HttpResponseRedirect('/Luna')
 
@@ -86,15 +97,23 @@ def agent(request):
 @user_passes_test(email_check)
 def transactions(request):
     if request.user.is_authenticated:
-        email = request.user.email
-        badge_id = find_badge_id(email)
-        agent = employee_id.objects.get(badgeid=badge_id)
-        context = {
-            'badge_id': badge_id,
-            'user_list': user_list(),
-            'coin': agent.allotment,
-        }
-        return render(request, 'transaction_window.html', context)
+        try:
+            email = request.user.email
+            badge_id = find_badge_id(email)
+            agent = employee_id.objects.get(badgeid=badge_id)
+            context = {
+                'badge_id': badge_id,
+                'user_list': user_list(),
+                'coin': agent.allotment,
+            }
+            return render(request, 'transaction_window.html', context)
+        except Exception as e:
+            messages.error(request, 'Creating New User')
+            new_user()
+            return redirect('/coin/transaction')
+    else:
+        return HttpResponseRedirect('/Luna')
+
 
 # VALIDATES THE TRANSACTION THAT IS SUBMITTED
 def submit_transaction(request):
@@ -174,25 +193,3 @@ def trans_load(request):
         trans.save()
     messages.success(request, 'Success')
     return redirect('/coin/overlord_view')
-
-# def accept_coin(request):
-#     id_list = request.POST.getlist('id')
-#     accept_list = request.POST.getlist('need_to_accept')
-#     badge = request.POST.get('badge_id')
-#     for i, value in enumerate(id_list):
-#         trans = transaction.objects.get(id=value)
-#         give1 = trans.gave
-#         agent = employee_id.objects.get(badgeid=trans.recipient)
-#         from_agent = employee_id.objects.get(badgeid=trans.benefactor)
-#         if int(accept_list[i]):
-#             trans.need_to_accept = 1
-#             agent.to_accept -= give1
-#         else:
-#             trans.need_to_accept = 0
-#             from_agent.give += give1
-#             agent.to_accept -= give1
-#             trans.rejected = 1
-#         agent.save()
-#         from_agent.save()
-#         trans.save()
-#     return redirect('/coin_sharing/agent')
