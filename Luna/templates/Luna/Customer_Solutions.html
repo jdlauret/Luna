@@ -8,182 +8,222 @@
         input {
             padding: 3px;
         }
+
+        .cs_content {
+            position: absolute;
+            left: 0;
+            background: white;
+            right: 0;
+            bottom: auto;
+            padding: 20px;
+            border: white;
+            top: auto;
+            height: auto;
+            width: auto;
+            margin-top: auto;
+        }
     </style>
 
     <div class="main">
-        <h2>Customer Solutions Calculator</h2>
+    <h2>Customer Solutions Calculator</h2>
 
-        {#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-        {#    ACCOUNT LOOKUP AND ACCOUNT INFORMATION HEADER ON CUSTOMER SOLUTIONS CALCULATOR ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-        {#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+    {#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+    {#    ACCOUNT LOOKUP AND ACCOUNT INFORMATION HEADER ON CUSTOMER SOLUTIONS CALCULATOR ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+    {#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
 
-        <div style="width: 100%; display: inline-block;">
-            <div style="float: left; width: 30%">
-                <form action="/calculators/Customer_Solutions/" method="post">
-                    <table class="table table-borderless" style="border: white;">
-                        <thead class="thead-dark">
-                        <tr>
-                            <th colspan="3"></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>{{ form.non_field_errors }}</td>
-                        </tr>
-                        {% for field in form %}
-                            <tr>
-                                {% if field.errors %}
-                                    <td>{{ field.errors }}</td>
-                                {% endif %}
-                                <td><label for="{{ field.id_for_label }}">{{ field.label }} </label></td>
-                                <td colspan="2">{{ field }}
-                                    <input style="display:inline-block;" type="submit" value="Submit"/></td>
-                            </tr>
-                        {% endfor %}
-                        <tr>
-                            <td colspan="2">
-                                {% if form_response_complete == True %}
-                                    <input type="submit"
-                                           formaction="/calculators/Customer_Solutions_buyout/pdf"
-                                           value="Buyout Print Friendly Page" formtarget="_blank"/>
-                                {% endif %}
-                            </td>
-                            <td colspan="2">
-                                {% if form_response_complete == True %}
-                                    <input type="submit"
-                                           formaction="/calculators/Customer_Solutions_prepayment/pdf"
-                                           value="Prepayment Print Friendly Page" formtarget="_blank"/>
-                                {% endif %}
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </form>
-            </div>
-
-            <div id="account_info" style="margin-left: 32%">
-                {#            Table for Account Information #}
-                {% if form_response_complete == True %}
-                    <table class="table">
-                        <thead class="thead-dark">
-                        <tr>
-                            <th colspan="10">Account Information</th>
-                        </tr>
-                        </thead>
-                        <thead>
-                        <tr>
-                            <th>Service Number</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Street Address</th>
-                            <th>City</th>
-                            <th>County</th>
-                            <th>State</th>
-                            <th>Zip Code</th>
-                        </tr>
-                        <tr>
-                            {#                        Inputs the account information ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-                            {% for info in form_response.account_info %}
-                                <td>{{ info }}</td>
-                            {% endfor %}
-                        </tr>
-                    </table>
-                {% endif %}
-            </div>
-            {% if form_response.error %}
-                <table>
+    <div style="width: 100%; display: inline-block;">
+    <div style="float: left; width: 30%">
+        <form action="/calculators/Customer_Solutions/" method="post">
+            <table class="table table-borderless" style="border: white;">
+                <thead class="thead-dark">
+                <tr>
+                    <th colspan="3"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ form.non_field_errors }}</td>
+                </tr>
+                {% for field in form %}
                     <tr>
-                        <td colspan="5" style="color: red;"><b>{{ form_response.error }}</b></td>
+                        {% if field.errors %}
+                            <td>{{ field.errors }}</td>
+                        {% endif %}
+                        <td><label for="{{ field.id_for_label }}">{{ field.label }} </label></td>
+                        <td colspan="2">{{ field }}
+                            <input style="display:inline-block;" type="submit" value="Submit"/></td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="2">
+                        {% if form_response_complete == True %}
+                            <input type="submit"
+                                   formaction="/calculators/Customer_Solutions_buyout/pdf"
+                                   value="Buyout Print Friendly Page" formtarget="_blank"/>
+                        {% endif %}
+                    </td>
+                    <td colspan="2">
+                        {% if form_response_complete == True %}
+                            <input type="submit"
+                                   formaction="/calculators/Customer_Solutions_prepayment/pdf"
+                                   value="Prepayment Print Friendly Page" formtarget="_blank"/>
+                        {% endif %}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+
+    <div id="account_info" style="margin-left: 32%">
+        {#            Table for Account Information #}
+        {% if form_response_complete == True %}
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th colspan="10">Account Information</th>
+                </tr>
+                </thead>
+                <thead>
+                <tr>
+                    <th>Service Number</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Street Address</th>
+                    <th>City</th>
+                    <th>County</th>
+                    <th>State</th>
+                    <th>Zip Code</th>
+                </tr>
+                <tr>
+                    {#                        Inputs the account information ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+                    {% for info in form_response.account_info %}
+                        <td>{{ info }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        {% endif %}
+    </div>
+
+    {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`#}
+    {#    ERROR MESSAGE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`~#}
+    {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+    <div class="error_message" style="color:red;">
+        {% if form_response.error %}
+            <table>
+                <tr>
+                    <td colspan="5" style="color: red;"><b>{{ form_response.error }}</b></td>
+                </tr>
+            </table>
+        {% endif %}
+    </div>
+    {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+    {#    ERROR~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+    {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+    <div style="color:red; padding-left:20px;">
+        {% if form_response2.calc_error.error_flag == True %}
+            {{ form_response2.calc_error.error_note }}
+        {% endif %}
+    </div>
+    {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+    {#    TAB CONTENT~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+    {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+    {% if form_response_complete == True %}
+        <div class="cs_content">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#buyout">Buyout Rate Calculator</a></li>
+            <li><a data-toggle="tab" href="#default">Default Calculator</a></li>
+            <li><a data-toggle="tab" href="#prepay">Prepayment Calculator</a></li>
+        </ul>
+    {% endif %}
+
+{#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+{#                      BUYOUT RATE CALCULATOR~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+{#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+
+<div class="tab-content">
+    <div id="buyout" class="tab-pane fade in active">
+        {% if form_response_complete == True %}
+            <br><h4>Buyout Calculator</h4>
+            <table class="calc" style="width: 100%; height:auto;">
+                <tr class="calc">
+                    <th class="calc">Year</th>
+                    <th class="calc">Transfer Buyout Price</th>
+                    <th class="calc">Watts</th>
+                    <th class="calc">Transfer Total</th>
+                </tr>
+                <tr class="calc">
+                    <td class="calc" style="width:10%;">{{ form_response.results.contract_year }}</td>
+                    <td class="calc" style="width:20%;">
+                        ${{ form_response.results.transfer_buyout_price }}</td>
+                    <td class="calc" style="width:10%;">{{ form_response.results.watts }}</td>
+                    <td class="calc">${{ form_response.results.transfer_total }}</td>
+                </tr>
+            </table>
+        {% endif %}
+    </div>
+
+    {#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+    {#                      DEFAULT CALCULATOR~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+    {#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+
+        <div id="default" class="tab-pane fade in fade">
+            {% if form_response_complete == True %}
+                <br><h4>Default Calculator</h4>
+                <table class="calc" style="width: 100%;">
+                    <tr class="calc">
+                        <th class="calc">Year</th>
+                        <th class="calc">Default Price</th>
+                        <th class="calc">Watts</th>
+                        <th class="calc">Default Total</th>
+                    </tr>
+                    <tr class="calc">
+                        <td class="calc" style="width:10%;">{{ form_response.results.contract_year }}</td>
+                        <td class="calc" style="width:20%;">${{ form_response.results.default_price }}</td>
+                        <td class="calc" style="width:10%;">{{ form_response.results.watts }}</td>
+                        <td class="calc">${{ form_response.results.default_total }}</td>
                     </tr>
                 </table>
             {% endif %}
         </div>
-        {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-        {#    ERROR~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-        {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-        <div style="color:red; padding-left:20px;">
-            {% if form_response2.calc_error.error_flag == True %}
-                {{ form_response2.calc_error.error_note }}
+
+        {#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+        {#              PREPAYMENT CALCULATOR ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+        {#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+
+        <div id="prepay" class="tab-pane fade">
+            {% if form_response_complete == True %}
+                <br><h4>Prepayment Calculator</h4>
+                <table style="padding:10px; height:auto;">
+                    <tr>
+                        <td style="padding:10px;"><b>Service Number</b></td>
+                        <td style="padding-left:20px;">{{ form_response2.prepayment_inputs.service_name }}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px;"><b>Project</b></td>
+                        <td style="padding-left:20px;">{{ form_response2.prepayment_inputs.project_number }}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px;"><b>System Size</b></td>
+                        <td style="padding-left:20px;">{{ form_response2.prepayment_inputs.system_size }} kW</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px;"><b>Annual Escalator</b></td>
+                        <td style="padding-left:20px;">{{ form_response2.prepayment_inputs.escalator }}%</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px;"><b>Current Prepayment Value</b></td>
+                        <td style="padding-left:20px;">${{ form_response2.total_prepayment_price }}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px;"><b>Payment Frequency</b></td>
+                        <td style="padding-left:20px;">Monthly</td>
+                    </tr>
+                </table>
             {% endif %}
         </div>
-        {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-        {#    TAB CONTENT~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-        {#    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-        {% if form_response_complete == True %}
-            <div id="cs_content">
-            <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#buyout">Buyout Rate Calculator</a></li>
-                <li><a data-toggle="tab" href="#prepay">Prepayment Calculator</a></li>
-            </ul>
-        {% endif %}
-
-        {#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-        {#                      BUYOUT RATE CALCULATOR~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-        {#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-
-        <div class="tab-content">
-            <div id="buyout" class="tab-pane fade in active">
-                {% if form_response_complete == True %}
-                    <br><h4>Buyout Calculator</h4>
-                    <table class="calc" style="width: 100%;">
-                        <tr class="calc">
-                            <th class="calc">Year</th>
-                            <th class="calc">Transfer Buyout Price</th>
-                            <th class="calc">Default Price</th>
-                            <th class="calc">Watts</th>
-                            <th class="calc">Transfer Total</th>
-                            <th class="calc">Default Total</th>
-                        </tr>
-                        <tr class="calc">
-                            <td class="calc" style="width:10%;">{{ form_response.results.contract_year }}</td>
-                            <td class="calc" style="width:20%;">
-                                ${{ form_response.results.transfer_buyout_price }}</td>
-                            <td class="calc" style="width:20%;">${{ form_response.results.default_price }}</td>
-                            <td class="calc" style="width:10%;">{{ form_response.results.watts }}</td>
-                            <td class="calc">${{ form_response.results.transfer_total }}</td>
-                            <td class="calc">${{ form_response.results.default_total }}</td>
-                        </tr>
-                    </table>
-                {% endif %}
-            </div>
-
-            {#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-            {#              PREPAYMENT CALCULATOR ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-            {#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-
-            <div id="prepay" class="tab-pane fade">
-                {% if form_response_complete == True %}
-                    <br><h4>Prepayment Calculator</h4>
-                    <table style="padding:10px;">
-                        <tr>
-                            <td style="padding:10px;"><b>Service Number</b></td>
-                            <td style="padding-left:20px;">{{ form_response2.prepayment_inputs.service_name }}</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:10px;"><b>Project</b></td>
-                            <td style="padding-left:20px;">{{ form_response2.prepayment_inputs.project_number }}</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:10px;"><b>System Size</b></td>
-                            <td style="padding-left:20px;">{{ form_response2.prepayment_inputs.system_size }} kW</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:10px;"><b>Annual Escalator</b></td>
-                            <td style="padding-left:20px;">{{ form_response2.prepayment_inputs.escalator }}%</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:10px;"><b>Current Prepayment Value</b></td>
-                            <td style="padding-left:20px;">${{ form_response2.total_prepayment_price }}</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:10px;"><b>Payment Frequency</b></td>
-                            <td style="padding-left:20px;">Monthly</td>
-                        </tr>
-                    </table>
-                {% endif %}
-            </div>
-        </div>
-        </div>
     </div>
+</div>
+</div>
 
 {% endblock %}

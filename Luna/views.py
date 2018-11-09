@@ -11,7 +11,7 @@ from datetime import datetime as dt
 from .models import CareerPath
 from Luna.utilities.template_updates import JsonHandler
 from .forms import *
-from .utilities.soft_savings_analysis import soft_savings_analysis
+from .utilities.soft_savings_analysis import silver_soft_savings_analysis
 from .utilities.full_benefit_analysis import full_benefit_analysis
 from .utilities.system_performance_calc import system_performance
 from .utilities.page_notes import *
@@ -394,8 +394,8 @@ def soft_savings_calculator(request):
             if form.is_valid():
 
                 service_number = form.cleaned_data['service_number']
-                start_date = form.cleaned_data['start_date']
-                end_date = form.cleaned_data['end_date']
+                # start_date = form.cleaned_data['start_date']
+                # end_date = form.cleaned_data['end_date']
                 # TODO pass parameters to Mack's function
                 context = {
                     'form': form,
@@ -405,7 +405,7 @@ def soft_savings_calculator(request):
                     'legal_footer': print_page_legal_footer,
                 }
                 try:
-                    results = soft_savings_analysis(str(service_number), str(start_date), str(end_date))
+                    results = silver_soft_savings_analysis(str(service_number))
                     context['form_response'] = results
                 except Exception as e:
                     context['form_response_complete'] = False
@@ -424,7 +424,7 @@ def soft_savings_calculator(request):
                 }
                 return render(request, 'Luna/soft_savings_analysis.html', context=context)
         else:
-            form = SystemPerformanceForm()
+            form = SoftSavingsForm()
             context = {
                 'user': request.user,
                 'form': form,
@@ -445,8 +445,8 @@ def soft_savings_print(request):
             form = SoftSavingsForm(request.POST)
             if form.is_valid():
                 service_number = form.cleaned_data['service_number']
-                start_date = form.cleaned_data['start_date']
-                end_date = form.cleaned_data['end_date']
+                # start_date = form.cleaned_data['start_date']
+                # end_date = form.cleaned_data['end_date']
                 # TODO pass parameters to Mack's function
                 context = {
                     'form': form,
@@ -456,7 +456,7 @@ def soft_savings_print(request):
                     'legal_footer': print_page_legal_footer,
                 }
                 try:
-                    results = soft_savings_analysis(str(service_number), str(start_date), str(end_date))
+                    results = silver_soft_savings_analysis(str(service_number))
                     context['form_response'] = results
                 except Exception as e:
                     context['form_response_complete'] = False
