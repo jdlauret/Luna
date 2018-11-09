@@ -47,7 +47,7 @@ def notes_wizard (servicenum):
         # Execute second query results
         DB.execute_query(sql[1].format(service_number=str(servicenum)))
         # Second query results
-        roof_section_columns = DB.query_columns
+        roof_section_columns = DB.column_names
         roof_section_info = DB.query_results[0]
 
         # error message when no installation notes are pulled up
