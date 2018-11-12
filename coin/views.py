@@ -8,6 +8,7 @@ from .models import employee_id, transaction
 from .utilities.user_list import user_list
 from coin.utilities import find_badge_id
 from coin.utilities.create_new_user import new_user
+from coin.utilities.change_status_termination import terminated_user
 
 # TODO SEND EMAILS -> NOTIFICATION SYSTEM
 # TODO AUTOMATOR TO UPLOAD TRANSACTION HISTORY
@@ -34,6 +35,16 @@ def create_new_user_button(request):
             messages.error(request, err)
         return redirect('/coin/overlord_view')
     messages.success(request, 'Created new users')
+    return redirect('/coin/overlord_view')
+
+
+def terminated_user_button(request):
+    result = terminated_user()
+    if type(result) == list:
+        for err in result:
+            messages.error(request, err)
+        return redirect('/coin/overlord_view')
+    messages.success(request, 'Removed Terminated Users')
     return redirect('/coin/overlord_view')
 
 
