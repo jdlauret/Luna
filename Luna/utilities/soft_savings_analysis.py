@@ -271,11 +271,17 @@ def silver_soft_savings_analysis(servicenum):
         results['error'] = e
         return results
 
-    results['account'] = DB.query_results[0][2:]
+    finally:
+        DB.close_connection()
+
+    results['account'] = DB.query_results[0][4:]
 
     if len(results['account']) == 0:
         results['error'] = '{} is not a valid service number or the associated ' \
                            'Solar Project has been cancelled.'.format(servicenum)
+        return results
+    elif DB.query_results[0][0] < 12:
+        results['error'] = '{} has not been PTO\'d for at least 12 months!'.format(servicenum)
         return results
     elif not results['account'][7]:
         results['error'] = 'The system hasn\'t been PTO\'d yet!'
@@ -399,12 +405,12 @@ def silver_soft_savings_analysis(servicenum):
                 ),
                 'For that energy, you paid Vivint Solar {}.'.format(results['savings'][-1][3]),
                 'The average utility customer of your utility, {}, would have paid {} for that same amount of energy.'.format(
-                    results['account'][0][8],
+                    results['account'][8],
                     results['savings'][-1][4]
                 ),
                 'For the average utility customer with {}, who had {} kilowatt hours (kWh) of production since {},' \
                 ' they would have saved {}.'.format(
-                    results['account'][0][8],
+                    results['account'][8],
                     results['savings'][-1][1].split()[0],
                     results['startdate'].strftime('%Y-%m-%d'),
                     results['savings'][-1][5]
@@ -454,12 +460,12 @@ def silver_soft_savings_analysis(servicenum):
             ),
             'For that energy, you paid Vivint Solar {}.'.format(results['savings'][-1][3]),
             'The average utility customer of your utility, {}, would have paid {} for that same amount of energy.'.format(
-                results['account'][0][8],
+                results['account'][8],
                 results['savings'][-1][4]
             ),
             'For the average utility customer with {}, who had {} kilowatt hours (kWh) of production since {},' \
             ' they would have saved {}.'.format(
-                results['account'][0][8],
+                results['account'][8],
                 results['savings'][-1][1].split()[0],
                 results['startdate'].strftime('%Y-%m-%d'),
                 results['savings'][-1][5]

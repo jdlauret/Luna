@@ -2,6 +2,7 @@ select * from
 
 (
 select
+  cm.month_cnt,
   case
   when billed_year_kwh > 40000 then t.year_40000_kwh/40000
   when billed_year_kwh > 30000 then t.year_30000_kwh/30000
@@ -46,6 +47,42 @@ case
   when billed_year_kwh > 1000 then st.year_1000_kwh/1000
   when billed_year_kwh >= 0 then st.year_0_kwh + ((st.year_1000_kwh-st.year_0_kwh)/1000)
 end subsidized_pre_solar_year_cost_per_kwh,
+
+iff(
+contains(upper(utility_schedule_rate),'CAR') OR
+contains(upper(utility_schedule_rate),'DRLI') OR
+contains(upper(utility_schedule_rate),'FERA') OR
+contains(upper(utility_schedule_rate),'R-2') OR
+contains(upper(utility_schedule_rate),'R2') OR
+contains(upper(utility_schedule_rate),'RS R-2') OR
+contains(upper(utility_schedule_rate),'R 2') OR
+contains(upper(utility_schedule_rate),'RS LI R-2') OR
+contains(upper(utility_schedule_rate),'NG R-2') OR
+contains(upper(utility_schedule_rate),'RLI R-2') OR
+contains(upper(utility_schedule_rate),'R-2 LI') OR
+contains(upper(utility_schedule_rate),'RLI 2') OR
+contains(upper(utility_schedule_rate),'R LI R-2') OR
+contains(upper(utility_schedule_rate),'R-2 RES LI') OR
+contains(upper(utility_schedule_rate),'RESLOWINR2') OR
+contains(upper(utility_schedule_rate),'RLI R2') OR
+contains(upper(utility_schedule_rate),'LOW R-2') OR
+contains(upper(utility_schedule_rate),'R-2 LOW IN') OR
+contains(upper(utility_schedule_rate),'R L I R2') OR
+contains(upper(utility_schedule_rate),'A2 R2') OR
+contains(upper(utility_schedule_rate),'A2') OR
+contains(upper(utility_schedule_rate),'A-2') OR
+contains(upper(utility_schedule_rate),'A2 ASSIST') OR
+contains(upper(utility_schedule_rate),'A2 RES') OR
+contains(upper(utility_schedule_rate),'A3') OR
+contains(upper(utility_schedule_rate),'A2-RES') OR
+contains(upper(utility_schedule_rate),'A2-RS') OR
+contains(upper(utility_schedule_rate),'A2-R') OR
+contains(upper(utility_schedule_rate),'A2 R') OR
+contains(upper(utility_schedule_rate),'A2-RA') OR
+contains(upper(utility_schedule_rate),'A2 RA') OR
+contains(upper(utility_schedule_rate),'A2 - RA') OR
+contains(upper(utility_schedule_rate),'A2 RASSIST'),true,false) is_utility_schedule_care,
+
   p.service_name,
   c.full_name,
   c.email,
@@ -54,12 +91,8 @@ end subsidized_pre_solar_year_cost_per_kwh,
   p.service_state,
   p.service_zip_code,
   date_trunc(day, p.start_billing),
-    case
-        when upper(p.utility_schedule_rate) like '%CARE%' and p.service_state = 'CA' then p.utility_company||' - CARE'
-        when upper(p.utility_schedule_rate) like '%FERA%' and p.service_state = 'CA' then p.utility_company||' - FERA'
-        else p.utility_company
-    end utility_company,
-  iff(p.utility_schedule_rate ilike '%care%', subsidized_pre_solar_year_cost_per_kwh, pre_solar_year_cost_per_kwh),
+  iff(is_utility_schedule_care and p.service_state = 'CA', p.utility_company||' - CARE', p.utility_company) utility_company,
+  iff(cm.month_cnt = 12, iff(is_utility_schedule_care, subsidized_pre_solar_year_cost_per_kwh, pre_solar_year_cost_per_kwh), null),
   ct.record_type
 from rpt.t_contact c,
   (
@@ -73,9 +106,10 @@ billed_wh,sum(billed_wh) over (partition by project_id order by start_date rows 
 sum(iff(billing_method = 'Estimated',billed_wh,null)) over (partition by project_id order by start_date rows between 11 preceding and current row)/1000 estimated_billed_year_kwh,
 sum(1) over  (partition by project_id order by start_date rows between 11 preceding and current row) month_cnt
     from
-fleet.t_combined_monthly where is_all_month --and project_name = 'SP-3180141'
+fleet.t_combined_monthly where is_all_month
     )
-  where month_cnt = 12 and start_date = dateadd('month',-1,date_from_parts(year(current_date()),month(current_date()),1))
+  where
+    start_date = dateadd('month',-1,date_from_parts(year(current_date()),month(current_date()),1))
   )
   cm,
 rpt.t_project p,
@@ -85,14 +119,14 @@ rpt.t_contract ct,
 select * from
 (
   select t.*,
+  nvl(t.customer_likelihood , 0) customer_likelihood_all,
   tr.zipcode,
-  row_number() over (partition by zipcode order by customer_likelihood desc) row_cnt2
+  row_number() over (partition by zipcode order by customer_likelihood_all desc) row_cnt2
   from
   fleet.t_tariff t,
 fleet.t_territory tr
   where
-  t.unique_territory_id = tr.unique_territory_id and
-  customer_likelihood is not null
+  t.unique_territory_id = tr.unique_territory_id
   )
   where
   row_cnt2 = 1
@@ -102,14 +136,14 @@ t,
 select * from
 (
   select t.*,
+  nvl(t.customer_likelihood , 0) customer_likelihood_all,
   tr.zipcode,
-  row_number() over (partition by zipcode order by customer_likelihood desc) row_cnt2
+  row_number() over (partition by zipcode order by customer_likelihood_all desc) row_cnt2
   from
   fleet.t_tariff t,
 fleet.t_territory tr
   where
   t.unique_territory_id = tr.unique_territory_id and
-  customer_likelihood is not null and
   is_subsidized = 'True'
   )
   where
@@ -139,7 +173,7 @@ t.tariff_name,
 t.tariff_code,
 st.tariff_code subsidized_tariff_code,
 t.climate_zone_name,
-t.customer_likelihood,
+t.customer_likelihood_all,
 t.is_subsidized,
 ct.contract_rate,
 billed_year_kwh,
@@ -238,15 +272,57 @@ case
   when billed_year_kwh >= 0 then st.year_0_kwh + (billed_year_kwh*(st.year_1000_kwh-st.year_0_kwh)/1000)
 end subsidized_pre_solar_year_cost,
 
-pre_solar_year_cost-billed_year_cost default_yearly_saving,
-subsidized_pre_solar_year_cost-billed_year_cost subsidized_yearly_saving,
+iff(
+contains(upper(utility_schedule_rate),'CAR') OR
+contains(upper(utility_schedule_rate),'DRLI') OR
+contains(upper(utility_schedule_rate),'FERA') OR
+contains(upper(utility_schedule_rate),'R-2') OR
+contains(upper(utility_schedule_rate),'R2') OR
+contains(upper(utility_schedule_rate),'RS R-2') OR
+contains(upper(utility_schedule_rate),'R 2') OR
+contains(upper(utility_schedule_rate),'RS LI R-2') OR
+contains(upper(utility_schedule_rate),'NG R-2') OR
+contains(upper(utility_schedule_rate),'RLI R-2') OR
+contains(upper(utility_schedule_rate),'R-2 LI') OR
+contains(upper(utility_schedule_rate),'RLI 2') OR
+contains(upper(utility_schedule_rate),'R LI R-2') OR
+contains(upper(utility_schedule_rate),'R-2 RES LI') OR
+contains(upper(utility_schedule_rate),'RESLOWINR2') OR
+contains(upper(utility_schedule_rate),'RLI R2') OR
+contains(upper(utility_schedule_rate),'LOW R-2') OR
+contains(upper(utility_schedule_rate),'R-2 LOW IN') OR
+contains(upper(utility_schedule_rate),'R L I R2') OR
+contains(upper(utility_schedule_rate),'A2 R2') OR
+contains(upper(utility_schedule_rate),'A2') OR
+contains(upper(utility_schedule_rate),'A-2') OR
+contains(upper(utility_schedule_rate),'A2 ASSIST') OR
+contains(upper(utility_schedule_rate),'A2 RES') OR
+contains(upper(utility_schedule_rate),'A3') OR
+contains(upper(utility_schedule_rate),'A2-RES') OR
+contains(upper(utility_schedule_rate),'A2-RS') OR
+contains(upper(utility_schedule_rate),'A2-R') OR
+contains(upper(utility_schedule_rate),'A2 R') OR
+contains(upper(utility_schedule_rate),'A2-RA') OR
+contains(upper(utility_schedule_rate),'A2 RA') OR
+contains(upper(utility_schedule_rate),'A2 - RA') OR
+contains(upper(utility_schedule_rate),'A2 RASSIST'),true,false) is_utility_schedule_care,
+POWER(1.029,TRUNC(DATEDIFF(DAY, DATE_TRUNC('D', P.START_BILLING), DATE_TRUNC('D', cm2.start_DATE)) / 365)) escalator_factor,
 
+pre_solar_year_cost - billed_year_cost default_yearly_saving,
+subsidized_pre_solar_year_cost - billed_year_cost subsidized_yearly_saving,
+--monthly view with escalated PPA/Lease rate
 to_char(cm2.start_date, 'Mon YYYY') month_year,
 round(cm2.billed_wh/1000, 3) billed_kwh,
-NVL(P.RATE_PER_KWH * POWER(1.029,TRUNC(DATEDIFF(DAY, DATE_TRUNC('D', P.START_BILLING), DATE_TRUNC('D', cm2.start_DATE)) / 365)), 0) rate_per_kwh,
-round(cm2.billed_wh/1000 * NVL(P.RATE_PER_KWH * POWER(1.029,TRUNC(DATEDIFF(DAY, DATE_TRUNC('D', P.START_BILLING), DATE_TRUNC('D', cm2.start_DATE)) / 365)), 0), 2) vivint_solar_charges,
-iff(p.utility_schedule_rate ilike '%care%', round(cm2.billed_wh/1000 * subsidized_pre_solar_year_cost_per_kwh, 2), round(cm2.billed_wh/1000 * pre_solar_year_cost_per_kwh, 2)) utility_charges,
-iff(p.utility_schedule_rate ilike '%care%', round(cm2.billed_wh/1000 * subsidized_pre_solar_year_cost_per_kwh - (cm2.billed_wh/1000 * NVL(P.RATE_PER_KWH * POWER(1.029,TRUNC(DATEDIFF(DAY, DATE_TRUNC('D', P.START_BILLING), DATE_TRUNC('D', cm2.start_DATE)) / 365)), 0)), 2), round(cm2.billed_wh/1000 * pre_solar_year_cost_per_kwh - (cm2.billed_wh/1000 * NVL(P.RATE_PER_KWH * POWER(1.029,TRUNC(DATEDIFF(DAY, DATE_TRUNC('D', P.START_BILLING), DATE_TRUNC('D', cm2.start_DATE)) / 365)), 0)), 2)) savings
+NVL(P.RATE_PER_KWH * escalator_factor, 0) rate_per_kwh,
+round(cm2.billed_wh/1000 * NVL(P.RATE_PER_KWH * escalator_factor, 0), 2) vivint_solar_charges,
+iff(
+    is_utility_schedule_care,
+    round(cm2.billed_wh/1000 * subsidized_pre_solar_year_cost_per_kwh, 2),
+    round(cm2.billed_wh/1000 * pre_solar_year_cost_per_kwh, 2)) utility_charges,
+iff(
+    is_utility_schedule_care,
+    round(cm2.billed_wh/1000 * subsidized_pre_solar_year_cost_per_kwh - (cm2.billed_wh/1000 * NVL(P.RATE_PER_KWH * escalator_factor, 0)), 2),
+    round(cm2.billed_wh/1000 * pre_solar_year_cost_per_kwh - (cm2.billed_wh/1000 * NVL(P.RATE_PER_KWH * escalator_factor, 0)), 2)) savings
 from
   (
     select * from
@@ -266,6 +342,7 @@ fleet.t_combined_monthly where is_all_month
   cm,
 rpt.t_project p,
 rpt.t_contract ct,
+--billed_wh by month
   (
     select * from
   (
@@ -285,14 +362,14 @@ fleet.t_combined_monthly where is_all_month
 select * from
 (
   select t.*,
+  nvl(t.customer_likelihood , 0) customer_likelihood_all,
   tr.zipcode,
-  row_number() over (partition by zipcode order by customer_likelihood desc) row_cnt2
+  row_number() over (partition by zipcode order by customer_likelihood_all desc) row_cnt2
   from
   fleet.t_tariff t,
 fleet.t_territory tr
   where
-  t.unique_territory_id = tr.unique_territory_id and
-  customer_likelihood is not null
+  t.unique_territory_id = tr.unique_territory_id
   )
   where
   row_cnt2 = 1
@@ -302,14 +379,14 @@ t,
 select * from
 (
   select t.*,
+  nvl(t.customer_likelihood , 0) customer_likelihood_all,
   tr.zipcode,
-  row_number() over (partition by zipcode order by customer_likelihood desc) row_cnt2
+  row_number() over (partition by zipcode order by customer_likelihood_all desc) row_cnt2
   from
   fleet.t_tariff t,
 fleet.t_territory tr
   where
   t.unique_territory_id = tr.unique_territory_id and
-  customer_likelihood is not null and
   is_subsidized = 'True'
   )
   where
@@ -324,6 +401,7 @@ p.project_id = cm2.project_id(+) and
 p.primary_contract_id = ct.contract_id and
 substring(p.service_zip_code,0,5) = t.zipcode and
 substring(p.service_zip_code,0,5) = st.zipcode(+) and
+--replace {service_number} with any account number
 p.service_number = '{service_number}' and
 cm2.start_date > dateadd(month, -13, date_trunc(month, current_date)) and
 cm2.start_date <= dateadd(month, -1, date_trunc(month, current_date))
