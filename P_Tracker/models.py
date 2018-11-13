@@ -161,6 +161,7 @@ class trackerManager(models.Manager):
     @classmethod
     def manual_input(self, post_data):
         errors = []
+        tz = pytz.timezone('US/Mountain')
         if len(post_data['start_time']) == 0 or len(post_data['end_time']) == 0:
             errors.append('No information was selected')
             return errors
@@ -168,10 +169,10 @@ class trackerManager(models.Manager):
             if post_data['type'] == 'project':
                 end = post_data['end_time']
                 end = parser.parse(end)
-                end = end.replace(tzinfo=pytz.utc)
+                end = end.replace(tzinfo=tz)
                 start = post_data['start_time']
                 start = parser.parse(start)
-                start = start.replace(tzinfo=pytz.utc)
+                start = start.replace(tzinfo=tz)
                 total = end-start
                 total = total / timedelta(hours=1)
                 pn = int(post_data['project_name'])
