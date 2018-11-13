@@ -1,11 +1,7 @@
 import pytz
 import datetime as dt
-import pandas as pd
-import numpy as np
-from django.utils import timezone
 from datetime import datetime, timedelta
 from dateutil import parser
-from dateutil.relativedelta import relativedelta
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, redirect
