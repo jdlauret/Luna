@@ -13,19 +13,19 @@ DB.set_user('MACK_DAMAVANDI')
 
 
 def soft_savings_analysis(servicenum, startdate, enddate):
-
     results = {}
 
     if enddate < startdate:
-        results = {'error': 'The start date you entered ({}) must come before the end date you entered ({}).'.format(startdate.strftime('%Y-%m-%d'), enddate.strftime('%Y-%m-%d'))}
+        results = {'error': 'The start date you entered ({}) must come before the end date you entered ({}).'.format(
+            startdate.strftime('%Y-%m-%d'), enddate.strftime('%Y-%m-%d'))}
         return results
 
     if 'S-' in servicenum.upper():
-        servicenum = servicenum.upper().replace('S-','')
+        servicenum = servicenum.upper().replace('S-', '')
 
     try:
         DB.open_connection()
-        with open(os.path.join(utilities_dir, 'soft_savings_analysis.sql'),'r') as file:
+        with open(os.path.join(utilities_dir, 'soft_savings_analysis.sql'), 'r') as file:
             sql = file.read()
         sql = sql.split(';')
 
@@ -46,7 +46,7 @@ def soft_savings_analysis(servicenum, startdate, enddate):
         results['error'] = 'The system hasn\'t been PTO\'d yet!'
         results['account'][9] = '${}'.format(round(results['account'][9], 5))
         return results
-    elif results['account'][7] > date.today()-timedelta(30):
+    elif results['account'][7] > date.today() - timedelta(30):
         results['error'] = 'The system hasn\'t been PTO\'d for more than 30 days.'
         return results
     # elif results['account'][0][7].date() > date.today()-timedelta(365):
@@ -57,7 +57,7 @@ def soft_savings_analysis(servicenum, startdate, enddate):
     #     return results
     elif results['account'][8] == None:
         results['error'] = 'There was no utility information found for service ' \
-                                    '{}.'.format(servicenum)
+                           '{}.'.format(servicenum)
         results['account'][7] = results['account'][7].strftime('%B %#d, %Y')
         return results
     elif results['account'][-1] != 'Solar PPA' and results['account'][-1] != 'Solar Lease':
@@ -94,7 +94,6 @@ def soft_savings_analysis(servicenum, startdate, enddate):
         results['enddate'] = dt.datetime.strptime(enddate, '%Y-%m-%d').date()
         enddatestring = results['enddate'].replace(day=1).strftime('%Y-%m-%d')
 
-
     # bindvars.append({'serviceNum': servicenum,
     #              'startDate': startdatestring,
     #              'endDate': enddatestring})
@@ -113,18 +112,18 @@ def soft_savings_analysis(servicenum, startdate, enddate):
 
     if len(results['savings']) == 0:
         results['error'] = 'There was no Actual production ' \
-                                     'found for service number {} in the date range {} ' \
-                                     'to {}.'.format(servicenum, startdatestring, enddatestring)
+                           'found for service number {} in the date range {} ' \
+                           'to {}.'.format(servicenum, startdatestring, enddatestring)
         return results
 
     totals = [sum(j) for j in [i for i in zip(*results['savings'])][1:6]]
     results['savings'].append(['Total',
-                                  round(totals[0], 2),
-                                  '',
-                                  round(totals[2], 2),
-                                  round(totals[3], 2),
-                                  round(totals[4], 2)
-                                  ])
+                               round(totals[0], 2),
+                               '',
+                               round(totals[2], 2),
+                               round(totals[3], 2),
+                               round(totals[4], 2)
+                               ])
 
     if results['savings'][-1][5] < 0:
         results['summary'] = [
@@ -177,14 +176,14 @@ def soft_savings_analysis(servicenum, startdate, enddate):
                 'Equivalencies Calculator).'.format(
                     results['startdate'].strftime('%Y-%m-%d'),
                     results['enddate'].strftime('%Y-%m-%d'),
-                    round(float(results['savings'][-1][1].split()[0])*1.824,1)
+                    round(float(results['savings'][-1][1].split()[0]) * 1.824, 1)
                 ),
-            'From {} to {}, the solar energy system at your home has offset the same amount of carbon ' \
+                'From {} to {}, the solar energy system at your home has offset the same amount of carbon ' \
                 'emissions as {} newly planted trees (according to the EPA\'s Greenhouse Gas ' \
                 'Equivalencies Calculator).'.format(
                     results['startdate'].strftime('%Y-%m-%d'),
                     results['enddate'].strftime('%Y-%m-%d'),
-                    int(round(float(results['savings'][-1][1].split()[0])*0.0391,0))
+                    int(round(float(results['savings'][-1][1].split()[0]) * 0.0391, 0))
                 )
             ]
         )
@@ -232,14 +231,14 @@ def soft_savings_analysis(servicenum, startdate, enddate):
             'Equivalencies Calculator).'.format(
                 results['startdate'].strftime('%Y-%m-%d'),
                 results['enddate'].strftime('%Y-%m-%d'),
-                round(float(results['savings'][-1][1].split()[0])*1.824,1)
+                round(float(results['savings'][-1][1].split()[0]) * 1.824, 1)
             ),
             'From {} to {}, the solar energy system at your home has offset the same amount of carbon ' \
             'emissions as {} newly planted trees (according to the EPA\'s Greenhouse Gas ' \
             'Equivalencies Calculator).'.format(
                 results['startdate'].strftime('%Y-%m-%d'),
                 results['enddate'].strftime('%Y-%m-%d'),
-                round(float(results['savings'][-1][1].split()[0])*0.0391,0)
+                round(float(results['savings'][-1][1].split()[0]) * 0.0391, 0)
             )
         ]
 
@@ -247,8 +246,8 @@ def soft_savings_analysis(servicenum, startdate, enddate):
 
     return results
 
-def silver_soft_savings_analysis(servicenum):
 
+def silver_soft_savings_analysis(servicenum):
     results = {}
 
     # if enddate < startdate:
@@ -256,11 +255,11 @@ def silver_soft_savings_analysis(servicenum):
     #     return results
 
     if 'S-' in servicenum.upper():
-        servicenum = servicenum.upper().replace('S-','')
+        servicenum = servicenum.upper().replace('S-', '')
 
     try:
         DB.open_connection()
-        with open(os.path.join(utilities_dir, 'silver_soft_savings_analysis.sql'),'r') as file:
+        with open(os.path.join(utilities_dir, 'silver_soft_savings_analysis.sql'), 'r') as file:
             sql = file.read()
         sql = sql.split(';')
 
@@ -287,7 +286,7 @@ def silver_soft_savings_analysis(servicenum):
         results['error'] = 'The system hasn\'t been PTO\'d yet!'
         results['account'][9] = '${}'.format(round(results['account'][9], 5))
         return results
-    elif results['account'][7] > date.today()-timedelta(30):
+    elif results['account'][7] > date.today() - timedelta(30):
         results['error'] = 'The system hasn\'t been PTO\'d for more than 30 days.'
         return results
     # elif results['account'][0][7].date() > date.today()-timedelta(365):
@@ -298,7 +297,7 @@ def silver_soft_savings_analysis(servicenum):
     #     return results
     elif results['account'][8] == None:
         results['error'] = 'There was no utility information found for service ' \
-                                    '{}.'.format(servicenum)
+                           '{}.'.format(servicenum)
         results['account'][7] = results['account'][7].strftime('%B %#d, %Y')
         return results
     elif results['account'][-1] != 'Solar PPA' and results['account'][-1] != 'Solar Lease':
@@ -308,17 +307,21 @@ def silver_soft_savings_analysis(servicenum):
         results['account'][9] = '${}'.format(round(results['account'][9], 5))
         results['account'][7] = results['account'][7].strftime('%B %#d, %Y')
         return results
+    elif not results['account'][9]:
+        results['error'] = 'The utility rate for this customer could not be determined.'
+        results['account'][7] = results['account'][7].strftime('%B %#d, %Y')
+        return results
     # elif dt.datetime.strptime(startdate, '%Y-%m-%d').date() < results['account'][7]:
     #     results['startdate'] = results['account'][7]
     #     startdatestring = results['startdate'].strftime('%Y-%m-%d')
     # else:
     #     results['startdate'] = dt.datetime.strptime(startdate, '%Y-%m-%d').date()
     #     startdatestring = results['startdate'].replace(day=1).strftime('%Y-%m-%d')
-        # results['enddate'] = (date.today().replace(day=1) - timedelta(1))
-        # enddatestring = results['enddate'].strftime('%Y-%m-%d')
-        # results['startdate'] = (results['enddate'] - timedelta(365)).replace(month=results['enddate'].month % 12 + 1,
-        #                                                                      day=1)
-        # startdatestring = results['startdate'].strftime('%Y-%m-%d')
+    # results['enddate'] = (date.today().replace(day=1) - timedelta(1))
+    # enddatestring = results['enddate'].strftime('%Y-%m-%d')
+    # results['startdate'] = (results['enddate'] - timedelta(365)).replace(month=results['enddate'].month % 12 + 1,
+    #                                                                      day=1)
+    # startdatestring = results['startdate'].strftime('%Y-%m-%d')
 
     results['account'][9] = '${}'.format(round(results['account'][9], 5))
 
@@ -341,7 +344,7 @@ def silver_soft_savings_analysis(servicenum):
     # bindvars.append({'serviceNum': servicenum,
     #              'startDate': startdatestring,
     #              'endDate': enddatestring})
-    query_2 = sql[1].format(service_number=str(servicenum)) #, start_date=str(startdate), end_date=str(enddate))
+    query_2 = sql[1].format(service_number=str(servicenum))  # , start_date=str(startdate), end_date=str(enddate))
     try:
         DB.execute_query(query_2)
 
@@ -356,18 +359,18 @@ def silver_soft_savings_analysis(servicenum):
 
     if len(results['savings']) == 0:
         results['error'] = 'There was no Actual production ' \
-                                     'found for service number {} in the date range {} ' \
-                                     'to {}.'.format(servicenum, startdatestring, enddatestring)
+                           'found for service number {} in the date range {} ' \
+                           'to {}.'.format(servicenum, startdatestring, enddatestring)
         return results
 
     totals = [sum(j) for j in [i for i in zip(*results['savings'])][1:6]]
     results['savings'].append(['Total',
-                                  round(totals[0], 2),
-                                  '',
-                                  round(totals[2], 2),
-                                  round(totals[3], 2),
-                                  round(totals[4], 2)
-                                  ])
+                               round(totals[0], 2),
+                               '',
+                               round(totals[2], 2),
+                               round(totals[3], 2),
+                               round(totals[4], 2)
+                               ])
 
     if results['savings'][-1][5] < 0:
         results['summary'] = [
@@ -420,14 +423,14 @@ def silver_soft_savings_analysis(servicenum):
                 'Equivalencies Calculator).'.format(
                     results['startdate'].strftime('%Y-%m-%d'),
                     results['enddate'].strftime('%Y-%m-%d'),
-                    round(float(results['savings'][-1][1].split()[0])*1.824,1)
+                    round(float(results['savings'][-1][1].split()[0]) * 1.824, 1)
                 ),
-            'From {} to {}, the solar energy system at your home has offset the same amount of carbon ' \
+                'From {} to {}, the solar energy system at your home has offset the same amount of carbon ' \
                 'emissions as {} newly planted trees (according to the EPA\'s Greenhouse Gas ' \
                 'Equivalencies Calculator).'.format(
                     results['startdate'].strftime('%Y-%m-%d'),
                     results['enddate'].strftime('%Y-%m-%d'),
-                    int(round(float(results['savings'][-1][1].split()[0])*0.0391,0))
+                    int(round(float(results['savings'][-1][1].split()[0]) * 0.0391, 0))
                 )
             ]
         )
@@ -475,14 +478,14 @@ def silver_soft_savings_analysis(servicenum):
             'Equivalencies Calculator).'.format(
                 results['startdate'].strftime('%Y-%m-%d'),
                 results['enddate'].strftime('%Y-%m-%d'),
-                round(float(results['savings'][-1][1].split()[0])*1.824,1)
+                round(float(results['savings'][-1][1].split()[0]) * 1.824, 1)
             ),
             'From {} to {}, the solar energy system at your home has offset the same amount of carbon ' \
             'emissions as {} newly planted trees (according to the EPA\'s Greenhouse Gas ' \
             'Equivalencies Calculator).'.format(
                 results['startdate'].strftime('%Y-%m-%d'),
                 results['enddate'].strftime('%Y-%m-%d'),
-                round(float(results['savings'][-1][1].split()[0])*0.0391,0)
+                round(float(results['savings'][-1][1].split()[0]) * 0.0391, 0)
             )
         ]
 
