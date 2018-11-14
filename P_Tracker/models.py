@@ -173,28 +173,32 @@ class trackerManager(models.Manager):
                 start = post_data['start_time']
                 start = parser.parse(start)
                 start = start.replace(tzinfo=tz)
-                total = end-start
-                total = total / timedelta(hours=1)
-                pn = int(post_data['project_name'])
-                name = Project_Name.objects.get(id=pn)
-                who_approved = Auth_Employee.objects.get(badge_id=int(post_data['approved_by']))
+                if start > end:
+                    errors.append('Start Time needs to be less than End Time')
+                    return errors
+                else:
+                    total = end-start
+                    total = total / timedelta(hours=1)
+                    pn = int(post_data['project_name'])
+                    name = Project_Name.objects.get(id=pn)
+                    who_approved = Auth_Employee.objects.get(badge_id=int(post_data['approved_by']))
 
-                temp = Project_Time(
-                    name=name.name,
-                    description=post_data['description'],
-                    who_approved_id=post_data['approved_by'],
-                    who_approved_name=who_approved.full_name,
-                    start_time=start,
-                    end_time=end,
-                    total_time=total,
-                    completed=True,
-                    auth_employee_id=post_data['badge_id'],
-                    edited_at=dt.now(pytz.timezone('US/Mountain')),
-                    who_edited=post_data['super_badge'],
-                    accept=True,
-                    super_stamp=post_data['super_badge'],
-                )
-                temp.save()
+                    temp = Project_Time(
+                        name=name.name,
+                        description=post_data['description'],
+                        who_approved_id=post_data['approved_by'],
+                        who_approved_name=who_approved.full_name,
+                        start_time=start,
+                        end_time=end,
+                        total_time=total,
+                        completed=True,
+                        auth_employee_id=post_data['badge_id'],
+                        edited_at=dt.now(pytz.timezone('US/Mountain')),
+                        who_edited=post_data['super_badge'],
+                        accept=True,
+                        super_stamp=post_data['super_badge'],
+                    )
+                    temp.save()
             elif post_data['type'] == 'meeting':
                 end = post_data['end_time']
                 end = parser.parse(end)
@@ -202,22 +206,26 @@ class trackerManager(models.Manager):
                 start = post_data['start_time']
                 start = parser.parse(start)
                 start = start.replace(tzinfo=pytz.utc)
-                total = end - start
-                total = total / timedelta(hours=1)
+                if start > end:
+                    errors.append('Start Time needs to be less than End Time')
+                    return errors
+                else:
+                    total = end - start
+                    total = total / timedelta(hours=1)
 
-                temp_m = Meeting_Time(
-                    name=post_data['name'],
-                    start_time=start,
-                    end_time=end,
-                    total_time=total,
-                    completed=True,
-                    auth_employee_id=post_data['badge_id'],
-                    edited_at=dt.now(pytz.timezone('US/Mountain')),
-                    who_edited=post_data['super_badge'],
-                    accept=True,
-                    super_stamp=post_data['super_badge']
-                )
-                temp_m.save()
+                    temp_m = Meeting_Time(
+                        name=post_data['name'],
+                        start_time=start,
+                        end_time=end,
+                        total_time=total,
+                        completed=True,
+                        auth_employee_id=post_data['badge_id'],
+                        edited_at=dt.now(pytz.timezone('US/Mountain')),
+                        who_edited=post_data['super_badge'],
+                        accept=True,
+                        super_stamp=post_data['super_badge']
+                    )
+                    temp_m.save()
             else:
                 end = post_data['end_time']
                 end = parser.parse(end)
@@ -225,22 +233,26 @@ class trackerManager(models.Manager):
                 start = post_data['start_time']
                 start = parser.parse(start)
                 start = start.replace(tzinfo=pytz.utc)
-                total = end - start
-                total = total / timedelta(hours=1)
+                if start > end:
+                    errors.append('Start Time needs to be less than End Time')
+                    return errors
+                else:
+                    total = end - start
+                    total = total / timedelta(hours=1)
 
-                temp_t = Training_Time(
-                    name=post_data['name'],
-                    start_time=start,
-                    end_time=end,
-                    total_time=total,
-                    completed=True,
-                    auth_employee_id=post_data['badge_id'],
-                    edited_at=dt.now(pytz.timezone('US/Mountain')),
-                    who_edited=post_data['super_badge'],
-                    accept=True,
-                    super_stamp=post_data['super_badge']
-                )
-                temp_t.save()
+                    temp_t = Training_Time(
+                        name=post_data['name'],
+                        start_time=start,
+                        end_time=end,
+                        total_time=total,
+                        completed=True,
+                        auth_employee_id=post_data['badge_id'],
+                        edited_at=dt.now(pytz.timezone('US/Mountain')),
+                        who_edited=post_data['super_badge'],
+                        accept=True,
+                        super_stamp=post_data['super_badge']
+                    )
+                    temp_t.save()
 
 # THIS ALLOWS PEOPLE ACcESS TO THE PRODUCTIVITY TRACKER
 class Auth_Employee(models.Model):
