@@ -273,11 +273,19 @@ def silver_soft_savings_analysis(servicenum):
     finally:
         DB.close_connection()
 
-    results['account'] = DB.query_results[0][4:]
+    try:
+        results['account'] = DB.query_results[0][4:]
+
+    except Exception as e:
+        pass
+
+    finally:
+        results['account'] = []
 
     if len(results['account']) == 0:
-        results['error'] = '{} is not a valid service number or the associated ' \
-                           'Solar Project has been cancelled.'.format(servicenum)
+        results['error'] = '{} is not a valid service number, the associated ' \
+                           'Solar Project has been cancelled, or the Utility Tariff '\
+                           'could not be determined.'.format(servicenum)
         return results
     elif DB.query_results[0][0] < 12:
         results['error'] = '{} has not been PTO\'d for at least 12 months!'.format(servicenum)
