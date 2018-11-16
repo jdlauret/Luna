@@ -202,10 +202,10 @@ class trackerManager(models.Manager):
             elif post_data['type'] == 'meeting':
                 end = post_data['end_time']
                 end = parser.parse(end)
-                end = end.replace(tzinfo=pytz.utc)
+                end = end.replace(tzinfo=tz)
                 start = post_data['start_time']
                 start = parser.parse(start)
-                start = start.replace(tzinfo=pytz.utc)
+                start = start.replace(tzinfo=tz)
                 if start > end:
                     errors.append('Start Time needs to be less than End Time')
                     return errors
@@ -229,10 +229,10 @@ class trackerManager(models.Manager):
             else:
                 end = post_data['end_time']
                 end = parser.parse(end)
-                end = end.replace(tzinfo=pytz.utc)
+                end = end.replace(tzinfo=tz)
                 start = post_data['start_time']
                 start = parser.parse(start)
-                start = start.replace(tzinfo=pytz.utc)
+                start = start.replace(tzinfo=tz)
                 if start > end:
                     errors.append('Start Time needs to be less than End Time')
                     return errors
