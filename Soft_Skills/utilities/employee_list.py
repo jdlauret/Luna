@@ -1,10 +1,12 @@
 import os
 import datetime as dt
 from BI.data_warehouse.connector import Snowflake
+from Soft_Skills.models import Employee_List as elist
 
 main_dir = os.getcwd()
 soft_dir = os.path.join(main_dir, 'Soft_Skills')
 utilities_dir = os.path.join(soft_dir, 'utilities')
+
 
 def employee_list():
 	DB = Snowflake()
@@ -14,7 +16,7 @@ def employee_list():
 	try:
 		DB.open_connection()
 		with open(os.path.join(utilities_dir, 'employee_list.sql'), 'r') as file:
-			sql=file.read().split(';')
+			sql = file.read().split(';')
 		DB.execute_query(sql[0])
 		results = DB.query_results
 		if len(results) == 0:
@@ -38,11 +40,12 @@ def employee_list():
 	# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	for j, value in enumerate(results):
-		# the_list[value[0]] = value
-		
-
-
-
+		try:
+			elist.objects.get()
+			elist.objects.create(badge_id=value[1], name=value[0], business_title=value[2],
+			                             supervisor_badge=value[3], supervisor_name=value[4], hire_date=value[5],
+			                             team=value[6], sub_team=value[7], tier=value[8], terminated=False,
+			                             created_at=dt.datetime.now(), edited_at=dt.datetime.now()).save()
 
 	return the_list
 
