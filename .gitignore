@@ -65,3 +65,5 @@ Luna_Django/credentials/
 Luna/credentials/
 
 Luna_Dev_Server\.exe
+
+Luna_Django/settings\.py
