@@ -161,7 +161,7 @@ class Employee_List(models.Model):
 	supervisor_name = models.CharField(max_length=200)
 	hire_date = models.DateTimeField(null=True)
 	team = models.CharField(max_length=200)
-	sub_team = models.CharField(max_length=200)
+	sub_team = models.CharField(max_length=200, null=True)
 	tier = models.CharField(max_length=200)
 	terminated = models.BooleanField(default=False)
 	created_at = models.DateTimeField(auto_now_add=True, blank=True)

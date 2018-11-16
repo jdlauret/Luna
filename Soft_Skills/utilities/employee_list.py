@@ -1,5 +1,7 @@
 import os
 import datetime as dt
+import pytz
+from django.core.exceptions import ObjectDoesNotExist
 from BI.data_warehouse.connector import Snowflake
 from Soft_Skills.models import Employee_List as elist
 
@@ -19,6 +21,7 @@ def employee_list():
 			sql = file.read().split(';')
 		DB.execute_query(sql[0])
 		results = DB.query_results
+
 		if len(results) == 0:
 			the_list['error'] = 'List is not generating, please check is SQL is correct'
 			return the_list
@@ -39,14 +42,19 @@ def employee_list():
 	# value[8]: tier
 	# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+	now = dt.datetime.now()
+	now = now.replace(tzinfo=pytz.timezone('US/Mountain'))
+
 	for j, value in enumerate(results):
+		# IF BADGE ID IS FOUND IN EMPLOYEE_LIST
 		try:
-			elist.objects.get()
+			elist.objects.get(badge_id=value[1])
+		# IF BADGE ID IS NOT FOUND IN EMPLOYEE_LIST
+		except ObjectDoesNotExist:
 			elist.objects.create(badge_id=value[1], name=value[0], business_title=value[2],
-			                             supervisor_badge=value[3], supervisor_name=value[4], hire_date=value[5],
-			                             team=value[6], sub_team=value[7], tier=value[8], terminated=False,
-			                             created_at=dt.datetime.now(), edited_at=dt.datetime.now()).save()
+			                     supervisor_badge=value[3], supervisor_name=value[4], hire_date=value[5],
+			                     team=value[6], sub_team=value[7], tier=value[8], terminated=False,
+			                     created_at=now, edited_at=now.save()
+			                     )
 
-	return the_list
-
-# work on building employee list
+	return 'Added New Users'

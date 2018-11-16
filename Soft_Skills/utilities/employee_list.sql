@@ -18,6 +18,8 @@ SELECT
         THEN 'RECs ' || CHR(38) || ' Rebates'
         WHEN wd.business_title LIKE 'Resolution - %'
         THEN 'Resolution'
+        WHEN wd.business_title LIKE 'Customer Resolutions%'
+        THEN 'Resolution'
         WHEN wd.business_title LIKE 'Transfer - %'
         THEN 'Transfer'
         ELSE 'Other'
@@ -55,6 +57,8 @@ SELECT
         THEN 'Specialist 3'
         WHEN wd.business_title LIKE '% - Team Lead%'
         THEN 'Team Lead'
+        WHEN wd.business_title LIKE '%Project Specialist%'
+        THEN 'Project Specialist'
     END AS tier
 FROM
     hr.t_employee wd
