@@ -25,9 +25,7 @@ def employee_list():
 	finally:
 		DB.close_connection()
 
-	for j, value in enumerate(results):
-		the_list[value[0]] = value
-
+	# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	# value[0]: Name
 	# value[1]: badge id
 	# value[2]: business title
@@ -37,6 +35,15 @@ def employee_list():
 	# value[6]: Team
 	# value[7]: Sub team
 	# value[8]: tier
+	# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	for j, value in enumerate(results):
+		# the_list[value[0]] = value
+		
+
+
+
+
 	return the_list
 
 # work on building employee list
