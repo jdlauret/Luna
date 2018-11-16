@@ -141,6 +141,8 @@
                             <td>{{ completed.end_time }}</td>
                             {% if completed.accept == True %}
                                 <td>Accepted</td>
+                            {% elif completed.super_stamp == NULL %}
+                                <td>Supervisor approval needed</td>
                             {% else %}
                                 <td>Rejected</td>
                             {% endif %}
