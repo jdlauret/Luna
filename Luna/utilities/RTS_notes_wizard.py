@@ -5,11 +5,11 @@ main_dir = os.getcwd()
 luna_dir = os.path.join(main_dir, 'Luna')
 utilities_dir = os.path.join(luna_dir, 'utilities')
 
-DB = Snowflake()
-DB.set_user('MACK_DAMAVANDI')
-DB.set_user('MACK_DAMAVANDI')
 
 def notes_wizard (servicenum):
+    DB = Snowflake()
+    DB.set_user('MACK_DAMAVANDI')
+
     install_notes = {
         'account_info': {},
         'arrays': {},
