@@ -144,9 +144,9 @@
 }
 
 .sidebar-nav li a:hover, .sidebar-nav li a:active, .sidebar-nav li a:focus, .sidebar-nav li.open a:hover, .sidebar-nav li.open a:active, .sidebar-nav li.open a:focus {
-    color: white;
+    color: #484848;
     text-decoration: none;
-    background-color: transparent;
+    background-color: white;
 }
 
 .sidebar-nav > .sidebar-brand {
