@@ -1,5 +1,6 @@
 import os
 from BI.data_warehouse.connector import Snowflake
+from BI.luna_db.connector import Postgres
 from coin.models import employee_id
 
 # MAIN_DIR = os.path.dirname(os.path.realpath(__file__))
@@ -9,10 +10,15 @@ main_dir = os.getcwd()
 coin_dir = os.path.join(main_dir, 'coin')
 utilities_dir = os.path.join(coin_dir, 'utilities')
 
-DB = Snowflake()
-DB.set_user('MACK_DAMAVANDI')
+
+# TODO NEED TO PUT THIS INTO THE AUTOMATOR
 
 def terminated_user():
+    DB = Snowflake()
+    DB.set_user('MACK_DAMAVANDI')
+    luna = Postgres()
+    luna.set_user('POSTGRES_HOST')
+
     # log_file_path = os.path.join(CREATED_DIR, 'date_terminated.json')
     # with open(log_file_path) as infile:
     #     log_file = json.load(infile)

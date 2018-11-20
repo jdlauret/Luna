@@ -15,8 +15,8 @@
         <div class="form-group" style="display:inline-block;">
             <label for="supervisor_list">Supervisor</label>
             <select multiple class="form-control" id="supervisor_list" style="height:400px; width:250px;">
-                {% for key, value in employee_list.items %}
-                    <option>{{ value.4 }}</option>
+                {% for key, value in supervisor_list.items %}
+                    <option value="{{ key }}">{{ value }}</option>
                 {% endfor %}
             </select>
         </div>

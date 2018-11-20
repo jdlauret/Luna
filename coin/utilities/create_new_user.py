@@ -1,10 +1,8 @@
 import os
 import datetime as dt
 from BI.data_warehouse.connector import Snowflake
+from BI.luna_db.connector import Postgres
 from coin.models import employee_id
-#
-# MAIN_DIR = os.path.dirname(os.path.realpath(__file__))
-# CREATED_DIR = os.path.join(MAIN_DIR, 'logs')
 
 main_dir = os.getcwd()
 coin_dir = os.path.join(main_dir, 'coin')
@@ -15,6 +13,11 @@ DB.set_user('MACK_DAMAVANDI')
 
 
 def new_user():
+    DB = Snowflake()
+    DB.set_user('MACK_DAMAVANDI')
+    luna = Postgres()
+    luna.set_user('POSTGRES_HOST')
+
     # log_file_path = os.path.join(CREATED_DIR, 'created_id.json')
     # with open(log_file_path) as infile:
     #     log_file = json.load(infile)

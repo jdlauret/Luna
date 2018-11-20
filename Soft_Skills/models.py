@@ -173,3 +173,5 @@ class Agent_Skills(models.Model):
 	skill_id = models.ForeignKey(Career_Path, on_delete=models.CASCADE)
 	created_at = models.DateTimeField(auto_now_add=True, blank=True)
 	edited_at = models.DateTimeField(null=True)
+
+# TODO CREATE QUERY FROM SNOWFLAKE, PULL THE SUPERVISOR LIST AND THEN SET VALUE TO BADGE ID
