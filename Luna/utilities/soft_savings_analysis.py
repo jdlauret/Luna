@@ -248,12 +248,15 @@ def soft_savings_analysis(servicenum, startdate, enddate):
 
 
 def silver_soft_savings_analysis(servicenum):
+    DB = Snowflake()
+    DB.set_user('MACK_DAMAVANDI')
     results = {}
 
     # if enddate < startdate:
     #     results = {'error': 'The start date you entered ({}) must come before the end date you entered ({}).'.format(startdate.strftime('%Y-%m-%d'), enddate.strftime('%Y-%m-%d'))}
     #     return results
-
+    if not isinstance(servicenum, str):
+        servicenum = str(servicenum)
     if 'S-' in servicenum.upper():
         servicenum = servicenum.upper().replace('S-', '')
 
@@ -277,9 +280,6 @@ def silver_soft_savings_analysis(servicenum):
         results['account'] = DB.query_results[0][4:]
 
     except Exception as e:
-        pass
-
-    finally:
         results['account'] = []
 
     if len(results['account']) == 0:
