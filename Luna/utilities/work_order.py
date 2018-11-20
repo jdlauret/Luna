@@ -20,8 +20,8 @@ def work_order(servicenum):
         with open(os.path.join(utilities_dir, 'work_order.sql'), 'r') as file:
             sql = file.read()
         sql = sql.split(';')
-        DW.execute_query(sql[0].format(service_number=str(servicenum)))
-        account_information = DW.query_results[0]
+        DB.execute_query(sql[0].format(service_number=str(servicenum)))
+        account_information = DB.query_results[0]
         install_notes['account_info'] = account_information
         if len(account_information) == 0:
             install_notes['error'] = '{} is not a valid service number.'.format(servicenum)
@@ -32,8 +32,8 @@ def work_order(servicenum):
         return install_notes
 
     try:
-        DW.execute_query(sql[1] % {'service_number': str(servicenum)})
-        info = DW.query_results[0]
+        DB.execute_query(sql[1] % {'service_number': str(servicenum)})
+        info = DB.query_results[0]
 
         if len(info) == 0:
             install_notes['error'] = 'There was no Installation Notes and ' \
