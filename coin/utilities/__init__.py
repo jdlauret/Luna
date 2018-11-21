@@ -3,6 +3,7 @@ from BI.data_warehouse.connector import Snowflake
 DB = Snowflake()
 DB.set_user('MACK_DAMAVANDI')
 
+
 def find_badge_id(email):
     try:
         DB.open_connection()

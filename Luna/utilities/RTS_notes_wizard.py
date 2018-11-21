@@ -19,7 +19,7 @@ def notes_wizard (servicenum):
     }
 
     if 'S-' in servicenum.upper():
-        servicenum = servicenum.upper().replace('S-' , '')
+        servicenum = servicenum.upper().replace('S-', '')
 
     try:
         DB.open_connection()
