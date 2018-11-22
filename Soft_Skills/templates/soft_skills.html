@@ -12,25 +12,30 @@
     <body>
     <div class="top_pane"><h3 style="color: white;">Employee Soft Skills</h3></div>
     <div class="main">
-        <div class="form-group" style="display:inline-block;">
-            <label for="supervisor_list">Supervisor</label>
-            <select multiple class="form-control" id="supervisor_list" style="height:400px; width:250px;">
-                {% for key, value in supervisor_list.items %}
-                    <option value="{{ key }}">{{ value }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <div class="form-group" style="display:inline-block; vertical-align: top;">
-            <label for="employee_list">Employee</label>
-            <select multiple class="form-control" id="employee_list" style="height:400px; width: 250px;">
-                {% for key, value in employee_list.items %}
-                    <option>{{ value.0 }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <div id="submit_button" style="display: inline-block; vertical-align: top;">
-            <input type="submit">
-        </div>
+        <form action="/Soft_Skills/" method="POST">
+            {% csrf_token %}
+            <div class="form-group" style="display:inline-block;">
+                <label for="supervisor_list">Supervisor</label>
+                <select multiple class="form-control" id="supervisor_list" style="height:400px; width:250px;">
+                    {% for key, values in supervisor_list.items %}
+                        <option value={{ key }}>{{ values }}</option>
+                    {% endfor %}
+                </select>
+                <div id="submit_button" style="display: inline-block; vertical-align: top;">
+                    <input type="submit">
+                </div>
+            </div>
+        </form>
+    </div>
+    {#        <div class="form-group" style="display:inline-block; vertical-align: top;">#}
+    {#            <label for="employee_list">Employee</label>#}
+    {#            <select multiple class="form-control" id="employee_list" style="height:400px; width: 250px;">#}
+    {#                {% for key, value in employee_list.items %}#}
+    {#                    <option>{{ value.0 }}</option>#}
+    {#                {% endfor %}#}
+    {#            </select>#}
+    {#        </div>#}
+
     </div>
     </body>
     </html>

@@ -98,7 +98,7 @@ DATABASES = {
         'HOST': 'luna-prod.cfjzwtytsd7q.us-west-2.rds.amazonaws.com',
         'PORT': '5432',
         'USER': os.environ.get('POSTGRES_USER'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD')
+        'PASSWORD': os.environ.get('POSTGRES_PASS')
     }
 }
 
