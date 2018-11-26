@@ -3,6 +3,9 @@ from django.utils.safestring import mark_safe
 from datetime import date
 from dateutil.relativedelta import relativedelta
 
+YES_OR_NO = [('y', 'Yes'),
+             ('n', 'No')]
+
 
 class DateInput(forms.DateInput):
     input_type = 'date'
@@ -35,6 +38,8 @@ class SystemPerformanceForm(forms.Form):
 
 class SoftSavingsForm(forms.Form):
     service_number = forms.CharField(label='Service Number:', max_length=20, required=True)
+
+    subsidized = forms.ChoiceField(label='CARE Customer:', required=True, choices=YES_OR_NO, widget=forms.RadioSelect())
     # start_date = forms.DateField(label='Start Date:',
     #                              required=True,
     #                              widget=forms.TextInput(attrs={
@@ -48,11 +53,14 @@ class SoftSavingsForm(forms.Form):
     #                                'width': '100%',
     #                            }))
 
+
 class RTSForm(forms.Form):
     service_number = forms.CharField(label='Service Number:', max_length=20, required=True)
 
+
 class CSForm(forms.Form):
     service_number = forms.CharField(label='Service Number:', max_length=20, required=True)
+
 
 class FullBenefitForm(forms.Form):
     month = previous_month_end().replace(
