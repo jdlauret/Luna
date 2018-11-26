@@ -14,9 +14,9 @@ calculator_patterns = [
     url(r'^RTS_notes/$', views.RTS_notes),
     url(r'^removal_reinstall/$', views.removal_reinstall),
     url(r'^removal_reinstall/pdf$', views.removal_reinstall_print, name='Work Order Notes'),
-    url(r'^Customer_Solutions/$', views.customer_solutions),
-    url(r'^Customer_Solutions_buyout/pdf$', views.customer_solutions_buyout, name='Customer Solutions buyout'),
-    url(r'^Customer_Solutions_prepayment/pdf$', views.customer_solutions_prepayment, name='Customer Solutions prepayment'),
+    # url(r'^Customer_Solutions/$', views.customer_solutions),
+    # url(r'^Customer_Solutions_buyout/pdf$', views.customer_solutions_buyout, name='Customer Solutions buyout'),
+    # url(r'^Customer_Solutions_prepayment/pdf$', views.customer_solutions_prepayment, name='Customer Solutions prepayment'),
 ]
 
 automation_patterns =[
@@ -27,8 +27,8 @@ automation_patterns =[
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^career_path/$', views.career_path, name='career_path'),
-    url(r'^login/$', auth_views.login, name='login'),
-    url(r'^logout/$', auth_views.logout, name='logout'),
+    url(r'^login/$', auth_views.LoginView, name='login'),
+    url(r'^logout/$', auth_views.LogoutView, name='logout'),
     path('calculators/', include(calculator_patterns)),
     path('automation/', include(automation_patterns)),
 ]

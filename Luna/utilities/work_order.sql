@@ -10,8 +10,8 @@ SELECT
 FROM VSLR.RPT.T_PROJECT AS T
 INNER JOIN VSLR.RPT.T_CONTACT AS C
       ON C.CONTACT_ID = T.CONTRACT_SIGNER
-      WHERE T.SERVICE_NUMBER = '{service_number}';
-
+      WHERE T.SERVICE_NUMBER = '{service_number}'
+      ;
 SELECT
     -- For now, Brescia is okay with just listing tilt and azimuth for all roof sections, comma-separated
     -- Long-term, she'd like it to reflect the roof sections listed in the Roof Section(s) field of the Removal Case (currently missing from t_case)
@@ -23,7 +23,8 @@ SELECT
       , ca.case_number
       , pr.roc_name
       , pr.pto_awarded IS NOT NULL AS is_post_pto
-      , pr.service_number -- Might want service_name instead
+      , pr.service_number
+      -- Might want service_name instead
       , pr.service_name
       , cad.system_size_actual_kw
       , NVL(cad.total_modules_actual, cad.total_modules_designed) AS total_modules
@@ -45,4 +46,5 @@ ON  pr.primary_cad = cad.cad_id
 -- Left instead of INNER because some CADs don't have any roof sections listed
 LEFT OUTER JOIN rpt.v_cad_roof_configurations rc ON  pr.primary_cad = rc.cad_id
 WHERE ca.record_type = 'Solar - Panel Removal'
-AND PR.SERVICE_NUMBER = '{service_number}';
+AND PR.SERVICE_NUMBER = '%(service_number)s'
+;

@@ -501,7 +501,7 @@ def edit_project(request):
     end_time = request.POST['end_time']
     end_time = parser.parse(end_time)
     end_time = end_time.replace(tzinfo=pytz.timezone('US/Mountain'))
-    project = Project_Time.objects.get(id=int(request.POST['id']))
+    project = Project_Time.objects.get(id=int(request.POST['id'])).order_by('created_at')
     accept = request.POST['accept']
     who_approved_name = Auth_Employee.objects.get(badge_id=request.POST['who_approved_by'])
     total = end_time - start_time

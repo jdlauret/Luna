@@ -6,6 +6,8 @@ urlpatterns = [
     url(r'^$', views.index),
     url(r'^global$', views.index, name="global"),
     url(r'^agent$', views.agent, name="agent_view"),
+    url(r'^new_user$', views.create_new_user_button, name="new_user"),
+    url(r'^terminated_user$', views.terminated_user_button, name="terminated_user"),
     url(r'^transaction', views.transactions, name="transaction_view"),
     url(r'^submit_transaction', views.submit_transaction, name="submit_transaction"),
     url(r'^overlord_view$', views.overlord_view, name="overlord"),

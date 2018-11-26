@@ -5,11 +5,11 @@ main_dir = os.getcwd()
 luna_dir = os.path.join(main_dir, 'Luna')
 utilities_dir = os.path.join(luna_dir, 'utilities')
 
-DB = Snowflake()
-DB.set_user('MACK_DAMAVANDI')
-DB.set_user('MACK_DAMAVANDI')
 
 def notes_wizard (servicenum):
+    DB = Snowflake()
+    DB.set_user('MACK_DAMAVANDI')
+
     install_notes = {
         'account_info': {},
         'arrays': {},
@@ -19,7 +19,7 @@ def notes_wizard (servicenum):
     }
 
     if 'S-' in servicenum.upper():
-        servicenum = servicenum.upper().replace('S-' , '')
+        servicenum = servicenum.upper().replace('S-', '')
 
     try:
         DB.open_connection()
@@ -47,7 +47,7 @@ def notes_wizard (servicenum):
         # Execute second query results
         DB.execute_query(sql[1].format(service_number=str(servicenum)))
         # Second query results
-        roof_section_columns = DB.query_columns
+        roof_section_columns = DB.column_names
         roof_section_info = DB.query_results[0]
 
         # error message when no installation notes are pulled up

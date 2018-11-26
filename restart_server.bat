@@ -1,1 +1,1 @@
-cd C:\Luna_Production\venv\Scripts & activate & cd C:\Luna_Production & python-by-name_production.bat Luna_Production_Server manage.py runserver 0:80 --noreload
+cd C:\Luna_Production\venv\Scripts & activate & cd C:\Luna_Production & python-by-name_production.bat Luna_Production_Server manage.py runserver 10.30.4.83:80 --noreload --settings=no_debug_settings

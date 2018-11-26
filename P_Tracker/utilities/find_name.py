@@ -1,19 +1,18 @@
-from models import SnowflakeConsole, SnowFlakeDW
+from BI.data_warehouse.connector import Snowflake
 
-DB = SnowFlakeDW()
-DB.set_user('MACK_DAMAVANDI')
 
 def find_name(badge):
+    db = Snowflake()
+    db.set_user('MACK_DAMAVANDI')
     try:
-        DB.open_connection()
-        DW = SnowflakeConsole(DB)
+        db.open_connection()
 
-        DW.execute_query('''SELECT FULL_NAME
-                                FROM VSLR.HR.T_EMPLOYEE
-                                WHERE BADGE_ID = %s''',
+        db.execute_query('''SELECT FULL_NAME
+                            FROM VSLR.HR.T_EMPLOYEE
+                            WHERE BADGE_ID = %s''',
                          bindvars=[badge])
-        results = DW.query_results[0][0]
+        results = db.query_results[0][0]
     finally:
-        DB.close_connection()
+        db.close_connection()
 
     return results

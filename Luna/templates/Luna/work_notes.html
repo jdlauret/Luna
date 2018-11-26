@@ -194,7 +194,7 @@ Number of modules: {{ form_response.total_modules }}
 Affected Roof Sections: {{ roof_section }}
 Tilt: {{ form_response.tilt }}
 Azimuth: {{ form_response.azimuth }}
-Inverter Provider: {{ form_response.inverter }}{% if form_response.racking_type == None %}
+Inverter Provider: {{ form_response.inverter }}{% if form_response.racking_type == None or form_response.racking_type == '--None--'%}
 Racking System: [Fill this in from visual Cad also input into field on the left] {% else %}
 Racking System: {{ form_response.racking_type }}{% endif %}
 Module Type: {{ form_response.module_manufacturer }} {{ form_response.module_model }}

@@ -10,12 +10,10 @@ DB.set_user('MACK_DAMAVANDI')
 
 
 def work_order(servicenum):
-    install_notes = {
-        'account_info': {},
-    }
-
-    if 'S-' in servicenum.upper():
-        servicenum = servicenum.upper().replace('S-','')
+    install_notes = {'account_info': {}}
+    if isinstance(servicenum, str):
+        if 'S-' in servicenum.upper():
+            servicenum = servicenum.upper().replace('S-', '')
 
     try:
         DB.open_connection()
@@ -24,23 +22,31 @@ def work_order(servicenum):
         sql = sql.split(';')
         DB.execute_query(sql[0].format(service_number=str(servicenum)))
         account_information = DB.query_results[0]
-
+        install_notes['account_info'] = account_information
         if len(account_information) == 0:
             install_notes['error'] = '{} is not a valid service number.'.format(servicenum)
             return install_notes
 
     except Exception as e:
-        install_notes['error'] = 'Invalid Service Number'
+        install_notes['error'] = e
         return install_notes
 
     try:
-        DB.execute_query(sql[1].format(service_number=str(servicenum)))
+        DB.execute_query(sql[1] % {'service_number': str(servicenum)})
         info = DB.query_results[0]
+
+        if len(info) == 0:
+            install_notes['error'] = 'There was no Installation Notes and ' \
+                               'Information found for Service Number {}'.format(servicenum)
+            return install_notes
+
+    except Exception as e:
+        install_notes['error'] = e
+        return install_notes
 
     finally:
         DB.close_connection()
 
-    install_notes['account_info'] = account_information
     install_notes['organization'] = info[0]
     install_notes['case_number'] = info[1]
     install_notes['roc_name'] = info[2]
@@ -57,4 +63,5 @@ def work_order(servicenum):
     install_notes['racking_type'] = info[13]
     install_notes['module_manufacturer'] = info[14]
     install_notes['module_model'] = info[15]
+
     return install_notes
