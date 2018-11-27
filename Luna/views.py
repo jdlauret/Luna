@@ -394,6 +394,7 @@ def soft_savings_calculator(request):
             if form.is_valid():
 
                 service_number = form.cleaned_data['service_number']
+                subsidized = form.cleaned_data['subsidized']
                 # start_date = form.cleaned_data['start_date']
                 # end_date = form.cleaned_data['end_date']
                 # TODO pass parameters to Mack's function
@@ -405,7 +406,7 @@ def soft_savings_calculator(request):
                     'legal_footer': print_page_legal_footer,
                 }
                 try:
-                    results = silver_soft_savings_analysis(str(service_number))
+                    results = silver_soft_savings_analysis(str(service_number), subsidized)
                     context['form_response'] = results
                 except Exception as e:
                     context['form_response_complete'] = False
@@ -445,6 +446,7 @@ def soft_savings_print(request):
             form = SoftSavingsForm(request.POST)
             if form.is_valid():
                 service_number = form.cleaned_data['service_number']
+                subsidized = form.cleaned_data['subsidized']
                 # start_date = form.cleaned_data['start_date']
                 # end_date = form.cleaned_data['end_date']
                 # TODO pass parameters to Mack's function
@@ -456,7 +458,7 @@ def soft_savings_print(request):
                     'legal_footer': print_page_legal_footer,
                 }
                 try:
-                    results = silver_soft_savings_analysis(str(service_number))
+                    results = silver_soft_savings_analysis(str(service_number), subsidized)
                     context['form_response'] = results
                 except Exception as e:
                     context['form_response_complete'] = False
