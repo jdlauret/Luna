@@ -21,8 +21,8 @@
                                 {% if field.errors %}
                                     <td>{{ field.errors }}</td>
                                 {% endif %}
-                                <td><label for="{{ field.id_for_label }}">{{ field.label }} </label></td>
-                                <td colspan="2">{{ field }}</td>
+                                <td><label for="{{ field.id_for_label }}" title="{{ field.help_text }}">{{ field.label }} </label></td>
+                                <td colspan="2" title="{{ field.help_text }}">{{ field }}</td>
                             </tr>
                         {% endfor %}
                         <tr>
