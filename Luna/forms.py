@@ -3,8 +3,8 @@ from django.utils.safestring import mark_safe
 from datetime import date
 from dateutil.relativedelta import relativedelta
 
-YES_OR_NO = [('y', 'Yes'),
-             ('n', 'No')]
+YES_OR_NO = [(True, 'Yes'),
+             (False, 'No')]
 
 
 class DateInput(forms.DateInput):
