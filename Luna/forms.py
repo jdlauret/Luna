@@ -3,8 +3,8 @@ from django.utils.safestring import mark_safe
 from datetime import date
 from dateutil.relativedelta import relativedelta
 
-YES_OR_NO = [('y', 'Yes'),
-             ('n', 'No')]
+YES_OR_NO = [(True, 'Yes'),
+             (False, 'No')]
 
 
 class DateInput(forms.DateInput):
@@ -39,7 +39,9 @@ class SystemPerformanceForm(forms.Form):
 class SoftSavingsForm(forms.Form):
     service_number = forms.CharField(label='Service Number:', max_length=20, required=True)
 
-    subsidized = forms.ChoiceField(label='CARE Customer:', required=True, choices=YES_OR_NO, widget=forms.RadioSelect())
+    subsidized = forms.BooleanField(label='CARE Customer:',
+                                    help_text='Click here if the customer is on a CARE plan in California',
+                                    required=False)
     # start_date = forms.DateField(label='Start Date:',
     #                              required=True,
     #                              widget=forms.TextInput(attrs={

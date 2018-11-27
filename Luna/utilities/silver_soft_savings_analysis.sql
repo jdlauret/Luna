@@ -48,40 +48,42 @@ case
   when billed_year_kwh >= 0 then st.year_0_kwh + ((st.year_1000_kwh-st.year_0_kwh)/1000)
 end subsidized_pre_solar_year_cost_per_kwh,
 
-iff(
-contains(upper(utility_schedule_rate),'CAR') OR
-contains(upper(utility_schedule_rate),'DRLI') OR
-contains(upper(utility_schedule_rate),'FERA') OR
-contains(upper(utility_schedule_rate),'R-2') OR
-contains(upper(utility_schedule_rate),'R2') OR
-contains(upper(utility_schedule_rate),'RS R-2') OR
-contains(upper(utility_schedule_rate),'R 2') OR
-contains(upper(utility_schedule_rate),'RS LI R-2') OR
-contains(upper(utility_schedule_rate),'NG R-2') OR
-contains(upper(utility_schedule_rate),'RLI R-2') OR
-contains(upper(utility_schedule_rate),'R-2 LI') OR
-contains(upper(utility_schedule_rate),'RLI 2') OR
-contains(upper(utility_schedule_rate),'R LI R-2') OR
-contains(upper(utility_schedule_rate),'R-2 RES LI') OR
-contains(upper(utility_schedule_rate),'RESLOWINR2') OR
-contains(upper(utility_schedule_rate),'RLI R2') OR
-contains(upper(utility_schedule_rate),'LOW R-2') OR
-contains(upper(utility_schedule_rate),'R-2 LOW IN') OR
-contains(upper(utility_schedule_rate),'R L I R2') OR
-contains(upper(utility_schedule_rate),'A2 R2') OR
-contains(upper(utility_schedule_rate),'A2') OR
-contains(upper(utility_schedule_rate),'A-2') OR
-contains(upper(utility_schedule_rate),'A2 ASSIST') OR
-contains(upper(utility_schedule_rate),'A2 RES') OR
-contains(upper(utility_schedule_rate),'A3') OR
-contains(upper(utility_schedule_rate),'A2-RES') OR
-contains(upper(utility_schedule_rate),'A2-RS') OR
-contains(upper(utility_schedule_rate),'A2-R') OR
-contains(upper(utility_schedule_rate),'A2 R') OR
-contains(upper(utility_schedule_rate),'A2-RA') OR
-contains(upper(utility_schedule_rate),'A2 RA') OR
-contains(upper(utility_schedule_rate),'A2 - RA') OR
-contains(upper(utility_schedule_rate),'A2 RASSIST'),true,false) is_utility_schedule_care,
+-- iff(
+-- contains(upper(utility_schedule_rate),'CAR') OR
+-- contains(upper(utility_schedule_rate),'DRLI') OR
+-- contains(upper(utility_schedule_rate),'FERA') OR
+-- contains(upper(utility_schedule_rate),'R-2') OR
+-- contains(upper(utility_schedule_rate),'R2') OR
+-- contains(upper(utility_schedule_rate),'RS R-2') OR
+-- contains(upper(utility_schedule_rate),'R 2') OR
+-- contains(upper(utility_schedule_rate),'RS LI R-2') OR
+-- contains(upper(utility_schedule_rate),'NG R-2') OR
+-- contains(upper(utility_schedule_rate),'RLI R-2') OR
+-- contains(upper(utility_schedule_rate),'R-2 LI') OR
+-- contains(upper(utility_schedule_rate),'RLI 2') OR
+-- contains(upper(utility_schedule_rate),'R LI R-2') OR
+-- contains(upper(utility_schedule_rate),'R-2 RES LI') OR
+-- contains(upper(utility_schedule_rate),'RESLOWINR2') OR
+-- contains(upper(utility_schedule_rate),'RLI R2') OR
+-- contains(upper(utility_schedule_rate),'LOW R-2') OR
+-- contains(upper(utility_schedule_rate),'R-2 LOW IN') OR
+-- contains(upper(utility_schedule_rate),'R L I R2') OR
+-- contains(upper(utility_schedule_rate),'A2 R2') OR
+-- contains(upper(utility_schedule_rate),'A2') OR
+-- contains(upper(utility_schedule_rate),'A-2') OR
+-- contains(upper(utility_schedule_rate),'A2 ASSIST') OR
+-- contains(upper(utility_schedule_rate),'A2 RES') OR
+-- contains(upper(utility_schedule_rate),'A3') OR
+-- contains(upper(utility_schedule_rate),'A2-RES') OR
+-- contains(upper(utility_schedule_rate),'A2-RS') OR
+-- contains(upper(utility_schedule_rate),'A2-R') OR
+-- contains(upper(utility_schedule_rate),'A2 R') OR
+-- contains(upper(utility_schedule_rate),'A2-RA') OR
+-- contains(upper(utility_schedule_rate),'A2 RA') OR
+-- contains(upper(utility_schedule_rate),'A2 - RA') OR
+-- contains(upper(utility_schedule_rate),'A2 RASSIST'),true,false) is_utility_schedule_care,
+
+{true_or_false} is_utility_schedule_care,
 
   p.service_name,
   c.full_name,
@@ -92,7 +94,7 @@ contains(upper(utility_schedule_rate),'A2 RASSIST'),true,false) is_utility_sched
   p.service_zip_code,
   date_trunc(day, p.start_billing),
   iff(is_utility_schedule_care and p.service_state = 'CA', p.utility_company||' - CARE', p.utility_company) utility_company,
-  iff(cm.month_cnt = 12, iff(is_utility_schedule_care, subsidized_pre_solar_year_cost_per_kwh, pre_solar_year_cost_per_kwh), null),
+  iff(cm.month_cnt = 12, iff(is_utility_schedule_care and p.service_state = 'CA', subsidized_pre_solar_year_cost_per_kwh, pre_solar_year_cost_per_kwh), null),
   ct.record_type
 from rpt.t_contact c,
   (
@@ -272,40 +274,41 @@ case
   when billed_year_kwh >= 0 then st.year_0_kwh + (billed_year_kwh*(st.year_1000_kwh-st.year_0_kwh)/1000)
 end subsidized_pre_solar_year_cost,
 
-iff(
-contains(upper(utility_schedule_rate),'CAR') OR
-contains(upper(utility_schedule_rate),'DRLI') OR
-contains(upper(utility_schedule_rate),'FERA') OR
-contains(upper(utility_schedule_rate),'R-2') OR
-contains(upper(utility_schedule_rate),'R2') OR
-contains(upper(utility_schedule_rate),'RS R-2') OR
-contains(upper(utility_schedule_rate),'R 2') OR
-contains(upper(utility_schedule_rate),'RS LI R-2') OR
-contains(upper(utility_schedule_rate),'NG R-2') OR
-contains(upper(utility_schedule_rate),'RLI R-2') OR
-contains(upper(utility_schedule_rate),'R-2 LI') OR
-contains(upper(utility_schedule_rate),'RLI 2') OR
-contains(upper(utility_schedule_rate),'R LI R-2') OR
-contains(upper(utility_schedule_rate),'R-2 RES LI') OR
-contains(upper(utility_schedule_rate),'RESLOWINR2') OR
-contains(upper(utility_schedule_rate),'RLI R2') OR
-contains(upper(utility_schedule_rate),'LOW R-2') OR
-contains(upper(utility_schedule_rate),'R-2 LOW IN') OR
-contains(upper(utility_schedule_rate),'R L I R2') OR
-contains(upper(utility_schedule_rate),'A2 R2') OR
-contains(upper(utility_schedule_rate),'A2') OR
-contains(upper(utility_schedule_rate),'A-2') OR
-contains(upper(utility_schedule_rate),'A2 ASSIST') OR
-contains(upper(utility_schedule_rate),'A2 RES') OR
-contains(upper(utility_schedule_rate),'A3') OR
-contains(upper(utility_schedule_rate),'A2-RES') OR
-contains(upper(utility_schedule_rate),'A2-RS') OR
-contains(upper(utility_schedule_rate),'A2-R') OR
-contains(upper(utility_schedule_rate),'A2 R') OR
-contains(upper(utility_schedule_rate),'A2-RA') OR
-contains(upper(utility_schedule_rate),'A2 RA') OR
-contains(upper(utility_schedule_rate),'A2 - RA') OR
-contains(upper(utility_schedule_rate),'A2 RASSIST'),true,false) is_utility_schedule_care,
+-- iff(
+-- contains(upper(utility_schedule_rate),'CAR') OR
+-- contains(upper(utility_schedule_rate),'DRLI') OR
+-- contains(upper(utility_schedule_rate),'FERA') OR
+-- contains(upper(utility_schedule_rate),'R-2') OR
+-- contains(upper(utility_schedule_rate),'R2') OR
+-- contains(upper(utility_schedule_rate),'RS R-2') OR
+-- contains(upper(utility_schedule_rate),'R 2') OR
+-- contains(upper(utility_schedule_rate),'RS LI R-2') OR
+-- contains(upper(utility_schedule_rate),'NG R-2') OR
+-- contains(upper(utility_schedule_rate),'RLI R-2') OR
+-- contains(upper(utility_schedule_rate),'R-2 LI') OR
+-- contains(upper(utility_schedule_rate),'RLI 2') OR
+-- contains(upper(utility_schedule_rate),'R LI R-2') OR
+-- contains(upper(utility_schedule_rate),'R-2 RES LI') OR
+-- contains(upper(utility_schedule_rate),'RESLOWINR2') OR
+-- contains(upper(utility_schedule_rate),'RLI R2') OR
+-- contains(upper(utility_schedule_rate),'LOW R-2') OR
+-- contains(upper(utility_schedule_rate),'R-2 LOW IN') OR
+-- contains(upper(utility_schedule_rate),'R L I R2') OR
+-- contains(upper(utility_schedule_rate),'A2 R2') OR
+-- contains(upper(utility_schedule_rate),'A2') OR
+-- contains(upper(utility_schedule_rate),'A-2') OR
+-- contains(upper(utility_schedule_rate),'A2 ASSIST') OR
+-- contains(upper(utility_schedule_rate),'A2 RES') OR
+-- contains(upper(utility_schedule_rate),'A3') OR
+-- contains(upper(utility_schedule_rate),'A2-RES') OR
+-- contains(upper(utility_schedule_rate),'A2-RS') OR
+-- contains(upper(utility_schedule_rate),'A2-R') OR
+-- contains(upper(utility_schedule_rate),'A2 R') OR
+-- contains(upper(utility_schedule_rate),'A2-RA') OR
+-- contains(upper(utility_schedule_rate),'A2 RA') OR
+-- contains(upper(utility_schedule_rate),'A2 - RA') OR
+-- contains(upper(utility_schedule_rate),'A2 RASSIST'),true,false) is_utility_schedule_care,
+{true_or_false} is_utility_schedule_care,
 POWER(1.029,TRUNC(DATEDIFF(DAY, DATE_TRUNC('D', P.START_BILLING), DATE_TRUNC('D', cm2.start_DATE)) / 365)) escalator_factor,
 
 pre_solar_year_cost - billed_year_cost default_yearly_saving,
@@ -316,11 +319,11 @@ round(cm2.billed_wh/1000, 3) billed_kwh,
 NVL(P.RATE_PER_KWH * escalator_factor, 0) rate_per_kwh,
 round(cm2.billed_wh/1000 * NVL(P.RATE_PER_KWH * escalator_factor, 0), 2) vivint_solar_charges,
 iff(
-    is_utility_schedule_care,
+    is_utility_schedule_care and p.service_state = 'CA',
     round(cm2.billed_wh/1000 * subsidized_pre_solar_year_cost_per_kwh, 2),
     round(cm2.billed_wh/1000 * pre_solar_year_cost_per_kwh, 2)) utility_charges,
 iff(
-    is_utility_schedule_care,
+    is_utility_schedule_care and p.service_state = 'CA',
     round(cm2.billed_wh/1000 * subsidized_pre_solar_year_cost_per_kwh - (cm2.billed_wh/1000 * NVL(P.RATE_PER_KWH * escalator_factor, 0)), 2),
     round(cm2.billed_wh/1000 * pre_solar_year_cost_per_kwh - (cm2.billed_wh/1000 * NVL(P.RATE_PER_KWH * escalator_factor, 0)), 2)) savings
 from

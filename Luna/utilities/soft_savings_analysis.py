@@ -247,7 +247,7 @@ def soft_savings_analysis(servicenum, startdate, enddate):
     return results
 
 
-def silver_soft_savings_analysis(servicenum):
+def silver_soft_savings_analysis(servicenum, subsidy):
     DB = Snowflake()
     DB.set_user('MACK_DAMAVANDI')
     results = {}
@@ -266,7 +266,7 @@ def silver_soft_savings_analysis(servicenum):
             sql = file.read()
         sql = sql.split(';')
 
-        query = sql[0].format(service_number=str(servicenum))
+        query = sql[0].format(service_number=str(servicenum), true_or_false=subsidy)
         DB.execute_query(query)
 
     except Exception as e:
@@ -352,7 +352,7 @@ def silver_soft_savings_analysis(servicenum):
     # bindvars.append({'serviceNum': servicenum,
     #              'startDate': startdatestring,
     #              'endDate': enddatestring})
-    query_2 = sql[1].format(service_number=str(servicenum))  # , start_date=str(startdate), end_date=str(enddate))
+    query_2 = sql[1].format(service_number=str(servicenum), true_or_false=subsidy)  # , start_date=str(startdate), end_date=str(enddate))
     try:
         DB.execute_query(query_2)
 
