@@ -391,6 +391,7 @@ def stamp_approval(request):
 
 def edit_employee(request):
     results = Auth_Employee.objects.edit_status(request.POST)
+    print(request.POST)
     if type(results) == list:
         for err in results:
             messages.error(request, err)
