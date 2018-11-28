@@ -125,23 +125,33 @@ class trackerManager(models.Manager):
     @classmethod
     def edit_status(self, post_data):
         errors = []
-        if post_data['supervisor'] == 'null' and post_data['business_title'] == 'null':
+        if post_data['supervisor'] == 'null' and post_data['business_title'] == 'null' and post_data['terminated'] == 'False':
             errors.append('No information was selected')
             return errors
+
+        elif post_data['supervisor'] == 'null' and post_data['business_title'] == 'null' and post_data['terminated'] == 'True':
+            employee = Auth_Employee.objects.get(badge_id=post_data['badge_id'])
+            employee.terminated = True
+            employee.edited_at = dt.now(pytz.timezone('US/Mountain'))
+            employee.save()
+
         elif post_data['supervisor'] == 'null' and len(post_data['business_title']) > 0:
             employee = Auth_Employee.objects.get(badge_id=post_data['badge_id'])
             employee.business_title = post_data['business_title']
+            employee.edited_at = dt.now(pytz.timezone('US/Mountain'))
             employee.save()
 
         elif post_data['business_title'] == 'null' and len(post_data['supervisor']) > 0:
             employee = Auth_Employee.objects.get(badge_id=post_data['badge_id'])
             employee.supervisor = post_data['supervisor']
+            employee.edited_at = dt.now(pytz.timezone('US/Mountain'))
             employee.save()
 
         else:
             employee = Auth_Employee.objects.get(badge_id=post_data['badge_id'])
             employee.supervisor = post_data['supervisor']
             employee.business_title = post_data['business_title']
+            employee.edited_at = dt.now(pytz.timezone('US/Mountain'))
             employee.save()
 
     @classmethod
