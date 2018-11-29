@@ -1,6 +1,7 @@
 import os
 import datetime as dt
 from BI.data_warehouse.connector import Snowflake
+from BI.luna_db.connector import Postgres
 from coin.models import employee_id
 
 

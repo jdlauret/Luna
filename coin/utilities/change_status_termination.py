@@ -9,11 +9,14 @@ main_dir = os.getcwd()
 coin_dir = os.path.join(main_dir, 'coin')
 utilities_dir = os.path.join(coin_dir, 'utilities')
 
-DB = Snowflake()
-DB.set_user('MACK_DAMAVANDI')
+
+# TODO NEED TO PUT THIS INTO THE AUTOMATOR
 
 def terminated_user():
     agent_list = {}
+
+    DB = Snowflake()
+    DB.set_user('MACK_DAMAVANDI')
 
     try:
         DB.open_connection()
