@@ -2,7 +2,7 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.index, name="main_page"),                                                  #INDEX PAGE OR MAIN PAGE
+    url(r'^$', views.index),                                                  #INDEX PAGE OR MAIN PAGE
 
     url(r'^input_project_time$', views.input_project_time, name='input_project'),               #INPUT PROJECT TIME
     url(r'^end_project_time$', views.end_project_time, name='end_project'),                     #INPUT END TIME FOR PROJECT

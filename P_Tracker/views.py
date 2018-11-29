@@ -40,6 +40,9 @@ def index(request):
         last_date = first_date + timedelta(days=5)
         last_date = last_date.replace(hour=23, minute=59, second=59, tzinfo=pytz.timezone('US/Mountain'))
 
+        # todo, figure out a way to send warning when time entered is between an already start and end time
+        test_time = dt.datetime('2018-11-09 17:50:50.855')
+
         # Shows Daily Tracker
         stat_projects = Project_Time.objects.filter(auth_employee_id=badge, completed=True, start_time__gte=first_date,
                                                     end_time__lte=last_date, accept=True).aggregate(Sum('total_time'))[
