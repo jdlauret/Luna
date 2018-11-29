@@ -15,6 +15,9 @@ utilities_dir = os.path.join(coin_dir, 'utilities')
 def terminated_user():
     agent_list = {}
 
+    DB = Snowflake()
+    DB.set_user('MACK_DAMAVANDI')
+
     try:
         DB.open_connection()
         with open(os.path.join(utilities_dir, 'termination_list.sql'), 'r') as file:
