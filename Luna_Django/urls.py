@@ -23,8 +23,8 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     url('', include('Luna.urls'), name='luna'),
-    url(r'^login/$', auth_views.LoginView, name='login'),
-    url(r'^logout/$', auth_views.LogoutView, name='logout'),
+    url(r'^acounts/login/$', auth_views.LoginView, name='login'),
+    url(r'^accounts/logout/$', auth_views.LogoutView.as_view(), name='logout'),
     url(r'^auth/', include('social_django.urls', namespace='social')),
     url(r'^admin/', admin.site.urls),
     url(r'^coin/', include(('coin.urls', 'sharing'), namespace='sharing')), #Coin sharing URL
