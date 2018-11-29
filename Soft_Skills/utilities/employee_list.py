@@ -16,7 +16,7 @@ def employee_list():
 	DB = Snowflake()
 	DB.set_user('MACK_DAMAVANDI')
 	luna = Postgres()
-	luna.set_user('POSTGRES_HOST')
+	# luna.set_user('POSTGRES_HOST')
 
 	the_list = {}
 
@@ -54,6 +54,7 @@ def employee_list():
 	# CREATE NEW EMPLOYEES
 	# TODO CHANGE FROM .MODELS TO BI.LUNA_DB SECTION
 	# TODO UPDATE SUPERVISOR LIST IF WRONG
+	# TODO IF SUPERVISOR CHANGES, CHANGE SUPERVISOR OR TITLE
 	for j, value in enumerate(results):
 		# IF BADGE ID IS FOUND IN EMPLOYEE_LIST
 		try:
@@ -63,9 +64,9 @@ def employee_list():
 			elist.objects.create(badge_id=value[1], name=value[0], business_title=value[2],
 			                     supervisor_badge=value[3], supervisor_name=value[4], hire_date=value[5],
 			                     team=value[6], sub_team=value[7], tier=value[8], terminated=False,
-			                     created_at=now, edited_at=now.save()
+			                     created_at=now, edited_at=now
 			                     )
 	# TERMINATED SECTION
-	luna.execute_sql_command()
+	# luna.execute_sql_command()
 
 	return 'Added New Users'

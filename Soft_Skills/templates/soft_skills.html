@@ -8,6 +8,7 @@
         {% load staticfiles %}
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="{% static 'Soft_Skills/CSS/soft_skills.css' %}">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
     </head>
     <body>
     <div class="top_pane"><h3 style="color: white;">Employee Soft Skills</h3></div>
@@ -16,26 +17,29 @@
             {% csrf_token %}
             <div class="form-group" style="display:inline-block;">
                 <label for="supervisor_list">Supervisor</label>
-                <select multiple class="form-control" id="supervisor_list" style="height:400px; width:250px;">
+                <select class="form-control" id="supervisor_list" name="super_badge"
+                        style="height:400px; width:250px;" multiple>
                     {% for key, values in supervisor_list.items %}
-                        <option value={{ key }}>{{ values }}</option>
+                        <option value={{ key }} data-tokens={{ values }}>{{ values }}</option>
                     {% endfor %}
                 </select>
-                <div id="submit_button" style="display: inline-block; vertical-align: top;">
-                    <input type="submit">
+            </div>
+
+            {% if super_badge != None %}
+                <div class="form-group" style="display:inline-block; vertical-align: top;">
+                    <label for="employee_list">Employee</label>
+                    <select multiple class="form-control" id="employee_list" name="selected_employee"
+                            style="height:400px; width: 250px;">
+                        {% for value in employee_list %}
+                            <option value={{ value.badge_id }}>{{ value.name }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
+            {% endif %}
+            <div id="submit_button" style="display: inline-block; vertical-align: top;">
+                <input type="submit">
             </div>
         </form>
-    </div>
-    {#        <div class="form-group" style="display:inline-block; vertical-align: top;">#}
-    {#            <label for="employee_list">Employee</label>#}
-    {#            <select multiple class="form-control" id="employee_list" style="height:400px; width: 250px;">#}
-    {#                {% for key, value in employee_list.items %}#}
-    {#                    <option>{{ value.0 }}</option>#}
-    {#                {% endfor %}#}
-    {#            </select>#}
-    {#        </div>#}
-
     </div>
     </body>
     </html>
