@@ -5,5 +5,5 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.index, name="soft_skills"),
-    url(r'^Soft_Skills/employee', views.agent_skills_sheet, name="agent")
+    url(r'^employee', views.agent_skills_sheet, name="agent")
 ]

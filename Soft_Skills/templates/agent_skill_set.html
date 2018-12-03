@@ -1,6 +1,5 @@
 {% extends 'Luna/base.html' %}
 {% block content %}
-    <!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -10,10 +9,53 @@
         <link rel="stylesheet" href="{% static 'Soft_Skills/CSS/soft_skills.css' %}">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
         <script src="{% static 'Soft_Skills_Script' %}"></script>
+        <style>
+        th, td {
+            padding: 5px;
+            text-align: left;
+                }
+        tr:hover {background-color: #f5f5f5;}
+       </style>
     </head>
     <body>
     <div class="top_pane"><h3 style="color: white;">Employee Soft Skills</h3></div>
     <div class="main">
+    <h3>Employee Info</h3>
+        <div id="employee_info_box">
+            <h4>{{ selected_employee.name }} - Soft Skills</h4>
+            <table style="width: 100%;">
+                <tr>
+                    <th>Hire Date</th>
+                    <th>Team</th>
+                    <th>Sub Team</th>
+                    <th>Tier</th>
+                    <th>Supervisor</th>
+                </tr>
+                <tr>
+                    <td>{{ selected_employee.hire_date|date:'Y-m-d'}}</td>
+                    <td>{{ selected_employee.team }}</td>
+                    <td>{{ selected_employee.sub_team }}</td>
+                    <td>{{ selected_employee.tier }}</td>
+                    <td>{{ selected_employee.supervisor_name }}</td>
+                </tr>
+            </table>
+        </div>
+
+        <h3>Skill Set</h3>
+
+        <div id="skill_set_box">
+            <table style="width:100%;">
+                <tr>
+                    <th>Team</th>
+                    <th>Sub Team</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+
     </div>
     </body>
     </html>

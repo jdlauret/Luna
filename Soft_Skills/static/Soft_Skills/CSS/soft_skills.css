@@ -18,6 +18,24 @@
     padding-left:10px;
 }
 
+#employee_info_box{
+    padding: 20px;
+    border-style: solid;
+    border-color: #1a1a1a;
+    box-shadow: 5px 5px darkgrey;
+    border-radius: 15px;
+    background-color: #f8f8f8;
+}
+
+#skill_set_box{
+    padding: 20px;
+    border-style: solid;
+    border-color: #1a1a1a;
+    box-shadow: 5px 5px darkgrey;
+    border-radius: 15px;
+    background-color: #f8f8f8;
+}
+
 /*BUTTONS*/
 .reset_button{
     background: #eeeeee;
@@ -25,4 +43,8 @@
     color: Black;
     border:1px #c1c1c1 solid;
     margin-top:1px;
+}
+
+/*TABLE*/
+#employee_info_table{
 }

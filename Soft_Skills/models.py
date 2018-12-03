@@ -167,7 +167,6 @@ class Employee_List(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True, blank=True)
 	edited_at = models.DateTimeField(null=True)
 
-
 class Agent_Skills(models.Model):
 	badge_id = models.ForeignKey(Employee_List, on_delete=models.CASCADE)
 	skill_id = models.ForeignKey(Career_Path, on_delete=models.CASCADE)

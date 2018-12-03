@@ -1,6 +1,5 @@
 {% extends 'Luna/base.html' %}
 {% block content %}
-    <!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -13,9 +12,11 @@
     </head>
     <body>
     <div class="top_pane"><h3 style="color: white;">Employee Soft Skills</h3></div>
+
     <div class="main">
         <form action="/Soft_Skills/" method="POST">
         {% csrf_token %}
+        {% if super_badge == None %}
             <div class="form-group" style="display:inline-block;">
                 <label for="supervisor_list">Supervisor</label>
                 <select class="form-control" id="supervisor_list" name="super_badge"
@@ -26,6 +27,17 @@
                 </select>
             </div>
 
+            <div id="submit_button" style="display: inline-block; vertical-align: top;">
+               <input type="submit">
+           </div>
+           <div class="reset_button_section" style="display: inline-block; vertical-align: top; padding-top: 2px;">
+                <a class="reset_button" href="/Soft_Skills/" style="text-decoration:none;">Reset</a>
+            </div>
+        {% endif %}
+        </form>
+
+        <form action="/Soft_Skills/employee" method="POST">
+        {% csrf_token %}
             {% if super_badge != None %}
                 <div class="form-group" style="display:inline-block; vertical-align: top;">
                     <label for="employee_list">Employee</label>
@@ -36,19 +48,16 @@
                         {% endfor %}
                     </select>
                 </div>
-            {% endif %}
-            {% if employee_list == None %}
+
                 <div id="submit_button" style="display: inline-block; vertical-align: top;">
                    <input type="submit">
                </div>
-            {% else %}
-
+               <div class="reset_button_section" style="display: inline-block; vertical-align: top; padding-top: 2px;">
+                    <a class="reset_button" href="/Soft_Skills/" style="text-decoration:none;">Reset</a>
+                </div>
             {% endif %}
-            <div class="reset_button_section" style="display: inline-block; vertical-align: top; padding-top: 2px;">
-                <a class="reset_button" href="/Soft_Skills/" style="text-decoration:none;">Reset</a>
-            </div>
         </form>
-</div>
+    </div>
     </body>
     </html>
 {% endblock %}
