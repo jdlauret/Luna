@@ -1,3 +1,4 @@
+import json
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
@@ -6,6 +7,9 @@ from Soft_Skills.utilities.employee_list import employee_list
 from Soft_Skills.utilities.supervisor_list import supervisor_list
 from .models import Career_Path, Employee_List, Agent_Skills
 
+
+from django.shortcuts import render
+from django.http import JsonResponse
 
 def email_check(user):
     return user.email.endswith('@vivintsolar.com')
@@ -31,4 +35,21 @@ def index(request):
             }
             return render(request, 'soft_skills.html', context)
     else:
+        return HttpResponseRedirect('/Luna')
+
+@login_required
+@user_passes_test(email_check)
+def agent_skills_sheet(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            print('TEST1')
+            return render(request, 'agent_skill_set.html')
+        else:
+            print('NO POST')
+            context = {
+                'supervisor_list': supervisor_list(),
+            }
+            return render(request, 'soft_skills.html', context)
+    else:
+        print('USER is not authenticated')
         return HttpResponseRedirect('/Luna')

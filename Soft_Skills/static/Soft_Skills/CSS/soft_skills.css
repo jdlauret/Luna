@@ -4,12 +4,25 @@
     margin: 0px;
 }
 
+/*TOP PANE*/
+
 .top_pane {
     padding: 10px;
     background-color: #3a3a3a;
     width: 100%;
 }
 
+/*BODY*/
+
 .main {
     padding-left:10px;
+}
+
+/*BUTTONS*/
+.reset_button{
+    background: #eeeeee;
+    padding:3px;
+    color: Black;
+    border:1px #c1c1c1 solid;
+    margin-top:1px;
 }
