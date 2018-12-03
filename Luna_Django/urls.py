@@ -23,10 +23,11 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     url('', include('Luna.urls'), name='luna'),
-    url(r'^login/$', auth_views.LoginView, name='login'),
-    url(r'^logout/$', auth_views.LogoutView, name='logout'),
+    url(r'^acounts/login/$', auth_views.LoginView, name='login'),
+    url(r'^accounts/logout/$', auth_views.LogoutView.as_view(), name='logout'),
     url(r'^auth/', include('social_django.urls', namespace='social')),
     url(r'^admin/', admin.site.urls),
     url(r'^coin/', include(('coin.urls', 'sharing'), namespace='sharing')), #Coin sharing URL
     url(r'^P_Tracker/', include(('P_Tracker.urls', 'tracker'), namespace='tracker')), #Tracker URL
+    # url(r'^Soft_Skills/', include(('Soft_Skills.urls', 'skills'), namespace='skills')), #Soft Skills URL
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

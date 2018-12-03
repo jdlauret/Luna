@@ -23,6 +23,8 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# DEBUG = False
+
 
 ALLOWED_HOSTS = [
     '10.30.4.83',
@@ -42,9 +44,6 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_AUTH_EXTRA_ARGUMENTS = {'hd': 'vivintsolar.com'}
 # Application definition
 
 INSTALLED_APPS = [
-    'Luna.apps.LunaConfig',
-    'coin.apps.CoinAppConfig',
-    'P_Tracker.apps.P_TrackerAppConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -52,15 +51,21 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'social_django',
+    'Luna.apps.LunaConfig',
+    'coin.apps.CoinAppConfig',
+    'P_Tracker.apps.P_TrackerAppConfig',
+    'Soft_Skills.apps.SkillsAppConfig',
 ]
 
 MIDDLEWARE = [
     # 'django.middleware.security.SecurityMiddleware',
+
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
     # 'django.middleware.csrf.CsrfViewMiddleware',
+
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -162,5 +167,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "coin", "static"),
     os.path.join(BASE_DIR, "Luna", "static"),
     os.path.join(BASE_DIR, "P_Tracker", "static"),
+    os.path.join(BASE_DIR, "Soft_Skills", "static"),
 ]
 
