@@ -14,47 +14,184 @@
             padding: 5px;
             text-align: left;
                 }
-        tr:hover {background-color: #f5f5f5;}
+        tr:hover {background-color: #acacac;}
        </style>
     </head>
     <body>
     <div class="top_pane"><h3 style="color: white;">Employee Soft Skills</h3></div>
     <div class="main">
-    <h3>Employee Info</h3>
-        <div id="employee_info_box">
-            <h4>{{ selected_employee.name }} - Soft Skills</h4>
-            <table style="width: 100%;">
-                <tr>
-                    <th>Hire Date</th>
-                    <th>Team</th>
-                    <th>Sub Team</th>
-                    <th>Tier</th>
-                    <th>Supervisor</th>
-                </tr>
-                <tr>
-                    <td>{{ selected_employee.hire_date|date:'Y-m-d'}}</td>
-                    <td>{{ selected_employee.team }}</td>
+    <h3 style="display: inline-block">Employee Info</h3>
+    <a href="/Soft_Skills/" style="text-decoration:none; border: 2px solid black;
+            padding:10px; color:black; display: inline-block; margin-left:20px;">Reset</a>
+    <br><br>
+
+    <!--THIS SECTION DISPLAY THE EMPLOYEE INFORMATION-->
+
+    <div id="employee_info_box">
+        <h3>{{ selected_employee.name }}</h3>
+        <table style="width: 100%;">
+            <tr>
+                <th>Supervisor</th>
+                <th>Hire Date</th>
+                <th>Team</th>
+                {% if selected_employee.sub_team == None %}
+                {% else %}
+                <th>Sub Team</th>
+                {% endif %}
+                <th>Tier</th>
+            </tr>
+            <tr>
+                <td>{{ selected_employee.supervisor_name }}</td>
+                <td>{{ selected_employee.hire_date|date:'m-d-Y'}}</td>
+                <td>{{ selected_employee.team }}</td>
+                {% if selected_employee.sub_team == None %}
+                {% else %}
                     <td>{{ selected_employee.sub_team }}</td>
-                    <td>{{ selected_employee.tier }}</td>
-                    <td>{{ selected_employee.supervisor_name }}</td>
-                </tr>
-            </table>
-        </div>
+                {% endif %}
+                <td>{{ selected_employee.tier }}</td>
+            </tr>
+        </table>
+    </div>
+
+    <!--DROP DOWN OF SELECTING-->
 
         <h3>Skill Set</h3>
+        <form action="/Soft_Skills/employee" method="POST">
+        {% csrf_token %}
+            <div class="input-group">
+              <select class="custom-select"
+                    style="display: inline-block; padding:15px; width:250px; border-color:black;"
+                    name="select_team" required>
+                <option selected>Choose...</option>
+                <option value="customer_relations">Customer Relations</option>
+                <option value="RECs_&_rebates">RECs and Rebates</option>
+                <option value="central_scheduling">Central Scheduling</option>
+                <option value="customer_solutions">Customer Solutions</option>
+                <option value="customer_service">Customer Service</option>
+              </select>
+              <div class="input-group-append" style="display: inline-block">
+                <input type="submit" style="background-color:white; border: 2px solid black;
+                        margin-top:-2px; border-radius: 0%; padding: 13px;">
+              </div>
+            </div>
+            <input type="hidden" name="selected_employee" value={{ selected_employee.badge_id }}>
+        </form>
 
+        <br><br>
+
+    <!--THIS SECTION IS A LIST OF ALL THE SOFT SKILLS CUSTOMER RELATIONS-->
+
+        {% if customer_relations_inbound != None %}
         <div id="skill_set_box">
+        <h3>Customer Relations</h3>
+
+        <!--REPRESENTATIVE 1-->
             <table style="width:100%;">
                 <tr>
-                    <th>Team</th>
-                    <th>Sub Team</th>
+                    <th style="width:150px;">Representative 1</th>
                     <th>Description</th>
                 </tr>
+                {% for a in customer_relations_rep_1 %}
                 <tr>
                     <td></td>
+                    <td>{{ a.description }}</td>
                 </tr>
+                {% endfor %}
             </table>
+            <hr style="background-color:gray; padding:1px;">
+
+        <!--REPRESENTATIVE 2-->
+            <table style="width:100%;">
+                <tr>
+                    <th style="width:150px;">Representative 2</th>
+                    <th>Description</th>
+                </tr>
+                {% for b in customer_relations_rep_2 %}
+                <tr>
+                    <td></td>
+                    <td>{{ b.description }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <hr style="background-color:gray; padding:1px;">
+
+        <!--REPRESENTATIVE 3-->
+            <table style="width:100%;">
+                <tr>
+                    <th style="width:150px;">Representative 3</th>
+                    <th>Description</th>
+                </tr>
+                {% for c in customer_relations_rep_3 %}
+                <tr>
+                    <td></td>
+                    <td>{{ c.description }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <hr style="background-color:gray; padding:1px;">
+
+        <!--SPECIALIST 1-->
+            <table style="width:100%;">
+                <tr>
+                    <th style="width:150px;">Specialist 1</th>
+                    <th>Description</th>
+                </tr>
+                {% for d in customer_relations_specialist_1 %}
+                <tr>
+                    <td></td>
+                    <td>{{ d.description }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <hr style="background-color:gray; padding:1px;">
+
+        <!--SPECIALIST 2-->
+            <table style="width:100%;">
+                <tr>
+                    <th style="width:150px;">Specialist 2</th>
+                    <th>Description</th>
+                </tr>
+                {% for e in customer_relations_specialist_2 %}
+                <tr>
+                    <td></td>
+                    <td>{{ e.description }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <hr style="background-color:gray; padding:1px;">
+
+        <!--SPECIALIST 3-->
+            <table style="width:100%;">
+                <tr>
+                    <th style="width:150px;">Specialist 3</th>
+                    <th>Description</th>
+                </tr>
+                {% for f in customer_relations_specialist_3 %}
+                <tr>
+                    <td></td>
+                    <td>{{ f.description }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <hr style="background-color:gray; padding:1px;">
+
+        <!--TEAM LEAD-->
+            <table style="width:100%;">
+                <tr>
+                    <th style="width:150px;">Team Lead</th>
+                    <th>Description</th>
+                </tr>
+                {% for g in customer_relations_team %}
+                <tr>
+                    <td></td>
+                    <td>{{ g.description }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <hr style="background-color:gray; padding:1px;">
+
         </div>
+        {% endif %}
 
     </div>
     </body>
