@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 {#https://bootsnipp.com/snippets/featured/fancy-sidebar-navigation#}
 {% load staticfiles %}
-<html lang="en">
     <link rel="icon" href="{% static 'resources/textless_black_starless.png' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'luna_style.css' %}"/>
     {#<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"#}
-    {#      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">#}
+    {# integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">#}
     {#<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">#}
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -21,108 +20,108 @@
             border-top: 1px solid white;}
     </style>
 
-<body>
-    {#<div id="wrapper">#}
-    <div class="overlay"></div>
-    <!-- Sidebar -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
-        <ul class="nav sidebar-nav">
-            <div class="sidebar-brand"><a class="logo" href="{% url 'index' %}"><span class="logo"></span></a></div>
-            <div id="spacing_between"></div>
-            <hr>
-            {% if user.is_authenticated %}
-                {% if perms.automator_task.can_add_automator_tasks %}
-                    <li><a href="/automation"><b>Automation</b></a></li>
-                {% endif %}
-                {#                CENTRAL SCHEDULING~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Central Scheduling</b><span
-                            class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li style="display:none"></li>
-                        <li><a href="/calculators/RTS_notes">Central Notes</a></li>
-                        <li><a href="/calculators/removal_reinstall">Removal/Reinstall Notes</a></li>
-                        <li><a href="/calculators/soft_savings_analysis">Soft Savings Analysis</a></li>
-                        <li><a href="/calculators/system_performance_calculator">System Performance</a></li>
-                        {#                        <li><a href="/calculators/full_benefit_analysis">Full Benefit Analysis</a></li>#}
-                    </ul>
-                </li>
-                {#                RELATIONS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Customer Relations</b><span
-                            class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li style="display:none"></li>
-                        <li><a href="/calculators/soft_savings_analysis">Soft Savings Analysis</a></li>
-                        <li><a href="/calculators/system_performance_calculator">System Performance</a></li>
-                        {#                        <li><a href="/calculators/full_benefit_analysis">Full Benefit Analysis</a></li>#}
-                    </ul>
-                </li>
-                {#                CUSTOMER SERVICE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Customer Service</b><span
-                            class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li style="display:none"></li>
-                        <li><a href="/calculators/soft_savings_analysis">Soft Savings Analysis</a></li>
-                        <li><a href="/calculators/system_performance_calculator">System Performance</a></li>
-                        {#                        <li><a href="/calculators/full_benefit_analysis">Full Benefit Analysis</a></li>#}
-                    </ul>
-                </li>
-                {#                CUSTOMER SOLUTIONS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Customer Solutions</b><span
-                            class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li style="display:none"></li>
-                        <li><a href="/calculators/soft_savings_analysis">Soft Savings Analysis</a></li>
-                        <li><a href="/calculators/system_performance_calculator">System Performance</a></li>
-    {#                    <li><a href="/calculators/Customer_Solutions">Buyout/Prepayment</a></li>#}
-                        {#                        <li><a href="/calculators/full_benefit_analysis">Full Benefit Analysis</a></li>#}
-                    </ul>
-                </li>
-                {#                RECS & REBATES~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>RECs & Rebates</b><span
-                            class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li style="display:none"></li>
-                        <li><a href="/P_Tracker">Productivity Tracker</a></li>
-                    </ul>
-                </li>
-                {#              coin~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  #}
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Coin</b><span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li style="display:none"></li>
-                        {% if perms.Coin_Overlord %}
-                            <li><a href="{% url 'sharing:overlord' %}">The Overlord</a></li>
-                        {% endif %}
-                        <li><a href="{% url 'sharing:global' %}">Community View</a></li>
-                        <li><a href="{% url 'sharing:agent_view' %}">Personal View</a></li>
-                        <li><a href="{% url 'sharing:transaction_view' %}">Send Coin</a></li>
-                    </ul>
-                </li>
-
-                <li><a href="/career_path"><b>Career Path</b></a></li>
-    {#            <li><a href="/Soft_Skills"><b>Soft Skills</b></a></li>#}
-                {#                <li><a href="https://goo.gl/forms/xzCIQTfr5zBt3q6l2">Got Feedback?</a></li>#}
+    <body>
+        {#<div id="wrapper">#}
+        <div class="overlay"></div>
+        <!-- Sidebar -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+            <ul class="nav sidebar-nav">
+                <div class="sidebar-brand"><a class="logo" href="{% url 'index' %}"><span class="logo"></span></a></div>
+                <div id="spacing_between"></div>
                 <hr>
-                <li><a href="/accounts/logout"><b>Logout</b></a></li>
-            {% else %}
-                <li><a href="{% url 'social:begin' 'google-oauth2' %}">Login</a></li>
-            {% endif %}
-        </ul>
-    </nav>
-    <!-- /#sidebar-wrapper -->
+                {% if user.is_authenticated %}
+                    {% if perms.automator_task.can_add_automator_tasks %}
+                        <li><a href="/automation"><b>Automation</b></a></li>
+                    {% endif %}
+                    {#                CENTRAL SCHEDULING~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Central Scheduling</b><span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li style="display:none"></li>
+                            <li><a href="/calculators/RTS_notes">Central Notes</a></li>
+                            <li><a href="/calculators/removal_reinstall">Removal/Reinstall Notes</a></li>
+                            <li><a href="/calculators/soft_savings_analysis">Soft Savings Analysis</a></li>
+                            <li><a href="/calculators/system_performance_calculator">System Performance</a></li>
+                            {#                        <li><a href="/calculators/full_benefit_analysis">Full Benefit Analysis</a></li>#}
+                        </ul>
+                    </li>
+                    {#                RELATIONS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Customer Relations</b><span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li style="display:none"></li>
+                            <li><a href="/calculators/soft_savings_analysis">Soft Savings Analysis</a></li>
+                            <li><a href="/calculators/system_performance_calculator">System Performance</a></li>
+                            {#                        <li><a href="/calculators/full_benefit_analysis">Full Benefit Analysis</a></li>#}
+                        </ul>
+                    </li>
+                    {#                CUSTOMER SERVICE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Customer Service</b><span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li style="display:none"></li>
+                            <li><a href="/calculators/soft_savings_analysis">Soft Savings Analysis</a></li>
+                            <li><a href="/calculators/system_performance_calculator">System Performance</a></li>
+                            {#                        <li><a href="/calculators/full_benefit_analysis">Full Benefit Analysis</a></li>#}
+                        </ul>
+                    </li>
+                    {#                CUSTOMER SOLUTIONS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Customer Solutions</b><span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li style="display:none"></li>
+                            <li><a href="/calculators/soft_savings_analysis">Soft Savings Analysis</a></li>
+                            <li><a href="/calculators/system_performance_calculator">System Performance</a></li>
+        {#                    <li><a href="/calculators/Customer_Solutions">Buyout/Prepayment</a></li>#}
+                            {#                        <li><a href="/calculators/full_benefit_analysis">Full Benefit Analysis</a></li>#}
+                        </ul>
+                    </li>
+                    {#                RECS & REBATES~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>RECs & Rebates</b><span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li style="display:none"></li>
+                            <li><a href="/P_Tracker">Productivity Tracker</a></li>
+                        </ul>
+                    </li>
+                    {#              coin~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  #}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Coin</b><span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li style="display:none"></li>
+                            {% if perms.Coin_Overlord %}
+                                <li><a href="{% url 'sharing:overlord' %}">The Overlord</a></li>
+                            {% endif %}
+                            <li><a href="{% url 'sharing:global' %}">Community View</a></li>
+                            <li><a href="{% url 'sharing:agent_view' %}">Personal View</a></li>
+                            <li><a href="{% url 'sharing:transaction_view' %}">Send Coin</a></li>
+                        </ul>
+                    </li>
 
-    <!-- Page Content -->
-    <div id="page-content-wrapper">
-        {% block content %}
-        {% endblock %}
-    </div>
-    <!-- /#page-content-wrapper -->
+                    <li><a href="/career_path"><b>Career Path</b></a></li>
+        {#            <li><a href="/Soft_Skills"><b>Soft Skills</b></a></li>#}
+                    {#                <li><a href="https://goo.gl/forms/xzCIQTfr5zBt3q6l2">Got Feedback?</a></li>#}
+                    <hr>
+                    <li><a href="/accounts/logout"><b>Logout</b></a></li>
+                {% else %}
+                    <li><a href="{% url 'social:begin' 'google-oauth2' %}">Login</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        <!-- /#sidebar-wrapper -->
 
-    {#</div>#}
-    <!-- /#wrapper -->
-</body>
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            {% block content %}
+            {% endblock %}
+        </div>
+        <!-- /#page-content-wrapper -->
+
+        {#</div>#}
+        <!-- /#wrapper -->
+    </body>

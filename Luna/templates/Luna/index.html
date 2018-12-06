@@ -1,24 +1,58 @@
 {% extends 'Luna/base.html' %}
 {% load static %}
 {% block content %}
+<script src="/your_path_to/fallingsnow_v6.js"></script>
 
-    <div class="main">
-        {% if user.is_authenticated %}
+{# TODO GET RID OF STYLE - SNOW SKIN #}
+<style>
+    #snowflakeContainer {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+    }
+    .snowflake {
+        padding-left: 15px;
+        font-size: 14px;
+        line-height: 24px;
+        position: fixed;
+        color: #FFFFFF;
+        user-select: none;
+        z-index: 1000;
+    }
+    .snowflake:hover {
+        cursor: default;
+    }
+</style>
+{# TODO GET RID OF BACKGROUND COLOR - SNOW SKIN #}
+    <div class="main" style="background-color:#7b0022;">
+    {# TODO GET RID OF DIV ID SNOWFLAKE CONTAINER - SNOW SKIN #}
+    <div id="snowflakeContainer">
+        <p class="snowflake">*</p>
+    </div>
+
+    {% if user.is_authenticated %}
+        <h2 style="color:white;"><b>Welcome {{ user.first_name }}</b></h2>
+        <p id="browser_detect" onclick="browser_detect()" style="color:white;"><b>Click here to check if you are using a
+            compatible browser</b></p>
+    </div>
+
+<!--
 {#            <div class="top_pane">#}
 {#                <div class="name_box">#}
 {#                    Welcome {{ user.first_name }}!<br>#}
 {#                </div>#}
 {#            </div>#}
-            Welcome {{ user.first_name }}
-
+-->
         {% else %}
-            <h2>Welcome!</h2>
-            <br>
-            <p>To access Luna, Please <a href="{% url 'social:begin' 'google-oauth2' %}">Login</a></p>
+        {# todo remove color:white #}
+        <h2 style="color:white;"><b>Welcome!</b></h2>
+        <p style="color:white"><b>To access Luna, Please <a href="{% url 'social:begin' 'google-oauth2' %}">Login</a></b></p>
         {% endif %}
-        <p id="browser_detect" onclick="browser_detect()">Click here to check if you are using a
-            compatible browser</p>
     </div>
+
     <script type="text/javascript" src="{% static 'js/scripts.js' %}"></script>
 
+    {# TODO GET RID TWO SCRIPTS - SNOW SKIN #}
+    <script src="//www.kirupa.com/js/fallingsnow_v6.js"></script>
+    <script src="//www.kirupa.com/js/prefixfree.min.js"></script>
 {% endblock %}
