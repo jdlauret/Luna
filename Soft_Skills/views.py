@@ -1,10 +1,9 @@
-from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.contrib import messages
-from django.shortcuts import render, redirect
-from Soft_Skills.utilities.employee_list import employee_list
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
+
 from Soft_Skills.utilities.supervisor_list import supervisor_list
-from .models import Career_Path, Employee_List, Agent_Skills
+from .models import Employee_List
 
 
 def email_check(user):
