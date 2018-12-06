@@ -827,9 +827,12 @@ tools for copy and paste feature on Luna
         font-size: 14px;
         line-height: 24px;
         position: fixed;
-        color: #FFFFFF;
+        color: whitesmoke;
         user-select: none;
         z-index: 1000;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
     }
     .snowflake:hover {
         cursor: default;
