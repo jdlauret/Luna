@@ -11,7 +11,7 @@
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="{% static "js/scripts.js" %}"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
     <style>
         .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
             padding: 8px;
@@ -21,10 +21,16 @@
     </style>
 
     <body>
+
         {#<div id="wrapper">#}
         <div class="overlay"></div>
         <!-- Sidebar -->
         <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+
+            {# TODO GET RID OF DIV ID SNOWFLAKE CONTAINER - SNOW SKIN #}
+        <div id="snowflakeContainer">
+            <p class="snowflake">❆</p>
+
             <ul class="nav sidebar-nav">
                 <div class="sidebar-brand"><a class="logo" href="{% url 'index' %}"><span class="logo"></span></a></div>
                 <div id="spacing_between"></div>
@@ -111,7 +117,8 @@
                 {% else %}
                     <li><a href="{% url 'social:begin' 'google-oauth2' %}">Login</a></li>
                 {% endif %}
-            </ul>
+                </ul>
+            </div>
         </nav>
         <!-- /#sidebar-wrapper -->
 
@@ -125,6 +132,6 @@
         {#</div>#}
         <!-- /#wrapper -->
             {# TODO GET RID TWO SCRIPTS - SNOW SKIN #}
-    <script src="//www.kirupa.com/js/fallingsnow_v6.js"></script>
+    <script src="{% static 'js/fallingsnow.js' %}"></script>
     <script src="//www.kirupa.com/js/prefixfree.min.js"></script>
     </body>
