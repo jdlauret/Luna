@@ -24,12 +24,15 @@
     width: 190px;
     height: 100%;
     margin-left: -190px;
-    background: #1a1a1a;
+    /*background: #1a1a1a;*/
+    /*todo christmas skin*/
+    background: #3b733c;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
+
 
 #sidebar-wrapper::-webkit-scrollbar {
     display: none;
@@ -812,3 +815,22 @@ tools for copy and paste feature on Luna
 .calc th {
     height: 50px;
 }
+
+/*todo remove holiday skin*/
+    #snowflakeContainer {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+    }
+    .snowflake {
+        padding-left: 15px;
+        font-size: 14px;
+        line-height: 24px;
+        position: fixed;
+        color: #FFFFFF;
+        user-select: none;
+        z-index: 1000;
+    }
+    .snowflake:hover {
+        cursor: default;
+    }
