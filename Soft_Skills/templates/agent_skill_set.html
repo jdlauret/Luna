@@ -80,118 +80,126 @@
         <br><br>
 
     <!--THIS SECTION IS A LIST OF ALL THE SOFT SKILLS CUSTOMER RELATIONS-->
+        <form action="/Soft_Skills/employee" method="POST">
+            {% if customer_relations_inbound != None %}
+            <div id="skill_set_box">
+            <h3>Customer Relations</h3>
 
-        {% if customer_relations_inbound != None %}
-        <div id="skill_set_box">
-        <h3>Customer Relations</h3>
+            <!--REPRESENTATIVE 1-->
 
-        <!--REPRESENTATIVE 1-->
-            <table style="width:100%;">
-                <tr>
-                    <th style="width:150px;">Representative 1</th>
-                    <th>Description</th>
-                </tr>
-                {% for a in customer_relations_rep_1 %}
-                <tr>
-                    <td></td>
-                    <td>{{ a.description }}</td>
-                </tr>
-                {% endfor %}
-            </table>
-            <hr style="background-color:gray; padding:1px;">
+                <table style="width:100%;">
+                    <tr>
+                        <th style="width:150px;">Representative 1</th>
+                        <th>Description</th>
+                    </tr>
+                    {% for a in customer_relations_rep_1 %}
+                    <tr>
+                        <td><input type="checkbox" style="margin-left: 50px;" name="soft skills id" value={{ a.id }}></td>
+                        <td>{{ a.description }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <hr style="background-color:gray; padding:1px;">
 
-        <!--REPRESENTATIVE 2-->
-            <table style="width:100%;">
-                <tr>
-                    <th style="width:150px;">Representative 2</th>
-                    <th>Description</th>
-                </tr>
-                {% for b in customer_relations_rep_2 %}
-                <tr>
-                    <td></td>
-                    <td>{{ b.description }}</td>
-                </tr>
-                {% endfor %}
-            </table>
-            <hr style="background-color:gray; padding:1px;">
+            <!--REPRESENTATIVE 2-->
+                <table style="width:100%;">
+                    <tr>
+                        <th style="width:150px;">Representative 2</th>
+                        <th>Description</th>
+                    </tr>
+                    {% for b in customer_relations_rep_2 %}
+                    <tr>
+                        <td></td>
+                        <td>{{ b.description }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <hr style="background-color:gray; padding:1px;">
 
-        <!--REPRESENTATIVE 3-->
-            <table style="width:100%;">
-                <tr>
-                    <th style="width:150px;">Representative 3</th>
-                    <th>Description</th>
-                </tr>
-                {% for c in customer_relations_rep_3 %}
-                <tr>
-                    <td></td>
-                    <td>{{ c.description }}</td>
-                </tr>
-                {% endfor %}
-            </table>
-            <hr style="background-color:gray; padding:1px;">
+            <!--REPRESENTATIVE 3-->
+                <table style="width:100%;">
+                    <tr>
+                        <th style="width:150px;">Representative 3</th>
+                        <th>Description</th>
+                    </tr>
+                    {% for c in customer_relations_rep_3 %}
+                    <tr>
+                        <td></td>
+                        <td>{{ c.description }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <hr style="background-color:gray; padding:1px;">
 
-        <!--SPECIALIST 1-->
-            <table style="width:100%;">
-                <tr>
-                    <th style="width:150px;">Specialist 1</th>
-                    <th>Description</th>
-                </tr>
-                {% for d in customer_relations_specialist_1 %}
-                <tr>
-                    <td></td>
-                    <td>{{ d.description }}</td>
-                </tr>
-                {% endfor %}
-            </table>
-            <hr style="background-color:gray; padding:1px;">
+            <!--SPECIALIST 1-->
+                <table style="width:100%;">
+                    <tr>
+                        <th style="width:150px;">Specialist 1</th>
+                        <th>Description</th>
+                    </tr>
+                    {% for d in customer_relations_specialist_1 %}
+                    <tr>
+                        <td></td>
+                        <td>{{ d.description }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <hr style="background-color:gray; padding:1px;">
 
-        <!--SPECIALIST 2-->
-            <table style="width:100%;">
-                <tr>
-                    <th style="width:150px;">Specialist 2</th>
-                    <th>Description</th>
-                </tr>
-                {% for e in customer_relations_specialist_2 %}
-                <tr>
-                    <td></td>
-                    <td>{{ e.description }}</td>
-                </tr>
-                {% endfor %}
-            </table>
-            <hr style="background-color:gray; padding:1px;">
+            <!--SPECIALIST 2-->
+                <table style="width:100%;">
+                    <tr>
+                        <th style="width:150px;">Specialist 2</th>
+                        <th>Description</th>
+                    </tr>
+                    {% for e in customer_relations_specialist_2 %}
+                    <tr>
+                        <td></td>
+                        <td>{{ e.description }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <hr style="background-color:gray; padding:1px;">
 
-        <!--SPECIALIST 3-->
-            <table style="width:100%;">
-                <tr>
-                    <th style="width:150px;">Specialist 3</th>
-                    <th>Description</th>
-                </tr>
-                {% for f in customer_relations_specialist_3 %}
-                <tr>
-                    <td></td>
-                    <td>{{ f.description }}</td>
-                </tr>
-                {% endfor %}
-            </table>
-            <hr style="background-color:gray; padding:1px;">
+            <!--SPECIALIST 3-->
+                <table style="width:100%;">
+                    <tr>
+                        <th style="width:150px;">Specialist 3</th>
+                        <th>Description</th>
+                    </tr>
+                    {% for f in customer_relations_specialist_3 %}
+                    <tr>
+                        <td></td>
+                        <td>{{ f.description }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <hr style="background-color:gray; padding:1px;">
 
-        <!--TEAM LEAD-->
-            <table style="width:100%;">
-                <tr>
-                    <th style="width:150px;">Team Lead</th>
-                    <th>Description</th>
-                </tr>
-                {% for g in customer_relations_team %}
-                <tr>
-                    <td></td>
-                    <td>{{ g.description }}</td>
-                </tr>
-                {% endfor %}
-            </table>
-            <hr style="background-color:gray; padding:1px;">
+            <!--TEAM LEAD-->
+                <table style="width:100%;">
+                    <tr>
+                        <th style="width:150px;">Team Lead</th>
+                        <th>Description</th>
+                    </tr>
+                    {% for g in customer_relations_team %}
+                    <tr>
+                        <td></td>
+                        <td>{{ g.description }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <hr style="background-color:gray; padding:1px;">
 
-        </div>
-        {% endif %}
+            </div>
+            {% endif %}
+            <input type="hidden" name="selected_employee" value={{ selected_employee.badge_id }}>
+            <!--{%  %} -->
+            <div style="padding-top: 20px; padding-left:50%;">
+                <input type="submit" style="background-color:white; border: 2px solid black;
+                        margin-top:-2px; border-radius: 0%; padding: 13px;">
+            </div>
+        </form>
 
     </div>
     </body>
