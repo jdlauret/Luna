@@ -67,7 +67,7 @@ function Snowflake(element, speed, xPos, yPos) {
 
 	// setting an initial opacity and size for our snowflake
     this.element.style.opacity = .1 + Math.random();
-    this.element.style.fontSize = 12 + Math.random() * 75 + "px";
+    this.element.style.fontSize = 12 + Math.random() * 100 + "px";
 }
 
 //
@@ -110,7 +110,7 @@ function generateSnowflakes() {
 
     // get our browser's size
 	// browserWidth = document.documentElement.clientWidth;
-    browserWidth = 10;
+    browserWidth = -80;
 	browserHeight = document.documentElement.clientHeight;
 
     // create each individual snowflake
@@ -152,7 +152,7 @@ function moveSnowflakes() {
 	// Reset the position of all the snowflakes to a new value
 	if (resetPosition) {
 		// browserWidth = document.documentElement.clientWidth;
-        browserWidth = 10;
+        browserWidth = -80;
 		browserHeight = document.documentElement.clientHeight;
 
 		for (var i = 0; i < snowflakes.length; i++) {
