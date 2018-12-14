@@ -26,7 +26,7 @@ def index(request):
             context = {
                 'supervisor_list' : supervisor_list(),
                 'super_badge' : super_list,
-                'employee_list' : Employee_List.objects.all().filter(supervisor_badge__in=super_list, terminated=False),
+                'employee_list' : Employee_List.objects.filter(supervisor_badge__in=super_list, terminated=False),
             }
             return render(request, 'soft_skills.html', context)
         else:
@@ -41,10 +41,8 @@ def index(request):
 @user_passes_test(email_check)
 def agent_skills_sheet(request):
     if request.user.is_authenticated:
-
         print(request.POST)
         selected_employee = int(request.POST['selected_employee'])
-        print(selected_employee, type(selected_employee))
 
         if request.method == 'POST':
             try:
@@ -54,20 +52,25 @@ def agent_skills_sheet(request):
                 central_scheduling = Career_Path.objects.filter(team='central_scheduling')
                 customer_solutions = Career_Path.objects.filter(team='customer_solutions')
                 customer_service = Career_Path.objects.filter(team='customer_service')
-
+                print('TRY')
+                # todo remove print
                 if skill_set == 'customer_relations':
-                    context={
-                        'selected_employee' : Employee_List.objects.all().get(badge_id=selected_employee),
-                        'customer_relations_inbound': customer_relations.filter(sub_team='inbound_outbound'),
-                        'customer_relations_rep_1': customer_relations.filter(sub_team='inbound_outbound', tier='rep_1'),
-                        'customer_relations_rep_2': customer_relations.filter(sub_team='inbound_outbound', tier='rep_2'),
-                        'customer_relations_rep_3': customer_relations.filter(sub_team='inbound_outbound', tier='rep_3'),
-                        'customer_relations_specialist_1': customer_relations.filter(sub_team='inbound_outbound', tier='specialist_1'),
-                        'customer_relations_specialist_2': customer_relations.filter(sub_team='inbound_outbound', tier='specialist_2'),
-                        'customer_relations_specialist_3': customer_relations.filter(sub_team='inbound_outbound', tier='specialist_3'),
-                        'customer_relations_team': customer_relations.filter(sub_team='inbound_outbound', tier='team_lead'),
-                    }
-                    return render(request, 'agent_skill_set.html', context)
+                    try:
+                        skills_id = request.POST['skills_id']
+                    except:
+                        context={
+                            'skill_set' : skill_set,
+                            'selected_employee' : Employee_List.objects.all().get(badge_id=selected_employee),
+                            'customer_relations_inbound': customer_relations.filter(sub_team='inbound_outbound').order_by('id'),
+                            'customer_relations_rep_1': customer_relations.filter(sub_team='inbound_outbound', tier='rep_1').order_by('id'),
+                            'customer_relations_rep_2': customer_relations.filter(sub_team='inbound_outbound', tier='rep_2').order_by('id'),
+                            'customer_relations_rep_3': customer_relations.filter(sub_team='inbound_outbound', tier='rep_3').order_by('id'),
+                            'customer_relations_specialist_1': customer_relations.filter(sub_team='inbound_outbound', tier='specialist_1').order_by('id'),
+                            'customer_relations_specialist_2': customer_relations.filter(sub_team='inbound_outbound', tier='specialist_2').order_by('id'),
+                            'customer_relations_specialist_3': customer_relations.filter(sub_team='inbound_outbound', tier='specialist_3').order_by('id'),
+                            'customer_relations_team': customer_relations.filter(sub_team='inbound_outbound', tier='team_lead').order_by('id'),
+                        }
+                        return render(request, 'agent_skill_set.html', context)
                 if skill_set == 'RECs_&_rebates':
                     context={
                         'selected_employee' : Employee_List.objects.all().get(badge_id=selected_employee),
@@ -97,9 +100,19 @@ def agent_skills_sheet(request):
             except:
                 context={
                     'selected_employee' : Employee_List.objects.all().get(badge_id=selected_employee),
+	                'skill_set': skill_set,
                 }
+                # todo remove print
+                print('Except')
                 return render(request, 'agent_skill_set.html', context)
         else:
             return HttpResponseRedirect('/Soft_Skills/')
     else:
         return HttpResponseRedirect('/Luna')
+
+# ADDS SOFT SKILL ID TO AGENT SKILLS LIST
+def add_soft_skills(request):
+    print(request.POST)
+    selected_employee = int(request.POST['selected_employee'])
+    return redirect('/Soft_Skills/employee', selected_employee=selected_employee)
+# todo need to have the user reload the page with new data

@@ -22,7 +22,7 @@
     <div class="main">
     <h3 style="display: inline-block">Employee Info</h3>
     <a href="/Soft_Skills/" style="text-decoration:none; border: 2px solid black;
-            padding:10px; color:black; display: inline-block; margin-left:20px;">Reset</a>
+            padding:13px; color:black; display: inline-block; margin-left:20px;">Reset</a>
     <br><br>
 
     <!--THIS SECTION DISPLAY THE EMPLOYEE INFORMATION-->
@@ -54,8 +54,8 @@
     </div>
 
     <!--DROP DOWN OF SELECTING-->
-
-        <h3>Skill Set</h3>
+        {% if skill_set == None %}
+        <h3>Team</h3>
         <form action="/Soft_Skills/employee" method="POST">
         {% csrf_token %}
             <div class="input-group">
@@ -76,8 +76,30 @@
             </div>
             <input type="hidden" name="selected_employee" value={{ selected_employee.badge_id }}>
         </form>
+        {% endif %}
+
+        {% if sub_team == None and skill_set != None %}
+        <h3>Sub-Team</h3>
+        <form action="/Soft_Skills/employee" method="POST">
+        {% csrf_token %}
+            <div class="input-group">
+              <select class="custom-select"
+                    style="display: inline-block; padding:15px; width:250px; border-color:black;"
+                    name="sub_team" required>
+                <option selected>Choose...</option>
+
+              </select>
+              <div class="input-group-append" style="display: inline-block">
+                <input type="submit" style="background-color:white; border: 2px solid black;
+                        margin-top:-2px; border-radius: 0%; padding: 13px;">
+              </div>
+            </div>
+            <input type="hidden" name="selected_employee" value={{ selected_employee.badge_id }}>
+        </form>
+        {% endif %}
 
         <br><br>
+
 
     <!--THIS SECTION IS A LIST OF ALL THE SOFT SKILLS CUSTOMER RELATIONS-->
         <form action="/Soft_Skills/employee" method="POST">
@@ -94,7 +116,7 @@
                     </tr>
                     {% for a in customer_relations_rep_1 %}
                     <tr>
-                        <td><input type="checkbox" style="margin-left: 50px;" name="soft skills id" value={{ a.id }}></td>
+                        <td><input type="checkbox" style="margin-left: 50px;" name="skills_id" value={{ a.id }}></td>
                         <td>{{ a.description }}</td>
                     </tr>
                     {% endfor %}
@@ -109,7 +131,7 @@
                     </tr>
                     {% for b in customer_relations_rep_2 %}
                     <tr>
-                        <td></td>
+                        <td><input type="checkbox" style="margin-left: 50px;" name="skills_id" value={{ b.id }}></td>
                         <td>{{ b.description }}</td>
                     </tr>
                     {% endfor %}
@@ -124,7 +146,7 @@
                     </tr>
                     {% for c in customer_relations_rep_3 %}
                     <tr>
-                        <td></td>
+                        <td><input type="checkbox" style="margin-left: 50px;" name="skills_id" value={{ c.id }}></td>
                         <td>{{ c.description }}</td>
                     </tr>
                     {% endfor %}
@@ -139,7 +161,7 @@
                     </tr>
                     {% for d in customer_relations_specialist_1 %}
                     <tr>
-                        <td></td>
+                        <td><input type="checkbox" style="margin-left: 50px;" name="skills_id" value={{ d.id }}></td>
                         <td>{{ d.description }}</td>
                     </tr>
                     {% endfor %}
@@ -154,7 +176,7 @@
                     </tr>
                     {% for e in customer_relations_specialist_2 %}
                     <tr>
-                        <td></td>
+                        <td><input type="checkbox" style="margin-left: 50px;" name="skills_id" value={{ e.id }}></td>
                         <td>{{ e.description }}</td>
                     </tr>
                     {% endfor %}
@@ -169,7 +191,7 @@
                     </tr>
                     {% for f in customer_relations_specialist_3 %}
                     <tr>
-                        <td></td>
+                        <td><input type="checkbox" style="margin-left: 50px;" name="skills_id" value={{ f.id }}></td>
                         <td>{{ f.description }}</td>
                     </tr>
                     {% endfor %}
@@ -184,7 +206,7 @@
                     </tr>
                     {% for g in customer_relations_team %}
                     <tr>
-                        <td></td>
+                        <td><input type="checkbox" style="margin-left: 50px;" name="skills_id" value={{ g.id }}></td>
                         <td>{{ g.description }}</td>
                     </tr>
                     {% endfor %}
@@ -194,13 +216,14 @@
             </div>
             {% endif %}
             <input type="hidden" name="selected_employee" value={{ selected_employee.badge_id }}>
-            <!--{%  %} -->
+            <input type="hidden" name="select_team" value="customer_relations">
+            {% if customer_relations_inbound != None %}
             <div style="padding-top: 20px; padding-left:50%;">
                 <input type="submit" style="background-color:white; border: 2px solid black;
                         margin-top:-2px; border-radius: 0%; padding: 13px;">
             </div>
+            {% endif %}
         </form>
-
     </div>
     </body>
     </html>

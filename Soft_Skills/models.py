@@ -5,6 +5,19 @@ from django.db import models
 from dateutil import parser
 
 
+class Soft_Skills_Manager(models.Manager):
+
+	@classmethod
+	def add_soft_skills_id(self, post_data):
+		error = []
+		print(post_data)
+
+# 		ADDS A SOFT SKILL ID TO EMPLOYEE BADGE ID
+# 		temp = Agent_Skills(
+# 			badge_id_id = post_data[''],
+# 			skill_id_id= post_data[''],
+# 		)
+
 class Career_Path(models.Model):
 	# DEPARTMENT CODES
 	CENTRAL_SCHEDULING = 'central_scheduling'

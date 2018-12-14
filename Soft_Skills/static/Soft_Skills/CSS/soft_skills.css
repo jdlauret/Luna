@@ -38,11 +38,10 @@
 
 /*BUTTONS*/
 .reset_button{
-    background: #eeeeee;
-    padding:3px;
+    background: white;
+    padding: 15px;
     color: Black;
-    border:1px #c1c1c1 solid;
-    margin-top:1px;
+    border: 2px solid black;
 }
 
 /*TABLE*/
