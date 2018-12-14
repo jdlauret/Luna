@@ -1,0 +1,1 @@
+cd C:\Luna_Dev\venv\Scripts & activate & cd C:\Luna_Dev & python-by-name_dev.bat Luna_Dev_Server manage.py runserver 10.30.4.83:8000 --noreload --settings=no_debug_settings

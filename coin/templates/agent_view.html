@@ -1,0 +1,193 @@
+{% extends 'Luna/base.html' %}
+{% block content %}
+    <!DOCTYPE html>
+    <html lang="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <meta charset="UTF-8">
+        <title>Global Transaction Window</title>
+        {% load staticfiles %}
+
+        <link rel="stylesheet" href="{% static 'coin/CSS/coin_style.css' %}">
+        <script type="text/javascript" src="{% static 'coin/JS/clock.js' %}"></script>
+        <script src="{% static 'coin/JS/coin_style.js' %}"></script>
+
+    </head>
+    <body>
+
+    <div class="main_body">
+
+        <div class="top_pane">
+            <div class="btnform_box">
+                <form class="btnform" action="global" method="POST">
+                    {% csrf_token %}
+                    <button class="btn">Community View</button>
+                </form>
+                <form class="btnform" action="transaction_view" method="POST">
+                    {% csrf_token %}
+                    <button class="btn">Send Coin</button>
+                </form>
+                <form style="display:inline-block;"
+                      onclick="window.open('https://store.vivintsolar.com/frontend/category/126', '_blank'); return false;">
+                    <button class="btn">Store</button>
+                </form>
+            </div>
+
+            <div class="balance_box">
+                <div class="total_share_coin_box">
+                    <p class="s_balance">Sharing Balance:</p>
+                    <div style="font-size: 12px;">Expiration Date</div>
+
+                    <div id="clock"></div>
+                    {{ coin }}
+                </div>
+            </div>
+
+            <div class="comment_box">
+                <br>{#                add comments here                      #}
+
+                <div style="color:black; vertical-align: bottom;"><b>Gifted coin will not reflect in store till next Tuesday</b>
+                    <div style="color:red;">Select tab below</div>
+                </div>
+            </div>
+
+        </div>
+        <div class="main_box">
+            <div class="tab">
+                <button class="tablinks" onclick="openCoinTab(event, 'all_transaction')">View All</button>
+                <button class="tablinks" onclick="openCoinTab(event, 'received_transaction')">View Received</button>
+                <button class="tablinks" onclick="openCoinTab(event, 'sent_transaction')">View Sent</button>
+            </div>
+            <div id="all_transaction" class="tabcontent">
+                <table id="transaction_table">
+                    <tr>
+                        <th>Giver</th>
+                        <th>Receiver</th>
+                        <th style="text-align: right;">Amount</th>
+                        <th>Transaction Date</th>
+                        <th>Note</th>
+                        <th>Redeemed</th>
+                    </tr>
+                    {% for x in allt1 %}
+                        <tr>
+                            {% if x.anonymous == 1 %}
+                                <td>Anonymous</td>
+                            {% endif %}
+                            {% if x.anonymous == 0 %}
+                                <td>{{ x.benefactor_name }}</td>
+                            {% endif %}
+                            <td>{{ x.recipient_name }}</td>
+                            <td style="text-align: right;">{{ x.award }}</td>
+                            <td>{{ x.created_at }}</td>
+                            {% if x.bad_comment == 1 %}
+                                <td> No Comment</td>
+                            {% endif %}
+                            {% if x.bad_comment == 0 %}
+                                <td>{{ x.note }}</td>
+                            {% endif %}
+                            {% if x.redeemed == 0 %}
+                                <td>No</td>
+                            {% else %}
+                                <td>Yes</td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                    {% for x in allt2 %}
+                        <tr>
+                            {% if x.anonymous == 1 %}
+                                <td>Anonymous</td>
+                            {% endif %}
+                            {% if x.anonymous == 0 %}
+                                <td>{{ x.benefactor_name }}</td>
+                            {% endif %}
+                            <td>{{ x.recipient_name }}</td>
+                            <td style="text-align: right;">{{ x.award }}</td>
+                            <td>{{ x.created_at }}</td>
+                            {% if x.bad_comment == 1 %}
+                                <td> No Comment</td>
+                            {% endif %}
+                            {% if x.bad_comment == 0 %}
+                                <td>{{ x.note }}</td>
+                            {% endif %}
+                            {% if x.redeemed == 0 %}
+                                <td>No</td>
+                            {% else %}
+                                <td>Yes</td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+            <div id="received_transaction" class="tabcontent">
+                <table id="from_transaction_table">
+                    <tr>
+                        <th>Giver</th>
+                        <th style="text-align: right;">Amount</th>
+                        <th>Date</th>
+                        <th>Reason</th>
+                        <th>Redeemed</th>
+                    </tr>
+                    {% for x in senttransaction %}
+                        <tr>
+                            {% if x.anonymous == 1 %}
+                                <td>Anonymous</td>
+                            {% endif %}
+                            {% if x.anonymous == 0 %}
+                                <td>{{ x.benefactor_name }}</td>
+                            {% endif %}
+                            <td style="text-align: right;">{{ x.award }}</td>
+                            <td>{{ x.created_at }}</td>
+                            {% if x.bad_comment == 1 %}
+                                <td> No Comment</td>
+                            {% endif %}
+                            {% if x.bad_comment == 0 %}
+                                <td>{{ x.note }}</td>
+                            {% endif %}
+                            {% if x.redeemed == 0 %}
+                                <td>No</td>
+                            {% else %}
+                                <td>Yes</td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+            <div id="sent_transaction" class="tabcontent">
+                <table id="to_transaction_table">
+                    <tr>
+                        <th>Receiver</th>
+                        <th style="text-align: right;">Amount</th>
+                        <th>Date</th>
+                        <th>Reason</th>
+                        <th>Redeemed</th>
+                    </tr>
+                    {% for x in fromtransaction %}
+                        <tr>
+                            <td>{{ x.recipient_name }}</td>
+                            <td style="text-align: right;">{{ x.award }}</td>
+                            <td>{{ x.created_at }}</td>
+                            {% if x.bad_comment == 1 %}
+                                <td></td>
+                            {% endif %}
+                            {% if x.bad_comment == 0 %}
+                                <td>{{ x.note }}</td>
+                            {% endif %}
+                            {% if x.redeemed == 0 %}
+                                <td>No</td>
+                            {% else %}
+                                <td>Yes</td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+        </div>
+        <p style="font-size: 12px;">If you have any questions or comments please contact
+            <a href="mailto:stephanie.holmberg@vivintsolar.com?Subject=Coin%20Question%20or%20Comment">Steph</a></p>
+    </div>
+    </body>
+    </html>
+{% endblock %}

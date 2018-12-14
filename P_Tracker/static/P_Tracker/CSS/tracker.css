@@ -1,0 +1,185 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+body {
+    font-family: "Lato", sans-serif;
+    color: #656569;
+}
+
+.top_pane {
+    height: auto;
+    padding: 0px 10px 10px 0px;
+    overflow: auto;
+}
+.top_pane2 {
+    height: 260px;
+    padding: 10px;
+    overflow: auto;
+}
+
+.top_pane3{}
+#proj_body{
+    padding-left: 10px;
+}
+
+#edit_employee_body{
+    padding-left: 10px;
+}
+.error_message{
+    padding: 10px;
+    margin: 10px;
+}
+.main_body {
+    width: 100%;
+    padding: 20px;
+}
+
+.error_box {
+    color: red;
+}
+
+.block {
+    border-style: solid;
+    padding: 10px;
+    display: inline-block;
+}
+
+#pro_table table {
+    border-collapse: collapse;
+    padding: 10px;
+}
+
+#pro_table th, #pro_table td {
+    text-align: center;
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+
+.proj_table th, .proj_table td {
+    text-align: center;
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.create_proj_table th, .create_proj_table td {
+    text-align: center;
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.pro_table tr:hover {
+    background-color: #f5f5f5;
+}
+
+.menu {
+    padding: 10px;
+    background-color: #333;
+    color: white;
+}
+
+.tabs {
+    position: relative;
+    min-height: 762px; /* This part sucks */
+    clear: both;
+    margin: 25px 0;
+}
+
+.tab {
+    float: left;
+}
+
+.tab label {
+    background: #eee;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-left: -1px;
+    position: relative;
+    left: 1px;
+    margin-bottom: -1px;
+}
+
+.tab [type=radio] {
+    display: none;
+}
+
+.content {
+    position: absolute;
+    left: 0;
+    background: white;
+    right: 0;
+    bottom: auto;
+    padding: 20px;
+    border: white;
+    top: auto;
+    /*height: 1200px;*/
+    width: auto;
+    margin-top: auto;
+}
+.employ_content {
+    position: absolute;
+    left: 0;
+    background: white;
+    right: 0;
+    bottom: auto;
+    padding: 20px;
+    /*border: 1px solid #ccc;*/
+    top: auto;
+    /*height: 550px;*/
+    width: auto;
+}
+
+[type=radio]:checked ~ label {
+    background: white;
+    border-bottom: 1px solid white;
+    z-index: 2;
+}
+
+[type=radio]:checked ~ label ~ .content {
+    z-index: 1;
+}
+[type=radio]:checked ~ label ~ .employ_content {
+    z-index: 1;
+}
+.dropbtnMenu {
+    background-color: #3a3a3a;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdownMenu {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdownMenu-content {
+    display: none;
+    color: white;
+    position: absolute;
+    background-color: #3a3a3a;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdownMenu-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdownMenu-content a:hover {background-color: #f1f1f1}
+
+.dropdownMenu:hover .dropdownMenu-content {
+    display: block;
+}
+
+.dropdownMenu:hover .dropbtnMenu {
+    background-color: #8d8d8d;
+}

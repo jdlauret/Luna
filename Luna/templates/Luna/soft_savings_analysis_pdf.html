@@ -1,0 +1,211 @@
+{% extends "Luna/print_base.html" %}
+{% block content %}
+    <div>
+        <div id="account_info">
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th colspan="{{ form_response.account.0|length }}">Account Information</th>
+                </tr>
+                </thead>
+
+                    {% if form_response_complete == True %}
+                        <thead>
+                        <tr>
+                            <th>Service Number</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Street Address</th>
+                            <th>City</th>
+                            <th>State</th>
+                            <th>Zip Code</th>
+{#                            <th>Street Address</th>#}
+{#                            <th>City</th>#}
+{#                            <th>State</th>#}
+{#                            <th>Zip Code</th>#}
+{#                            <th>PTO</th>#}
+{#                            <th>Utility Company</th>#}
+{#                            <th>Average Utility Rate</th>#}
+                        </tr>
+                        </thead>
+                        <tbody>
+{#                        {% for row in form_response.account %}#}
+{#                            <tr>#}
+{#                                {% for item in row %}#}
+{#                                    <td>{{ item }}</td>#}
+{#                                {% endfor %}#}
+{#                            </tr>#}
+{#                        {% endfor %}#}
+                            <tr>
+                                <td>{{ form_response.account.0 }}</td>
+                                <td>{{ form_response.account.1 }}</td>
+                                <td>{{ form_response.account.2 }}</td>
+                                <td>{{ form_response.account.3 }}</td>
+                                <td>{{ form_response.account.4 }}</td>
+                                <td>{{ form_response.account.5 }}</td>
+                                <td>{{ form_response.account.6 }}</td>
+                            </tr>
+                        </tbody>
+{#                    </table>#}
+{#                    <table class="table">#}
+                        <thead>
+                            <tr>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                            </tr>
+                        </tbody>
+{#                    </table>#}
+{#                    <table class="table">#}
+                        <thead>
+                            <tr>
+                                <th>PTO Date</th>
+                                <th>Utility Company</th>
+                                <th>Calculated Utility Rate<sup>*</sup></th>
+                                <th>Contract Type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ form_response.account.7 }}</td>
+                                <td>{{ form_response.account.8 }}</td>
+                                <td>{{ form_response.account.9 }}</td>
+                                <td>{{ form_response.account.10 }}</td>
+                            </tr>
+                        </tbody>
+{#                    </table>#}
+                    {% endif %}
+            </table>
+        </div>
+    </div>
+    <div id="production_div">
+        <table class="table">
+            <thead>
+            <tr>
+                <th colspan="{{ form_response.production.0|length }}">Production by Month</th>
+            </tr>
+            </thead>
+        </table>
+        <table id="production" class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Month</th>
+                <th scope="col">Billed Production <br>from the PV System</th>
+                <th scope="col">PPA/Lease Rate <br>per kWh</th>
+                <th scope="col">Vivint Solar Charges</th>
+                <th scope="col">Utility Charges<sup>*</sup></th>
+                <th scope="col">Savings<sup>*</sup></th>
+            </tr>
+            </thead>
+            {% if form_response_complete == True %}
+                <tbody>
+
+                {% for row in form_response.savings %}
+
+                    {% if row.0 == 'Total' %}
+                        <tr>
+                            {% for col in row %}
+                                <td>{{ col }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% else %}
+                        <tr>
+                            {% for col in row %}
+                                <td>{{ col }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                    <tr>
+                        <td><b>Definitions</b></td>
+                        <td colspan="5">
+                            <ul>
+                                <li>
+                                    <b>Calculated Utility Rate<sup>*</sup></b>: The utility rate (per kilowatt hour) paid
+                                    by the average customer of your utility company with your pre-solar usage profile.
+                                </li>
+                                <li>
+                                    <b>Savings<sup>*</sup></b>: The difference between your
+                                    <b><em>Utility Charges<sup>*</sup></em></b> and your
+                                    <b><em>Vivint Solar Charges</em></b>.
+                                </li>
+                                <li>
+                                    <b>Vivint Solar Charges</b>: Your Vivint Solar charges based on the
+                                    <b><em>Billed Production from the PV System</em></b> of the solar energy system at
+                                    your home and your contract rate during that month.
+                                </li>
+                                <li>
+                                    <b>Utility Charges<sup>*</sup></b>: This value is calculated by multiplying your
+                                    <b><em>Calculated Utility Rate<sup>*</sup></em></b> and your
+                                    <b><em>Billed Production from the PV System</em></b>. This is not necessarily what
+                                    you paid your utility company, but what you could have had to pay your utility
+                                    company for receiving the same amount of power generated by the PV system from
+                                    the grid.
+                                <li>
+                                    <b>Billed Production from the PV System</b>: The amount of produced energy you
+                                    were billed for.
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Footnote</b>
+                        </td>
+                        <td colspan="5">
+                            <b>*</b> Values are representative of the average customer of your Utility Company.
+                        </td>
+                    </tr>
+                </tbody>
+            {% endif %}
+        </table>
+        <div>
+            <p class="printPageFooter">
+                The savings numbers provided above are just a ballpark estimate based on the utility costs in your area and
+                the costs associated with your particular solar system. Actual savings will vary based ona a variety of
+                factors, including (without limitation): system size, your home's location, position of you solar panels,
+                insolation (shading on your solar panels), energy consumption patterns, utility rates, financing charges,
+                etc.
+                <br><br>
+                <b>
+                    ASSUMPTIONS AND DISCLAIMERS
+                    <br><br>
+                    These estimates are based on the following assumptions:
+                </b>
+                <br>
+            </p>
+            <div style="padding-left: 20px">
+            <ul class="printPageFooter">
+                <li>
+                    The rate that you pay for energy from the utility company is the average blended rate for the
+                    average customer in your utility for the past 12 months. This blended rate is calculated by taking
+                    the energy usage of the average customer and applying it to the rate tariffs in your utility which
+                    may include tiered and Time of Use (TOU) pricing structures. In order to arrive at the "average
+                    customer" for your particular utility, we use the average consumption profile for your utility, as
+                    provided by the US Energy Information Administration (EIA).
+                </li>
+                <li>
+                    Your total usage would not have changed if you did not have the solar energy system installed and
+                    all the power that you would have used would have been purchased from the utility at the blended
+                    rate indentified.
+                </li>
+                <li>
+                    These calculations assume that the amount of energy produced by your solar energy system does not
+                    exceed your total energy consumption during the applicable time period.
+                </li>
+            </ul>
+            </div>
+            <p class="printPageFooter">
+                <b>Disclaimers</b>
+                <br><br>
+                <sup>1</sup> Estimates are not a guarantee of energy production, cost savings, and/or the existence or nature of
+                any net metering or incentive program. Utility rates are subject to change, and such changes cannot
+                be accurately predicted
+                <br><br>
+                <sup>2</sup> This estimate does not take into consideration any net metering programs, or any other incentive
+                programs.
+            </p>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,114 @@
+{% extends "Luna/print_base.html" %}
+{% block content %}
+    <div>
+        <div id="account_info">
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th colspan="{{ form_response.account.0|length }}">Account Information</th>
+                </tr>
+                </thead>
+                {% if form_response_complete == True %}
+                    <thead>
+                    <tr>
+                        <th>Service Number</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Street Address</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Zip Code</th>
+                        <th>PTO</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                                {% for item in form_response.account %}
+                                    <td>{{ item }}</td>
+                                {% endfor %}
+                            </tr>
+                    </tbody>
+                {% endif %}
+            </table>
+        </div>
+    </div>
+    <div id="production_div">
+        <table class="table">
+            <thead>
+            <tr>
+                <th colspan="{{ form_response.production.0|length }}">Production by Month</th>
+            </tr>
+            </thead>
+        </table>
+        <table id="production" class="table table-striped">
+            <thead>
+            <tr>
+                <th>Month</th>
+                <th>Design Estimate<br>w/Degradation</th>
+                <th>Weather Corrected Estimate</th>
+                <th>Actual Production</th>
+                <th>Designed Performance<br>Ratio w/Degradation</th>
+                <th>Weather Corrected<br>Performance Ratio</th>
+            </tr>
+            </thead>
+            {% if form_response_complete == True %}
+                <tbody>
+
+                {% for row in form_response.production %}
+
+                    {% if row.0 == 'Total' %}
+                        <tr>
+                            {% for col in row %}
+                                <td>{{ col }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% else %}
+                        <tr>
+                            {% for col in row %}
+                                <td>{{ col }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                <tr>
+                        <td><b>Definitions</b></td>
+                        <td colspan="5">
+                            <ul>
+                                <li>
+                                    <b>Design Estimate w/Degradation</b>: Over time, the solar cells within solar panels
+                                    become less efficient. This number takes the initial
+                                    <b><em>Design Estimate</em></b> you were given before receiving PTO and adjusts it
+                                    down to account for the efficiency loss over time.
+                                </li>
+                                <li>
+                                    <b>Weather Corrected Estimate</b>: Solar energy systems (like the one on your home)
+                                    are very sensitive to changes in the weather. This number takes your
+                                    <b><em>Design Estimate w/Degradation</em></b> and factors it up or down depending
+                                    on how clear or cloudy the weather was in your area for that month.
+                                </li>
+                                <li>
+                                    <b>Actual Production</b>: The amount of energy produced by the
+                                    solar energy system at your home.
+                                </li>
+                                <li>
+                                    <b>Designed Performance Ratio w/Degradation</b>: This percentage represents how well
+                                    the solar energy system at your home produced compared to the
+                                    <b><em>Design Estimate w/Degradation</em></b>. It is calculated by dividing the
+                                    <b><em>Actual Production</em></b> by the
+                                    <b><em>Design Estimate w/Degradation</em></b>.
+                                </li>
+                                <li>
+                                    <b>Weather Corrected Performance Ratio</b>: This percentage represents how well
+                                    the solar energy system at your home produced compared to the
+                                    <b><em>Weather Corrected Estimate</em></b>. It is calculated by dividing the
+                                    <b><em>Actual Production</em></b> by the
+                                    <b><em>Weather Corrected Estimate</em></b>.
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            {% endif %}
+        </table>
+    </div>
+{% endblock %}
