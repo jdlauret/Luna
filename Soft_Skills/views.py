@@ -100,7 +100,6 @@ def agent_skills_sheet(request):
             except:
                 context={
                     'selected_employee' : Employee_List.objects.all().get(badge_id=selected_employee),
-	                'skill_set': skill_set,
                 }
                 # todo remove print
                 print('Except')
