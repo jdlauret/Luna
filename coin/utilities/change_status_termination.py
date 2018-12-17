@@ -43,6 +43,7 @@ def terminated_user():
     for key, value in agent_list.items():
         try:
             old_employee = employee_id.objects.get(badgeid=value)
+            # print('Old Employee ', old_employee)
             if old_employee == 0:
                 if old_employee:  # True
                     old_employee.terminated = 1
