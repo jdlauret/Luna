@@ -185,7 +185,7 @@ Pygments==2.2.0
 pygsheet==0.1.19b19
 pygsheets==1.1.4
 PyHamcrest==1.9.0
-PyJWT==1.6.1
+PyJWT==2.4.0
 pylint==1.8.4
 pyodbc==4.0.23
 pyOpenSSL==17.5.0
